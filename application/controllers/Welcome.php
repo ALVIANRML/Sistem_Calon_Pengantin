@@ -19,7 +19,28 @@ class Welcome extends CI_Controller {
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
 	public function index()
-	{
-		$this->load->view('welcome_message');
-	}
+    {
+        // Load database library
+        $this->load->database();
+
+        // Initialize db_message
+        $data['db_message'] = '';
+
+        // Test query
+        $query = $this->db->query('SELECT version()');
+
+        if ($query->num_rows() > 0)
+        {
+            // Fetch result
+            $row = $query->row();
+            $data['db_message'] = "Database connected successfully. PostgreSQL version: " . $row->version;
+        }
+        else
+        {
+            $data['db_message'] = "Failed to connect to database.";
+        }
+
+        // Load view with database message
+        $this->load->view('welcome_message', $data);
+    }
 }
