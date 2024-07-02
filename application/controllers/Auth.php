@@ -30,10 +30,10 @@ class Auth extends CI_Controller
 
 
 		$this->form_validation->set_rules('nomor_telepon', 'Nomor Telepon', 'required|trim|is_unique[users.nomor_telepon]|max_length[13]|min_length[7]', [
-			'is_unique' => 'Nomor Telepon ini sudah terdaftar',
-			'max_length' => 'Nomor Telepon maksimal 13',
-			'min_length' => 'Nomor Telepon minimal 7',
-			'required' => 'Nomor Telepon tidak boleh kosong',
+			'is_unique' => 'Nomor Handphone ini sudah terdaftar',
+			'max_length' => 'Nomor Handphone maksimal 13',
+			'min_length' => 'Nomor Handphone minimal 7',
+			'required' => 'Nomor Handphone tidak boleh kosong',
 		]);
 
 		$this->form_validation->set_rules('tanggal_lahir', "Tanggal Lahir", 'required|callback_check_age');
@@ -117,16 +117,16 @@ class Auth extends CI_Controller
 
 					switch ($user['role']) {
 						case 1:
-							redirect('Dashboard/view_admin');
+							redirect('Dashboard/admin');
 							break;
 						case 2:
-							redirect('Dashboard/view_kesehatan');
+							redirect('Dashboard/kesehatan');
 							break;
 						case 3:
-							redirect('Dashboard/view_bnn');
+							redirect('Dashboard/bnn');
 							break;
 						case 4:
-							redirect('Dashboard/view_psikolog');
+							redirect('Dashboard/psikolog');
 							break;
 						case 5:
 							redirect('Dashboard/Catin');
@@ -148,4 +148,77 @@ class Auth extends CI_Controller
 			}
 		}
 	}
+	public function lupa_password() {
+        $this->form_validation->set_rules('nomor_telepon', 'Nomor Telepon', 'required|trim|max_length[13]|min_length[7]',[
+			'max_length' => 'Nomor Handphone maksimal 13',
+			'min_length' => 'Nomor Handphone minimal 7',
+			'required' => 'Nomor Handphone tidak boleh kosong',
+		]);
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Lupa Password';
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('auth/lupa_password');
+            $this->load->view('templates/auth_footer');
+        } else {
+            $nomor_telepon = $this->input->post('nomor_telepon');
+            $user = $this->m_Auth->get_user_by_phone($nomor_telepon);
+
+            if ($user->num_rows() > 0) {
+                $user = $user->row_array();
+
+                // Simpan nomor telepon ke session
+                $this->session->set_userdata('nomor_telepon', $nomor_telepon);
+                redirect('auth/reset_password');
+            } else {
+                $this->session->set_flashdata('message', 'Nomor telepon tidak ditemukan.');
+                redirect('auth/lupa_password');
+            }
+        }
+    }
+
+    public function reset_password() {
+        $this->form_validation->set_rules(
+            'password1',
+            'Password',
+            'required|trim|min_length[4]|matches[password2]',
+            [
+                'required' => 'Password tidak boleh kosong',
+                'matches' => 'Password tidak cocok',
+                'min_length' => 'Password terlalu pendek'
+            ]
+        );
+        $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]', [
+            'required' => 'Password tidak boleh kosong',
+			'matches' => 'Password tidak cocok',
+			'min_length' => 'Password terlalu pendek'
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Reset Password';
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('auth/reset_password');
+            $this->load->view('templates/auth_footer');
+        } else {
+            $nomor_telepon = $this->session->userdata('nomor_telepon');
+            if (!$nomor_telepon) {
+                $this->session->set_flashdata('message', 'Sesi habis. Silakan coba lagi.');
+                redirect('auth/lupa_password');
+            }
+
+            $password = $this->input->post('password1');
+            $user = $this->m_Auth->get_user_by_phone($nomor_telepon);
+
+            if ($user->num_rows() > 0) {
+                $user = $user->row_array();
+                $this->m_Auth->update_password($user['id_user'], password_hash($password, PASSWORD_DEFAULT));
+                $this->session->unset_userdata('nomor_telepon');
+                $this->session->set_flashdata('message', 'Password berhasil diperbarui.');
+                redirect('auth/login');
+            } else {
+                $this->session->set_flashdata('message', 'Nomor telepon tidak ditemukan.');
+                redirect('auth/reset_password');
+            }
+        }
+    }
 }

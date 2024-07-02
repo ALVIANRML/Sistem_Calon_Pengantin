@@ -33,34 +33,34 @@
 						</div>
 
 						<div class="form-group" style="margin-bottom: 5px;">
-							<label for="nomor_telepon" style="font-size: 2vh; margin-bottom: 5px;"><b>Nomor Telepon</b></label>
+							<label for="nomor_telepon" style="font-size: 2vh; margin-bottom: 5px;"><b>Nomor Handphone</b></label>
 							<input type="text" class="form-control form-control-user" id="nomor_telepon" placeholder="08*********" style="font-size: 2vh;" name="nomor_telepon" value="<?= set_value('nomor_telepon') ?>">
 							<?= form_error('nomor_telepon', '<small class="text-danger pl-3">', '</small>'); ?>
 						</div>
-						
+
 						<div class="form-group" style="margin-bottom: 40px; position: relative;">
 							<label for="password1" style="font-size: 2vh; margin-bottom: 5px;"><i class="zmdi zmdi-lock"></i><b>Ulangi Password</b></label>
 							<div class="password-field" style="position: relative;">
 								<input type="password" class="form-control form-control-user" id="password1" placeholder="******" style="font-size: 2vh; padding-right: 40vh;" name="password1">
 								<span class="toggle-password" onclick="togglePasswordVisibility('password1')" style="position: absolute; top: 3vh; right: 2vh; transform: translateY(-50%); cursor: pointer;">
-									<i id="toggle-icon-2" class="zmdi zmdi-eye">👁️</i>
+								<i id="toggle-icon-password1" class="fas fa-eye"></i>
 								</span>
 								<?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
 							</div>
-							
+
 							<div class="form-group" style="margin-bottom: 40px; position: relative;">
 								<label for="password2" style="font-size: 2vh; margin-bottom: 5px;"><b>Ulangi Password</b></label>
 								<div class="password-field" style="position: relative;">
-									<input type="password" class="form-control form-control-user"  id="password2" placeholder="******" style="font-size: 2vh; padding-right: 40vh;" name="password2">
+									<input type="password" class="form-control form-control-user" id="password2" placeholder="******" style="font-size: 2vh; padding-right: 40vh;" name="password2">
 									<span class="toggle-password" onclick="togglePasswordVisibility('password2')" style="position: absolute; top: 3vh; right: 2vh; transform: translateY(-50%); cursor: pointer; ">
-										<i id="toggle-icon-2" class="zmdi zmdi-eye">👁️</i>
+										<i id="toggle-icon-password2" class="fas fa-eye"></i>
 									</span>
 									<?= form_error('password2', '<small class="text-danger pl-3">', '</small>'); ?>
 								</div>
 
 
-<br>
-							<button type="submit" id="submit" name="submit" class="btn btn-primary btn-user btn-block" style="background-color: #015D67;">Daftar</button>
+								<br>
+								<button type="submit" id="submit" name="submit" class="btn btn-primary btn-user btn-block" style="background-color: #015D67;">Daftar</button>
 					</form>
 
 					<div class="text-center" style="margin-top: 30vh;">
@@ -71,23 +71,4 @@
 		</div>
 	</div>
 </div>
-
-<script src="<?= base_url(); ?>assets/login/vendor/jquery/jquery.min.js"></script>
-<script src="<?= base_url(); ?>assets/login/js/main.js"></script>
-
-<script>
-	function togglePasswordVisibility(inputId) {
-		var passwordField = document.getElementById(inputId);
-		var toggleIcon = document.querySelector(`#${inputId} ~ .toggle-password i`);
-
-		if (passwordField.type === 'password') {
-			passwordField.type = 'text';
-			toggleIcon.textContent = '🙈'; // Change icon to hide password
-		} else {
-			passwordField.type = 'password';
-			toggleIcon.textContent = '👁️'; // Change icon to show password
-		}
-	}
-</script>
-
 
