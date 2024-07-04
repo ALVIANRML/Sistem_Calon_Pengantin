@@ -12653,41 +12653,51 @@ body.sidebar-toggled footer.sticky-footer {
 		/* Adjust position for smaller screens */
 	}
 }
+
 @media (max-width: 992px) {
 	.p-5 {
-			padding: 3rem !important; /* Ubah padding pada kolom agar sesuai */
+		padding: 3rem !important;
+		/* Ubah padding pada kolom agar sesuai */
 	}
 
 	.col-lg-7 {
-			display: none; /* Sembunyikan gambar pada layar kecil */
+		display: none;
+		/* Sembunyikan gambar pada layar kecil */
 	}
 
 	.form-group {
-			margin-bottom: 15px; /* Ubah margin-bottom agar sesuai dengan tata letak */
+		margin-bottom: 15px;
+		/* Ubah margin-bottom agar sesuai dengan tata letak */
 	}
 
 	label {
-			font-size: 14px; /* Ubah ukuran font label */
+		font-size: 14px;
+		/* Ubah ukuran font label */
 	}
 
 	input[type="text"],
 	input[type="password"],
 	input[type="date"] {
-			font-size: 14px; /* Ubah ukuran font input */
+		font-size: 14px;
+		/* Ubah ukuran font input */
 	}
 }
 
 @media (max-width: 768px) {
 	.col-lg-5 {
-			padding: 1rem !important; /* Ubah padding pada kolom untuk layar sangat kecil */
+		padding: 1rem !important;
+		/* Ubah padding pada kolom untuk layar sangat kecil */
 	}
 
 	.img-fluid {
-			max-height: 25vh; /* Ukuran gambar sesuaikan dengan layar kecil */
-			width: auto; /* Sesuaikan lebar gambar */
+		max-height: 25vh;
+		/* Ukuran gambar sesuaikan dengan layar kecil */
+		width: auto;
+		/* Sesuaikan lebar gambar */
 	}
 
 	h5 {
-			font-size: 18px; /* Ubah ukuran font judul untuk layar kecil */
+		font-size: 18px;
+		/* Ubah ukuran font judul untuk layar kecil */
 	}
 }

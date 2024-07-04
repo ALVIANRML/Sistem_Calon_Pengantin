@@ -1,0 +1,145 @@
+body {
+	margin: 0;
+	padding: 20px;
+	background-color: white;
+	font-family: Arial, sans-serif;
+}
+
+.contact_container {
+	display: flex;
+	justify-content: space-between;
+	/* Menjaga jarak antara elemen */
+	align-items: center;
+	/* Menjaga elemen di tengah secara vertikal */
+	width: 100%;
+	height: 80vh;
+	/* background-color: aliceblue; */
+	padding: 20px;
+}
+
+.contact_pertanyaan {
+	/* background-color: yellowgreen; */
+	position: relative;
+	padding: 20px;
+	margin-right: 5%;
+	border-radius: 10px;
+	height: 20vh;
+	width: 43%;
+	margin-left: 5%;
+	flex-wrap: wrap;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+.contact_pertanyaan_title {
+	font-family: 'Inter', sans-serif;
+	font-weight: 900;
+	color: black;
+	/* Menggunakan properti color yang benar */
+	/* text-align: center; */
+	font-size: 35px;
+	margin: 0;
+	letter-spacing: -1.5px;
+	
+
+}
+
+.contact_pertanyaan_isi {
+	
+	width: 80vh;
+	height: 9vh;
+	/* background-color: crimson; */
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	max-width: 88.8;
+	/* align-items: center; */
+	/* justify-content: center; */
+
+}
+.isi{
+	color: var(--primary---color, black);
+	/* medium/p */
+	font-family: 'Inter', sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: normal;
+	margin-top: -10px;
+	
+}
+.button_pertanyaan{
+	width: 36vh;
+	background-color: black;
+	color: white;
+	border-radius: 10px;
+	height: 7vh;
+	margin-top: 8vh;
+	
+}
+
+.button_form{
+	width: 75vh;
+	background-color: black;
+	color: white;
+	border-radius: 10px;
+	height: 7vh;
+	/* margin-top: 8vh; */
+	
+}
+
+.contact_form {
+	background-color: whitesmoke;
+	height: 75vh;
+	width: 37%;
+	padding: 20px;
+	margin-right: 5%;
+	border-radius: 10px;
+}
+
+.contact_form_title{
+	font-family: 'Inter', sans-serif;
+	font-weight: 900;
+	color: black;
+	/* Menggunakan properti color yang benar */
+	/* text-align: center; */
+	font-size: 35px;
+	margin: 0;
+	letter-spacing: -1.5px;
+}
+
+.name_container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+	font-family: 'Inter', sans-serif;
+	letter-spacing: 0.5px;
+}
+
+.input_container {
+    flex: 1;
+    margin-right: 10px;
+	width: 50px;
+	border: none;
+}
+
+.input_container:last-child {
+    margin-right: 0;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+	background-color: white;
+	outline: 0;
+	border: none;
+	opacity: 0.5;	
+	border-radius: 5px;
+
+}
+
+
+
