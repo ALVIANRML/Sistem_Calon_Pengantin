@@ -3,6 +3,7 @@ body {
 	padding: 20px;
 	background-color: white;
 	font-family: Arial, sans-serif;
+	overflow: hidden;
 }
 
 .contact_container {
@@ -19,15 +20,18 @@ body {
 
 .contact_pertanyaan {
 	/* background-color: yellowgreen; */
-	position: relative;
-	padding: 20px;
-	margin-right: 5%;
-	border-radius: 10px;
-	height: 20vh;
-	width: 43%;
-	margin-left: 5%;
-	flex-wrap: wrap;
-}
+
+		position: relative;
+		padding: 20px;
+		margin-right: 10%;
+		border-radius: 10px;
+		height: 85vh; /* Mengatur tinggi otomatis agar mengikuti isi */
+		width: 43%;
+		/* margin-left: 10%; */
+		top: 0; /* Mengatur posisi ke atas */
+		
+	}
+
 
 *, *::before, *::after {
     box-sizing: inherit;
@@ -39,16 +43,15 @@ body {
 	color: black;
 	/* Menggunakan properti color yang benar */
 	/* text-align: center; */
-	font-size: 35px;
+	font-size: 50px;
 	margin: 0;
 	letter-spacing: -1.5px;
-	
 
 }
 
 .contact_pertanyaan_isi {
 	
-	width: 80vh;
+	width: 95vh;
 	height: 9vh;
 	/* background-color: crimson; */
 	display: flex;
@@ -57,9 +60,11 @@ body {
 	max-width: 88.8;
 	/* align-items: center; */
 	/* justify-content: center; */
-
+	word-wrap: break-word; /* Membungkus kata panjang */
+    white-space: normal; /* Mengizinkan pembungkusan teks */
 }
 .isi{
+	
 	color: var(--primary---color, black);
 	/* medium/p */
 	font-family: 'Inter', sans-serif;
@@ -68,6 +73,12 @@ body {
 	font-weight: 300;
 	line-height: normal;
 	margin-top: -10px;
+	width: 24vh;
+	height: 7vh;
+	/* background-color: aqua; */
+	gap: 1px;
+	
+	
 	
 }
 .button_pertanyaan{
@@ -138,7 +149,6 @@ input[type="text"] {
 	border: none;
 	opacity: 0.5;	
 	border-radius: 5px;
-
 }
 
 
