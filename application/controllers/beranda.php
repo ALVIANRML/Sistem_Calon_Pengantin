@@ -19,7 +19,11 @@ class beranda extends CI_Controller
 
 	}
 
-	public function tentang_kami(){
+	public function alur_pendaftaran(){
 		$this->load->view('Beranda/alur_pendaftaran');
+	}
+
+	public function contact(){
+		$this->load->view('Beranda/contact');
 	}
 }

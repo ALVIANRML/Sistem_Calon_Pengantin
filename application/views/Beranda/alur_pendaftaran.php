@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/alur_pendaftaran.css">
-	<title>Document</title>
-</head>
-
-<body>
+	
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="<?= base_url('assets/') ?>css/alur_pendaftaran.css">
+		<title>Alur Pendaftaran</title>
+	</head>
+	
+	<body>
+	<div class="elipse"></div>
 	<h1>Alur Pendaftaran</h1>
 	<p class="underHeader">Standar Pelayanan Prosedur Perkawinan (SP3)</p>
 	<div class="container">
@@ -43,7 +44,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="elipse"></div>
 </body>
 
 </html>
