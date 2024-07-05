@@ -36,7 +36,7 @@
 					<form method="post" action="<?= base_url('auth/lupa_password') ?>">
 						<div class="form-group" style="margin-bottom: 5px;">
 							<label for="nomor_telepon" style="font-size: 2vh; margin-bottom: 5px;"><b>Nomor Handphone</b></label>
-							<input type="text" class="form-control form-control-user placeHolder" id="nomor_telepon" placeholder="08123456789" style="font-size: 2vh; width: 100%;" name="nomor_telepon" value="<?= set_value('nomor_telepon') ?>">
+							<input type="text" class="form-control form-control-user placeHolder" id="nomor_telepon" placeholder="+628123456789" style="font-size: 2vh; width: 100%;" name="nomor_telepon" value="<?= set_value('nomor_telepon') ?>">
 							<?= form_error('nomor_telepon', '<small class="text-danger pl-3">', '</small>'); ?>
 							<?php if ($this->session->flashdata('message')) : ?>
                         <p class="text-danger pl-3" style="font-size: small;"> <?php echo $this->session->flashdata('message'); ?>
