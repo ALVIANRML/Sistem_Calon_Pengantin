@@ -34,7 +34,7 @@
 
 						<div class="form-group" style="margin-bottom: 5px;">
 							<label for="nomor_telepon" style="font-size: 2vh; margin-bottom: 5px;"><b>Nomor Handphone</b></label>
-							<input type="text" class="form-control form-control-user" id="nomor_telepon" placeholder="08*********" style="font-size: 2vh;" name="nomor_telepon" value="<?= set_value('nomor_telepon') ?>">
+							<input type="text" class="form-control form-control-user" id="nomor_telepon" placeholder="+628123456789" style="font-size: 2vh;" name="nomor_telepon" value="<?= set_value('nomor_telepon') ?>">
 							<?= form_error('nomor_telepon', '<small class="text-danger pl-3">', '</small>'); ?>
 						</div>
 

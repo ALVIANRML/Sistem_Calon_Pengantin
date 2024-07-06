@@ -26,10 +26,9 @@
                     <p style="margin-top: -10px;">Jl. Gunung Leuser No. 3, Kota Tebing Tinggi Sumatera Utara Indonesia Kode POS : 20614</p>
                 </div>
             </div>
-			<iframe
+            <iframe
 			src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.986706135521!2d99.16206607473123!3d3.353395096621332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x303161da98f8c417%3A0xa9aa16030bbeef11!2sDinas%20PPKB%20Kota%20Tebing%20Tinggi!5e0!3m2!1sid!2sid!4v1705589852672!5m2!1sid!2sid"
 			frameborder="0" style="width:90vh; height: 65vh; margin-top:30px; border-radius:10px;" allowfullscreen></iframe> 
-
         </div>
 
         <div class="contact_form">
@@ -42,25 +41,25 @@
                     </div>
                     <div class="input_container">
                         <label for="last_name">Surname</label>
-                        <input type="text"  id="last_name" placeholder="Bellingham" name="last_name">
+                        <input type="text" id="last_name" placeholder="Bellingham" name="last_name">
                     </div>
                 </div>
                 <div class="name_container">
                     <div class="input_container">
                         <label for="mail">Mail</label>
-                        <input type="text" id="mail" placeholder="judebellingham@gmail.com"name="mail">
+                        <input type="text" id="mail" placeholder="judebellingham@gmail.com" name="mail">
                     </div>
                 </div>
                 <div class="name_container">
                     <div class="input_container">
                         <label for="address">Address</label>
-                        <input type="text" id="address"  placeholder="Real Madrid" name="address">
+                        <input type="text" id="address" placeholder="Real Madrid" name="address">
                     </div>
                 </div>
                 <div class="name_container">
                     <div class="input_container">
                         <label for="description">Description</label>
-                        <input type="text" id="description" name="description" class="element"  style="height: 150px;">
+                        <input type="text" id="description" name="description" class="element" style="height: 150px;">
                     </div>
                 </div>
                 <button class="button_form" style="align-items: center;">Submit</button>
