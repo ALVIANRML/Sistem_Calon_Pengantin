@@ -1,0 +1,129 @@
+body {
+    padding: 61px 91px;
+    font-family: 'Inter';
+}
+
+/* Kontainer header */
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 38px;
+}
+
+/* Judul utama dalam header */
+.header h1 {
+    margin: 0;
+    color: #015D67;
+    font-size: 54px;
+    font-weight: 900;
+    text-align: left;
+}
+
+/* Paragraf dalam header */
+.header p {
+    width: 100%; /* Lebar maksimal elemen */
+    max-width: 600px; /* Batas lebar maksimum */
+    word-wrap: break-word; /* Pecah kata yang terlalu panjang */
+    overflow-wrap: break-word; /* Pecah kata yang terlalu panjang */
+    opacity: 60%;
+}
+
+/* Kontainer kartu */
+.container-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 16px;
+}
+
+/* Kartu */
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: #015D67;
+    width: 90%;
+    max-width: 822px;
+    border-radius: 16px;
+    padding: 16px 24px;
+    color: #E4EEEF;
+}
+
+/* Judul dalam kartu */
+.card h2 {
+    margin: 0;
+}
+
+/* Kontainer Tentang Kami */
+.container_tentangkami {
+    width: 100%;
+    height: auto;
+    margin-bottom: 18vh;
+}
+
+/* Media Queries untuk membuat layout responsif */
+
+/* Untuk layar dengan lebar maksimum 1200px */
+@media (max-width: 1200px) {
+    body {
+        padding: 50px 70px;
+    }
+
+    .header h1 {
+        font-size: 48px;
+    }
+
+    .card {
+        width: 90%;
+    }
+}
+
+/* Untuk layar dengan lebar maksimum 992px */
+@media (max-width: 992px) {
+    body {
+        padding: 40px 50px;
+    }
+
+    .header h1 {
+        font-size: 42px;
+    }
+
+    .card {
+        width: 85%;
+    }
+}
+
+/* Untuk layar dengan lebar maksimum 768px */
+@media (max-width: 608px) {
+    body {
+        padding: 30px 40px;
+    }
+
+    .header h1 {
+        font-size: 36px;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
+
+/* Untuk layar dengan lebar maksimum 576px */
+@media (max-width: 576px) {
+    body {
+        padding: 20px 30px;
+    }
+
+    .header h1 {
+        font-size: 30px;
+    }
+
+    .header p {
+        width: 100%;
+    }
+
+    .card {
+        width: 100%;
+        padding: 20px;
+    }
+}

@@ -10,6 +10,10 @@ class beranda extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->model('m_Beranda');
 	}
+
+	public function index(){
+		$this->load->view('beranda/public');
+	}
 	public function faq()
 	{
 		// var_dump(20);
@@ -83,6 +87,9 @@ class beranda extends CI_Controller
 		redirect('beranda/contact');
 
 	}
+	}
+	public function tentang_kami(){
+		$this->load->view('Beranda/tentang_kami');
 	}
 	
 }

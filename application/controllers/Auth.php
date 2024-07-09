@@ -10,7 +10,7 @@ class Auth extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->model('m_Auth');
 		$this->load->library('twilio');
-        $this->load->library('session');
+		$this->load->library('session');
 	}
 
 
@@ -180,96 +180,102 @@ class Auth extends CI_Controller
 		}
 	}
 
-	public function send_otp() {
-        $to = $this->session->userdata('nomor_telepon');
-        if (!$to) {
-            echo "Nomor telepon tidak ditemukan dalam sesi.";
-            return;
-        }
+	public function send_otp()
+	{
+		$to = $this->session->userdata('nomor_telepon');
+		if (!$to) {
+			echo "Nomor telepon tidak ditemukan dalam sesi.";
+			return;
+		}
 		$from = '+16185564227';
 
-        $otp = mt_rand(100000, 999999);
-        $this->session->set_userdata('otp', $otp);
+		$otp = mt_rand(100000, 999999);
+		$this->session->set_userdata('otp', $otp);
 
-        $message = "Ini kode OTP kamu: " . $otp;
+		$message = "Ini kode OTP kamu: " . $otp;
 		$response = $this->twilio->send_message($to, $from, $message);
 		var_dump($response);
-        if ($response) {
+		if ($response) {
 			echo "OTP BERHASIL DIKIRIM";
 			echo ($otp);
-            $this->load->view('auth/otp');
-        } else {
-            echo "GAGAL MENGIRIM OTP";
-        }
-    }
-
-public function verified_otp()
-{
-    $this->form_validation->set_rules('otp_input', 'Kode OTP', 'required|trim');
-
-    if ($this->form_validation->run() == FALSE) {
-        // Jika validasi gagal, kembali ke halaman input OTP
-        $this->load->view('auth/otp');
-    } else {
-        $otp_input = $this->input->post("otp_input");
-        $stored_otp = $this->session->userdata("otp");
-
-        if ($otp_input == $stored_otp) {
-            echo "OTP BENAR";
-			redirect('auth/reset_password');
-        } else {
-            echo "OTP SALAH. Kode yang benar adalah: " . $stored_otp;
 			$this->load->view('auth/otp');
-        }
-    }
-}
+		} else {
+			echo "GAGAL MENGIRIM OTP";
+		}
+	}
+
+	public function verified_otp()
+	{
+		$this->form_validation->set_rules('otp_input', 'Kode OTP', 'required|trim');
+
+		if ($this->form_validation->run() == FALSE) {
+			// Jika validasi gagal, kembali ke halaman input OTP
+			$this->load->view('auth/otp');
+		} else {
+			$otp_input = $this->input->post("otp_input");
+			$stored_otp = $this->session->userdata("otp");
+
+			if ($otp_input == $stored_otp) {
+				echo "OTP BENAR";
+				redirect('auth/reset_password');
+			} else {
+				echo "OTP SALAH. Kode yang benar adalah: " . $stored_otp;
+				$this->load->view('auth/otp');
+			}
+		}
+	}
 
 
 
 
 	public function reset_password()
 	{
-		$this->form_validation->set_rules(
-			'password1',
-			'Password',
-			'required|trim|min_length[4]|matches[password2]',
-			[
+		$stored_otp = $this->session->userdata("otp");
+		if ($stored_otp) {
+			$this->form_validation->set_rules(
+				'password1',
+				'Password',
+				'required|trim|min_length[4]|matches[password2]',
+				[
+					'required' => 'Password tidak boleh kosong',
+					'matches' => 'Password tidak cocok',
+					'min_length' => 'Password terlalu pendek'
+				]
+			);
+			$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]', [
 				'required' => 'Password tidak boleh kosong',
 				'matches' => 'Password tidak cocok',
 				'min_length' => 'Password terlalu pendek'
-			]
-		);
-		$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]', [
-			'required' => 'Password tidak boleh kosong',
-			'matches' => 'Password tidak cocok',
-			'min_length' => 'Password terlalu pendek'
-		]);
+			]);
 
-		if ($this->form_validation->run() == false) {
-			$data['title'] = 'Reset Password';
-			$this->load->view('templates/auth_header', $data);
-			$this->load->view('auth/reset_password');
-			$this->load->view('templates/auth_footer');
-		} else {
-			$nomor_telepon = $this->session->userdata('nomor_telepon');
-			if (!$nomor_telepon) {
-				$this->session->set_flashdata('message', 'Sesi habis. Silakan coba lagi.');
-				redirect('auth/lupa_password');
-			}
-
-			$password = $this->input->post('password1');
-			$user = $this->m_Auth->get_user_by_phone($nomor_telepon);
-
-			if ($user->num_rows() > 0) {
-				$user = $user->row_array();
-				$this->m_Auth->update_password($user['id_user'], password_hash($password, PASSWORD_DEFAULT));
-				$this->session->unset_userdata('nomor_telepon');
-				$this->session->set_flashdata('message', 'Password berhasil diperbarui.');
-				redirect('auth/login');
+			if ($this->form_validation->run() == false) {
+				$data['title'] = 'Reset Password';
+				$this->load->view('templates/auth_header', $data);
+				$this->load->view('auth/reset_password');
+				$this->load->view('templates/auth_footer');
 			} else {
-				$this->session->set_flashdata('message', 'Nomor telepon tidak ditemukan.');
-				redirect('auth/reset_password');
+				$nomor_telepon = $this->session->userdata('nomor_telepon');
+				if (!$nomor_telepon) {
+					$this->session->set_flashdata('message', 'Sesi habis. Silakan coba lagi.');
+					redirect('auth/lupa_password');
+				}
+
+				$password = $this->input->post('password1');
+				$user = $this->m_Auth->get_user_by_phone($nomor_telepon);
+
+				if ($user->num_rows() > 0) {
+					$user = $user->row_array();
+					$this->m_Auth->update_password($user['id_user'], password_hash($password, PASSWORD_DEFAULT));
+					$this->session->unset_userdata('nomor_telepon');
+					$this->session->set_flashdata('message', 'Password berhasil diperbarui.');
+					redirect('auth/login');
+				} else {
+					$this->session->set_flashdata('message', 'Nomor telepon tidak ditemukan.');
+					redirect('auth/reset_password');
+				}
 			}
-		}
+		} else
+		{	
+			redirect('auth/lupa_password');}
 	}
 }

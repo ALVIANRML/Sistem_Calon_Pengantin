@@ -23,12 +23,12 @@
 				<div class="col-lg-5 p-5">
 					<div class="text-center">
 
-						<img src="<?php echo base_url(); ?>assets/img/percatin_log.png" alt="logo percatin" class="img-fluid" style="max-height: 15vh; width: 15vh; margin-left:-35vh; color:#015D67;flex-shrink: 0;">
+						<img src="<?php echo base_url(); ?>assets/img/percatin_log.png" alt="logo percatin" class="img-fluid" style="max-height: 15vh; width: 15vh; margin-top: -10px; margin-left:-35vh; color:#015D67;flex-shrink: 0;">
 
 						<h5 class="text-gray-900 mt-4" style="color: #171717; font-family: 'Arial Black', sans-serif; font-size: 3.4vh; font-weight: 700; letter-spacing: -1.44px; margin-left:.0vh;">
 							<b>Masukkan akun Anda</b>
 						</h5>
-						<p class="mb-4" style="color: #171717; font-family: 'Arial'; font-size: 12px; font-weight: 400; letter-spacing: -0.64px; margin-top: -10px; margin-left: -4.8vh">
+						<p class="mb-4" style="color: #171717; font-family: 'Arial'; font-size: 12px; font-weight: 400; letter-spacing: -0.64px; margin-top: -10px; margin-left: -8vh">
 							Masuk untuk pengalaman yang lebih baik
 						</p>
 					</div>
@@ -46,7 +46,7 @@
 								<span class="toggle-password" onclick="togglePasswordVisibility('password1')" style="position: absolute; top: 3vh; right: 2vh; transform: translateY(-50%); cursor: pointer;">
 									<i id="toggle-icon-password1" class="fas fa-eye"></i>
 								</span>
-								<a class="small" style="color:#015D67; margin-left: 41.9vh; margin-bottom:10vh;" href="<?= base_url('auth/lupa_password'); ?>">Lupa Password?</a>
+								<a class="small" style="color:#015D67; margin-left: 38vh; margin-bottom:10vh;" href="<?= base_url('auth/lupa_password'); ?>">Lupa Password?</a>
 								<?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
 								<p><?php if ($this->session->flashdata('login_error')) : ?>
 										<small class="text-danger pl-3"><?= $this->session->flashdata('login_error') ?></small>
@@ -56,8 +56,8 @@
 							<button type="submit" id="submit" name="submit" class="btn btn-primary btn-user btn-block" style="background-color: #015D67;">Masuk</button>
 					</form>
 
-					<div class="text-center" style="margin-top: 30vh;">
-						<p style="color: black">Belum punya Akun? <a class="small" style="color: #015D67;" href="<?= base_url('auth/register'); ?>">Daftar</a></p>
+					<div class="text-center" style="margin-top: 3vh;">
+						<p style="color: black">Belum punya Akun? <a class="medium" style="color: #015D67;" href="<?= base_url('auth/register'); ?>">Daftar</a></p>
 					</div>
 				</div>
 			</div>

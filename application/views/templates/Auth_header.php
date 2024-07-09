@@ -26,4 +26,4 @@
     <!-- SweetAlert -->
     <script src="<?= base_url() ?>node_modules/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-<body style="background-color:#015D67;">
+<body style="background-color:#015D67; overflow: hidden;">
