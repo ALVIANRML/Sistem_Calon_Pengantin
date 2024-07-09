@@ -46,14 +46,16 @@
 								<span class="toggle-password" onclick="togglePasswordVisibility('password1')" style="position: absolute; top: 3vh; right: 2vh; transform: translateY(-50%); cursor: pointer;">
 									<i id="toggle-icon-password1" class="fas fa-eye"></i>
 								</span>
-								<a class="small" style="color:#015D67; margin-left: 38vh; margin-bottom:10vh;" href="<?= base_url('auth/lupa_password'); ?>">Lupa Password?</a>
 								<?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
-								<p><?php if ($this->session->flashdata('login_error')) : ?>
-										<small class="text-danger pl-3"><?= $this->session->flashdata('login_error') ?></small>
-									<?php endif; ?>
-								</p>
+								<?php if ($this->session->flashdata('login_error')) : ?>
+									<small class="text-danger pl-3"><?= $this->session->flashdata('login_error') ?></small>
+								<?php endif; ?>
+								<br> <!-- Pindahkan pesan error ke baris baru -->
+								<a class="small" style="color: #015D67; text-align: right; display: block; margin-right: 10px;top=20%;" href="<?= base_url('auth/lupa_password'); ?>">Lupa Password?</a>
+
 							</div>
 							<button type="submit" id="submit" name="submit" class="btn btn-primary btn-user btn-block" style="background-color: #015D67;">Masuk</button>
+						</div>
 					</form>
 
 					<div class="text-center" style="margin-top: 3vh;">

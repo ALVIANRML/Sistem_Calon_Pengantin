@@ -91,6 +91,14 @@ class Auth extends CI_Controller
 		return true;
 	}
 
+	// cek masa pendaftaran
+
+	public function cek_pendaftaran(){
+
+		$this->session->set_flashdata('cek_masa_pendaftaran', 'Status pendaftaran BUKA');
+		redirect('auth/login');
+	}
+
 	// login
 	public function login()
 	{
@@ -172,7 +180,8 @@ class Auth extends CI_Controller
 
 				// Simpan nomor telepon ke session
 				$this->session->set_userdata('nomor_telepon', $nomor_telepon);
-				redirect('auth/send_otp');
+				$this->session->set_flashdata('kirim_otp', 'Buka SMS Anda, maka kode OTP untuk mengubah kata sandi akan dikirim ke nomoro telepon yang Anda masukkan.');
+				redirect('auth/lupa_password');
 			} else {
 				$this->session->set_flashdata('message', 'Nomor telepon tidak ditemukan.');
 				redirect('auth/lupa_password');
@@ -255,6 +264,7 @@ class Auth extends CI_Controller
 				$this->load->view('templates/auth_footer');
 			} else {
 				$nomor_telepon = $this->session->userdata('nomor_telepon');
+
 				if (!$nomor_telepon) {
 					$this->session->set_flashdata('message', 'Sesi habis. Silakan coba lagi.');
 					redirect('auth/lupa_password');
@@ -267,15 +277,14 @@ class Auth extends CI_Controller
 					$user = $user->row_array();
 					$this->m_Auth->update_password($user['id_user'], password_hash($password, PASSWORD_DEFAULT));
 					$this->session->unset_userdata('nomor_telepon');
-					$this->session->set_flashdata('message', 'Password berhasil diperbarui.');
-					redirect('auth/login');
+					$this->session->set_flashdata('reset_success', 'Permintaan Anda berhasil dijalankan. ');
+					redirect('auth/reset_password');
 				} else {
 					$this->session->set_flashdata('message', 'Nomor telepon tidak ditemukan.');
 					redirect('auth/reset_password');
 				}
 			}
 		} else
-		{	
-			redirect('auth/lupa_password');}
+			redirect('auth/lupa_password');
 	}
 }
