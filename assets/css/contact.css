@@ -1,9 +1,10 @@
 body {
     margin: 0;
     padding: 20px;
-    background-color: white;
+
     font-family: Arial, sans-serif;
     overflow-x: hidden;
+	
 }
 
 .contact_container {
@@ -13,7 +14,9 @@ body {
     align-items: center;
     width: 100%;
     padding: 20px;
+	background-color: white;
 }
+
 
 .contact_pertanyaan {
     position: relative;
@@ -91,6 +94,7 @@ body {
     font-size: 35px;
     margin: 0;
     letter-spacing: -1.5px;
+	text-align: left;
 }
 
 .name_container {

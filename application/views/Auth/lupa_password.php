@@ -36,13 +36,14 @@
 					<form method="post" action="<?= base_url('auth/lupa_password') ?>">
 						<div class="form-group" style="margin-bottom: 5px;">
 							<label for="nomor_telepon" style="font-size: 2vh; margin-bottom: 5px;"><b>Nomor Handphone</b></label>
-							<input type="text" class="form-control form-control-user placeHolder" id="nomor_telepon" placeholder="+628123456789" style="font-size: 2vh; width: 100%;" name="nomor_telepon" value="<?= set_value('nomor_telepon') ?>">
+							<input type="text" class="form-control form-control-user placeHolder" id="nomor_telepon" placeholder="+62812**" style="font-size: 2vh; width: 100%;" name="nomor_telepon" value="<?= set_value('nomor_telepon') ?>">
 							<?= form_error('nomor_telepon', '<small class="text-danger pl-3">', '</small>'); ?>
 							<?php if ($this->session->flashdata('message')) : ?>
                         <p class="text-danger pl-3" style="font-size: small;"> <?php echo $this->session->flashdata('message'); ?>
                         </p>
                     <?php endif; ?>
 						</div>
+				
 				
 						<button type="submit" id="submit" name="submit" class="btn btn-primary btn-user btn-block" style="background-color: #015D67;">Kirim Permintaan</button>
 						<?php echo form_close(); ?>
@@ -58,3 +59,14 @@
 			</div>
 		</div>
 	</div>
+	<script>
+// Script untuk memastikan nilai awal tidak dihapus
+document.addEventListener('DOMContentLoaded', function() {
+    var inputNomor = document.getElementById('nomor_telepon');
+    inputNomor.addEventListener('input', function() {
+        if (!inputNomor.value.startsWith('+62')) {
+            inputNomor.value = '+62';
+        }
+    });
+});
+</script>
