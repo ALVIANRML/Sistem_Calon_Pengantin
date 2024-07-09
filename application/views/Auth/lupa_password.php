@@ -1,7 +1,31 @@
+<?php if ($this->session->flashdata('kirim_otp')) { ?>
+    
+	<script>
+		
+        swal({
+            title: "Informasi",
+            content: {
+                element: "div",
+                attributes: {
+                    innerHTML: "<hr><?php echo $this->session->flashdata('kirim_otp'); ?>Anda akan diarahkan ke halaman reset password.<hr>"
+                },
+            },
+            // icon: "success"
+        }).then((willRedirect) => {
+            if (willRedirect) {
+                window.location.href = "<?php echo base_url('auth/send_otp'); ?>";
+            }
+        });
+    </script>
+<?php } ?>
+
+
+
 <?php if ($this->session->flashdata('login_error')) { ?>
 	<script>
 		swal({
 			title: "Error!",
+			
 			text: "Username atau password salah.",
 			icon: "error"
 		});

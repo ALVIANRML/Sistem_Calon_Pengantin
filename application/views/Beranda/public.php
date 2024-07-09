@@ -50,36 +50,46 @@
 		<h1>Alur Pendaftaran</h1>
 		<p class="underHeader">Standar Pelayanan Prosedur Perkawinan (SP3)</p>
 		<div class="container">
-			<div class="box_baris1" data-aos="fade-up" data-aos-delay="100">
-				<div class="isi_box">
-					<h5 class="judul_box">1 &ensp; Registrasi</h5>
-					<p class="text_box">Forward closer feature disband down eow working back cc nor. Chime regroup management vendor accountable turn close solutionize activities brainstorming. Overflow optimize for roll future-proof stronger issues revision hours an. </p>
-				</div>
-			</div>
-			<div class="box_baris1" data-aos="fade-up" data-aos-delay="200">
-				<div class="isi_box">
-					<h5 class="judul_box">1 &ensp; Registrasi</h5>
-					<p class="text_box">Forward closer feature disband down eow working back cc nor. Chime regroup management vendor accountable turn close solutionize activities brainstorming. Overflow optimize for roll future-proof stronger issues revision hours an. </p>
-				</div>
-			</div>
-			<div class="box_baris1" data-aos="fade-up" data-aos-delay="300">
-				<div class="isi_box">
-					<h5 class="judul_box">1 &ensp; Registrasi</h5>
-					<p class="text_box">Forward closer feature disband down eow working back cc nor. Chime regroup management vendor accountable turn close solutionize activities brainstorming. Overflow optimize for roll future-proof stronger issues revision hours an. </p>
-				</div>
-			</div>
-			<div class="box_baris1" data-aos="fade-up" data-aos-delay="400">
-				<div class="isi_box">
-					<h5 class="judul_box">1 &ensp; Registrasi</h5>
-					<p class="text_box">Forward closer feature disband down eow working back cc nor. Chime regroup management vendor accountable turn close solutionize activities brainstorming. Overflow optimize for roll future-proof stronger issues revision hours an. </p>
-				</div>
-			</div>
-			<div class="box_baris1" data-aos="fade-up" data-aos-delay="500">
-				<div class="isi_box">
-					<h5 class="judul_box">1 &ensp; Registrasi</h5>
-					<p class="text_box">Forward closer feature disband down eow working back cc nor. Chime regroup management vendor accountable turn close solutionize activities brainstorming. Overflow optimize for roll future-proof stronger issues revision hours an. </p>
-				</div>
-			</div>
+		<div class="box_baris1" data-aos="fade-up" data-aos-delay="100">
+    <div class="isi_box">
+        <h3 class="judul_box" style="font-weight: bold;">
+            <span class="circle-number">1</span> Registrasi
+        </h3>
+        <p class="text_box">Forward closer feature disband down eow working back cc nor. Chime regroup management vendor accountable turn close solutionize activities brainstorming. Overflow optimize for roll future-proof stronger issues revision hours an.</p>
+    </div>
+</div>
+<div class="box_baris1" data-aos="fade-up" data-aos-delay="200">
+    <div class="isi_box">
+        <h3 class="judul_box" style="font-weight: bold;">
+            <span class="circle-number">2</span> Plano Test, Suntik TD
+        </h3>
+        <p class="text_box">Forward closer feature disband down eow working back cc nor. Chime regroup management vendor accountable turn close solutionize activities brainstorming. Overflow optimize for roll future-proof stronger issues revision hours an.</p>
+    </div>
+</div>
+<div class="box_baris1" data-aos="fade-up" data-aos-delay="300">
+    <div class="isi_box">
+        <h3 class="judul_box" style="font-weight: bold;">
+            <span class="circle-number">3</span> KIE Narkoba
+        </h3>
+        <p class="text_box">Forward closer feature disband down eow working back cc nor. Chime regroup management vendor accountable turn close solutionize activities brainstorming. Overflow optimize for roll future-proof stronger issues revision hours an.</p>
+    </div>
+</div>
+<div class="box_baris1" data-aos="fade-up" data-aos-delay="400">
+    <div class="isi_box">
+        <h3 class="judul_box" style="font-weight: bold;">
+            <span class="circle-number">4</span> Konseling Psikolog
+        </h3>
+        <p class="text_box">Forward closer feature disband down eow working back cc nor. Chime regroup management vendor accountable turn close solutionize activities brainstorming. Overflow optimize for roll future-proof stronger issues revision hours an.</p>
+    </div>
+</div>
+<div class="box_baris1" data-aos="fade-up" data-aos-delay="500">
+    <div class="isi_box">
+        <h3 class="judul_box" style="font-weight: bold;">
+            <span class="circle-number">5</span> Kartu Kendali
+        </h3>
+        <p class="text_box">Forward closer feature disband down eow working back cc nor. Chime regroup management vendor accountable turn close solutionize activities brainstorming. Overflow optimize for roll future-proof stronger issues revision hours an.</p>
+    </div>
+</div>
 		</div>
 	</div>
 
