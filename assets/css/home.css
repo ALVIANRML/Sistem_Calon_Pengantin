@@ -1,0 +1,322 @@
+/* Reset margin dan padding untuk body dan html */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Kontainer utama */
+.container_home {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Kontainer header */
+.header-container {
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 18px 0;
+    width: calc(100vw + 40px); /* Lebar penuh ditambah padding body */
+    margin-left: -20px; /* Menarik kembali margin kiri */
+    margin-right: -20px; /* Menarik kembali margin kanan */
+    background: var(--Whites, #E4EEEF);
+    box-sizing: border-box; /* Menghitung padding dan border dalam ukuran elemen */
+}
+
+/* Gaya untuk link */
+a {
+    color: #2D2E2E;
+    text-decoration: none;
+}
+
+/* Navbar */
+.navbar {
+    transform: translateX(80px);
+}
+
+/* Daftar navigasi */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 58px;
+    padding: 0;
+    margin: 0;
+}
+
+/* Daftar masuk */
+.daftar-masuk {
+    display: flex;
+    gap: 32px;
+}
+
+/* Tombol umum */
+.btn {
+    background-color: #FFFFFF;
+    width: 150px;
+    height: 45.5px;
+    border-radius: 5px;
+    border: 2.55px solid #00ABB2;
+    color: #2D2E2E;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Teks */
+.teks-1 {
+    color: var(--white---color, #2D2E2E);
+    font-size: 54px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    letter-spacing: 5.4px;
+    margin: 0;
+}
+
+.teks-2 {
+    color: var(--white---color, #2D2E2E);
+    font-family: Inter;
+    font-size: 54px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -2.16px;
+    margin: 0;
+}
+
+.teks-3 {
+    color: black;
+}
+
+.span-1 {
+    font-weight: bold;
+}
+
+/* Tombol masuk */
+.btn-masuk {
+    border-radius: 7.5px;
+    background: var(--primary---color, #015D67);
+    width: 240px;
+    height: 50px;
+    color: #FFFAFA;
+    font-size: 1rem;
+}
+
+/* Elemen home */
+.home {
+    position: static;
+    padding: 0 100px;
+    height: 87vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw; /* Lebar 100% viewport */
+}
+
+/* Elemen hero-home */
+.hero-home {
+    position: absolute;
+    opacity: 20%;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    width: 100%; /* Lebar 100% */
+    height: 120%;
+    /* object-fit: cover; */
+}
+
+/* Deskripsi */
+.desc {
+    margin-bottom: 48px;
+}
+
+/* Media Queries */
+
+/* Tablet view */
+@media (max-width: 768px) {
+    .navbar {
+        transform: translateX(40px);
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .header-container {
+        flex-direction: column;
+        padding: 10px 0;
+        width: 100vw;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .home {
+        flex-direction: column;
+        padding: 0 50px;
+        height: auto;
+    }
+
+    .btn {
+        width: 120px;
+        height: 40px;
+    }
+
+    .btn-masuk {
+        width: 180px;
+        height: 40px;
+    }
+
+    .teks-1, .teks-2 {
+        font-size: 36px;
+        letter-spacing: normal;
+    }
+
+    .daftar-masuk {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+/* Mobile view */
+@media (max-width: 480px) {
+    .navbar {
+        transform: translateX(20px);
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-container {
+        flex-direction: column;
+        padding: 10px 0;
+        width: 100vw;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .home {
+        flex-direction: column;
+        padding: 0 20px;
+        height: auto;
+    }
+
+    .btn {
+        width: 100px;
+        height: 35px;
+    }
+
+    .btn-masuk {
+        width: 150px;
+        height: 35px;
+    }
+
+    .teks-1, .teks-2 {
+        font-size: 24px;
+        letter-spacing: normal;
+    }
+
+    .daftar-masuk {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Small mobile view */
+@media (max-width: 200px) {
+    .navbar {
+        transform: translateX(10px);
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .header-container {
+        flex-direction: column;
+        padding: 5px 0;
+        width: 100vw;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .home {
+        flex-direction: column;
+        padding: 0 10px;
+        height: auto;
+    }
+
+    .btn {
+        width: 80px;
+        height: 30px;
+        font-size: 0.75rem;
+    }
+
+    .btn-masuk {
+        width: 120px;
+        height: 30px;
+        font-size: 0.75rem;
+    }
+
+    .teks-1, .teks-2 {
+        font-size: 18px;
+        letter-spacing: normal;
+    }
+
+    .daftar-masuk {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* View untuk lebar maksimal 50% */
+@media (max-width: 50vw) {
+    .navbar {
+        transform: translateX(5vw);
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 3vw;
+    }
+
+    .header-container {
+        flex-direction: column;
+        padding: 5px 0;
+        width: 100vw;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .home {
+        flex-direction: column;
+        padding: 0 5vw;
+        height: auto;
+    }
+
+    .btn {
+        width: 15vw;
+        height: 5vh;
+        font-size: 1vw;
+    }
+
+    .btn-masuk {
+        width: 20vw;
+        height: 5vh;
+        font-size: 1vw;
+    }
+
+    .teks-1, .teks-2 {
+        font-size: 4vw;
+        letter-spacing: normal;
+    }
+
+    .daftar-masuk {
+        flex-direction: column;
+        gap: 2vw;
+    }
+}

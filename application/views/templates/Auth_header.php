@@ -14,6 +14,7 @@
 
 
 	<!-- Custom fonts for this template-->
+	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/tt1.png" />
 	<link href="<?= base_url('assets/') ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
@@ -30,60 +31,82 @@
 
 
 	<style>
-    /* CSS custom untuk mengubah panjang dan warna popup */
-    .swal-modal {
-        width: 80% !important; /* Sesuaikan panjang popup */
-        max-width: 600px; /* Batasi lebar maksimum */
-        background-color: white !important; /* Warna background popup */
-        height: auto; /* Atur tinggi secara otomatis */
-    }
+		/* CSS custom untuk mengubah panjang dan warna popup */
+		.swal-modal {
+			width: 80% !important;
+			/* Sesuaikan panjang popup */
+			max-width: 600px;
+			/* Batasi lebar maksimum */
+			background-color: white !important;
+			/* Warna background popup */
+			height: auto;
+			/* Atur tinggi secara otomatis */
+		}
 
-    .swal-title {
-        color: #343a40 !important; /* Warna teks judul */
-        font-weight: bold;
-        margin-bottom: 10px; /* Atur margin bawah */
-        margin-top: 20px; /* Atur margin atas */
-        text-align: left;
-        padding-left: 20px; /* Padding kiri */
-    }
+		.swal-title {
+			color: #343a40 !important;
+			/* Warna teks judul */
+			font-weight: bold;
+			margin-bottom: 10px;
+			/* Atur margin bawah */
+			margin-top: 20px;
+			/* Atur margin atas */
+			text-align: left;
+			padding-left: 20px;
+			/* Padding kiri */
+		}
 
-    .swal-content {
-        color: white !important; /* Warna teks isi */
-        background-color: #015D67;
-        border-radius: 4px;
-        width: 90%;
-        max-width: 500px; /* Batasi lebar maksimum konten */
-        margin: auto; /* Mengatur margin auto untuk posisi tengah */
-        display: flex; /* Menggunakan flexbox untuk penataan */
-        align-items: center; /* Memusatkan vertikal */
-        justify-content: left; /* Memusatkan horizontal */
-        padding: 20px; /* Atur padding sesuai kebutuhan */
-        text-align: left;
-        font-size: medium;
-    }
+		.swal-content {
+			color: white !important;
+			/* Warna teks isi */
+			background-color: #015D67;
+			border-radius: 4px;
+			width: 90%;
+			max-width: 500px;
+			/* Batasi lebar maksimum konten */
+			margin: auto;
+			/* Mengatur margin auto untuk posisi tengah */
+			display: flex;
+			/* Menggunakan flexbox untuk penataan */
+			align-items: center;
+			/* Memusatkan vertikal */
+			justify-content: left;
+			/* Memusatkan horizontal */
+			padding: 20px;
+			/* Atur padding sesuai kebutuhan */
+			text-align: left;
+			font-size: medium;
+		}
 
-    .swal-button {
-        background-color: #015D67 !important; /* Warna tombol */
-        position: relative;
-        top: 50%; /* Geser vertikal */
-        right: 45%; /* Geser horizontal */
-    }
+		.swal-button {
+			background-color: #015D67 !important;
+			/* Warna tombol */
+			position: relative;
+			top: 50%;
+			/* Geser vertikal */
+			right: 45%;
+			/* Geser horizontal */
+		}
 
-    /* Media query untuk layar yang lebih kecil */
-    @media (max-width: 629px) {
-        .swal-modal {
-            width: 90% !important; /* Sesuaikan lebar untuk layar kecil */
-            max-width: 90%;
-            height: auto; /* Atur tinggi secara otomatis */
-        }
+		/* Media query untuk layar yang lebih kecil */
+		@media (max-width: 629px) {
+			.swal-modal {
+				width: 90% !important;
+				/* Sesuaikan lebar untuk layar kecil */
+				max-width: 90%;
+				height: auto;
+				/* Atur tinggi secara otomatis */
+			}
 
-        .swal-content {
-            width: 95%; /* Sesuaikan lebar konten untuk layar kecil */
-            max-width: none; /* Hapus batasan lebar maksimum */
-			height: 10%;
-        }
-    }
-</style>
+			.swal-content {
+				width: 95%;
+				/* Sesuaikan lebar konten untuk layar kecil */
+				max-width: none;
+				/* Hapus batasan lebar maksimum */
+				height: 10%;
+			}
+		}
+	</style>
 
 </head>
 
