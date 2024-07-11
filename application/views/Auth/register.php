@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" style="margin-top: -5vh;">
 	<div class="card o-hidden border-0 shadow-lg my-5">
-		<div class="card-body p-0" style="height: 96vh;">
+		<div class="card-body p-0" ">
 			<!-- Nested Row within Card Body -->
 			<div class="row">
 				<!-- Kolom kiri untuk gambar -->
