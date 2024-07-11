@@ -110,4 +110,4 @@
 
 </head>
 
-<body style="background-color:#015D67; overflow: hidden;">
+<body style="background-color:#015D67;">

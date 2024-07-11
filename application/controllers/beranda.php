@@ -9,10 +9,15 @@ class beranda extends CI_Controller
 		parent::__construct();
 		$this->load->library('form_validation');
 		$this->load->model('m_Beranda');
+		$this->load->model('m_Dashboard');
+		$this->load->library('session');
 	}
 
 	public function index()
 	{
+		$id_tanggal ='d4973c6f-3510-4edc-8b49-e044b873bb26';
+		$status = $this->m_Dashboard->get_status($id_tanggal);
+		$this->session->set_userdata('status', $status);
 		$this->load->view('beranda/public');
 	}
 

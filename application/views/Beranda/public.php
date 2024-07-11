@@ -19,47 +19,49 @@
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/contact.css">
 	<title>Catin DPPKB Tebing Tinggi</title>
 </head>
+<body style="margin: auto; padding-top:0;overflow:-moz-hidden-unscrollable">
+    <?php 
+    $tombol = $this->session->userdata('status');
+    $display = ($tombol == 0) ? "display:none" : "display:block";
+    $heroMovement = ($tombol == 0) ? "position: absolute; width: 105%; " : ""; // Tambahkan ini
+    ?>
+    
+    <!-- home -->
+    <div class="container_home" style="margin-bottom: 30vh;">
+        <header>
+            <div class="header-container">
+                <img class="logo" src="<?= base_url('assets/') ?>img/logo.png" alt="" style="margin-left:-10vh">
+                <div class="navbar">
+                    <nav>
+                        <ul>
+                            <li><a href="#tentang">Tentang</a></li>
+                            <li><a href="#">Struktur</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#contact">Kontak</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="daftar-masuk">
+                    <a href="<?= base_url('auth/register') ?>"><button class="btn" style="<?php echo $display; ?>">Daftar</button></a>
+                    <a href="<?= base_url('auth/login') ?>"><button class="btn">Masuk</button></a>
+                </div>
+            </div>
+        </header>
+        <div class="home">
+            <img class="hero-home" src="<?= base_url('assets/') ?>img/tugu-13-desember-t-tinggi3.jpg" alt="" style="height:100%; margin-top:10vh; opacity:20%; <?php echo $heroMovement; ?>"> <!-- Tambahkan heroMovement -->
+            <div class="desc-container">
+                <div class="desc">
+                    <p class="teks-1">PERCANTIN</p>
+                    <p class="teks-2">Pemeriksaan Calon</p>
+                    <p class="teks-2">Pengantin</p>
+                </div>
 
-<body style="margin: auto; padding-top:0;">
-
-
-
-	<!-- home -->
-	<div class="container_home" style="margin-bottom: 30vh;">
-		<header>
-			<div class="header-container">
-				<img class="logo" src="<?= base_url('assets/') ?>img/logo.png" alt="" style="margin-left:-10vh">
-				<div class="navbar">
-					<nav>
-						<ul>
-							<li><a href="#tentang">Tentang</a></li>
-							<li><a href="#">Struktur</a></li>
-							<li><a href="#">FAQ</a></li>
-							<li><a href="#contact">Kontak</a></li>
-						</ul>
-					</nav>
-				</div>
-				<div class="daftar-masuk">
-					<a href="<?= base_url('auth/register') ?>"><button class="btn">Daftar</button></a>
-					<a href="<?= base_url('auth/login') ?>"><button class="btn">Masuk</button></a>
-				</div>
-			</div>
-		</header>
-		<div class="home">
-			<img class="hero-home" src="<?= base_url('assets/') ?>img/hero.png" alt="">
-			<div class="desc-container">
-				<div class="desc">
-					<p class="teks-1">PERCANTIN</p>
-					<p class="teks-2">Pemeriksaan Calon</p>
-					<p class="teks-2">Pengantin</p>
-				</div>
-
-				<a href="<?= base_url('auth/login') ?>"><button class="btn-masuk">Masuk</button></a>
-				<p class="teks-3">Belum mempunyai akun? <span class="span-1"><a href="<?= base_url('auth/register') ?>">Daftar</a></span></p>
-			</div>
-			<img src="<?= base_url('assets/') ?>img/percantin.png" alt="" style="margin-right: 20vh;">
-		</div>
-	</div>
+                <a href="<?= base_url('auth/login') ?>"><button class="btn-masuk">Masuk</button></a>
+                <p class="teks-3" style="<?php echo $display; ?>">Belum mempunyai akun? <span class="span-1"><a href="<?= base_url('auth/register') ?>">Daftar</a></span></p>
+            </div>
+            <img src="<?= base_url('assets/') ?>img/percantin.png" alt="" style="margin-right: 20vh;">
+        </div>
+    </div>
 </body>
 
 
