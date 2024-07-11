@@ -93,7 +93,8 @@ class Auth extends CI_Controller
 
 	// cek masa pendaftaran
 
-	public function cek_pendaftaran(){
+	public function cek_pendaftaran()
+	{
 
 		$this->session->set_flashdata('cek_masa_pendaftaran', 'Status pendaftaran BUKA');
 		redirect('auth/login');

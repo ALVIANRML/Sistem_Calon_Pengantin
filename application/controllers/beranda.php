@@ -11,30 +11,27 @@ class beranda extends CI_Controller
 		$this->load->model('m_Beranda');
 	}
 
-	public function index(){
+	public function index()
+	{
 		$this->load->view('beranda/public');
 	}
-	public function faq()
+
+	public function home()
 	{
-		// var_dump(20);
-		// exit;
-
-			$this->load->view('Beranda/faq');
-
+		$this->load->view('Beranda/home');
 	}
 
-	public function alur_pendaftaran(){
-		$this->load->view('Beranda/alur_pendaftaran');
-	}
 
-	public function contact(){
+
+	public function contact()
+	{
 		$this->form_validation->set_rules(
 			'first_name',
 			'First Name',
 			'required|trim',
 			[
 				'required' => 'Nama tidak boleh kosong',
-				]
+			]
 		);
 
 		$this->form_validation->set_rules(
@@ -43,9 +40,9 @@ class beranda extends CI_Controller
 			'required|trim',
 			[
 				'required' => 'Nama tidak boleh kosong',
-				]
+			]
 		);
-		
+
 		$this->form_validation->set_rules(
 			'email',
 			'Email',
@@ -53,7 +50,7 @@ class beranda extends CI_Controller
 			[
 				'required' => 'email tidak boleh kosong',
 				'email' => 'format email salah',
-				]
+			]
 		);
 		$this->form_validation->set_rules(
 			'address',
@@ -61,7 +58,7 @@ class beranda extends CI_Controller
 			'required|trim',
 			[
 				'required' => 'Alamat tidak boleh kosong',
-				]
+			]
 		);
 
 		$this->form_validation->set_rules(
@@ -70,26 +67,21 @@ class beranda extends CI_Controller
 			'required|trim',
 			[
 				'required' => 'Deskripsi tidak boleh kosong',
-				]
+			]
 		);
 
-		if($this->form_validation->run()== false){
+		if ($this->form_validation->run() == false) {
 
-		$this->load->view('beranda/contact');
-	}else{
-		$id = bin2hex(random_bytes(16));
-		$firstName= $this->input->post('first_name');
-		$lastName= $this->input->post('last_name');
-		$address= $this->input->post('address');
-		$description= $this->input->post('description');
-		
-		$this->m_Beranda->contact($id, $firstName,$lastName,$address,$description);
-		redirect('beranda/contact');
+			$this->load->view('beranda/public');
+		} else {
+			$id = bin2hex(random_bytes(16));
+			$firstName = $this->input->post('first_name');
+			$lastName = $this->input->post('last_name');
+			$address = $this->input->post('address');
+			$description = $this->input->post('description');
 
+			$this->m_Beranda->contact($id, $firstName, $lastName, $address, $description);
+			redirect('beranda/public');
+		}
 	}
-	}
-	public function tentang_kami(){
-		$this->load->view('Beranda/tentang_kami');
-	}
-	
 }
