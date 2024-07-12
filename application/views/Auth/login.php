@@ -8,6 +8,11 @@
 	</script>
 <?php } ?>
 
+<?php 
+    $tombol = $this->session->userdata('status');
+    $display = ($tombol == 0) ? "display:none" : "display:block";
+    $heroMovement = ($tombol == 0) ? "position: absolute; width: 105%; " : ""; // Tambahkan ini
+    ?>
 
 <div class="container">
 	<div class="card o-hidden border-0 shadow-lg my-5">
@@ -59,7 +64,7 @@
 					</form>
 
 					<div class="text-center" style="margin-top: 3vh;">
-						<p style="color: black">Belum punya Akun? <a class="medium" style="color: #015D67;" href="<?= base_url('auth/register'); ?>">Daftar</a></p>
+						<p style="color: black; <?php echo $display; ?>">Belum punya Akun? <a class="medium" style="color: #015D67;" href="<?= base_url('auth/register'); ?>">Daftar</a></p>
 					</div>
 				</div>
 			</div>

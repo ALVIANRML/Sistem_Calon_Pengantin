@@ -1,5 +1,5 @@
 <?php
-class m_Dashboard extends CI_Model
+class m_Tanggal_Pemeriksaan extends CI_Model
 {
 	public function tanggal_pemeriksaan($id_tanggal, $id_status, $tanggal)
 	{
@@ -19,9 +19,23 @@ class m_Dashboard extends CI_Model
 		$this->db->where('id_tanggal', $id_tanggal);
 		$query = $this->db->get();
 
-		// Mengembalikan satu nilai id_status sebagai string
+		
 		if ($query->num_rows() > 0) {
 			return $query->row()->id_status;
+		}
+		return null;
+	}
+	public function get_tanggal($id_tanggal)
+	{
+
+		$this->db->select('tanggal');
+		$this->db->from('tanggal_pemeriksaan');
+		$this->db->where('id_tanggal', $id_tanggal);
+		$query = $this->db->get();
+
+		
+		if ($query->num_rows() > 0) {
+			return $query->row()->tanggal;
 		}
 		return null;
 	}
