@@ -1,3 +1,10 @@
+<?php 
+    $tombol = $this->session->userdata('status');
+   if($tombol == 0){
+	redirect('beranda/index');
+   }
+	?>
+
 <div class="container" style="margin-top: -5vh;">
 	<div class="card o-hidden border-0 shadow-lg my-5">
 		<div class="card-body p-0" ">

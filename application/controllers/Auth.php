@@ -11,6 +11,7 @@ class Auth extends CI_Controller
 		$this->load->model('m_Auth');
 		$this->load->library('twilio');
 		$this->load->library('session');
+		$this->load->model('m_Tanggal_Pemeriksaan');
 	}
 
 
@@ -18,6 +19,9 @@ class Auth extends CI_Controller
 
 	public function register()
 	{
+		$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
+		$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
+		$this->session->set_userdata('status', $status);
 
 		$this->form_validation->set_rules(
 			'nama',
@@ -74,6 +78,7 @@ class Auth extends CI_Controller
 
 			$this->m_Auth->input_user($id, $nama, $password, $role, $created_at, $nomorTelepon, $tanggalLahir);
 			$this->session->set_flashdata('message', '<div class="alert alert-succes" role="alert">Congratulation!</div>');
+
 			redirect('auth/login');
 		}
 	}
@@ -103,6 +108,9 @@ class Auth extends CI_Controller
 	// login
 	public function login()
 	{
+		$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
+		$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
+		$this->session->set_userdata('status', $status);
 		$this->form_validation->set_rules('nama', 'Nama', 'required|trim');
 		$this->form_validation->set_rules('password1', 'Password', 'required|trim');
 
@@ -125,22 +133,21 @@ class Auth extends CI_Controller
 					$this->session->set_userdata('id_user', $user['id_user']);
 					$this->session->set_userdata('username', $user['username']);
 					$this->session->set_userdata('role', $user['role']);
-
 					switch ($user['role']) {
 						case 1:
-							redirect('Dashboard/admin');
+							redirect('Dashboard/view_admin');
 							break;
 						case 2:
-							redirect('Dashboard/kesehatan');
+							redirect('Dashboard/view_kesehatan');
 							break;
 						case 3:
-							redirect('Dashboard/bnn');
+							redirect('Dashboard/view_bnn');
 							break;
 						case 4:
-							redirect('Dashboard/psikolog');
+							redirect('Dashboard/view_psikolog');
 							break;
 						case 5:
-							redirect('Dashboard/Catin');
+							redirect('Dashboard/view_Catin');
 							break;
 						default:
 							$this->session->set_flashdata('loggin_err', 'loggin_err');

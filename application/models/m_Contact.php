@@ -1,6 +1,6 @@
 <?php
 
-class m_Beranda extends CI_Model
+class m_Contact extends CI_Model
 {
 	public function contact($id, $firstName,$lastName,$address,$description){
 		$this->db->trans_start();

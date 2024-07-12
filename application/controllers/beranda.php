@@ -8,15 +8,15 @@ class beranda extends CI_Controller
 
 		parent::__construct();
 		$this->load->library('form_validation');
-		$this->load->model('m_Beranda');
-		$this->load->model('m_Dashboard');
+		$this->load->model('m_Contact');
+		$this->load->model('m_Tanggal_Pemeriksaan');
 		$this->load->library('session');
 	}
 
 	public function index()
 	{
 		$id_tanggal ='d4973c6f-3510-4edc-8b49-e044b873bb26';
-		$status = $this->m_Dashboard->get_status($id_tanggal);
+		$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
 		$this->session->set_userdata('status', $status);
 		$this->load->view('beranda/public');
 	}
@@ -77,7 +77,7 @@ class beranda extends CI_Controller
 
 		if ($this->form_validation->run() == false) {
 
-			$this->load->view('beranda/public');
+			redirect('beranda/index');
 		} else {
 			$id = bin2hex(random_bytes(16));
 			$firstName = $this->input->post('first_name');
@@ -85,8 +85,8 @@ class beranda extends CI_Controller
 			$address = $this->input->post('address');
 			$description = $this->input->post('description');
 
-			$this->m_Beranda->contact($id, $firstName, $lastName, $address, $description);
-			redirect('beranda/public');
+			$this->m_Contact->contact($id, $firstName, $lastName, $address, $description);
+			redirect('beranda/index');
 		}
 	}
 }
