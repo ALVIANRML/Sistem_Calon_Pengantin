@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>D_kesehatan</title>
+	<title>D_Psikolog</title>
 </head>
-
 <body>
-	<form action="<?= base_url('dashboard/tanggal') ?>" method="post">
+<form action="<?= base_url('dashboard/tanggal') ?>" method="post">
 		<div>
 			<label for="tanggal_pemeriksaan">Tanggal Pemeriksaan</label>
 			<?php $today = date('Y-m-d');?>
@@ -21,6 +19,4 @@
 		document.getElementById("date").valueAsDate = new Date();
 	</script>
 </body>
-
-
 </html>
