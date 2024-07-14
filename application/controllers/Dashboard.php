@@ -19,41 +19,74 @@ class Dashboard extends CI_Controller
 	{
 		$this->load->view('Dashboard/admin');
 	}
-	public function admin()
-	{
-		$tanggal = $this->input->post('tanggal_pemeriksaan');
-		$id_status = $this->input->post('status');
-		$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
-
-		$this->m_Tanggal_Pemeriksaan->tanggal_pemeriksaan($id_tanggal, $id_status, $tanggal);
-		redirect('Dashboard/view_admin');
-	}
 
 	// kesehatan
 	public function view_kesehatan()
 	{
 		$this->load->view('Dashboard/kesehatan');
 	}
-	public function kesehatan()
+	public function view_bnn()
 	{
-		$tanggal = $this->input->post('tanggal_pemeriksaan');
-		$id_status = $this->input->post('status');
-		$id_tanggal = 'ee250336-d65f-9309-742e-3c500258963d';
-		$this->m_Tanggal_Pemeriksaan->tanggal_pemeriksaan($id_tanggal, $id_status, $tanggal);
-		$tanggalexisted = $this->m_Tanggal_Pemeriksaan->get_tanggal($id_tanggal);
-		$this->session->set_userdata('tanggal', $tanggalexisted);
-		redirect('Dashboard/view_kesehatan');
+		$this->load->view('Dashboard/bnn');
+	}
+	public function view_psikolog()
+	{
+		$this->load->view('Dashboard/psikolog');
+	}
+	public function view_catin()
+	{
 	}
 
 
 
-	public function bnn()
+	public function tanggal()
 	{
-	}
-	public function psikolog()
-	{
-	}
-	public function catin()
-	{
+		$role = $this->session->userdata('role');
+
+		// admin
+		if ($role == 1) {
+			$awal_tanggal = date('Y-m-d');
+			$tanggal = $this->input->post('tanggal_pemeriksaan');
+			if (strtotime($tanggal) < strtotime($awal_tanggal)) {
+				$this->session->set_flashdata('error_tanggal', 'Tanggal pemeriksaan tidak boleh lebih awal dari tanggal hari ini.');
+				redirect('Dashboard/view_admin');
+			}
+			$id_status = $this->input->post('status');
+			$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
+			$this->m_Tanggal_Pemeriksaan->tanggal_pemeriksaan($awal_tanggal, $id_tanggal, $id_status, $tanggal);
+			redirect('Dashboard/view_admin');
+
+			// kesehatan
+		} else if ($role == 2) {
+			$tanggal = $this->input->post('tanggal_pemeriksaan');
+			$id_status = $this->input->post('status');
+			$id_tanggal = 'ee250336-d65f-9309-742e-3c500258963d';
+			$this->m_Tanggal_Pemeriksaan->tanggal_pemeriksaan($id_tanggal, $id_status, $tanggal);
+			$tanggalexisted = $this->m_Tanggal_Pemeriksaan->get_tanggal($id_tanggal);
+			$this->session->set_userdata('tanggal', $tanggalexisted);
+			redirect('Dashboard/view_kesehatan');
+		} else if ($role == 3) {
+
+			// bnn
+			$tanggal = $this->input->post('tanggal_pemeriksaan');
+			$id_status = $this->input->post('status');
+			$id_tanggal = '44ff9962-5668-aeeb-a1a6-4e730d5f1752';
+			$this->m_Tanggal_Pemeriksaan->tanggal_pemeriksaan($id_tanggal, $id_status, $tanggal);
+			$tanggalexisted = $this->m_Tanggal_Pemeriksaan->get_tanggal($id_tanggal);
+			$this->session->set_userdata('tanggal', $tanggalexisted);
+			redirect('Dashboard/view_bnn');
+		} else if ($role == 4) {
+
+			// psikolog
+			$tanggal = $this->input->post('tanggal_pemeriksaan');
+			$id_status = $this->input->post('status');
+			$id_tanggal = 'c1116372-6028-0013-f4f6-b8cd6e12f2f2';
+			$this->m_Tanggal_Pemeriksaan->tanggal_pemeriksaan($id_tanggal, $id_status, $tanggal);
+			$tanggalexisted = $this->m_Tanggal_Pemeriksaan->get_tanggal($id_tanggal);
+			$this->session->set_userdata('tanggal', $tanggalexisted);
+			redirect('Dashboard/view_psikolog');
+		} else {
+			return ('anda tidak memiliki akses');
+		}
 	}
 }

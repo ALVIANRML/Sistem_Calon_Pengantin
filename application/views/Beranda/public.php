@@ -25,6 +25,15 @@
     $display = ($tombol == 0) ? "display:none" : "display:block";
     $heroMovement = ($tombol == 0) ? "position: absolute; width: 105%; " : ""; // Tambahkan ini
     ?>
+
+	<?php
+	$kuota = 50;
+	if($kuota > 50){
+		$display = ($tombol == 0) ? "display:none" : "display:block";
+    $heroMovement = ($tombol == 0) ? "position: absolute; width: 105%; " : ""; // Tambahkan ini
+	}
+
+	?>
     
     <!-- home -->
     <div class="container_home" style="margin-bottom: 30vh;">

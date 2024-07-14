@@ -1,15 +1,25 @@
 <?php
 class m_Tanggal_Pemeriksaan extends CI_Model
 {
-	public function tanggal_pemeriksaan($id_tanggal, $id_status, $tanggal)
+	public function tanggal_pemeriksaan($awal_tanggal,$id_tanggal, $id_status, $tanggal)
 	{
 
 
 		$this->db->where('id_tanggal', $id_tanggal);
 		// var_dump($id_tanggal);
 		// exit;
-		$this->db->update('tanggal_pemeriksaan', ['id_status' => $id_status, 'tanggal' => $tanggal]);
+		$this->db->update('tanggal_pemeriksaan', ['id_status' => $id_status, 'tanggal' => $tanggal, 'awal_tanggal' => $awal_tanggal]);
 	}
+	public function update_id_status($id_tanggal, $id_status)
+	{
+
+
+		$this->db->where('id_tanggal', $id_tanggal);
+		// var_dump($id_tanggal);
+		// exit;
+		$this->db->update('tanggal_pemeriksaan', ['id_status' => $id_status]);
+	}
+
 
 	public function get_status($id_tanggal)
 	{
@@ -39,4 +49,10 @@ class m_Tanggal_Pemeriksaan extends CI_Model
 		}
 		return null;
 	}
+
+	public function get_tanggal_by_id($id_tanggal) {
+        $this->db->where('id_tanggal', $id_tanggal);
+        $query = $this->db->get('tanggal_pemeriksaan'); 
+        return $query;
+    }
 }
