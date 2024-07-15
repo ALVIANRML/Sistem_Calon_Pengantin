@@ -35,6 +35,11 @@ class Dashboard extends CI_Controller
 	}
 	public function view_catin()
 	{
+		$this->load->view('Dashboard/catin');
+	}
+
+	public function view_catin_pemeriksaan(){
+		$this->load->view('Dashboard/catin_pemeriksaan');
 	}
 
 
