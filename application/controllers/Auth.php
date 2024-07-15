@@ -109,7 +109,25 @@ class Auth extends CI_Controller
 	public function login()
 	{
 		$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
-		$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
+		$tanggalexisted = $this->m_Tanggal_Pemeriksaan->get_tanggal_by_id($id_tanggal);
+		// $today = date('Y-m-d');
+		$today = '2024-07-07';
+		if ($tanggalexisted->num_rows() > 0) {
+			$tanggalexisted = $tanggalexisted->row_array();
+			$akhir_tanggal = $tanggalexisted['tanggal'];
+			$awal_tanggal = $tanggalexisted['awal_tanggal'];
+			if (strtotime($akhir_tanggal) < strtotime($today) || strtotime($awal_tanggal) > strtotime($today)) {
+				$id_status = 0;
+				$this->m_Tanggal_Pemeriksaan->update_id_status($id_tanggal, $id_status);
+			} else {
+				$id_status = 1;
+				$this->m_Tanggal_Pemeriksaan->update_id_status($id_tanggal, $id_status);
+			}
+			$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
+			$this->session->set_userdata('status', $status);
+			
+		}
+
 		$this->session->set_userdata('status', $status);
 		$this->form_validation->set_rules('nama', 'Nama', 'required|trim');
 		$this->form_validation->set_rules('password1', 'Password', 'required|trim');

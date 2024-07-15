@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/home.css">
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/tentang.css">
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/alur_pendaftaran.css">
+
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/contact.css">
 	<title>Catin DPPKB Tebing Tinggi</title>
 </head>
@@ -147,6 +148,33 @@
 		</div>
 	</div>
 </div>
+
+<!-- struktur organisasi -->
+    <div class="header">
+        <p class="judul">Struktur Organisasi</p>
+        <p class="desc">Dinas Pemberdayaan Perempuan, Perlindungan Anak, Pengendalian Penduduk dan Keluarga Berencana.</p>
+    </div>
+    <div class="card-container">
+        <div class="card">
+            <img class="image" src="" alt="">
+            <p class="nama">Atika P. Sary Nasution., S.Rj</p>
+            <p class="NIP">NIP: 196907251995012001</p>
+            <p class="jabatan">Kepala Dinas</p>
+        </div>
+        <div class="card">
+            <img class="image" src="" alt="">
+            <p class="nama">Atika P. Sary Nasution., S.Rj</p>
+            <p class="NIP">NIP: 196907251995012001</p>
+            <p class="jabatan">Kepala Dinas</p>
+        </div>
+        <div class="card">
+            <img class="image" src="" alt="">
+            <p class="nama">Atika P. Sary Nasution., S.Rj</p>
+            <p class="NIP">NIP: 196907251995012001</p>
+            <p class="jabatan">Kepala Dinas</p>
+        </div>
+    </div>
+
 
 <!-- CONTACT -->
 <section id="contact">
