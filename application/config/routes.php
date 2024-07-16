@@ -52,3 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['get_kota'] = 'dashboard/get_kota';
+$route['get_kecamatan'] = 'dashboard/get_kecamatan';
+$route['get_kelurahan'] = 'dashboard/get_kelurahan';

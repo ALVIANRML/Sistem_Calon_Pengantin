@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/catin.css">
 	<title>D_catin</title>
 </head>
+
 <body>
 	<div class="container_admin">
 		<div class="header-container">
@@ -35,12 +37,14 @@
 							<span style="color:white">Dashboard</span>
 						</div>
 					</div>
-					<div class="isi" style="background-color: white;">
-						<img src="<?= base_url('assets/') ?>/img/Vector.png" alt="Profile Image" class="icon-navigation">
-						<div class="profile-text">
-							<span>Daftar Pemeriksaan</span>
+					<a href="<?= base_url('dashboard/view_catin_pemeriksaan') ?>">
+						<div class="isi" style="background-color: white;">
+							<img src="<?= base_url('assets/') ?>/img/Vector.png" alt="Profile Image" class="icon-navigation">
+							<div class="profile-text">
+								<span>Daftar Pemeriksaan</span>
+							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 			<div class="inti">
@@ -139,4 +143,5 @@
 		</div>
 	</div>
 </body>
+
 </html>
