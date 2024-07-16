@@ -11,6 +11,10 @@ class Dashboard extends CI_Controller
 		$this->load->library('twilio');
 		$this->load->library('session');
 		$this->load->model('m_Tanggal_Pemeriksaan');
+		$this->load->model('m_provinsi');
+		$this->load->model('m_kota');
+		$this->load->model('m_kecamatan');
+		$this->load->model('m_kelurahan');
 		// $this->load
 	}
 
@@ -33,15 +37,95 @@ class Dashboard extends CI_Controller
 	{
 		$this->load->view('Dashboard/psikolog');
 	}
+
+
+	//  05 catin
 	public function view_catin()
 	{
+
 		$this->load->view('Dashboard/catin');
 	}
-
-	public function view_catin_pemeriksaan(){
-		$this->load->view('Dashboard/catin_pemeriksaan');
+	
+	
+	public function view_catin_pemeriksaan()
+	{
+		$data['provinsi'] = $this->m_provinsi->get_all_provinsi();
+		$this->load->view('Dashboard/catin_pemeriksaan',$data);
 	}
 
+	public function cek_pemeriksaan()
+	{
+		$this->input->post('umur');
+		$this->form_validation->set_rules(
+			'nama',
+			'Nama',
+			'required|trim',
+			[
+				'required' => 'nama tidak boleh kosong',
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'nik',
+			'NIK',
+			'required|trim|min_length[16]',
+			[
+				'required' => 'NIK tidak boleh kosong',
+				'min_length' => 'NIK terlalu pendek',
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'tempat_lahir',
+			'Tempat Lahir',
+			'required|trim',
+			[
+				'required' => 'Tempat Lahir tidak boleh kosong',
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'tanggal_lahir',
+			'Tanggal Lahir',
+			'required|trim',
+			[
+				'required' => 'Tanggal Lahir tidak boleh kosong',
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'agama',
+			'Agama',
+			'required|trim',
+			[
+				'required' => 'Agama tidak boleh kosong',
+			]
+		);
+		$this->form_validation->set_rules(
+			'pendidikan_terakhir',
+			'Pendidikan Terakhir',
+			'required|trim',
+			[
+				'required' => 'Pendidikan Terakhir tidak boleh kosong',
+			]
+		);
+		$this->form_validation->set_rules(
+			'pekerjaan',
+			'Pekerjaan',
+			'required|trim',
+			[
+				'required' => 'Pekerjaan tidak boleh kosong',
+			]
+		);
+		$this->form_validation->set_rules(
+			'jenis_kelamin',
+			'Jenis Kelamin',
+			'required|trim',
+			[
+				'required' => 'Jenis Kelamin tidak boleh kosong',
+			]
+		);
+	}
 
 
 	public function tanggal()
@@ -94,4 +178,26 @@ class Dashboard extends CI_Controller
 			return ('anda tidak memiliki akses');
 		}
 	}
+
+	public function get_kota() {
+		$provinsi_id = $this->input->post('provinsi_id');
+		
+		$kota = $this->m_kota->get_kota_by_provinsi($provinsi_id);
+		
+		echo json_encode($kota);
+	}
+	
+
+    public function get_kecamatan() {
+        $kota_id = $this->input->post('kota_id');
+		// var_dump($kota_id);
+        $kecamatan = $this->m_kecamatan->get_kecamatan_by_kota($kota_id);
+        echo json_encode($kecamatan);
+    }
+
+    public function get_kelurahan() {
+        $kecamatan_id = $this->input->post('kecamatan_id');
+        $kelurahan = $this->m_kelurahan->get_kelurahan_by_kecamatan($kecamatan_id);
+        echo json_encode($kelurahan);
+    }
 }
