@@ -21,7 +21,7 @@
 						<img src="<?= base_url('assets/') ?>/img/tugu-13-desember-t-tinggi3.jpg" alt="Profile Image" class="profile-img">
 						<div class="profile-text">
 							<span>Halo,</span>
-							<span><b>sigma</b> <img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 50px;"></span>
+							<span><b><?= $this->session->userdata('nama_lengkap')?></b> <img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 50px;"></span>
 						</div>
 					</div>
 				</ul>
@@ -47,25 +47,25 @@
 					</a>
 				</div>
 			</div>
-			<div class="inti">
+			<div class="inti"style="height: 100%;">
 				<h1 style="font-size: large;">DASHBOARD</h1>
 				<div class="informasi">
 					<div class="profil">
 						<div class="img-profil">
 							<img src="<?= base_url('assets/') ?>/img/tugu-13-desember-t-tinggi3.jpg" alt="Profile Image" style="height: 17.5vh; width: 10vw; border-radius: 50%;">
 						</div>
-						<p style="text-align: center; margin: 0;"><b>Sigma</b></p>
+						<p style="text-align: center; margin: 0;"><b><?= $this->session->userdata('nama_lengkap')?></b></p>
 						<div class="biodata" style="font-size: 12.5px;">
 							<div class="label">No</div>
 							<div class="isi-label">: 20240010010011</div>
 							<div class="label">NIK</div>
-							<div class="isi-label">: 3275071907980019</div>
+							<div class="isi-label">: <?= $this->session->userdata('nik') ?></div>
 							<div class="label">TTL</div>
-							<div class="isi-label">: Jakarta, 15 Agustus 1995</div>
+							<div class="isi-label">: <?= $this->session->userdata('tempat_lahir')?>, <?= date('d / m / Y', strtotime($this->session->userdata('tanggal_lahir'))) ?></div>
 							<div class="label">Usia</div>
-							<div class="isi-label">: 28 Tahun</div>
+							<div class="isi-label">: <?= $this->session->userdata('usia')?> Tahun</div>
 							<div class="label">Gender</div>
-							<div class="isi-label">: Laki-Laki</div>
+							<div class="isi-label">: <?= $this->session->userdata('jenis_kelamin')?></div>
 						</div>
 					</div>
 					<!-- 1 -->

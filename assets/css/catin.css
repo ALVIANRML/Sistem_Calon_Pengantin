@@ -62,8 +62,8 @@ body {
 }
 
 .icon-navigation {
-	width: 12.5px;
-	height: 12.5px;
+	width: 25.5px;
+	height: 25.5px;
 	margin-right: 12.5px;
 }
 
@@ -78,6 +78,7 @@ body {
 .main-content {
 	display: flex;
 	width: 100%;
+	height: max-content;
 }
 
 .navigasi_admin {
@@ -118,12 +119,14 @@ body {
 	flex-grow: 1;
 	padding: 12.5px;
 	background-color: #D9D9D9;
+	height: 100%;
 }
 
 .informasi {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	gap: 12.5px;
+	margin-bottom: 10vh;
 }
 
 .profil {
@@ -216,7 +219,7 @@ body {
 	margin: 5vh;
 	padding: 5vh;
 	margin-left: 10vh;
-	height: 220vh;
+	height: 100%;
 	width: 105vh;
 	background-color: whitesmoke;
 	border-radius: 10px;
@@ -263,4 +266,13 @@ body {
 	
 	
 	/* Adjust spacing as needed */
+}
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25vh; /* Sama dengan tinggi input untuk menengahkan secara vertikal */
+}
+.input-container input[type="file"] {
+    text-align: center;
 }
