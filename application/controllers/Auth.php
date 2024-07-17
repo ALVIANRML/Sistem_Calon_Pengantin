@@ -111,7 +111,7 @@ class Auth extends CI_Controller
 		$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
 		$tanggalexisted = $this->m_Tanggal_Pemeriksaan->get_tanggal_by_id($id_tanggal);
 		// $today = date('Y-m-d');
-		$today = '2024-07-07';
+		$today = '2024-07-17';
 		if ($tanggalexisted->num_rows() > 0) {
 			$tanggalexisted = $tanggalexisted->row_array();
 			$akhir_tanggal = $tanggalexisted['tanggal'];
