@@ -17,11 +17,11 @@
 			</div>
 			<nav class="navbar">
 				<ul>
-					<div class="navbar_profil">
-						<img src="<?= base_url('assets/') ?>/img/tugu-13-desember-t-tinggi3.jpg" alt="Profile Image" class="profile-img">
+					<div class="navbar_profil" style="width: 15vw; margin-right:0px">
+						<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
 						<div class="profile-text">
 							<span>Halo,</span>
-							<span><b><?= $this->session->userdata('nama_lengkap')?></b> <img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 50px;"></span>
+							<span><b style="color:black;"><?= $this->session->userdata('username'); ?></b> <img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 50px;"></span>
 						</div>
 					</div>
 				</ul>
@@ -37,7 +37,7 @@
 							<span style="color:white">Dashboard</span>
 						</div>
 					</div>
-					<a href="<?= base_url('dashboard/view_catin_pemeriksaan') ?>">
+					<a href="<?= base_url('dashboard/view_catin_pemeriksaan') ?> " style="text-decoration: none;">
 						<div class="isi" style="background-color: white;">
 							<img src="<?= base_url('assets/') ?>/img/Vector.png" alt="Profile Image" class="icon-navigation">
 							<div class="profile-text">
@@ -47,25 +47,25 @@
 					</a>
 				</div>
 			</div>
-			<div class="inti"style="height: 100%;">
+			<div class="inti" style="height: 100%;">
 				<h1 style="font-size: large;">DASHBOARD</h1>
 				<div class="informasi">
 					<div class="profil">
 						<div class="img-profil">
-							<img src="<?= base_url('assets/') ?>/img/tugu-13-desember-t-tinggi3.jpg" alt="Profile Image" style="height: 17.5vh; width: 10vw; border-radius: 50%;">
+							<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" style="height: 17.5vh; width: 10vw; border-radius: 50%;">
 						</div>
-						<p style="text-align: center; margin: 0;"><b><?= $this->session->userdata('nama_lengkap')?></b></p>
+						<p style="text-align: center; margin: 0;"><b><?= $this->session->userdata('nama_lengkap') ?></b></p>
 						<div class="biodata" style="font-size: 12.5px;">
 							<div class="label">No</div>
-							<div class="isi-label">: 20240010010011</div>
+							<div class="isi-label">: <?= date('dmy') ?><?= sprintf("%03d", $this->session->userdata('nomor'));; ?></div>
 							<div class="label">NIK</div>
 							<div class="isi-label">: <?= $this->session->userdata('nik') ?></div>
 							<div class="label">TTL</div>
-							<div class="isi-label">: <?= $this->session->userdata('tempat_lahir')?>, <?= date('d / m / Y', strtotime($this->session->userdata('tanggal_lahir'))) ?></div>
+							<div class="isi-label">: <?= $this->session->userdata('tempat_lahir') ?>, <?= date('d / m / Y', strtotime($this->session->userdata('tanggal_lahir'))) ?></div>
 							<div class="label">Usia</div>
-							<div class="isi-label">: <?= $this->session->userdata('usia')?> Tahun</div>
+							<div class="isi-label">: <?= $this->session->userdata('usia') ?> Tahun</div>
 							<div class="label">Gender</div>
-							<div class="isi-label">: <?= $this->session->userdata('jenis_kelamin')?></div>
+							<div class="isi-label">: <?= $this->session->userdata('jenis_kelamin') ?></div>
 						</div>
 					</div>
 					<!-- 1 -->
