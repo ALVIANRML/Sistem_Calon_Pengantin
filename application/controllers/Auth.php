@@ -149,7 +149,7 @@ class Auth extends CI_Controller
 					// Password cocok, atur session untuk pengguna
 					$this->session->set_userdata('logged_in', true);
 					$this->session->set_userdata('id_user', $user['id_user']);
-					$this->session->set_userdata('username', $user['username']);
+					$this->session->set_userdata('username', $user['nama']);
 					$this->session->set_userdata('role', $user['role']);
 					switch ($user['role']) {
 						case 1:

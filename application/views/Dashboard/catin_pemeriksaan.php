@@ -23,11 +23,11 @@
 				</div>
 				<nav class="navbar">
 					<ul>
-						<div class="navbar_profil">
-							<img src="<?= base_url('assets/') ?>/img/tugu-13-desember-t-tinggi3.jpg" alt="Profile Image" class="profile-img">
+						<div class="navbar_profil" style="width: 15vw; margin-right:0px">
+							<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
 							<div class="profile-text">
 								<span>Halo,</span>
-								<span><b>sigma</b> <img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 50px;"></span>
+								<span><b style="color:black;"><?= $this->session->userdata('username'); ?></b> <img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 50px;"></span>
 							</div>
 						</div>
 					</ul>
@@ -36,10 +36,10 @@
 			<div class="main-content">
 				<div class="navigasi_admin">
 					<h6 style="color: gray; margin: 0; font-size:10px;">NAVIGASI</h6>
-					<a href="<?= base_url('dashboard/view_catin') ?>">
+					<a href="<?= base_url('dashboard/view_catin') ?>"style="text-decoration: none;">
 						<div class="navigasi_admin_menu">
 							<div class="isi" style="background-color: white;">
-								<img src="<?= base_url('assets/') ?>/img/pemeriksaan_dashboard.png" alt="Profile Image" class="icon-navigation">
+								<img src="<?= base_url('assets/') ?>/img/pemeriksaan_dashboard.png" alt="Profile Image" class="icon-navigation" style="width:20px; height:20px;">
 								<div class="profile-text">
 									<span>Dashboard</span>
 								</div>
@@ -47,23 +47,23 @@
 					</a>
 				</div>
 				<div class="isi" style="background-color: #015D67;">
-					<img src="<?= base_url('assets/') ?>/img/pemerisaan_daftar.png" alt="Profile Image" class="icon-navigation">
+					<img src="<?= base_url('assets/') ?>/img/pemerisaan_daftar.png" alt="Profile Image" class="icon-navigation" style="width:20px; height:20px;">
 					<div class="profile-text" style="color:white;">
 						<span style="color:white">Daftar Pemeriksaan</span>
 					</div>
 				</div>
 			</div>
 			<div class="inti-pemeriksaan" style="height: 100%;">
-				<h1 style="font-size: 30px;"> <img src="<?= base_url('assets/') ?>/img/Vector.png" alt="Profile Image" class="icon-navigation" value="<?= set_value('nama_lengkap') ?> style=" height:5vh; width: 5vh;">Form Daftar Calon Pengantin</h1>
+				<h1 style="font-size: 30px;"> <img src="<?= base_url('assets/') ?>/img/Vector.png" alt="Profile Image" class="icon-navigation" style=" height:5vh; width: 5vh;">Form Daftar Calon Pengantin</h1>
 				<hr>
 				<h2>informasi dasar</h2>
-				<form action="<?= base_url('Dashboard/view_catin_pemeriksaan') ?>" method="post">
+				<?php echo isset($error) ? $error : ''; ?>
+				<form action="<?= base_url('dashboard/pemeriksaan') ?>" method="post" enctype="multipart/form-data">
 					<div class="form-container">
 						<div class="form-group">
 							<label for="nama_lengkap">Nama Lengkap</label>
 							<input type="text" id="nama_lengkap" class="inputan" name="nama_lengkap" placeholder="Isi Nama Lengkap" style="width: 32.3vw;" value="<?= $this->session->userdata('nama_lengkap'); ?>">
 							<?= form_error('nama_lengkap', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-
 						</div>
 						<div class="form-group">
 							<label for="nik">NIK</label>
@@ -77,7 +77,7 @@
 						</div>
 						<div class="form-group" style="width: 32.8vh;">
 							<label for="tanggal_lahir">Tanggal Lahir</label>
-							<input type="date" id="tanggal_lahir" name="tanggal_lahir" placeholder="Isi Tanggal Lahir" class="inputan" onchange="hitungUmur()" value="<?= $this->session->userdata('tanggal_lahir'); ?>">
+							<input type="date" id="tanggal_lahir" name="tanggal_lahir" placeholder="Isi Tanggal Lahir" class="inputan" onchange="hitungUmur()"value="<?= $this->session->userdata('tanggal_lahir'); ?>">
 							<?= form_error('tanggal_lahir', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
 						<div class="form-group">
@@ -85,6 +85,9 @@
 							<input type="number" id="umur" name="umur" class="inputan" readonly value="<?= $this->session->userdata('usia'); ?>">
 							<?= form_error('umur', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
+
+
+
 
 						<div class="form-group">
 							<label for="jenis_kelamin">Jenis Kelamin</label>
@@ -191,30 +194,36 @@
 						</div>
 
 
-					
+
+
 						<div class="form-group">
 							<label for="foto_user">Pas Foto</label>
-							<?php echo form_open_multipart('upload/do_upload');?>
-							<input type="file" id="foto_user" class="inputan" name="foto_user" placeholder="" style="width: 23.9vw; height: 25vh;" value="<?= $this->session->userdata('foto_user'); ?>"size="20">
+							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+							<input type="file" id="foto_user" class="inputan" name="foto_user" placeholder="" style="width: 23.9vw; height: 25vh;">
 							<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
 
 						<div class="form-group">
 							<label for="foto_ktp">Foto KTP</label>
-							<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" placeholder="masukkan foto" style="width: 23.9vw; height: 25vh;" value="<?= $this->session->userdata('foto_ktp'); ?>"size="20">
+							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+							<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" placeholder="masukkan foto" style="width: 23.9vw; height: 25vh;">
 							<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
 
 						<div class="form-group">
 							<label for="foto_kk">Foto Kartu Keluarga</label>
-							<input type="file" id="foto_kk" class="inputan" name="foto_kk" placeholder="masukkan foto" style="width: 23.9vw; height: 25vh;"value="<?= $this->session->userdata('foto_kk'); ?>"size="20">
+							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+							<input type="file" id="foto_kk" class="inputan" name="foto_kk" placeholder="masukkan foto" style="width: 23.9vw; height: 25vh;">
 							<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
 
-						<div class="form-group"><label for="foto_surat">Foto Surat Pengantar</label>
-							<input type="file" id="foto_surat" class="inputan" name="foto_surat" placeholder="masukkan foto" style="width: 23.9vw; height: 25vh; " value="<?= $this->session->userdata('foto_surat'); ?>"size="20">
+						<div class="form-group">
+							<label for="foto_surat">Foto Surat Pengantar</label>
+							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+							<input type="file" id="foto_surat" class="inputan" name="foto_surat" placeholder="masukkan foto" style="width: 23.9vw; height: 25vh;">
 							<?= form_error('foto_surat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
+
 
 					</div>
 
@@ -228,7 +237,7 @@
 							<button class="btn-pemeriksaan" style="margin-top: 4px;">
 								<p style="font-weight:bold; color:#015D67; text-align:center; ">Batal</p>
 							</button>
-							<button class="btn-pemeriksaan" style="background-color: #015D67;margin-top: 4px;">
+							<button type="submit" name="submit" id="submit" class="btn-pemeriksaan" style="background-color: #015D67;margin-top: 4px;">
 								<p style="font-weight:bold; color:white; text-align:center;">Daftar</p>
 							</button>
 						</div>
@@ -317,7 +326,7 @@
 						});
 						document.getElementById('kelurahan').innerHTML = tampung;
 					});
-				});
+			});
 		</script>
 	</body>
 

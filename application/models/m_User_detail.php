@@ -40,4 +40,21 @@ public function getAll($id_user){
 			'foto_surat' => $fotoSurat,
 		]);
 	}
+
+	public function hitung($id_user){
+		
+			$this->db->select('id_user_detail');
+			$this->db->order_by('id_user_detail', 'ASC');
+			$query = $this->db->get('user_detail');
+			
+			// Cari posisi urutan ID
+			$urutan = 1;
+			foreach ($query->result() as $row) {
+				if ($row->id_user_detail == $id_user) {
+					return $urutan;
+				}
+				$urutan++;
+			}
+			return -1; // Jika tidak ditemukan
+	}
 }
