@@ -5,7 +5,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/catin.css">
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/catin2.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <body>
 
@@ -19,7 +22,7 @@
 			<div class="header-container">
 				<div class="logo-container">
 					<img class="logo" src="<?= base_url('assets/') ?>img/logo.png" alt="Logo">
-					<span class="logo-text"><b>PERCATIN</b></span>
+					<span class="logo-text"><b style="font-family: 'Nunito Sans', sans-serif;">DPPKB <br> KOTA TEBING TINGGI</b></span>
 				</div>
 				<nav class="navbar">
 					<ul>
@@ -27,7 +30,7 @@
 							<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
 							<div class="profile-text">
 								<span>Halo,</span>
-								<span><b style="color:black;"><?= $this->session->userdata('username'); ?></b> <img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 50px;"></span>
+								<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;"><?= $this->session->userdata('username'); ?></b> <img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 50px;"></span>
 							</div>
 						</div>
 					</ul>
@@ -36,7 +39,7 @@
 			<div class="main-content">
 				<div class="navigasi_admin">
 					<h6 style="color: gray; margin: 0; font-size:10px;">NAVIGASI</h6>
-					<a href="<?= base_url('dashboard/view_catin') ?>"style="text-decoration: none;">
+					<a href="<?= base_url('dashboard/view_catin') ?>" style="text-decoration: none;">
 						<div class="navigasi_admin_menu">
 							<div class="isi" style="background-color: white;">
 								<img src="<?= base_url('assets/') ?>/img/pemeriksaan_dashboard.png" alt="Profile Image" class="icon-navigation" style="width:20px; height:20px;">
@@ -53,7 +56,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="inti-pemeriksaan" style="height: 100%;">
+			<div class="inti-pemeriksaan" style="height: 100%; background-color: white; border: 2px solid gray;">
 				<h1 style="font-size: 30px;"> <img src="<?= base_url('assets/') ?>/img/Vector.png" alt="Profile Image" class="icon-navigation" style=" height:5vh; width: 5vh;">Form Daftar Calon Pengantin</h1>
 				<hr>
 				<h2>informasi dasar</h2>
@@ -77,7 +80,7 @@
 						</div>
 						<div class="form-group" style="width: 32.8vh;">
 							<label for="tanggal_lahir">Tanggal Lahir</label>
-							<input type="date" id="tanggal_lahir" name="tanggal_lahir" placeholder="Isi Tanggal Lahir" class="inputan" onchange="hitungUmur()"value="<?= $this->session->userdata('tanggal_lahir'); ?>">
+							<input type="date" id="tanggal_lahir" name="tanggal_lahir" placeholder="Isi Tanggal Lahir" class="inputan" onchange="hitungUmur()" value="<?= $this->session->userdata('tanggal_lahir'); ?>">
 							<?= form_error('tanggal_lahir', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
 						<div class="form-group">
@@ -199,31 +202,66 @@
 						<div class="form-group">
 							<label for="foto_user">Pas Foto</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<input type="file" id="foto_user" class="inputan" name="foto_user" placeholder="" style="width: 23.9vw; height: 25vh;">
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
+								<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="updateFile('foto_user')" style="display: none;">
+								<label for="foto_user" class="custom-file-label">
+									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
+									<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
+									<div class="upload-text">Unggah atau drop file disini</div>
+									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+								</label>
+								<span id="file-name-foto_user" class="file-name"></span>
+							</div>
 							<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
 
 						<div class="form-group">
 							<label for="foto_ktp">Foto KTP</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" placeholder="masukkan foto" style="width: 23.9vw; height: 25vh;">
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
+								<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;">
+								<label for="foto_ktp" class="custom-file-label">
+									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
+									<img id="preview-image-foto_ktp" class="preview-image" src="" alt="Preview Image" style="display: none;">
+									<div class="upload-text">Unggah atau drop file disini</div>
+									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+								</label>
+								<span id="file-name-foto_ktp" class="file-name"></span>
+							</div>
 							<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
 
 						<div class="form-group">
 							<label for="foto_kk">Foto Kartu Keluarga</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<input type="file" id="foto_kk" class="inputan" name="foto_kk" placeholder="masukkan foto" style="width: 23.9vw; height: 25vh;">
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
+								<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="updateFile('foto_kk')" style="display: none;">
+								<label for="foto_kk" class="custom-file-label">
+									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
+									<img id="preview-image-foto_kk" class="preview-image" src="" alt="Preview Image" style="display: none;">
+									<div class="upload-text">Unggah atau drop file disini</div>
+									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+								</label>
+								<span id="file-name-foto_kk" class="file-name"></span>
+							</div>
 							<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
 
 						<div class="form-group">
 							<label for="foto_surat">Foto Surat Pengantar</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<input type="file" id="foto_surat" class="inputan" name="foto_surat" placeholder="masukkan foto" style="width: 23.9vw; height: 25vh;">
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
+								<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="updateFile('foto_surat')" style="display: none;">
+								<label for="foto_surat" class="custom-file-label">
+									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
+									<img id="preview-image-foto_surat" class="preview-image" src="" alt="Preview Image" style="display: none;">
+									<div class="upload-text">Unggah atau drop file disini</div>
+									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+								</label>
+								<span id="file-name-foto_surat" class="file-name"></span>
+							</div>
 							<?= form_error('foto_surat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
-
 
 					</div>
 
@@ -326,6 +364,70 @@
 						});
 						document.getElementById('kelurahan').innerHTML = tampung;
 					});
+			});
+		</script>
+		<script>
+			function updateFile(fileId) {
+				var input = document.getElementById(fileId);
+				var fileName = input.files.length > 0 ? input.files[0].name : '';
+				document.getElementById('file-name-' + fileId).textContent = fileName;
+
+				var previewImage = document.getElementById('preview-image-' + fileId);
+				var uploadIcon = document.querySelector('#drop-zone-' + fileId + ' .upload-icon');
+				var uploadText = document.querySelector('#drop-zone-' + fileId + ' .upload-text');
+				var uploadSubtext = document.querySelector('#drop-zone-' + fileId + ' .upload-subtext');
+
+				if (input.files.length > 0) {
+					var file = input.files[0];
+					var reader = new FileReader();
+
+					reader.onload = function(e) {
+						previewImage.src = e.target.result;
+						previewImage.style.display = 'block';
+					};
+
+					reader.readAsDataURL(file);
+
+					// Hide the upload text and subtext
+					uploadIcon.style.display = 'none';
+					uploadText.style.display = 'none';
+					uploadSubtext.style.display = 'none';
+				} else {
+					previewImage.src = '';
+					previewImage.style.display = 'none';
+
+					// Show the upload text and subtext
+					uploadIcon.style.display = 'block';
+					uploadText.style.display = 'block';
+					uploadSubtext.style.display = 'block';
+				}
+			}
+
+			// Set up event listeners for drag and drop
+			var dropZones = document.querySelectorAll('[id^=drop-zone-]');
+
+			dropZones.forEach(function(dropZone) {
+				dropZone.addEventListener('dragover', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					dropZone.classList.add('dragover');
+				});
+
+				dropZone.addEventListener('dragleave', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					dropZone.classList.remove('dragover');
+				});
+
+				dropZone.addEventListener('drop', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					dropZone.classList.remove('dragover');
+					var fileInputId = dropZone.id.replace('drop-zone-', '');
+					var files = e.dataTransfer.files;
+					document.getElementById(fileInputId).files = files;
+					updateFile(fileInputId);
+				});
 			});
 		</script>
 	</body>

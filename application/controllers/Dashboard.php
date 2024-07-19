@@ -89,175 +89,175 @@ class Dashboard extends CI_Controller
 
 		$this->input->post('umur');
 
-		$this->form_validation->set_rules(
-			'nama_lengkap',
-			'Nama',
-			'required|trim',
-			[
-				'required' => 'nama tidak boleh kosong',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'nama_lengkap',
+		// 	'Nama',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'nama tidak boleh kosong',
+		// 	]
+		// );
 
-		$this->form_validation->set_rules(
-			'nik',
-			'NIK',
-			'required|trim|min_length[16]',
-			[
-				'required' => 'NIK tidak boleh kosong',
-				'min_length' => 'NIK terlalu pendek',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'nik',
+		// 	'NIK',
+		// 	'required|trim|min_length[16]',
+		// 	[
+		// 		'required' => 'NIK tidak boleh kosong',
+		// 		'min_length' => 'NIK terlalu pendek',
+		// 	]
+		// );
 
-		$this->form_validation->set_rules(
-			'tempat_lahir',
-			'Tempat Lahir',
-			'required|trim',
-			[
-				'required' => 'Tempat Lahir tidak boleh kosong',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'tempat_lahir',
+		// 	'Tempat Lahir',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Tempat Lahir tidak boleh kosong',
+		// 	]
+		// );
 
-		$this->form_validation->set_rules(
-			'tanggal_lahir',
-			'Tanggal Lahir',
-			'required|trim',
-			[
-				'required' => 'Tanggal Lahir tidak boleh kosong',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'tanggal_lahir',
+		// 	'Tanggal Lahir',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Tanggal Lahir tidak boleh kosong',
+		// 	]
+		// );
 
-		$this->form_validation->set_rules(
-			'agama',
-			'Agama',
-			'required|trim',
-			[
-				'required' => 'Agama tidak boleh kosong',
-			]
-		);
-		$this->form_validation->set_rules(
-			'pendidikan_terakhir',
-			'Pendidikan Terakhir',
-			'required|trim',
-			[
-				'required' => 'Pendidikan Terakhir tidak boleh kosong',
-			]
-		);
-		$this->form_validation->set_rules(
-			'pekerjaan',
-			'Pekerjaan',
-			'required|trim',
-			[
-				'required' => 'Pekerjaan tidak boleh kosong',
-			]
-		);
-		$this->form_validation->set_rules(
-			'jenis_kelamin',
-			'Jenis Kelamin',
-			'required|trim',
-			[
-				'required' => 'Jenis Kelamin tidak boleh kosong',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'agama',
+		// 	'Agama',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Agama tidak boleh kosong',
+		// 	]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'pendidikan_terakhir',
+		// 	'Pendidikan Terakhir',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Pendidikan Terakhir tidak boleh kosong',
+		// 	]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'pekerjaan',
+		// 	'Pekerjaan',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Pekerjaan tidak boleh kosong',
+		// 	]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'jenis_kelamin',
+		// 	'Jenis Kelamin',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Jenis Kelamin tidak boleh kosong',
+		// 	]
+		// );
 
-		$this->form_validation->set_rules(
-			'jenis_kelamin',
-			'Jenis Kelamin',
-			'required|trim',
-			[
-				'required' => 'Jenis Kelamin tidak boleh kosong',
-			]
+		// $this->form_validation->set_rules(
+		// 	'jenis_kelamin',
+		// 	'Jenis Kelamin',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Jenis Kelamin tidak boleh kosong',
+		// 	]
 
-		);
-		$this->form_validation->set_rules(
-			'agama',
-			'Agama',
-			'required|trim',
-			[
-				'required' => 'Agama tidak boleh kosong',
-			]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'agama',
+		// 	'Agama',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Agama tidak boleh kosong',
+		// 	]
 
-		);
-		$this->form_validation->set_rules(
-			'pendidikan_terakhir',
-			'Pendidika Terakhir',
-			'required|trim',
-			[
-				'required' => 'Pendidika Terakhir tidak boleh kosong',
-			]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'pendidikan_terakhir',
+		// 	'Pendidika Terakhir',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Pendidika Terakhir tidak boleh kosong',
+		// 	]
 
-		);
-		$this->form_validation->set_rules(
-			'pekerjaan',
-			'Pekerjaan',
-			'required|trim',
-			[
-				'required' => 'Pekerjaan tidak boleh kosong',
-			]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'pekerjaan',
+		// 	'Pekerjaan',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Pekerjaan tidak boleh kosong',
+		// 	]
 
-		);
-		$this->form_validation->set_rules(
-			'nomor_telepon',
-			'Nomor Telepon',
-			'required|trim',
-			[
-				'required' => 'Nomor Telepon tidak boleh kosong',
-			]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'nomor_telepon',
+		// 	'Nomor Telepon',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Nomor Telepon tidak boleh kosong',
+		// 	]
 
-		);
-		$this->form_validation->set_rules(
-			'provinsi',
-			'Provinsi',
-			'required|trim',
-			[
-				'required' => 'Provinsi tidak boleh kosong',
-			]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'provinsi',
+		// 	'Provinsi',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Provinsi tidak boleh kosong',
+		// 	]
 
-		);
-		$this->form_validation->set_rules(
-			'kota',
-			'Kota',
-			'required|trim',
-			[
-				'required' => 'Kota tidak boleh kosong',
-			]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'kota',
+		// 	'Kota',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Kota tidak boleh kosong',
+		// 	]
 
-		);
-		$this->form_validation->set_rules(
-			'kecamatan',
-			'Kecamatan',
-			'required|trim',
-			[
-				'required' => 'Kecamatan tidak boleh kosong',
-			]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'kecamatan',
+		// 	'Kecamatan',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Kecamatan tidak boleh kosong',
+		// 	]
 
-		);
-		$this->form_validation->set_rules(
-			'kelurahan',
-			'Kelurahan',
-			'required|trim',
-			[
-				'required' => 'Kelurahan tidak boleh kosong',
-			]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'kelurahan',
+		// 	'Kelurahan',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Kelurahan tidak boleh kosong',
+		// 	]
 
-		);
-		$this->form_validation->set_rules(
-			'alamat',
-			'Alamat',
-			'required|trim',
-			[
-				'required' => 'Alamat tidak boleh kosong',
-			]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'alamat',
+		// 	'Alamat',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Alamat tidak boleh kosong',
+		// 	]
 
-		);
+		// );
 
-		$this->form_validation->set_rules(
-			'tanggal_pernikahan',
-			'Tanggal Pernikahan',
-			'required|trim',
-			[
-				'required' => 'Tanggal Pernikahan tidak boleh kosong',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'tanggal_pernikahan',
+		// 	'Tanggal Pernikahan',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Tanggal Pernikahan tidak boleh kosong',
+		// 	]
+		// );
 
 		$this->form_validation->set_rules(
 			'pernikahan_ke',
@@ -292,7 +292,7 @@ class Dashboard extends CI_Controller
 			
 				if (!empty($_FILES[$file]['name'])) {
 					$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-					var_dump($config);
+					
 					
 					$this->upload->initialize($config);
 
@@ -324,7 +324,7 @@ class Dashboard extends CI_Controller
 			
 				if (!empty($_FILES[$file]['name'])) {
 					$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-					var_dump($config);
+					
 					
 					$this->upload->initialize($config);
 
@@ -353,7 +353,7 @@ class Dashboard extends CI_Controller
 			$file =  'foto_kk';
 				if (!empty($_FILES[$file]['name'])) {
 					$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-					var_dump($config);
+					
 					
 					$this->upload->initialize($config);
 
@@ -382,7 +382,7 @@ class Dashboard extends CI_Controller
 			$file = 'foto_surat';
 				if (!empty($_FILES[$file]['name'])) {
 					$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-					var_dump($config);
+					
 					
 					$this->upload->initialize($config);
 
@@ -443,8 +443,6 @@ class Dashboard extends CI_Controller
 				$this->session->set_userdata('foto_user', $userDetail['foto_user']);
 				$this->session->set_userdata('foto_ktp', $userDetail['foto_ktp']);
 				$this->session->set_userdata('foto_kk', $userDetail['foto_kk']);
-				$this->session->set_userdata('foto_surat', $userDetail['foto_surat']);
-				$data['total_asset'] = $this->m_User_detail->hitung();
 				$this->session->set_userdata('foto_surat', $userDetail['foto_surat']);
 			}
 		}

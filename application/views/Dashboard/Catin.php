@@ -4,7 +4,10 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/catin.css">
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/catin2.css">
 	<title>D_catin</title>
 </head>
 
@@ -13,7 +16,7 @@
 		<div class="header-container">
 			<div class="logo-container">
 				<img class="logo" src="<?= base_url('assets/') ?>img/logo.png" alt="Logo">
-				<span class="logo-text"><b>PERCATIN</b></span>
+				<span class="logo-text"><b style="font-family: 'Nunito Sans', sans-serif;">DPPKB <br>KOTA TEBING TINGGI</b></span>
 			</div>
 			<nav class="navbar">
 				<ul>
@@ -21,7 +24,7 @@
 						<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
 						<div class="profile-text">
 							<span>Halo,</span>
-							<span><b style="color:black;"><?= $this->session->userdata('username'); ?></b> <img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 50px;"></span>
+							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;"><?= $this->session->userdata('username'); ?></b> <img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 50px;"></span>
 						</div>
 					</div>
 				</ul>
@@ -71,19 +74,36 @@
 					<!-- 1 -->
 					<div class="status">
 						<h5 style="font-size:medium; margin:10px;margin-bottom:20px;">Skrining kesehatan</h5>
-						<div class="isi-status" style="border: 1px solid  #015D67;font-weight:bold;">
-							<span>Isi Skrining Kesehatan</span>
+						<div class="isi-status" onclick="showPopup()" style="border: 1px solid  #015D67;font-weight:bold;">
+							<span >Isi Skrining Kesehatan</span>
 						</div>
 						<div class="status-container">
 							<p>Status:</p>
 							<span>Belum &nbsp;</span>
 							<img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:1px">
 						</div>
+						<div class="overlay" id="overlay"></div>
+
+						<div class="popup" id="popup">
+							<span class="close-btn" onclick="closePopup()">&times;</span>
+							<h2>Form Pop-up</h2>
+							<form id="popupForm" action="<?= base_url('form/submit'); ?>" method="post">
+								<div>
+									<label for="name">Name:</label>
+									<input type="text" id="name" name="name" required>
+								</div>
+								<div>
+									<label for="email">Email:</label>
+									<input type="email" id="email" name="email" required>
+								</div>
+								<button type="submit">Submit</button>
+							</form>
+						</div>
 					</div>
 					<!-- 2 -->
 					<div class="status">
 						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Kuesioner Kepribadian</h5>
-						<div class="isi-status" style="border: 1px solid  #015D67; font-weight:bold;">
+						<div class="isi-status"  onclick="showPopup()" style="border: 1px solid  #015D67; font-weight:bold;">
 							<span>Lihat Data</span>
 						</div>
 						<div class="status-container">
@@ -92,6 +112,7 @@
 							<img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:1px">
 						</div>
 					</div>
+					
 					<!-- 3 -->
 					<div class="status">
 						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Status Verifikasi</h5>
@@ -142,6 +163,17 @@
 			</div>
 		</div>
 	</div>
+	<script>
+        function showPopup() {
+            document.getElementById('popup').classList.add('show');
+            document.getElementById('overlay').classList.add('show');
+        }
+
+        function closePopup() {
+            document.getElementById('popup').classList.remove('show');
+            document.getElementById('overlay').classList.remove('show');
+        }
+    </script>
 </body>
 
 </html>
