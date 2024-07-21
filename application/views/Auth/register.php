@@ -17,7 +17,7 @@
 				<!-- Kolom kanan untuk form -->
 				<div class="col-lg-5 p-5">
 					<div class="text-center">
-						<img src="<?php echo base_url(); ?>assets/img/percatin_log.png" alt="logo percatin" class="img-fluid" style="max-height: 15vh; width: 15vh; margin-left:-45vh; color:#015D67;flex-shrink: 0; margin-top:-3vh;">
+						<img src="<?php echo base_url(); ?>assets/img/percatin_log.png" alt="logo percatin" class="img-fluid" style="max-height: 15vh; width: 15vh; margin-left:-35vh; color:#015D67;flex-shrink: 0; margin-top:-3vh;">
 						<h5 class="text-gray-900 mt-4" style="color: #171717; font-family: 'Arial Black', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -1.44px; margin-left:-32.5vh; top:50%;">
 							<b>Daftar akun Catin</b>
 						</h5>
@@ -50,7 +50,7 @@
 							<div class="password-field" style="position: relative;">
 								<input type="password" class="form-control form-control-user" id="password1" placeholder="******" style="font-size: 2vh;width:100%;" name="password1">
 								<span class="toggle-password" onclick="togglePasswordVisibility('password1')" style="position: absolute; top: 3vh; right: 2vh; transform: translateY(-50%); cursor: pointer;">
-									<i id="toggle-icon-password1" class="fas fa-eye"></i>
+									<!-- <i id="toggle-icon-password1" class="fas fa-eye"></i> -->
 								</span>
 								<?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
 							</div>
@@ -60,7 +60,7 @@
 								<div class="password-field" style="position: relative;">
 									<input type="password" class="form-control form-control-user" id="password2" placeholder="******" style="font-size: 2vh; width:100%;" name="password2">
 									<span class="toggle-password" onclick="togglePasswordVisibility('password2')" style="position: absolute; top: 3vh; right: 2vh; transform: translateY(-50%); cursor: pointer; ">
-										<i id="toggle-icon-password2" class="fas fa-eye"></i>
+										<!-- <i id="toggle-icon-password2" class="fas fa-eye"></i> -->
 									</span>
 									<?= form_error('password2', '<small class="text-danger pl-3">', '</small>'); ?>
 								</div>

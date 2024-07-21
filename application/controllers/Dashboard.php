@@ -12,7 +12,6 @@ class Dashboard extends CI_Controller
 		$this->load->model('m_Tanggal_Pemeriksaan');
 		$this->load->model('m_User_detail');
 		$this->load->helper(array('form', 'url'));
-		// $this->load
 	}
 
 	// admin
@@ -65,145 +64,108 @@ class Dashboard extends CI_Controller
 			$this->session->set_userdata('foto_ktp', $userDetail['foto_ktp']);
 			$this->session->set_userdata('foto_kk', $userDetail['foto_kk']);
 			$this->session->set_userdata('foto_surat', $userDetail['foto_surat']);
-
 			$data['total_asset'] = $this->m_User_detail->hitung($id_user);
-			$this->session->set_userdata('nomor',$data['total_asset']);
-			
-
-
+			$data = $this->session->set_userdata('nomor', $data['total_asset']);
 			$this->load->view('Dashboard/catin');
 		}
 	}
 
 	public function view_catin_pemeriksaan()
 	{
-
 		$this->load->view('Dashboard/catin_pemeriksaan');
 	}
+
 	public function pemeriksaan()
 	{
-
-
 		$id_user = $this->session->userdata('id_user');
 
+		$this->form_validation->set_rules(
+			'nama_lengkap',
+			'Nama',
+			'required|trim',
+			[
+				'required' => 'nama tidak boleh kosong',
+			]
+		);
 
-		$this->input->post('umur');
+		$this->form_validation->set_rules(
+			'nik',
+			'NIK',
+			'required|trim|min_length[16]',
+			[
+				'required' => 'NIK tidak boleh kosong',
+				'min_length' => 'NIK terlalu pendek',
+			]
+		);
 
-		// $this->form_validation->set_rules(
-		// 	'nama_lengkap',
-		// 	'Nama',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'nama tidak boleh kosong',
-		// 	]
-		// );
+		$this->form_validation->set_rules(
+			'tempat_lahir',
+			'Tempat Lahir',
+			'required|trim',
+			[
+				'required' => 'Tempat Lahir tidak boleh kosong',
+			]
+		);
 
-		// $this->form_validation->set_rules(
-		// 	'nik',
-		// 	'NIK',
-		// 	'required|trim|min_length[16]',
-		// 	[
-		// 		'required' => 'NIK tidak boleh kosong',
-		// 		'min_length' => 'NIK terlalu pendek',
-		// 	]
-		// );
+		$this->form_validation->set_rules(
+			'tanggal_lahir',
+			'Tanggal Lahir',
+			'required|trim',
+			[
+				'required' => 'Tanggal Lahir tidak boleh kosong',
+			]
+		);
 
-		// $this->form_validation->set_rules(
-		// 	'tempat_lahir',
-		// 	'Tempat Lahir',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Tempat Lahir tidak boleh kosong',
-		// 	]
-		// );
+		$this->form_validation->set_rules(
+			'agama',
+			'Agama',
+			'required|trim',
+			[
+				'required' => 'Agama tidak boleh kosong',
+			]
+		);
+		$this->form_validation->set_rules(
+			'pendidikan',
+			'Pendidikan Terakhir',
+			'required|trim',
+			[
+				'required' => 'Pendidikan Terakhir tidak boleh kosong',
+			]
+		);
+		$this->form_validation->set_rules(
+			'pekerjaan',
+			'Pekerjaan',
+			'required|trim',
+			[
+				'required' => 'Pekerjaan tidak boleh kosong',
+			]
+		);
+		$this->form_validation->set_rules(
+			'umur',
+			'Umur',
+			'required|trim',
+			[
+				'required' => 'Umur tidak boleh kosong',
+			]
+		);
 
-		// $this->form_validation->set_rules(
-		// 	'tanggal_lahir',
-		// 	'Tanggal Lahir',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Tanggal Lahir tidak boleh kosong',
-		// 	]
-		// );
+		$this->form_validation->set_rules(
+			'jenis_kelamin',
+			'Jenis Kelamin',
+			'required|trim',
+			[
+				'required' => 'Jenis Kelamin tidak boleh kosong',
+			]
+		);
+		$this->form_validation->set_rules(
+			'nomor_telepon',
+			'Nomor HP',
+			'required|trim',
+			[
+				'required' =>  'Nomor HP tidak boleh kosong',
+			]
+		);
 
-		// $this->form_validation->set_rules(
-		// 	'agama',
-		// 	'Agama',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Agama tidak boleh kosong',
-		// 	]
-		// );
-		// $this->form_validation->set_rules(
-		// 	'pendidikan_terakhir',
-		// 	'Pendidikan Terakhir',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Pendidikan Terakhir tidak boleh kosong',
-		// 	]
-		// );
-		// $this->form_validation->set_rules(
-		// 	'pekerjaan',
-		// 	'Pekerjaan',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Pekerjaan tidak boleh kosong',
-		// 	]
-		// );
-		// $this->form_validation->set_rules(
-		// 	'jenis_kelamin',
-		// 	'Jenis Kelamin',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Jenis Kelamin tidak boleh kosong',
-		// 	]
-		// );
-
-		// $this->form_validation->set_rules(
-		// 	'jenis_kelamin',
-		// 	'Jenis Kelamin',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Jenis Kelamin tidak boleh kosong',
-		// 	]
-
-		// );
-		// $this->form_validation->set_rules(
-		// 	'agama',
-		// 	'Agama',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Agama tidak boleh kosong',
-		// 	]
-
-		// );
-		// $this->form_validation->set_rules(
-		// 	'pendidikan_terakhir',
-		// 	'Pendidika Terakhir',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Pendidika Terakhir tidak boleh kosong',
-		// 	]
-
-		// );
-		// $this->form_validation->set_rules(
-		// 	'pekerjaan',
-		// 	'Pekerjaan',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Pekerjaan tidak boleh kosong',
-		// 	]
-
-		// );
-		// $this->form_validation->set_rules(
-		// 	'nomor_telepon',
-		// 	'Nomor Telepon',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Nomor Telepon tidak boleh kosong',
-		// 	]
-
-		// );
 		// $this->form_validation->set_rules(
 		// 	'provinsi',
 		// 	'Provinsi',
@@ -220,8 +182,8 @@ class Dashboard extends CI_Controller
 		// 	[
 		// 		'required' => 'Kota tidak boleh kosong',
 		// 	]
-
 		// );
+
 		// $this->form_validation->set_rules(
 		// 	'kecamatan',
 		// 	'Kecamatan',
@@ -229,8 +191,8 @@ class Dashboard extends CI_Controller
 		// 	[
 		// 		'required' => 'Kecamatan tidak boleh kosong',
 		// 	]
-
 		// );
+
 		// $this->form_validation->set_rules(
 		// 	'kelurahan',
 		// 	'Kelurahan',
@@ -238,26 +200,25 @@ class Dashboard extends CI_Controller
 		// 	[
 		// 		'required' => 'Kelurahan tidak boleh kosong',
 		// 	]
-
-		// );
-		// $this->form_validation->set_rules(
-		// 	'alamat',
-		// 	'Alamat',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Alamat tidak boleh kosong',
-		// 	]
-
 		// );
 
-		// $this->form_validation->set_rules(
-		// 	'tanggal_pernikahan',
-		// 	'Tanggal Pernikahan',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Tanggal Pernikahan tidak boleh kosong',
-		// 	]
-		// );
+		$this->form_validation->set_rules(
+			'alamat',
+			'Alamat',
+			'required|trim',
+			[
+				'required' => 'Alamat tidak boleh kosong',
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'tanggal_pernikahan',
+			'Tanggal Pernikahan',
+			'required|trim',
+			[
+				'required' => 'Tanggal Pernikahan tidak boleh kosong',
+			]
+		);
 
 		$this->form_validation->set_rules(
 			'pernikahan_ke',
@@ -268,135 +229,114 @@ class Dashboard extends CI_Controller
 			]
 		);
 
-
-
-
-
 		if ($this->form_validation->run() == false) {
-			redirect('dashboard/view_catin_pemeriksaan');
+			
+			$this->load->view('Dashboard/catin_pemeriksaan');
 		} else {
 			if (!is_dir(FCPATH . 'uploads/photo')) {
 				mkdir(FCPATH . 'uploads/photo', 0777, true);
 			}
+
 			$config['upload_path'] = FCPATH . 'uploads/photo/pasFoto';
 			$config['allowed_types']        = 'gif|jpg|png|jpeg';
-			$config['max_size'] = 2048; // 2 MB
-			$config['max_width'] = 2048;
-			$config['max_height'] = 2048;
-
-
+			$config['max_size'] = 1000000; // 2 MB
+			$config['max_width'] = 1000000;
+			$config['max_height'] = 1000000;
 			$this->load->library('upload', $config);
-
 
 			$file = 'foto_user';
-			
-				if (!empty($_FILES[$file]['name'])) {
-					$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-					
-					
-					$this->upload->initialize($config);
-
-					if (!$this->upload->do_upload($file)) {
-						$error = array('error' => $this->upload->display_errors());
-						var_dump($error);
-						var_dump($config['upload_path']);
-						
-						redirect('tes/index', $error);
-					} else {
-						$data = array('upload_data' => $this->upload->data());
-						
-					}
-					$fotoUser =$config['file_name'];
-					
-					
+			if (!empty($_FILES[$file]['name'])) {
+				$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
+				$config['file_name'] = str_replace(' ', '_', $config['file_name']);
+				$this->upload->initialize($config);
+				if (!$this->upload->do_upload($file)) {
+					$error = array('error' => $this->upload->display_errors());
+					var_dump($error);
+					var_dump($config['upload_path']);
+					exit;
+				} else {
+					$data = array('upload_data' => $this->upload->data());
+				}
+				$fotoUser = $config['file_name'];
 			}
+
 			$config['upload_path'] = FCPATH . 'uploads/photo/ktp';
 			$config['allowed_types']        = 'gif|jpg|png|jpeg';
-			$config['max_size'] = 2048; // 2 MB
-			$config['max_width'] = 2048;
-			$config['max_height'] = 2048;
-
-
+			$config['max_size'] = 1000000; // 2 MB
+			$config['max_width'] = 1000000;
+			$config['max_height'] = 1000000;
 			$this->load->library('upload', $config);
 
-
 			$file = 'foto_ktp';
-			
-				if (!empty($_FILES[$file]['name'])) {
-					$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-					
-					
-					$this->upload->initialize($config);
 
-					if (!$this->upload->do_upload($file)) {
-						$error = array('error' => $this->upload->display_errors());
-						var_dump($error);
-						var_dump($config['upload_path']);
-						
-						redirect('tes/index', $error);
-					} else {
-						$data = array('upload_data' => $this->upload->data());
-						
-					}
-					$fotoktp =$config['file_name'];
+			if (!empty($_FILES[$file]['name'])) {
+				$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
+
+				$this->upload->initialize($config);
+
+				if (!$this->upload->do_upload($file)) {
+					$error = array('error' => $this->upload->display_errors());
+					var_dump($error);
+					var_dump($config['upload_path']);
+
+					exit;
+				} else {
+					$data = array('upload_data' => $this->upload->data());
+				}
+				$fotoktp = $config['file_name'];
 			}
 			$config['upload_path'] = FCPATH . 'uploads/photo/kk';
 			$config['allowed_types']        = 'gif|jpg|png|jpeg';
-			$config['max_size'] = 2048; // 2 MB
-			$config['max_width'] = 2048;
-			$config['max_height'] = 2048;
+			$config['max_size'] = 1000000; // 2 MB
+			$config['max_width'] = 1000000;
+			$config['max_height'] = 1000000;
 
 
 			$this->load->library('upload', $config);
 
 
 			$file =  'foto_kk';
-				if (!empty($_FILES[$file]['name'])) {
-					$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-					
-					
-					$this->upload->initialize($config);
+			if (!empty($_FILES[$file]['name'])) {
+				$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
 
-					if (!$this->upload->do_upload($file)) {
-						$error = array('error' => $this->upload->display_errors());
-						var_dump($error);
-						var_dump($config['upload_path']);
-						
-						redirect('tes/index', $error);
-					} else {
-						$data = array('upload_data' => $this->upload->data());
-						
-					}
-					$fotokk =$config['file_name'];
+
+				$this->upload->initialize($config);
+
+				if (!$this->upload->do_upload($file)) {
+					$error = array('error' => $this->upload->display_errors());
+					var_dump($error);
+					var_dump($config['upload_path']);
+
+					exit;
+				} else {
+					$data = array('upload_data' => $this->upload->data());
+				}
+				$fotokk = $config['file_name'];
 			}
 			$config['upload_path'] = FCPATH . 'uploads/photo/surat';
 			$config['allowed_types']        = 'gif|jpg|png|jpeg';
-			$config['max_size'] = 2048; // 2 MB
-			$config['max_width'] = 2048;
-			$config['max_height'] = 2048;
-
+			$config['max_size'] = 1000000; // 2 MB
+			$config['max_width'] = 1000000;
+			$config['max_height'] = 1000000;
 
 			$this->load->library('upload', $config);
 
-
 			$file = 'foto_surat';
-				if (!empty($_FILES[$file]['name'])) {
-					$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-					
-					
-					$this->upload->initialize($config);
+			if (!empty($_FILES[$file]['name'])) {
+				$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
 
-					if (!$this->upload->do_upload($file)) {
-						$error = array('error' => $this->upload->display_errors());
-						var_dump($error);
-						var_dump($config['upload_path']);
-						
-						redirect('tes/index', $error);
-					} else {
-						$data = array('upload_data' => $this->upload->data());
-						
-					}
-					$fotoSurat =$config['file_name'];
+				$this->upload->initialize($config);
+
+				if (!$this->upload->do_upload($file)) {
+					$error = array('error' => $this->upload->display_errors());
+					var_dump($error);
+					var_dump($config['upload_path']);
+
+					exit;
+				} else {
+					$data = array('upload_data' => $this->upload->data());
+				}
+				$fotoSurat = $config['file_name'];
 			}
 
 			$nama = $this->input->post('nama_lengkap');
@@ -416,40 +356,10 @@ class Dashboard extends CI_Controller
 			$alamat = $this->input->post('alamat');
 			$pernikahanKe = $this->input->post('pernikahan_ke');
 			$tanggalPernikahan = $this->input->post('tanggal_pernikahan');
-			
-			
-
 			$this->m_User_detail->update($id_user, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat);
-			$userDetail = $this->m_User_detail->getAll($id_user);
-			if ($userDetail->num_rows() > 0) {
-				$userDetail = $userDetail->row_array();
-				$this->session->set_userdata('nama_lengkap', $userDetail['nama_lengkap']);
-				$this->session->set_userdata('nik', $userDetail['nik']);
-				$this->session->set_userdata('tempat_lahir', $userDetail['tempat_lahir']);
-				$this->session->set_userdata('tanggal_lahir', $userDetail['tanggal_lahir']);
-				$this->session->set_userdata('usia', $userDetail['usia']);
-				$this->session->set_userdata('jenis_kelamin', $userDetail['jenis_kelamin']);
-				$this->session->set_userdata('agama', $userDetail['agama']);
-				$this->session->set_userdata('pendidikan', $userDetail['pendidikan']);
-				$this->session->set_userdata('pekerjaan', $userDetail['pekerjaan']);
-				$this->session->set_userdata('nomor_telepon', $userDetail['nomor_telepon']);
-				$this->session->set_userdata('provinsi', $userDetail['provinsi']);
-				$this->session->set_userdata('kota', $userDetail['kota']);
-				$this->session->set_userdata('kecamatan', $userDetail['kecamatan']);
-				$this->session->set_userdata('kelurahan', $userDetail['kelurahan']);
-				$this->session->set_userdata('alamat', $userDetail['alamat']);
-				$this->session->set_userdata('pernikahan_ke', $userDetail['pernikahan_ke']);
-				$this->session->set_userdata('tanggal_pernikahan', $userDetail['tanggal_pernikahan']);
-				$this->session->set_userdata('foto_user', $userDetail['foto_user']);
-				$this->session->set_userdata('foto_ktp', $userDetail['foto_ktp']);
-				$this->session->set_userdata('foto_kk', $userDetail['foto_kk']);
-				$this->session->set_userdata('foto_surat', $userDetail['foto_surat']);
-			}
+			redirect('dashboard/view_catin');
 		}
-		redirect('dashboard/view_catin');
 	}
-
-	
 
 
 	public function tanggal()
