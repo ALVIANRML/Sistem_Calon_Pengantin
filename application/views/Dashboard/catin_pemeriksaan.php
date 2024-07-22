@@ -18,7 +18,10 @@
 	$kota = $this->session->userdata('kota');
 	$kecamatan = $this->session->userdata('kecamatan');
 	$kelurahan = $this->session->userdata('kelurahan');
-
+	$foto_user = $this->session->userdata('foto_user');
+	$foto_kk = $this->session->userdata('foto_kk');
+	$foto_ktp = $this->session->userdata('foto_ktp');
+	$foto_surat = $this->session->userdata('foto_surat');
 	?>
 
 	<div class="container_admin">
@@ -221,71 +224,151 @@
 
 
 
-
-					<div class="form-group" style="width: 50vh;">
-						<label for="foto_user">Pas Foto</label>
-						<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-						<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
-							<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="updateFile('foto_user')" style="display: none;" value="<?= $this->session->userdata('foto_user') ?>">
-							<label for="foto_user" class="custom-file-label">
-								<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-								<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
-								<div class="upload-text">Unggah atau drop file disini</div>
-								<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
-							</label>
-							<span id="file-name-foto_user" class="file-name"></span>
+					<?php if ($foto_user == null) : ?>
+						<div class="form-group" style="width: 50vh;">
+							<label for="foto_user">Pas Foto</label>
+							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
+								<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="uploadfile('foto_user')" style="display: none;" value="<?= $foto_user ?>">
+								<label for="foto_user" class="custom-file-label">
+									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
+									<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
+									<div class="upload-text">Unggah atau drop file disini</div>
+									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+								</label>
+								<span id="file-name-foto_user" class="file-name"></span>
+							</div>
+							<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
-						<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
+					<?php else : ?>
 
-					<div class="form-group" style="width: 50vh">
-						<label for="foto_ktp">Foto KTP</label>
-						<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-						<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
-							<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;">
-							<label for="foto_ktp" class="custom-file-label">
-								<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-								<img id="preview-image-foto_ktp" class="preview-image" src="" alt="Preview Image" style="display: none;">
-								<div class="upload-text">Unggah atau drop file disini</div>
-								<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
-							</label>
-							<span id="file-name-foto_ktp" class="file-name"></span>
+						<div class="form-group" style="width: 50vh;">
+							<label for="foto_user">Pas Foto</label>
+							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
+								<img id="uploadImage" src="<?= base_url('uploads/photo/pasFoto/') . $foto_user ?>" alt="Cat Image" class="preview-image">
+								<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="updateFile('foto_user')" style="display: none;" value="<?= $foto_user ?>">
+								<div class="image-caption">
+									<?= $foto_user ?>
+								</div>
+								<label for="foto_user" class="custom-file-label">
+									<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
+								</label>
+								<span id="file-name-foto_user" class="file-name"></span>
+							</div>
+							<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+							<input type="hidden" name="existing_image" value="<?= $foto_user ?>">
 						</div>
-						<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
+					<?php endif ?>
 
-					<div class="form-group" style="width: 50vh">
-						<label for="foto_kk">Foto Kartu Keluarga</label>
-						<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-						<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
-							<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="updateFile('foto_kk')" style="display: none;">
-							<label for="foto_kk" class="custom-file-label">
-								<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-								<img id="preview-image-foto_kk" class="preview-image" src="" alt="Preview Image" style="display: none;">
-								<div class="upload-text">Unggah atau drop file disini</div>
-								<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
-							</label>
-							<span id="file-name-foto_kk" class="file-name"></span>
+
+					<?php if ($foto_ktp == null) : ?>
+						<div class="form-group" style="width: 50vh;">
+							<label for="foto_user">Pas Foto</label>
+							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
+								<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="updateFile('foto_user')" style="display: none;" value="<?= $this->session->userdata('foto_user') ?>">
+								<label for="foto_user" class="custom-file-label">
+									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
+									<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
+									<div class="upload-text">Unggah atau drop file disini</div>
+									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+								</label>
+								<span id="file-name-foto_user" class="file-name"></span>
+							</div>
+							<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
-						<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-
-					<div class="form-group" style="width: 50vh">
-						<label for="foto_surat">Foto Surat Pengantar</label>
-						<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-						<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
-							<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="updateFile('foto_surat')" style="display: none;">
-							<label for="foto_surat" class="custom-file-label">
-								<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-								<img id="preview-image-foto_surat" class="preview-image" src="" alt="Preview Image" style="display: none;">
-								<div class="upload-text">Unggah atau drop file disini</div>
-								<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
-							</label>
-							<span id="file-name-foto_surat" class="file-name"></span>
+					<?php else : ?>
+						<div class="form-group" style="width: 50vh;">
+							<label for="foto_ktp">Foto KTP</label>
+							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
+								<img id="uploadImage" src="<?= base_url('uploads/photo/ktp/') ?><?= $foto_ktp ?>" alt="Cat Image" class="preview-image">
+								<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $foto_ktp ?>">
+								<div class="image-caption">
+									<?= $foto_ktp ?>
+								</div>
+								<label for="foto_ktp" class="custom-file-label">
+									<img id="preview-image-foto_ktp" class="preview-image" src="" alt="Preview Image" style="display: none;">
+								</label>
+								<span id="file-name-foto_ktp" class="file-name"></span>
+							</div>
+							<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+							<input type="hidden" name="existing_image" value="<?= $foto_ktp ?>">
 						</div>
-						<?= form_error('foto_surat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
+					<?php endif ?>
 
+					<?php if ($foto_kk == null) : ?>
+						<div class="form-group" style="width: 50vh">
+							<label for="foto_kk">Foto Kartu Keluarga</label>
+							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
+								<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="uploadfile('foto_kk')" style="display: none;">
+								<label for="foto_kk" class="custom-file-label">
+									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
+									<img id="preview-image-foto_kk" class="preview-image" src="" alt="Preview Image" style="display: none;">
+									<div class="upload-text">Unggah atau drop file disini</div>
+									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+								</label>
+								<span id="file-name-foto_kk" class="file-name"></span>
+							</div>
+							<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+						</div>
+					<?php else : ?>
+						<div class="form-group" style="width: 50vh;">
+							<label for="foto_kk">Foto Kartu Keluarga</label>
+							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
+								<img id="uploadImage" src="<?= base_url('uploads/photo/kk/') ?><?= $foto_kk ?>" alt="Cat Image" class="preview-image">
+								<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="updateFile('foto_kk')" style="display: none;" value="<?= $foto_kk ?>">
+								<div class="image-caption">
+									<?= $foto_kk ?>
+								</div>
+								<label for="foto_kk" class="custom-file-label">
+									<img id="preview-image-foto_kk" class="preview-image" src="" alt="Preview Image" style="display: none;">
+								</label>
+								<span id="file-name-foto_kk" class="file-name"></span>
+							</div>
+							<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+							<input type="hidden" name="existing_image" value="<?= $foto_kk ?>">
+						</div>
+					<?php endif ?>
+
+					<?php if ($foto_surat == null) : ?>
+						<div class="form-group" style="width: 50vh">
+							<label for="foto_surat">Foto Surat Pengantar</label>
+							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
+								<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="uploadfile('foto_surat')" style="display: none;">
+								<label for="foto_surat" class="custom-file-label">
+									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
+									<img id="preview-image-foto_surat" class="preview-image" src="" alt="Preview Image" style="display: none;">
+									<div class="upload-text">Unggah atau drop file disini</div>
+									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+								</label>
+								<span id="file-name-foto_surat" class="file-name"></span>
+							</div>
+							<?= form_error('foto_surat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+						</div>
+					<?php else : ?>
+						<div class="form-group" style="width: 50vh;">
+							<label for="foto_surat">Foto Surat Pengantar</label>
+							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
+								<img id="uploadImage" src="<?= base_url('uploads/photo/surat/') ?><?= $foto_surat ?>" alt="Cat Image" class="preview-image">
+								<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="updateFile('foto_surat')" style="display: none;" value="<?= $foto_surat ?>">
+								<div class="image-caption">
+									<?= $foto_surat ?>
+								</div>
+								<label for="foto_surat" class="custom-file-label">
+									<img id="preview-image-foto_surat" class="preview-image" src="" alt="Preview Image" style="display: none;">
+								</label>
+								<span id="file-name-foto_surat" class="file-name"></span>
+							</div>
+							<?= form_error('foto_surat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+							<input type="hidden" name="existing_image" value="<?= $foto_surat ?>">
+						</div>
+					<?php endif ?>
 				</div>
 
 				<hr style=" margin-top:20px;">
@@ -412,8 +495,11 @@
 				});
 		});
 	</script>
+
+
+
 	<script>
-		function updateFile(fileId) {
+		function uploadfile(fileId) {
 			var input = document.getElementById(fileId);
 			var fileName = input.files.length > 0 ? input.files[0].name : '';
 			document.getElementById('file-name-' + fileId).textContent = fileName;
@@ -472,10 +558,90 @@
 				var fileInputId = dropZone.id.replace('drop-zone-', '');
 				var files = e.dataTransfer.files;
 				document.getElementById(fileInputId).files = files;
-				updateFile(fileInputId);
+				uploadfile(fileInputId);
+			});
+
+			dropZone.addEventListener('click', function() {
+				var fileInputId = dropZone.id.replace('drop-zone-', '');
+				document.getElementById(fileInputId).click();
 			});
 		});
 	</script>
+
+
+
+
+	<script>
+		function updateFile(fileId) {
+			var input = document.getElementById(fileId);
+			var fileName = input.files.length > 0 ? input.files[0].name : '';
+			document.getElementById('file-name-' + fileId).textContent = fileName;
+
+			var previewImage = document.getElementById('preview-image-' + fileId);
+			var uploadImage = document.getElementById('uploadImage-' + fileId);
+			var uploadIcon = document.querySelector('#drop-zone-' + fileId + ' .upload-icon');
+			var uploadText = document.querySelector('#drop-zone-' + fileId + ' .upload-text');
+			var uploadSubtext = document.querySelector('#drop-zone-' + fileId + ' .upload-subtext');
+
+			if (input.files.length > 0) {
+				var file = input.files[0];
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					uploadImage.src = e.target.result;
+					uploadImage.style.display = 'block';
+				};
+
+				reader.readAsDataURL(file);
+
+				// Hide the upload text and subtext
+				if (uploadIcon) uploadIcon.style.display = 'none';
+				if (uploadText) uploadText.style.display = 'none';
+				if (uploadSubtext) uploadSubtext.style.display = 'none';
+			} else {
+				uploadImage.src = '';
+				uploadImage.style.display = 'none';
+
+				// Show the upload text and subtext
+				if (uploadIcon) uploadIcon.style.display = 'block';
+				if (uploadText) uploadText.style.display = 'block';
+				if (uploadSubtext) uploadSubtext.style.display = 'block';
+			}
+		}
+
+		// Set up event listeners for drag and drop
+		var dropZones = document.querySelectorAll('[id^=drop-zone-]');
+
+		dropZones.forEach(function(dropZone) {
+			dropZone.addEventListener('dragover', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				dropZone.classList.add('dragover');
+			});
+
+			dropZone.addEventListener('dragleave', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				dropZone.classList.remove('dragover');
+			});
+
+			dropZone.addEventListener('drop', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				dropZone.classList.remove('dragover');
+				var fileInputId = dropZone.id.replace('drop-zone-', '');
+				var files = e.dataTransfer.files;
+				document.getElementById(fileInputId).files = files;
+				updateFile(fileInputId);
+			});
+
+			dropZone.addEventListener('click', function() {
+				var fileInputId = dropZone.id.replace('drop-zone-', '');
+				document.getElementById(fileInputId).click();
+			});
+		});
+	</script>
+
 </body>
 
 </html>
