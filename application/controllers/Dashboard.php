@@ -74,7 +74,7 @@ class Dashboard extends CI_Controller
 	public function view_catin_pemeriksaan()
 	{
 		$id_user = $this->session->userdata('id_user');
-		
+
 		$userDetail = $this->m_User_detail->getAll($id_user);
 		if ($userDetail->num_rows() > 0) {
 			$userDetail = $userDetail->row_array();
@@ -99,16 +99,25 @@ class Dashboard extends CI_Controller
 			$this->session->set_userdata('foto_user', $userDetail['foto_user']);
 			$this->session->set_userdata('foto_ktp', $userDetail['foto_ktp']);
 			$this->session->set_userdata('foto_kk', $userDetail['foto_kk']);
-			$this->session->set_userdata('foto_surat', $userDetail['foto_surat']);}
+			$this->session->set_userdata('foto_surat', $userDetail['foto_surat']);
+		}
 
 
-			
 		$this->load->view('Dashboard/catin_pemeriksaan');
 	}
 
 	public function pemeriksaan()
 	{
 		$id_user = $this->session->userdata('id_user');
+		$userDetail = $this->m_User_detail->getAll($id_user);
+		if ($userDetail->num_rows() > 0) {
+			$userDetail = $userDetail->row_array();
+			$this->session->set_userdata('foto_user', $userDetail['foto_user']);
+			$this->session->set_userdata('foto_ktp', $userDetail['foto_ktp']);
+			$this->session->set_userdata('foto_kk', $userDetail['foto_kk']);
+			$this->session->set_userdata('foto_surat', $userDetail['foto_surat']);
+		}
+
 
 		$this->form_validation->set_rules(
 			'nama_lengkap',
@@ -196,9 +205,9 @@ class Dashboard extends CI_Controller
 				'required' =>  'Nomor HP tidak boleh kosong',
 			]
 		);
-// $kota = $this->input->post('provinsi');
-// var_dump($kota);
-// exit;
+		// $kota = $this->input->post('provinsi');
+		// var_dump($kota);
+		// exit;
 		// $this->form_validation->set_rules(
 		// 	'provinsi',
 		// 	'Provinsi',
@@ -263,9 +272,13 @@ class Dashboard extends CI_Controller
 		);
 
 		if ($this->form_validation->run() == false) {
-			
+
 			$this->load->view('Dashboard/catin_pemeriksaan');
 		} else {
+			$fotoUser = null;
+			$fotoktp = null;
+			$fotokk = null;
+			$fotoSurat = null;
 			if (!is_dir(FCPATH . 'uploads/photo')) {
 				mkdir(FCPATH . 'uploads/photo', 0777, true);
 			}
@@ -304,7 +317,7 @@ class Dashboard extends CI_Controller
 
 			if (!empty($_FILES[$file]['name'])) {
 				$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-
+				$config['file_name'] = str_replace(' ', '_', $config['file_name']);
 				$this->upload->initialize($config);
 
 				if (!$this->upload->do_upload($file)) {
@@ -331,7 +344,7 @@ class Dashboard extends CI_Controller
 			$file =  'foto_kk';
 			if (!empty($_FILES[$file]['name'])) {
 				$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-
+				$config['file_name'] = str_replace(' ', '_', $config['file_name']);
 
 				$this->upload->initialize($config);
 
@@ -357,7 +370,7 @@ class Dashboard extends CI_Controller
 			$file = 'foto_surat';
 			if (!empty($_FILES[$file]['name'])) {
 				$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-
+				$config['file_name'] = str_replace(' ', '_', $config['file_name']);
 				$this->upload->initialize($config);
 
 				if (!$this->upload->do_upload($file)) {
@@ -374,9 +387,9 @@ class Dashboard extends CI_Controller
 			$id_user = $this->session->userdata('id_user');
 			$nomor = $this->m_User_detail->hitung($id_user);
 			$tanggal_daftar = date('dmy');
-			$nomor = sprintf("%03d", $nomor); 
+			$nomor = sprintf("%03d", $nomor);
 			$nomor_pendaftaran = $tanggal_daftar . $nomor;
-			
+
 			$nama = $this->input->post('nama_lengkap');
 			$nik = $this->input->post('nik');
 			$tempatLahir = $this->input->post('tempat_lahir');
@@ -395,8 +408,19 @@ class Dashboard extends CI_Controller
 			$pernikahanKe = $this->input->post('pernikahan_ke');
 			$tanggalPernikahan = $this->input->post('tanggal_pernikahan');
 
-			
-			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat);		
+			if ($fotoUser == null) {
+				$fotoUser = $this->session->userdata('foto_user');
+			}
+			if ($fotokk == null) {
+				$fotokk = $this->session->userdata('foto_kk');
+			}
+			if ($fotoktp == null) {
+				$fotoktp = $this->session->userdata('foto_ktp');
+			}
+			if ($fotoSurat == null) {
+				$fotoSurat = $this->session->userdata('foto_surat');
+			}
+			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat);
 			redirect('dashboard/view_catin');
 		}
 	}
