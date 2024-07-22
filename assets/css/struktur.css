@@ -1,7 +1,7 @@
-/* body{
+body{
     font-family: Inter;
     margin-top: 107px;
-} */
+}
 
 p{
     margin: 0;
@@ -27,10 +27,10 @@ p{
     gap: 32px;
     padding-left: 81px;
     color: var(--white---color, #FFFAFA);
-    overflow-x: scroll;
+    overflow-x:scroll;
 }
 
-.card{
+.card-struktur{
     display: flex;
     flex: 0 0 500px; /* Pastikan card memiliki lebar tetap. NB: flex: [flex-grow] [flex-shrink] [flex-basis] */
     padding: 24px;

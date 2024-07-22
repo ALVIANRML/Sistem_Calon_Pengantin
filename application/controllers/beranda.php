@@ -104,4 +104,8 @@ class beranda extends CI_Controller
 			redirect('beranda/index');
 		}
 	}
+
+	public function struktur(){
+		$this->load->view('beranda/struktur');
+	}
 }

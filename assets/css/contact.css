@@ -15,6 +15,7 @@ body {
     width: 100%;
     padding: 20px;
 	background-color: white;
+    
 }
 
 
@@ -110,6 +111,11 @@ body {
 .input_container {
     flex: 1;
     margin-bottom: 10px;
+}
+
+.element{
+    width: 20%;
+    height: 20%;
 }
 
 input[type="text"] {

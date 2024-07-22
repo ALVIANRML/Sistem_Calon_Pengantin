@@ -12,11 +12,11 @@ class m_User_detail extends CI_Model
 	}
 
 
-	public function update($id_user, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat)
+	public function update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat)
 	{
 		$this->db->where('id_user_detail', $id_user);
 				$this->db->update('user_detail', [
-
+			'no_pendaftaran' => $nomor_pendaftaran,
 			'nama_lengkap' => $nama,
 			'nik' => $nik,
 			'tempat_lahir' => $tempatLahir,
