@@ -45,7 +45,7 @@
 				<a href="<?= base_url('dashboard/view_catin') ?>" style="text-decoration: none;">
 					<div class="navigasi_admin_menu">
 						<div class="isi" style="background-color: white;">
-							<img src="<?= base_url('assets/') ?>/img/pemeriksaan_dashboard.png" alt="Profile Image" class="icon-navigation" style="width:20px; height:20px;">
+							<img src="<?= base_url('assets/') ?>/img/pemeriksaan_dashboard.png" alt="Profile Image" class="icon-navigation" style="width: 2.5vh; height:2.5vh;">
 							<div class="profile-text">
 								<span>Dashboard</span>
 							</div>
@@ -53,7 +53,7 @@
 				</a>
 			</div>
 			<div class="isi" style="background-color: #015D67;">
-				<img src="<?= base_url('assets/') ?>/img/pemerisaan_daftar.png" alt="Profile Image" class="icon-navigation" style="width:20px; height:20px;">
+				<img src="<?= base_url('assets/') ?>/img/pemerisaan_daftar.png" alt="Profile Image" class="icon-navigation" style="width:2.5vh; height:2.5vh;">
 				<div class="profile-text" style="color:white;">
 					<span style="color:white">Daftar Pemeriksaan</span>
 				</div>

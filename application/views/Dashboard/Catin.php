@@ -15,6 +15,7 @@
 
 	<!-- declaration -->
 	<?php
+	$nomor_pendaftaran = $this->session->userdata('no_pendaftaran');
 	$nama = $this->session->userdata('nama_lengkap');
 	$nik = $this->session->userdata('nik');
 	$fotoUser = $this->session->userdata('foto_user');
@@ -29,7 +30,7 @@
 	<div class="container_admin">
 		<div class="header-container">
 			<div class="logo-container">
-				<img class="logo" src="<?= base_url('assets/') ?>img/logo.png" alt="Logo">
+				<img class="logo" src="<?= base_url('assets/') ?>img/percantin.png" alt="Logo">
 				<span class="logo-text"><b style="font-family: 'Nunito Sans', sans-serif;">DPPKB <br>KOTA TEBING TINGGI</b></span>
 			</div>
 			<nav class="navbar">
@@ -78,7 +79,7 @@
 							<?php if($nomor == null) :?>
 								<div class="isi-label">: Lakukan daftar pemeriksaan terlebih dahulu</div>
 								<?php else : ?>
-								<div class="isi-label">: <?= date('dmy') ?><?= sprintf("%03d", $this->session->userdata('nomor')) ?></div>
+								<div class="isi-label">: <?= $nomor_pendaftaran ?></div>
 								<?php endif ?>
 							
 							<div class="label">NIK</div>
@@ -118,8 +119,8 @@
 						</div>
 						<div class="status-container">
 							<p>Status:</p>
-							<span>Belum &nbsp;</span>
-							<img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:1px">
+							<span style="margin-right: 1vh;">Belum</span>
+							<img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:0px;margin-right:1vh">
 						</div>
 
 						<div class="overlay" id="overlay"></div>
@@ -160,8 +161,8 @@
 						</div>
 						<div class="status-container">
 							<p>Status:</p>
-							<span>Belum &nbsp;</span>
-							<img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:1px">
+							<span style="margin-right: 1vh;">Belum</span>
+							<img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:0px;margin-right:1vh">
 						</div>
 						<div class="overlay" id="overlay1"></div>
 						<div class="popup" id="popup1">
@@ -215,7 +216,7 @@
 					<div class="status">
 						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Status Kesehatan</h5>
 						<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
-							<span>Belum disetujui <img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:1px"></span>
+							<span>Belum disetujui <img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:1.5px"></span>
 						</div>
 						<div class="status-container">
 							<p>Harap menunggu s/d:</p>

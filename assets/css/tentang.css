@@ -35,6 +35,7 @@
     flex-direction: column;
     justify-content: space-between;
     row-gap: 16px;
+    
 }
 
 /* Kartu */
@@ -42,8 +43,9 @@
     display: flex;
     flex-direction: column;
     background-color: #015D67;
-    width: 90%;
-    max-width: 822px;
+    width: 50%;
+    /* height: 30vh; */
+    /* max-width: 822px; */
     border-radius: 16px;
     padding: 16px 24px;
     color: #E4EEEF;

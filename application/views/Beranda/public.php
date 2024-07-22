@@ -16,8 +16,9 @@
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/home.css">
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/tentang.css">
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/alur_pendaftaran.css">
-
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/struktur.css">
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/contact.css">
+
 	<title>Catin DPPKB Tebing Tinggi</title>
 </head>
 <body style="margin: auto; padding-top:0;overflow-x:hidden	">
@@ -40,7 +41,7 @@
     <div class="container_home" style="margin-bottom: 30vh;">
         <header>
             <div class="header-container">
-                <img class="logo" src="<?= base_url('assets/') ?>img/logo.png" alt="" style="margin-left:-10vh">
+                <img class="logo" src="<?= base_url('assets/') ?>img/percantin.png" alt="" style="margin-left:-10vh; width: 13vh;height: 13vh;">
                 <div class="navbar">
                     <nav>
                         <ul>
@@ -86,15 +87,15 @@
 		<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla doloribus odit reiciendis fuga in dicta doloremque suscipit. Tempore inventore vero laboriosam explicabo. At autem reiciendis laudantium iure ullam ex? Fugit sunt, inventore possimus earum aperiam nam eligendi assumenda et repellat.</p>
 	</div>
 	<div class="container-card">
-		<div class="card" data-aos="fade-up" data-aos-delay="100">
+		<div class="card" data-aos="fade-up" style="height:13vh;"  data-aos-delay="100" >
 			<h2>Skrining Kesehatan</h2>
 			<p>Pemeriksaan skrining kesehatan bertujuan untuk mendeteksi penyakit atau kondisi medis yang dapat mempengaruhi kesehatan calon pengantin. Pemeriksaan ini mencakup cek darah, analisis urine, dan pemeriksaan fisik dasar.</p>
 		</div>
-		<div class="card" data-aos="fade-up" data-aos-delay="200">
+		<div class="card" data-aos="fade-up" style="height:13vh;"  data-aos-delay="200" >
 			<h2>Pemeriksaan Narkoba</h2>
 			<p>Pemeriksaan narkoba dilakukan untuk memastikan calon pengantin bebas dari penggunaan zat terlarang. Ini penting untuk menjaga kesehatan dan kesejahteraan pasangan serta keluarga di masa depan.</p>
 		</div>
-		<div class="card" data-aos="fade-up" data-aos-delay="300">
+		<div class="card" data-aos="fade-up" style="height:13vh;"   data-aos-delay="300" >
 			<h2>Pemeriksaan Psikologi</h2>
 			<p>Pemeriksaan psikologi membantu mengidentifikasi kondisi mental dan emosional calon pengantin. Ini bertujuan untuk memastikan kesiapan psikologis dalam menjalani kehidupan pernikahan yang harmonis dan bahagia.</p>
 		</div>
@@ -149,37 +150,39 @@
 	</div>
 </div>
 
-<!-- struktur organisasi
-    <div class="header">
-        <p class="judul">Struktur Organisasi</p>
+<!-- struktur organisasi -->
+   
+    <div class="header" >
+        <p class="judul" data-aos="fade-up" data-aos-delay="100">Struktur Organisasi</p>
         <p class="desc">Dinas Pemberdayaan Perempuan, Perlindungan Anak, Pengendalian Penduduk dan Keluarga Berencana.</p>
     </div>
-    <div class="card-container">
-        <div class="card">
+    <div class="card-container" data-aos="fade-up" data-aos-delay="100" >
+        <div class="card-struktur" data-aos="fade-up" data-aos-delay="100">
             <img class="image" src="" alt="">
             <p class="nama">Atika P. Sary Nasution., S.Rj</p>
             <p class="NIP">NIP: 196907251995012001</p>
             <p class="jabatan">Kepala Dinas</p>
         </div>
-        <div class="card">
+        <div class="card-struktur" data-aos="fade-up" data-aos-delay="100">
             <img class="image" src="" alt="">
             <p class="nama">Atika P. Sary Nasution., S.Rj</p>
             <p class="NIP">NIP: 196907251995012001</p>
             <p class="jabatan">Kepala Dinas</p>
         </div>
-        <div class="card">
+        <div class="card-struktur" data-aos="fade-up" data-aos-delay="100">
             <img class="image" src="" alt="">
             <p class="nama">Atika P. Sary Nasution., S.Rj</p>
             <p class="NIP">NIP: 196907251995012001</p>
             <p class="jabatan">Kepala Dinas</p>
         </div>
-    </div> -->
+    </div>
+
 
 
 <!-- CONTACT -->
 <section id="contact">
 </section>
-<div class="contact_container" data-aos="fade-up">
+<div class="contact_container" data-aos="fade-up" style="margin-top: 20vh;">
 	<div class="contact_pertanyaan">
 		<h1 class="contact_pertanyaan_title">Ada Pertanyaan?</h1>
 		<div class="contact_pertanyaan_isi" style="margin-bottom: 0vh; margin-top:0vh;">
@@ -230,8 +233,8 @@
 			</div>
 			<div class="name_container">
 				<div class="input_container">
-					<label for="description">Deskripsi</label>
-					<input type="text" id="description" name="description" class="element" style="height: 150px;" value="<?= set_value('description') ?>">
+					<label for="description">Deskripsi</label><br>
+					<textarea id="description" name="description" class="element" style="height: 10vh; width:50vh; border-radius:10px" value="<?= set_value('description') ?>"></textarea>
 					<?= form_error('description', '<small class="text-danger pl-3">', '</small>'); ?>
 				</div>
 			</div>
