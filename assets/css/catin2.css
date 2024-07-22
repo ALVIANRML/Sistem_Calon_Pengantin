@@ -55,7 +55,7 @@
 
 .biodata .label {
     color: grey;
-    font-size: 17px;
+    font-size:13px;
     font-family: 'Inter', sans-serif;
 }
 
@@ -80,7 +80,7 @@
     align-items: center;
     border-radius: 10px;
     padding: 12.5px;
-    width: 35vh;
+    
     height: 12.5px;
     margin-bottom: 10px;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -147,6 +147,18 @@
     border-radius: 5px;
     outline: none;
 }
+.inputan-alamat {
+    border-radius: 2px;
+    height: 30px;
+    width: 32.8vh;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    
+}
+
 
 .btn-pemeriksaan {
     margin: 0;
@@ -178,6 +190,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
+    height: 70%;
     padding: 20px;
     background-color: white;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);

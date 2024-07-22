@@ -12,6 +12,20 @@
 </head>
 
 <body>
+
+	<!-- declaration -->
+	<?php
+	$nama = $this->session->userdata('nama_lengkap');
+	$nik = $this->session->userdata('nik');
+	$fotoUser = $this->session->userdata('foto_user');
+	$tempatLahir = $this->session->userdata('tempat_lahir');
+	$tanggalLahir = $this->session->userdata('tanggal_lahir');
+	$nomor = $this->session->userdata('nomor');
+	$usia = $this->session->userdata('usia');
+	$jenisKelamin = $this->session->userdata('jenis_kelamin');
+
+	?>
+
 	<div class="container_admin">
 		<div class="header-container">
 			<div class="logo-container">
@@ -50,60 +64,98 @@
 					</a>
 				</div>
 			</div>
+
 			<div class="inti" style="height: 100%;">
 				<h1 style="font-size: large;">DASHBOARD</h1>
 				<div class="informasi">
 					<div class="profil">
 						<div class="img-profil">
-							<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" style="height: 17.5vh; width: 10vw; border-radius: 50%;">
+							<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user') ?>" alt="Profile Image" style="height: 14.5vh; width: 10vw; border-radius: 50%;">
 						</div>
-						<p style="text-align: center; margin: 0;"><b><?= $this->session->userdata('nama_lengkap') ?></b></p>
+						<p style="text-align: center; margin: 0;"><b><?= $nama  ?></b></p>
 						<div class="biodata" style="font-size: 12.5px;">
 							<div class="label">No</div>
-							<div class="isi-label">: <?= date('dmy') ?><?= sprintf("%03d", $this->session->userdata('nomor'));; ?></div>
+							<?php if($nomor == null) :?>
+								<div class="isi-label">: Lakukan daftar pemeriksaan terlebih dahulu</div>
+								<?php else : ?>
+								<div class="isi-label">: <?= date('dmy') ?><?= sprintf("%03d", $this->session->userdata('nomor')) ?></div>
+								<?php endif ?>
+							
 							<div class="label">NIK</div>
-							<div class="isi-label">: <?= $this->session->userdata('nik') ?></div>
+							<?php if ($nik == null) : ?>
+								<div class="isi-label">: Lakukan daftar pemeriksaan terlebih dahulu</div>
+							<?php else : ?>
+								<div class="isi-label">: <?= $this->session->userdata('nik') ?></div>
+							<?php endif ?>
+							
 							<div class="label">TTL</div>
-							<div class="isi-label">: <?= $this->session->userdata('tempat_lahir') ?>, <?= date('d / m / Y', strtotime($this->session->userdata('tanggal_lahir'))) ?></div>
+							<?php if ($tanggalLahir == null && $tempatLahir == null) : ?>
+								<div class="isi-label">: Lakukan daftar pemeriksaan terlebih dahulu</div>
+							<?php else : ?>
+								<div class="isi-label">: <?= $tempatLahir ?>, <?= date('d / m / Y', strtotime($this->session->userdata('tanggal_lahir'))) ?></div>
+							<?php endif ?>
+							
 							<div class="label">Usia</div>
-							<div class="isi-label">: <?= $this->session->userdata('usia') ?> Tahun</div>
+							<?php if ($usia == null) : ?>
+								<div class="isi-label">: Lakukan daftar pemeriksaan terlebih dahulu</div>
+							<?php else : ?>
+								<div class="isi-label">: <?= $usia ?> Tahun</div>
+							<?php endif ?>
+
 							<div class="label">Gender</div>
-							<div class="isi-label">: <?= $this->session->userdata('jenis_kelamin') ?></div>
+							<?php if ($jenisKelamin == null) : ?>
+								<div class="isi-label">: Lakukan daftar pemeriksaan terlebih dahulu</div>
+							<?php else : ?>
+								<div class="isi-label">: <?= $jenisKelamin ?></div>
+							<?php endif ?>
 						</div>
 					</div>
 					<!-- 1 -->
 					<div class="status">
 						<h5 style="font-size:medium; margin:10px;margin-bottom:20px;">Skrining kesehatan</h5>
 						<div class="isi-status" onclick="showPopup()" style="border: 1px solid  #015D67;font-weight:bold;">
-							<span >Isi Skrining Kesehatan</span>
+							<span>Isi Skrining Kesehatan</span>
 						</div>
 						<div class="status-container">
 							<p>Status:</p>
 							<span>Belum &nbsp;</span>
 							<img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:1px">
 						</div>
-						<div class="overlay" id="overlay"></div>
 
+						<div class="overlay" id="overlay"></div>
 						<div class="popup" id="popup">
 							<span class="close-btn" onclick="closePopup()">&times;</span>
-							<h2>Form Pop-up</h2>
-							<form id="popupForm" action="<?= base_url('form/submit'); ?>" method="post">
+							<h2>Isi Skrining Kesehatan</h2>
+							<form id="popupForm" action="<?= base_url('dashboard/skrining_kesehatan'); ?>" method="post">
 								<div>
-									<label for="name">Name:</label>
-									<input type="text" id="name" name="name" required>
+								<p>Silahkan isi sesuai dengan kamu</p>
+									
+									<label for="sk1"><b>Mudah Pusing?</b><br></label>
+									<input type="radio" id="sk1" name="sk1" required> Ya
+									<input type="radio" id="sk1" name="sk1" required> Tidak
+							
+								<hr>	
+									<label for="ks2"><b>Merasa Berat Pada Bagian Tengkuk?</b><br></label>
+									<input type="radio" id="ks2" name="ks2" required> Ya
+									<input type="radio" id="ks2" name="ks2" required> Tidak
+						
+								<hr>
+									<label for="ks3"><b>Susah Tidur?</b><br></label>
+									<input type="radio" id="ks3" name="ks3" required> Ya
+									<input type="radio" id="ks3" name="ks3" required> Tidak
 								</div>
-								<div>
-									<label for="email">Email:</label>
-									<input type="email" id="email" name="email" required>
-								</div>
+								<hr>
+						
 								<button type="submit">Submit</button>
 							</form>
 						</div>
+
+						
 					</div>
 					<!-- 2 -->
 					<div class="status">
 						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Kuesioner Kepribadian</h5>
-						<div class="isi-status"  onclick="showPopup()" style="border: 1px solid  #015D67; font-weight:bold;">
+						<div class="isi-status" onclick="showPopup1()" style="border: 1px solid  #015D67; font-weight:bold;">
 							<span>Lihat Data</span>
 						</div>
 						<div class="status-container">
@@ -111,8 +163,42 @@
 							<span>Belum &nbsp;</span>
 							<img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:1px">
 						</div>
+						<div class="overlay" id="overlay1"></div>
+						<div class="popup" id="popup1">
+							<span class="close-btn" onclick="closePopup1()">&times;</span>
+							<h2>Kuesioner Kepribadian</h2>
+							<form id="popupForm" action="<?= base_url('dashboard/kuisioner_pribadi'); ?>" method="post">
+								<div>
+
+								<p>Silahkan isi sesuai dengan kamu</p>
+									
+									<label for="ks1"><b>Tenang Menghadapi Masalah?</b><br></label>
+									<input type="radio" id="ks1" name="ks1" required> ya
+									<input type="radio" id="ks1" name="ks1" required> tidak
+								</div>
+								<hr>
+								<div>
+									<label for="ks2"><b>Tidak Mudah Panik?</b><br></label>
+									<input type="radio" id="ks2" name="ks2" required>Ya
+									<input type="radio" id="ks2" name="ks2" required>Tidak
+								</div>
+								<hr>
+								<div>
+									<label for="ks3"><b>Cemas Ketika Menghadapi Masalah Baru?</b><br></label>
+									<input type="radio" id="ks3" name="ks3" required>Ya
+									<input type="radio" id="ks3" name="ks3" required>Tidak
+								</div>
+								<hr>
+								<div>
+									<label for="ks4"><b>Sulit Berkonsentrasi Dalam Mengerjakan Tugas?</b><br></label>
+									<input type="radio" id="ks4" name="ks4" required>Ya
+									<input type="radio" id="ks4" name="ks4" required>Tidak
+								</div>
+								<button type="submit">Submit</button>
+							</form>
+						</div>
 					</div>
-					
+
 					<!-- 3 -->
 					<div class="status">
 						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Status Verifikasi</h5>
@@ -164,16 +250,26 @@
 		</div>
 	</div>
 	<script>
-        function showPopup() {
-            document.getElementById('popup').classList.add('show');
-            document.getElementById('overlay').classList.add('show');
-        }
+		function showPopup() {
+			document.getElementById('popup').classList.add('show');
+			document.getElementById('overlay').classList.add('show');
+		}
+		function closePopup() {
+			document.getElementById('popup').classList.remove('show');
+			document.getElementById('overlay').classList.remove('show');
+		}
+		
+		function showPopup1(){
+			document.getElementById('popup1').classList.add('show');
+			document.getElementById('overlay1').classList.add('show');
+		}
+		
+		function closePopup1(){
+			document.getElementById('popup1').classList.remove('show');
+			document.getElementById('overlay1').classList.remove('show');
+		}
 
-        function closePopup() {
-            document.getElementById('popup').classList.remove('show');
-            document.getElementById('overlay').classList.remove('show');
-        }
-    </script>
+	</script>
 </body>
 
 </html>

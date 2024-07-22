@@ -47,9 +47,9 @@
 						<div class="form-group" style="margin-bottom: 40px; position: relative;">
 							<label for="password1" style="font-size: 2vh; margin-bottom: 5px;"><i class="zmdi zmdi-lock"></i><b>Password</b></label>
 							<div class="password-field" style="position: relative;">
-								<input type="password" class="form-control form-control-user" id="password1" placeholder="******" style="font-size: 2vh; padding-right: 40vh;" name="password1">
+								<input type="password" class="form-control form-control-user" id="password1" placeholder="******" style="font-size: 2vh; padding-right: 5vh;" name="password1">
 								<span class="toggle-password" onclick="togglePasswordVisibility('password1')" style="position: absolute; top: 3vh; right: 2vh; transform: translateY(-50%); cursor: pointer;">
-									<i id="toggle-icon-password1" class="fas fa-eye"></i>
+									<!-- <i id="toggle-icon-password1" class="fas fa-eye"></i> -->
 								</span>
 								<?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
 								<?php if ($this->session->flashdata('login_error')) : ?>
