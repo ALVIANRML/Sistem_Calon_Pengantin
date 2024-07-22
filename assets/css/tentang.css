@@ -1,7 +1,7 @@
-body {
+/* body {
     padding: 61px 91px;
     font-family: 'Inter';
-}
+} */
 
 /* Kontainer header */
 .header {
@@ -56,9 +56,11 @@ body {
 
 /* Kontainer Tentang Kami */
 .container_tentangkami {
-    width: 100%;
+    width: 90%;
     height: auto;
     margin-bottom: 18vh;
+    margin-left: 0vh;
+    
 }
 
 /* Media Queries untuk membuat layout responsif */

@@ -72,6 +72,34 @@ class Dashboard extends CI_Controller
 
 	public function view_catin_pemeriksaan()
 	{
+		$id_user = $this->session->userdata('id_user');
+		$userDetail = $this->m_User_detail->getAll($id_user);
+		if ($userDetail->num_rows() > 0) {
+			$userDetail = $userDetail->row_array();
+			$this->session->set_userdata('nama_lengkap', $userDetail['nama_lengkap']);
+			$this->session->set_userdata('nik', $userDetail['nik']);
+			$this->session->set_userdata('tempat_lahir', $userDetail['tempat_lahir']);
+			$this->session->set_userdata('tanggal_lahir', $userDetail['tanggal_lahir']);
+			$this->session->set_userdata('usia', $userDetail['usia']);
+			$this->session->set_userdata('jenis_kelamin', $userDetail['jenis_kelamin']);
+			$this->session->set_userdata('agama', $userDetail['agama']);
+			$this->session->set_userdata('pendidikan', $userDetail['pendidikan']);
+			$this->session->set_userdata('pekerjaan', $userDetail['pekerjaan']);
+			$this->session->set_userdata('nomor_telepon', $userDetail['nomor_telepon']);
+			$this->session->set_userdata('provinsi', $userDetail['provinsi']);
+			$this->session->set_userdata('kota', $userDetail['kota']);
+			$this->session->set_userdata('kecamatan', $userDetail['kecamatan']);
+			$this->session->set_userdata('kelurahan', $userDetail['kelurahan']);
+			$this->session->set_userdata('alamat', $userDetail['alamat']);
+			$this->session->set_userdata('pernikahan_ke', $userDetail['pernikahan_ke']);
+			$this->session->set_userdata('tanggal_pernikahan', $userDetail['tanggal_pernikahan']);
+			$this->session->set_userdata('foto_user', $userDetail['foto_user']);
+			$this->session->set_userdata('foto_ktp', $userDetail['foto_ktp']);
+			$this->session->set_userdata('foto_kk', $userDetail['foto_kk']);
+			$this->session->set_userdata('foto_surat', $userDetail['foto_surat']);}
+			// $kota = $this->session->userdata('kota');
+			// var_dump($id_user);
+			// exit;
 		$this->load->view('Dashboard/catin_pemeriksaan');
 	}
 
@@ -165,7 +193,9 @@ class Dashboard extends CI_Controller
 				'required' =>  'Nomor HP tidak boleh kosong',
 			]
 		);
-
+// $kota = $this->input->post('provinsi');
+// var_dump($kota);
+// exit;
 		// $this->form_validation->set_rules(
 		// 	'provinsi',
 		// 	'Provinsi',
@@ -356,7 +386,7 @@ class Dashboard extends CI_Controller
 			$alamat = $this->input->post('alamat');
 			$pernikahanKe = $this->input->post('pernikahan_ke');
 			$tanggalPernikahan = $this->input->post('tanggal_pernikahan');
-			$this->m_User_detail->update($id_user, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat);
+			$this->m_User_detail->update($id_user, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat);		
 			redirect('dashboard/view_catin');
 		}
 	}

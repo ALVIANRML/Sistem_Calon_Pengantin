@@ -1,9 +1,9 @@
 body {
     margin: 0;
-    padding: 20px;
+    padding: 0px;
 
     font-family: Arial, sans-serif;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 	
 }
 
@@ -34,6 +34,7 @@ body {
     color: black;
     font-size: 50px;
     margin: 0;
+    
     letter-spacing: -1.5px;
 }
 
