@@ -3,6 +3,8 @@ body, html {
     margin: 0;
     padding: 0;
     width: 100%;
+    /* overflow-x: hidden;  */
+    padding-left: 0;
 }
 
 /* Kontainer utama */
@@ -12,15 +14,15 @@ body, html {
     width: 100%;
 }
 
+
+
 /* Kontainer header */
 .header-container {
     display: inline-flex;
     justify-content: space-around;
     align-items: center;
     padding: 18px 0;
-    width: calc(100vw + 40px); /* Lebar penuh ditambah padding body */
-    margin-left: -20px; /* Menarik kembali margin kiri */
-    margin-right: -20px; /* Menarik kembali margin kanan */
+    width: 100%; /* Lebar penuh ditambah padding body */
     background: var(--Whites, #E4EEEF);
     box-sizing: border-box; /* Menghitung padding dan border dalam ukuran elemen */
 }
@@ -117,13 +119,12 @@ nav ul {
 /* Elemen hero-home */
 .hero-home {
     position: absolute;
-    
     top: 0;
     left: 0;
     z-index: -2;
     width: 100%; /* Lebar 100% */
     height: 120%;
-	opacity: 20%;
+    opacity: 20%;
     /* object-fit: cover; */
 }
 
@@ -137,22 +138,51 @@ nav ul {
 /* Tablet view */
 @media (max-width: 768px) {
     .navbar {
-        transform: translateX(40px);
+        transform: translateX(40%);
     }
 
-    nav ul {
-        flex-direction: column;
-        gap: 20px;
+     ul a {
+        display:block;
+        flex-direction: row;
+        gap: 1px;
+        margin-top: 50vh; 
+        /* text-align: center; */
+    }
+    .logo{
+        margin-top: 20vh;
+    }
+
+    .hero-home{
+        height: 100%;
     }
 
     .header-container {
-        flex-direction: column;
-        padding: 10px 0;
-        width: 100vw;
-        margin-left: 0;
-        margin-right: 0;
+        display: flex; /* Mengubah dari inline-flex ke flex */
+        justify-content: flex-start; /* Mengatur elemen-elemen di dalam kontainer berada di kiri */
+        align-items: center;
+        padding: 18px 0;
+        width: 100%; /* Lebar penuh */
+        background: var(--Whites, #E4EEEF);
+        box-sizing: border-box; /* Menghitung padding dan border dalam ukuran elemen */
     }
-
+    .logo-besar {
+        width: 30%; /* Sesuaikan ukuran untuk tablet */
+        height: 20%;
+        right: 5%;
+        margin-top: -100vh;
+        margin-bottom: 70vh;
+    }
+    .teks-1, .teks-2 {
+        font-size: 7vw;
+        text-align: left;
+        letter-spacing: normal;
+        margin-left: -5%;
+       
+    }
+    .teks-1{
+        margin-top: 10vh;
+    }
+   
     .home {
         flex-direction: column;
         padding: 0 50px;
@@ -175,8 +205,10 @@ nav ul {
     }
 
     .daftar-masuk {
-        flex-direction: column;
+        flex-direction: row;
         gap: 16px;
+        margin-top: 35vh;
+        margin-left: -25%;
     }
 }
 
@@ -187,16 +219,16 @@ nav ul {
     }
 
     nav ul {
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: row;
+        gap: 1px;
     }
 
     .header-container {
         flex-direction: column;
         padding: 10px 0;
-        width: 100vw;
+        width: 100%;
         margin-left: 0;
-        margin-right: 0;
+        margin-right: 10px;
     }
 
     .home {
@@ -224,6 +256,9 @@ nav ul {
         flex-direction: column;
         gap: 10px;
     }
+    body {
+        padding: 0;
+    }
 }
 
 /* Small mobile view */
@@ -240,7 +275,7 @@ nav ul {
     .header-container {
         flex-direction: column;
         padding: 5px 0;
-        width: 100vw;
+        width: 100%;
         margin-left: 0;
         margin-right: 0;
     }
@@ -288,7 +323,7 @@ nav ul {
     .header-container {
         flex-direction: column;
         padding: 5px 0;
-        width: 100vw;
+        width: 100%;
         margin-left: 0;
         margin-right: 0;
     }
@@ -310,6 +345,7 @@ nav ul {
         height: 5vh;
         font-size: 1vw;
     }
+   
 
     .teks-1, .teks-2 {
         font-size: 4vw;
@@ -319,5 +355,56 @@ nav ul {
     .daftar-masuk {
         flex-direction: column;
         gap: 2vw;
+    }
+}
+
+/* Additional media query to remove padding on split screen */
+@media screen and (min-width: 200px) and (max-width: 50vw) {
+    body {
+        padding: 0;
+    }
+}
+.logo-besar {
+    right: 10%;
+    width: 40%;
+    height: auto;
+}
+
+/* Media Queries */
+
+/* Tablet view */
+@media (max-width: 768px) {
+  
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 58px;
+        padding: 0;
+        margin: 0;
+        margin-left: -0vh;
+    }
+}
+
+/* Mobile view */
+@media (max-width: 480px) {
+    .logo-besar {
+        width: 20%; /* Sesuaikan ukuran untuk ponsel */
+        right: 2%;
+    }
+}
+
+/* Small mobile view */
+@media (max-width: 200px) {
+    .logo-besar {
+        width: 20%; /* Sesuaikan ukuran untuk ponsel kecil */
+        right: 0%;
+    }
+}
+
+/* View untuk lebar maksimal 50% */
+@media (max-width: 50vw) {
+    .logo-besar {
+        width: 20%; /* Sesuaikan ukuran untuk lebar maksimal 50% viewport */
+        right: 0%;
     }
 }

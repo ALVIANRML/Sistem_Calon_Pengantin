@@ -5,7 +5,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/catin.css">
-	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/catin2.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +24,7 @@
 	<div class="container_admin">
 		<div class="header-container">
 			<div class="logo-container">
-				<img class="logo" src="<?= base_url('assets/') ?>img/logo.png" alt="Logo">
+				<img class="logo" src="<?= base_url('assets/') ?>img/percantin.png" alt="Logo">
 				<span class="logo-text"><b style="font-family: 'Nunito Sans', sans-serif;">DPPKB <br> KOTA TEBING TINGGI</b></span>
 			</div>
 			<nav class="navbar">
@@ -67,9 +66,9 @@
 			<?php echo isset($error) ? $error : ''; ?>
 			<form action="<?= base_url('dashboard/pemeriksaan') ?>" method="post" enctype="multipart/form-data">
 				<div class="form-container">
-					<div class="form-group">
+					<div class="form-group" style="width: 37.5vw; margin-right:5.5vh;">
 						<label for="nama_lengkap">Nama Lengkap</label>
-						<input type="text" id="nama_lengkap" class="inputan" name="nama_lengkap" placeholder="Isi Nama Lengkap" style="width: 32.3vw;" value="<?= $this->session->userdata('nama_lengkap'); ?>">
+						<input type="text" id="nama_lengkap" class="inputan" name="nama_lengkap" placeholder="Isi Nama Lengkap" style="width:100%" value="<?= $this->session->userdata('nama_lengkap'); ?>">
 						<?= form_error('nama_lengkap', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 					<div class="form-group">
@@ -82,7 +81,8 @@
 						<input type="text" id="tempat_lahir" name="tempat_lahir" class="inputan" placeholder="Isi Tempat Lahir" value="<?= $this->session->userdata('tempat_lahir'); ?>">
 						<?= form_error('tempat_lahir', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
-					<div class="form-group" style="width: 32.8vh;">
+
+					<div class="form-group" style="">
 						<label for="tanggal_lahir">Tanggal Lahir</label>
 						<input type="date" id="tanggal_lahir" name="tanggal_lahir" placeholder="Isi Tanggal Lahir" class="inputan" onchange="hitungUmur()" value="<?= $this->session->userdata('tanggal_lahir'); ?>">
 						<?= form_error('tanggal_lahir', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
@@ -136,9 +136,9 @@
 						</select>
 						<?= form_error('pendidikan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="width: 37.5vw; margin-right:5.5vh">
 						<label for="pekerjaan">Pekerjaan</label>
-						<input type="text" id="pekerjaan" class="inputan" name="pekerjaan" placeholder="Isi Pekerjaan" style="width: 32.3vw;" value="<?= $this->session->userdata('pekerjaan'); ?>">
+						<input type="text" id="pekerjaan" class="inputan" name="pekerjaan" placeholder="Isi Pekerjaan" style="width: 100%;" value="<?= $this->session->userdata('pekerjaan'); ?>">
 						<?= form_error('pekerjaan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 					<div class="form-group">
@@ -150,9 +150,9 @@
 					<h2 style="width: 100%;">Alamat</h2>
 
 
-					<div class="form-group">
+					<div class="form-group" style="width:60vh ;">
 						<label for="provinsi">Provinsi</label>
-						<select name="provinsi" id="provinsi" class="inputan" style="width: 24vw;">
+						<select name="provinsi" id="provinsi" class="inputan" style="width:100%">
 							<?php if ($provinsi == null) : ?>
 								<!-- <option value="" disabled selected>Pilih Provinsi</option> -->
 							<?php else : ?>
@@ -162,9 +162,9 @@
 						</select>
 						<?= form_error('provinsi', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="width: 60vh;">
 						<label for="kota">Kota</label>
-						<select name="kota" id="kota" class="inputan" style="width: 24vw;">
+						<select name="kota" id="kota" class="inputan" style="width:100%">
 							<?php if ($kota == null) : ?>
 								<option value="" disabled selected>Pilih Kota</option>
 							<?php else : ?>
@@ -173,9 +173,9 @@
 						</select>
 						<?= form_error('kota', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="width: 60vh;">
 						<label for="kecamatan">Kecamatan</label>
-						<select name="kecamatan" id="kecamatan" class="inputan" style="width: 24vw;">
+						<select name="kecamatan" id="kecamatan" class="inputan" style="width:100%">
 							<?php if ($kecamatan == null) : ?>
 								<option value="" disabled selected>Pilih Kecamatan</option>
 							<?php else : ?>
@@ -185,9 +185,9 @@
 						</select>
 						<?= form_error('kecamatan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="width: 60vh;">
 						<label for="kelurahan">Kelurahan</label>
-						<select name="kelurahan" id="kelurahan" class="inputan" style="width: 24vw;">
+						<select name="kelurahan" id="kelurahan" class="inputan" style="width:100%">
 							<?php if ($kelurahan == null) : ?>
 								<option value="" disabled selected>Pilih Kelurahan</option>
 							<?php else : ?>
@@ -199,30 +199,30 @@
 					</div>
 
 
-					<div class="form-group">
+					<div class="form-group" style="width: 60vh;">
 						<label for="alamat">Alamat Lengkap</label>
-						<input type="text" id="alamat" class="inputan" name="alamat" placeholder="" value="<?= $this->session->userdata('alamat'); ?>" style="width: 49.4vw;height:15vh;">
+						<textarea id="alamat" class="inputan" name="alamat" placeholder="" value="<?= $this->session->userdata('alamat'); ?>" style="width: 100%;height:20vh;"></textarea>
 						<?= form_error('alamat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
 					<h2 style="width: 100%;">Dokumen</h2>
 
-					<div class="form-group">
+					<div class="form-group" style="width: 48vh;">
 						<label for="pernikahan_ke">Pernikahan Ke</label>
-						<input type="number" id="pernikahan_ke" class="inputan" name="pernikahan_ke" placeholder="" value="<?= $this->session->userdata('pernikahan_ke'); ?>" style="width: 23.9vw;">
+						<input type="number" id="pernikahan_ke" class="inputan" name="pernikahan_ke" placeholder="" value="<?= $this->session->userdata('pernikahan_ke'); ?>" style="width:100%" min="1">
 						<?= form_error('pernikahan_ke', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group" style="width: 48vh;">
 						<label for="tanggal_pernikahan">Tanggal Pernikahan</label>
-						<input type="date" id="tanggal_pernikahan" class="inputan" name="tanggal_pernikahan" placeholder="Pilih tanggal_pernikahan" value="<?= $this->session->userdata('tanggal_pernikahan'); ?>" style="width: 23.9vw;">
+						<input type="date" id="tanggal_pernikahan" class="inputan" name="tanggal_pernikahan" placeholder="Pilih tanggal_pernikahan" value="<?= $this->session->userdata('tanggal_pernikahan'); ?>" style="width: 100%;">
 						<?= form_error('tanggal_pernikahan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
 
 
 
-					<div class="form-group">
+					<div class="form-group" style="width: 50vh;">
 						<label for="foto_user">Pas Foto</label>
 						<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 						<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
@@ -238,7 +238,7 @@
 						<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group" style="width: 50vh">
 						<label for="foto_ktp">Foto KTP</label>
 						<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 						<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
@@ -254,7 +254,7 @@
 						<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group" style="width: 50vh">
 						<label for="foto_kk">Foto Kartu Keluarga</label>
 						<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 						<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
@@ -270,7 +270,7 @@
 						<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group" style="width: 50vh">
 						<label for="foto_surat">Foto Surat Pengantar</label>
 						<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 						<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
@@ -376,12 +376,12 @@
 				.then(districts => {
 					districts;
 					var data = districts;
-					<?php if($kecamatan == null) :?>
-						
+					<?php if ($kecamatan == null) : ?>
+
 						var tampung = '<option>Pilih Kecamatan</option>';
 					<?php else : ?>
-				
-						var tampung = '<option><?= $kecamatan?></option>';
+
+						var tampung = '<option><?= $kecamatan ?></option>';
 					<?php endif ?>
 					data.forEach(element => {
 						tampung += `<option data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
@@ -398,12 +398,12 @@
 				.then(villages => {
 					villages;
 					var data = villages;
-					<?php if($kelurahan == null) :?>
-						
+					<?php if ($kelurahan == null) : ?>
+
 						var tampung = '<option>Pilih kelurahan</option>';
 					<?php else : ?>
-				
-						var tampung = '<option><?= $kelurahan?></option>';
+
+						var tampung = '<option><?= $kelurahan ?></option>';
 					<?php endif ?>
 					data.forEach(element => {
 						tampung += `<option data-reg="${element.id}" value="${element.name}">${element.name}</option>`;

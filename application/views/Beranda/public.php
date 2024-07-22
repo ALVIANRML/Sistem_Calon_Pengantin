@@ -20,7 +20,7 @@
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/contact.css">
 	<title>Catin DPPKB Tebing Tinggi</title>
 </head>
-<body style="margin: auto; padding-top:0;overflow:-moz-hidden-unscrollable">
+<body style="margin: auto; padding-top:0;overflow-x:hidden	">
     <?php 
     $tombol = $this->session->userdata('status');
     $display = ($tombol == 0) ? "display:none" : "display:block";
@@ -69,7 +69,7 @@
                 <a href="<?= base_url('auth/login') ?>"><button class="btn-masuk">Masuk</button></a>
                 <p class="teks-3" style="<?php echo $display; ?>">Belum mempunyai akun? <span class="span-1"><a href="<?= base_url('auth/register') ?>">Daftar</a></span></p>
             </div>
-            <img src="<?= base_url('assets/') ?>img/percantin.png" alt="" style="margin-right: 20vh;">
+            <img src="<?= base_url('assets/') ?>img/percantin.png" alt="" style="margin-right: 20vh;" class="logo-besar">
         </div>
     </div>
 </body>
@@ -149,7 +149,7 @@
 	</div>
 </div>
 
-<!-- struktur organisasi -->
+<!-- struktur organisasi
     <div class="header">
         <p class="judul">Struktur Organisasi</p>
         <p class="desc">Dinas Pemberdayaan Perempuan, Perlindungan Anak, Pengendalian Penduduk dan Keluarga Berencana.</p>
@@ -173,7 +173,7 @@
             <p class="NIP">NIP: 196907251995012001</p>
             <p class="jabatan">Kepala Dinas</p>
         </div>
-    </div>
+    </div> -->
 
 
 <!-- CONTACT -->
@@ -196,7 +196,7 @@
 				<p style="margin-top: -10px;">Jl. Gunung Leuser No. 3, Kota Tebing Tinggi Sumatera Utara Indonesia Kode POS : 20614</p>
 			</div>
 		</div>
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.986706135521!2d99.16206607473123!3d3.353395096621332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x303161da98f8c417%3A0xa9aa16030bbeef11!2sDinas%20PPKB%20Kota%20Tebing%20Tinggi!5e0!3m2!1sid!2sid!4v1705589852672!5m2!1sid!2sid" frameborder="0" style="width:90vh; height: 65vh; margin-top:30px; border-radius:10px;" allowfullscreen></iframe>
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.986706135521!2d99.16206607473123!3d3.353395096621332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x303161da98f8c417%3A0xa9aa16030bbeef11!2sDinas%20PPKB%20Kota%20Tebing%20Tinggi!5e0!3m2!1sid!2sid!4v1705589852672!5m2!1sid!2sid" frameborder="0" style="width:100%; height: 65vh; margin-top:30px; border-radius:10px;" allowfullscreen></iframe>
 	</div>
 
 	<div class="contact_form" data-aos="fade-up" data-aos-delay="100">
