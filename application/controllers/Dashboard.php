@@ -408,6 +408,18 @@ class Dashboard extends CI_Controller
 			$pernikahanKe = $this->input->post('pernikahan_ke');
 			$tanggalPernikahan = $this->input->post('tanggal_pernikahan');
 
+			if ($provinsi == null) {
+				$provinsi = $this->session->userdata('provinsi');
+			}
+			if ($kota == null) {
+				$kota = $this->session->userdata('kota');
+			}
+			if ($kecamatan == null) {
+				$kecamatan = $this->session->userdata('kecamatan');
+			}
+			if ($kelurahan == null) {
+				$kelurahan = $this->session->userdata('kelurahan');
+			}
 			if ($fotoUser == null) {
 				$fotoUser = $this->session->userdata('foto_user');
 			}
@@ -421,7 +433,7 @@ class Dashboard extends CI_Controller
 				$fotoSurat = $this->session->userdata('foto_surat');
 			}
 			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat);
-			redirect('dashboard/view_catin');
+			redirect('dashboard/view_catin_pemeriksaan');
 		}
 	}
 

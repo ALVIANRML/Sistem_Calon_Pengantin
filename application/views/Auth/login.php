@@ -56,7 +56,7 @@
 									<small class="text-danger pl-3"><?= $this->session->flashdata('login_error') ?></small>
 								<?php endif; ?>
 								<br> <!-- Pindahkan pesan error ke baris baru -->
-								<a class="small" style="color: #015D67; text-align: right; display: block; margin-right: 10px;top=20%;" href="<?= base_url('auth/lupa_password'); ?>">Lupa Password?</a>
+								<a class="small" style="color: #015D67; text-align: right; display: block; margin-right: 10px;top=20%;margin-top:-2.5vh;margin-bottom:2vh" href="<?= base_url('auth/lupa_password'); ?>">Lupa Password?</a>
 
 							</div>
 							<button type="submit" id="submit" name="submit" class="btn btn-primary btn-user btn-block" style="background-color: #015D67;">Masuk</button>
