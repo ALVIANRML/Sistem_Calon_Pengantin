@@ -8,6 +8,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/catin.css">
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/catin2.css">
+	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 	<title>D_catin</title>
 </head>
 
@@ -50,14 +51,14 @@
 				<h6 style="color: gray; margin: 0; font-size:10px;">NAVIGASI</h6>
 				<div class="navigasi_admin_menu">
 					<div class="isi" style="background-color: #015D67;">
-						<img src="<?= base_url('assets/') ?>/img/dashboard.png" alt="Profile Image" class="icon-navigation">
+						<img src="<?= base_url('assets/') ?>/img/dashboard_catin.svg" alt="Profile Image" class="icon-navigation">
 						<div class="profile-text" style="color:white;">
 							<span style="color:white">Dashboard</span>
 						</div>
 					</div>
 					<a href="<?= base_url('dashboard/view_catin_pemeriksaan') ?> " style="text-decoration: none;">
 						<div class="isi" style="background-color: white;">
-							<img src="<?= base_url('assets/') ?>/img/Vector.png" alt="Profile Image" class="icon-navigation">
+							<img src="<?= base_url('assets/') ?>/img/dp_catin.svg" alt="Profile Image" class="icon-navigation">
 							<div class="profile-text">
 								<span>Daftar Pemeriksaan</span>
 							</div>
@@ -120,7 +121,7 @@
 						<div class="status-container">
 							<p>Status:</p>
 							<span style="margin-right: 1vh;">Belum</span>
-							<img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:0px;margin-right:1vh">
+							<img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:0px;margin-right:1vh">
 						</div>
 
 						<div class="overlay" id="overlay"></div>
@@ -162,7 +163,7 @@
 						<div class="status-container">
 							<p>Status:</p>
 							<span style="margin-right: 1vh;">Belum</span>
-							<img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:0px;margin-right:1vh">
+							<img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:0px;margin-right:1vh">
 						</div>
 						<div class="overlay" id="overlay1"></div>
 						<div class="popup" id="popup1">
@@ -204,7 +205,7 @@
 					<div class="status">
 						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Status Verifikasi</h5>
 						<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
-							<span>Sudah Diverifikasi <img src="<?= base_url('assets') ?>/img/sudah.png" alt="" style="margin-top:1px"></span>
+							<span>Sudah Diverifikasi <img src="<?= base_url('assets') ?>/img/sudah.svg" alt="" style="margin-top:1px"></span>
 						</div>
 						<div class="status-container">
 							<p>Tanggal:</p>
@@ -216,7 +217,7 @@
 					<div class="status">
 						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Status Kesehatan</h5>
 						<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
-							<span>Belum disetujui <img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:1.5px"></span>
+							<span>Belum disetujui <img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:1.5px"></span>
 						</div>
 						<div class="status-container">
 							<p>Harap menunggu s/d:</p>
@@ -228,7 +229,7 @@
 					<div class="status">
 						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Status BNN</h5>
 						<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
-							<span>Belum disetujui <img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:1px"></span>
+							<span>Belum disetujui <img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:1px"></span>
 						</div>
 						<div class="status-container">
 							<p>Harap menunggu s/d:</p>
@@ -239,7 +240,7 @@
 					<div class="status">
 						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Status Psikolog</h5>
 						<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
-							<span>Belum disetujui <img src="<?= base_url('assets') ?>/img/belum.png" alt="" style="margin-top:1px"></span>
+							<span>Belum disetujui <img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:1px"></span>
 						</div>
 						<div class="status-container">
 							<p>Harap menunggu s/d:</p>

@@ -8,6 +8,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 	<title>D_catin</title>
 </head>
 
@@ -48,7 +49,7 @@
 				<a href="<?= base_url('dashboard/view_catin') ?>" style="text-decoration: none;">
 					<div class="navigasi_admin_menu">
 						<div class="isi" style="background-color: white;">
-							<img src="<?= base_url('assets/') ?>/img/pemeriksaan_dashboard.png" alt="Profile Image" class="icon-navigation" style="width: 2.5vh; height:2.5vh;">
+						<img src="<?= base_url('assets/') ?>img/dashboard_black.svg" alt="Profile Image" class="icon-navigation" style="width:2.5vh; height:2.5vh;">
 							<div class="profile-text">
 								<span>Dashboard</span>
 							</div>
@@ -56,14 +57,14 @@
 				</a>
 			</div>
 			<div class="isi" style="background-color: #015D67;">
-				<img src="<?= base_url('assets/') ?>/img/pemerisaan_daftar.png" alt="Profile Image" class="icon-navigation" style="width:2.5vh; height:2.5vh;">
+				<img src="<?= base_url('assets/') ?>img/Frame.svg" alt="Profile Image" class="icon-navigation" style="width:2.5vh; height:2.5vh;">
 				<div class="profile-text" style="color:white;">
 					<span style="color:white">Daftar Pemeriksaan</span>
 				</div>
 			</div>
 		</div>
 		<div class="inti-pemeriksaan" style="height: 100%; background-color: white; border: 2px solid gray;">
-			<h1 style="font-size: 30px;"> <img src="<?= base_url('assets/') ?>/img/Vector.png" alt="Profile Image" class="icon-navigation" style=" height:5vh; width: 5vh;">Form Daftar Calon Pengantin</h1>
+			<h1 style="font-size: 30px;"> <img src="<?= base_url('assets/') ?>img/title_pemeriksaan.svg" alt="Profile Image" class="icon-navigation" style=" height:5vh; width: 5vh;">Form Daftar Calon Pengantin</h1>
 			<hr>
 			<h2>informasi dasar</h2>
 			<?php echo isset($error) ? $error : ''; ?>
@@ -158,8 +159,10 @@
 						<select name="provinsi" id="provinsi" class="inputan" style="width:100%">
 							<?php if ($provinsi == null) : ?>
 								<!-- <option value="" disabled selected>Pilih Provinsi</option> -->
+							<?php elseif ($provinsi == $this->session->userdata('provinsi')) : ?>
+								<option value="<?= $this->session->userdata('provinsi'); ?>" disabled selected> <?= $this->session->userdata('provinsi'); ?> </option>
 							<?php else : ?>
-								<option value="" disabled selected><?= $provinsi ?></option>
+								<option value="<?= $provinsi ?>" disabled selected><?= $provinsi ?></option>
 							<?php endif ?>
 
 						</select>
@@ -170,8 +173,10 @@
 						<select name="kota" id="kota" class="inputan" style="width:100%">
 							<?php if ($kota == null) : ?>
 								<option value="" disabled selected>Pilih Kota</option>
+							<?php elseif ($kota == $this->session->userdata('kota')) : ?>
+								<option value="<?= $this->session->userdata('kota'); ?>" disabled selected> <?= $this->session->userdata('kota'); ?> </option>
 							<?php else : ?>
-								<option value="" disabled selected><?= $kota ?></option>
+								<option value="<?= $kota ?>" disabled selected><?= $kota ?></option>
 							<?php endif ?>
 						</select>
 						<?= form_error('kota', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
@@ -181,8 +186,10 @@
 						<select name="kecamatan" id="kecamatan" class="inputan" style="width:100%">
 							<?php if ($kecamatan == null) : ?>
 								<option value="" disabled selected>Pilih Kecamatan</option>
+							<?php elseif ($kecamatan == $this->session->userdata('kecamatan')) : ?>
+								<option value="<?= $this->session->userdata('kecamatan'); ?>" disabled selected> <?= $this->session->userdata('kecamatan'); ?> </option>
 							<?php else : ?>
-								<option value="" disabled selected><?= $kecamatan ?></option>
+								<option value="<?= $kecamatan ?>" disabled selected><?= $kecamatan ?></option>
 							<?php endif ?>
 
 						</select>
@@ -193,18 +200,19 @@
 						<select name="kelurahan" id="kelurahan" class="inputan" style="width:100%">
 							<?php if ($kelurahan == null) : ?>
 								<option value="" disabled selected>Pilih Kelurahan</option>
+							<?php elseif ($kelurahan == $this->session->userdata('kelurahan')) : ?>
+								<option value="<?= $this->session->userdata('kelurahan'); ?>" disabled selected> <?= $this->session->userdata('kelurahan'); ?> </option>
 							<?php else : ?>
-								<option value="" disabled selected><?= $kelurahan ?></option>
+								<option value="<?= $kelurahan ?>" disabled selected><?= $kelurahan ?></option>
 							<?php endif ?>
 
 						</select>
 						<?= form_error('kelurahan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
-
 					<div class="form-group" style="width: 60vh;">
 						<label for="alamat">Alamat Lengkap</label>
-						<textarea id="alamat" class="inputan" name="alamat" placeholder="" value="<?= $this->session->userdata('alamat'); ?>" style="width: 100%;height:20vh;"></textarea>
+						<textarea id="alamat" class="inputan" name="alamat" placeholder="" value="<?= $this->session->userdata('alamat'); ?>" style="width: 100%;height:20vh;"><?= $this->session->userdata('alamat'); ?></textarea>
 						<?= form_error('alamat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
@@ -243,13 +251,13 @@
 					<?php else : ?>
 
 						<div class="form-group" style="width: 50vh;">
-							<label for="foto_user">Pas Foto</label>
+							<label for="foto_user">Foto KTP</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
-								<img id="uploadImage" src="<?= base_url('uploads/photo/pasFoto/') . $foto_user ?>" alt="Cat Image" class="preview-image">
+								<img id="uploadImage-foto_user" src="<?= base_url('uploads/photo/pasFoto/') . $foto_user ?>" alt="KTP Image" class="preview-image">
 								<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="updateFile('foto_user')" style="display: none;" value="<?= $foto_user ?>">
 								<div class="image-caption">
-									<?= $foto_user ?>
+
 								</div>
 								<label for="foto_user" class="custom-file-label">
 									<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
@@ -259,34 +267,35 @@
 							<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 							<input type="hidden" name="existing_image" value="<?= $foto_user ?>">
 						</div>
+
 					<?php endif ?>
 
 
 					<?php if ($foto_ktp == null) : ?>
 						<div class="form-group" style="width: 50vh;">
-							<label for="foto_user">Pas Foto</label>
+							<label for="foto_ktp">Pas Foto</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
-								<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="updateFile('foto_user')" style="display: none;" value="<?= $this->session->userdata('foto_user') ?>">
-								<label for="foto_user" class="custom-file-label">
+							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
+								<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $this->session->userdata('foto_ktp') ?>">
+								<label for="foto_ktp" class="custom-file-label">
 									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-									<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
+									<img id="preview-image-foto_ktp" class="preview-image" src="" alt="Preview Image" style="display: none;">
 									<div class="upload-text">Unggah atau drop file disini</div>
 									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
 								</label>
-								<span id="file-name-foto_user" class="file-name"></span>
+								<span id="file-name-foto_ktp" class="file-name"></span>
 							</div>
-							<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+							<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 						</div>
 					<?php else : ?>
 						<div class="form-group" style="width: 50vh;">
 							<label for="foto_ktp">Foto KTP</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
-								<img id="uploadImage" src="<?= base_url('uploads/photo/ktp/') ?><?= $foto_ktp ?>" alt="Cat Image" class="preview-image">
+								<img id="uploadImage-foto_ktp" src="<?= base_url('uploads/photo/ktp/') . $foto_ktp ?>" alt="KTP Image" class="preview-image">
 								<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $foto_ktp ?>">
 								<div class="image-caption">
-									<?= $foto_ktp ?>
+
 								</div>
 								<label for="foto_ktp" class="custom-file-label">
 									<img id="preview-image-foto_ktp" class="preview-image" src="" alt="Preview Image" style="display: none;">
@@ -296,6 +305,7 @@
 							<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 							<input type="hidden" name="existing_image" value="<?= $foto_ktp ?>">
 						</div>
+
 					<?php endif ?>
 
 					<?php if ($foto_kk == null) : ?>
@@ -319,10 +329,10 @@
 							<label for="foto_kk">Foto Kartu Keluarga</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
-								<img id="uploadImage" src="<?= base_url('uploads/photo/kk/') ?><?= $foto_kk ?>" alt="Cat Image" class="preview-image">
+								<img id="uploadImage-foto_kk" src="<?= base_url('uploads/photo/kk/') . $foto_kk ?>" alt="KTP Image" class="preview-image">
 								<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="updateFile('foto_kk')" style="display: none;" value="<?= $foto_kk ?>">
 								<div class="image-caption">
-									<?= $foto_kk ?>
+
 								</div>
 								<label for="foto_kk" class="custom-file-label">
 									<img id="preview-image-foto_kk" class="preview-image" src="" alt="Preview Image" style="display: none;">
@@ -332,6 +342,7 @@
 							<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 							<input type="hidden" name="existing_image" value="<?= $foto_kk ?>">
 						</div>
+
 					<?php endif ?>
 
 					<?php if ($foto_surat == null) : ?>
@@ -355,10 +366,10 @@
 							<label for="foto_surat">Foto Surat Pengantar</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
-								<img id="uploadImage" src="<?= base_url('uploads/photo/surat/') ?><?= $foto_surat ?>" alt="Cat Image" class="preview-image">
+								<img id="uploadImage-foto_surat" src="<?= base_url('uploads/photo/surat/') . $foto_surat ?>" alt="KTP Image" class="preview-image">
 								<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="updateFile('foto_surat')" style="display: none;" value="<?= $foto_surat ?>">
 								<div class="image-caption">
-									<?= $foto_surat ?>
+
 								</div>
 								<label for="foto_surat" class="custom-file-label">
 									<img id="preview-image-foto_surat" class="preview-image" src="" alt="Preview Image" style="display: none;">
@@ -374,7 +385,7 @@
 				<hr style=" margin-top:20px;">
 				<div class="main-container" style="display: flex; align-items: center; justify-content: space-between;">
 					<div class="info-container" style="display: flex; align-items: center;">
-						<img src="<?= base_url('assets') ?>/img/caution.png" alt="" style="margin-top:1px;">
+						<img src="<?= base_url('assets') ?>/img/caution.svg" alt="" style="margin-top:1px;">
 						<p> &nbsp;Isi semua kolom yang ada</p>
 					</div>
 					<div class="status-container" style="display: flex;">
@@ -588,8 +599,9 @@
 				var reader = new FileReader();
 
 				reader.onload = function(e) {
-					uploadImage.src = e.target.result;
-					uploadImage.style.display = 'block';
+					previewImage.src = e.target.result;
+					previewImage.style.display = 'block';
+					if (uploadImage) uploadImage.style.display = 'none';
 				};
 
 				reader.readAsDataURL(file);
@@ -599,8 +611,10 @@
 				if (uploadText) uploadText.style.display = 'none';
 				if (uploadSubtext) uploadSubtext.style.display = 'none';
 			} else {
-				uploadImage.src = '';
-				uploadImage.style.display = 'none';
+				if (uploadImage) uploadImage.src = '';
+				previewImage.src = '';
+				if (uploadImage) uploadImage.style.display = 'block';
+				previewImage.style.display = 'none';
 
 				// Show the upload text and subtext
 				if (uploadIcon) uploadIcon.style.display = 'block';
@@ -635,10 +649,7 @@
 				updateFile(fileInputId);
 			});
 
-			dropZone.addEventListener('click', function() {
-				var fileInputId = dropZone.id.replace('drop-zone-', '');
-				document.getElementById(fileInputId).click();
-			});
+
 		});
 	</script>
 
