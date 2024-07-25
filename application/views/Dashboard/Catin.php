@@ -32,7 +32,7 @@
 		<div class="header-container">
 			<div class="logo-container">
 				<img class="logo" src="<?= base_url('assets/') ?>img/percantin.png" alt="Logo">
-				<span class="logo-text"><b style="font-family: 'Nunito Sans', sans-serif;">DPPKB <br>KOTA TEBING TINGGI</b></span>
+				<span class="logo-text"><b style="font-family: 'Nunito Sans', sans-serif;">PERCATIN</b></span>
 			</div>
 			<nav class="navbar">
 				<ul>
@@ -40,7 +40,17 @@
 						<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
 						<div class="profile-text">
 							<span>Halo,</span>
-							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;"><?= $this->session->userdata('username'); ?></b> <img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 50px;"></span>
+							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;"><?= $this->session->userdata('username'); ?></b>
+								<div class="dropdown">
+									<button style="border: none; background-color:white; margin-right:5vh; width:2px" >
+										<img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 0px;" class="dropdown-button" >
+							</span>
+							</button>
+							<div class="dropdown-content">
+								<a href="<?= base_url('auth/ganti_password')?>">Ganti Password</a>
+								<a href="#">Keluar</a>
+
+							</div>
 						</div>
 					</div>
 				</ul>
@@ -77,26 +87,26 @@
 						<p style="text-align: center; margin: 0;"><b><?= $nama  ?></b></p>
 						<div class="biodata" style="font-size: 12.5px;">
 							<div class="label">No</div>
-							<?php if($nomor == null) :?>
+							<?php if ($nomor == null) : ?>
 								<div class="isi-label">: Lakukan daftar pemeriksaan terlebih dahulu</div>
-								<?php else : ?>
+							<?php else : ?>
 								<div class="isi-label">: <?= $nomor_pendaftaran ?></div>
-								<?php endif ?>
-							
+							<?php endif ?>
+
 							<div class="label">NIK</div>
 							<?php if ($nik == null) : ?>
 								<div class="isi-label">: Lakukan daftar pemeriksaan terlebih dahulu</div>
 							<?php else : ?>
 								<div class="isi-label">: <?= $this->session->userdata('nik') ?></div>
 							<?php endif ?>
-							
+
 							<div class="label">TTL</div>
 							<?php if ($tanggalLahir == null && $tempatLahir == null) : ?>
 								<div class="isi-label">: Lakukan daftar pemeriksaan terlebih dahulu</div>
 							<?php else : ?>
 								<div class="isi-label">: <?= $tempatLahir ?>, <?= date('d / m / Y', strtotime($this->session->userdata('tanggal_lahir'))) ?></div>
 							<?php endif ?>
-							
+
 							<div class="label">Usia</div>
 							<?php if ($usia == null) : ?>
 								<div class="isi-label">: Lakukan daftar pemeriksaan terlebih dahulu</div>
@@ -130,29 +140,29 @@
 							<h2>Isi Skrining Kesehatan</h2>
 							<form id="popupForm" action="<?= base_url('dashboard/skrining_kesehatan'); ?>" method="post">
 								<div>
-								<p>Silahkan isi sesuai dengan kamu</p>
-									
+									<p>Silahkan isi sesuai dengan kamu</p>
+
 									<label for="sk1"><b>Mudah Pusing?</b><br></label>
 									<input type="radio" id="sk1" name="sk1" required> Ya
 									<input type="radio" id="sk1" name="sk1" required> Tidak
-							
-								<hr>	
+
+									<hr>
 									<label for="ks2"><b>Merasa Berat Pada Bagian Tengkuk?</b><br></label>
 									<input type="radio" id="ks2" name="ks2" required> Ya
 									<input type="radio" id="ks2" name="ks2" required> Tidak
-						
-								<hr>
+
+									<hr>
 									<label for="ks3"><b>Susah Tidur?</b><br></label>
 									<input type="radio" id="ks3" name="ks3" required> Ya
 									<input type="radio" id="ks3" name="ks3" required> Tidak
 								</div>
 								<hr>
-						
+
 								<button type="submit">Submit</button>
 							</form>
 						</div>
 
-						
+
 					</div>
 					<!-- 2 -->
 					<div class="status">
@@ -172,8 +182,8 @@
 							<form id="popupForm" action="<?= base_url('dashboard/kuisioner_pribadi'); ?>" method="post">
 								<div>
 
-								<p>Silahkan isi sesuai dengan kamu</p>
-									
+									<p>Silahkan isi sesuai dengan kamu</p>
+
 									<label for="ks1"><b>Tenang Menghadapi Masalah?</b><br></label>
 									<input type="radio" id="ks1" name="ks1" required> ya
 									<input type="radio" id="ks1" name="ks1" required> tidak
@@ -256,21 +266,21 @@
 			document.getElementById('popup').classList.add('show');
 			document.getElementById('overlay').classList.add('show');
 		}
+
 		function closePopup() {
 			document.getElementById('popup').classList.remove('show');
 			document.getElementById('overlay').classList.remove('show');
 		}
-		
-		function showPopup1(){
+
+		function showPopup1() {
 			document.getElementById('popup1').classList.add('show');
 			document.getElementById('overlay1').classList.add('show');
 		}
-		
-		function closePopup1(){
+
+		function closePopup1() {
 			document.getElementById('popup1').classList.remove('show');
 			document.getElementById('overlay1').classList.remove('show');
 		}
-
 	</script>
 </body>
 

@@ -37,7 +37,18 @@
 						<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
 						<div class="profile-text">
 							<span>Halo,</span>
-							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;"><?= $this->session->userdata('username'); ?></b> <img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 50px;"></span>
+							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;"><?= $this->session->userdata('username'); ?></b> 
+							<div class="dropdown">
+									<button style="border: none; background-color:white; margin-right:5vh; width:2px" >
+										<img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 0px;" class="dropdown-button" >
+							</span>
+							</button>
+							<div class="dropdown-content">
+								<a href="<?= base_url('auth/ganti_password')?>">Ganti Password</a>
+								<a href="#">Keluar</a>
+
+							</div>	
+							
 						</div>
 					</div>
 				</ul>
@@ -86,7 +97,7 @@
 						<?= form_error('tempat_lahir', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
-					<div class="form-group" style="">
+					<div class="form-group">
 						<label for="tanggal_lahir">Tanggal Lahir</label>
 						<input type="date" id="tanggal_lahir" name="tanggal_lahir" placeholder="Isi Tanggal Lahir" class="inputan" onchange="hitungUmur()" value="<?= $this->session->userdata('tanggal_lahir'); ?>">
 						<?= form_error('tanggal_lahir', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
