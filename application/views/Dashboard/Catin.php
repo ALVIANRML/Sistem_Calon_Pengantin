@@ -48,7 +48,7 @@
 							</button>
 							<div class="dropdown-content">
 								<a href="<?= base_url('auth/ganti_password')?>">Ganti Password</a>
-								<a href="#">Keluar</a>
+								<a href="<?= base_url('auth/login')?>">Keluar</a>
 
 							</div>
 						</div>

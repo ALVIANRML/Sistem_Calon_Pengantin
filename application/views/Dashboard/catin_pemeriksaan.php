@@ -37,18 +37,18 @@
 						<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
 						<div class="profile-text">
 							<span>Halo,</span>
-							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;"><?= $this->session->userdata('username'); ?></b> 
-							<div class="dropdown">
-									<button style="border: none; background-color:white; margin-right:5vh; width:2px" >
-										<img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 0px;" class="dropdown-button" >
+							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;"><?= $this->session->userdata('username'); ?></b>
+								<div class="dropdown">
+									<button style="border: none; background-color:white; margin-right:5vh; width:2px">
+										<img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 0px;" class="dropdown-button">
 							</span>
 							</button>
 							<div class="dropdown-content">
-								<a href="<?= base_url('auth/ganti_password')?>">Ganti Password</a>
-								<a href="#">Keluar</a>
+								<a href="<?= base_url('auth/ganti_password') ?>">Ganti Password</a>
+								<a href="<?= base_url('auth/login') ?>">Keluar</a>
 
-							</div>	
-							
+							</div>
+
 						</div>
 					</div>
 				</ul>
@@ -60,7 +60,7 @@
 				<a href="<?= base_url('dashboard/view_catin') ?>" style="text-decoration: none;">
 					<div class="navigasi_admin_menu">
 						<div class="isi" style="background-color: white;">
-						<img src="<?= base_url('assets/') ?>img/dashboard_black.svg" alt="Profile Image" class="icon-navigation" style="width:2.5vh; height:2.5vh;">
+							<img src="<?= base_url('assets/') ?>img/dashboard_black.svg" alt="Profile Image" class="icon-navigation" style="width:2.5vh; height:2.5vh;">
 							<div class="profile-text">
 								<span>Dashboard</span>
 							</div>

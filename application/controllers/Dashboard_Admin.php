@@ -18,13 +18,15 @@ class Dashboard_Admin extends CI_Controller
 
     public function view_admin()
     {
-        // $id_user = $this->session->userdata('id_user');
 
-		// $userDetail = $this->m_User_detail->get_users($id_user);
-		// if ($userDetail->num_rows() > 0) {
-		// 	$userDetail = $userDetail->row_array();
-			
-        // }
-        $this->load->view('Dashboard/admin');
+
+        $id_user = $this->session->userdata('id_user');
+		$dataCatin = $this->m_User_detail->count_data_catin();
+		$cetakKartu = $this->m_User_detail->count_cetak_kartu();
+		$catinBermasalah = $this->m_User_detail->count_catin_bermasalah();
+        $this->session->set_userdata('data_catin', $dataCatin);
+        $this->session->set_userdata('cetak_kartu', $cetakKartu);
+        $this->session->set_userdata('catin_bermasalah', $catinBermasalah);
+		$this->load->view('Dashboard/admin');
     }
 }
