@@ -39,11 +39,6 @@ line-height: 20px;
     padding: 0 32px;
 }
 
-.profil-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
 
 .foto-profil{
     width: 44px;
@@ -74,11 +69,11 @@ line-height: 20px;
 
 .container-sidebar-dashboard-admin > p {
     color: #7F7F7F;
-font-size: 12px;
-font-weight: 700;
-letter-spacing: 0.257px;
-opacity: 0.6;
-margin-bottom: 16px
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.257px;
+    opacity: 0.6;
+    margin-bottom: 16px
 }
 
 .menu{
@@ -185,8 +180,8 @@ margin-bottom: 16px
 
 .judul-card-dashboard{
     color: #FFF;
-font-weight: 600;
-font-size: 21px;
+    font-weight: 600;
+    font-size: 21px;
 }
 
 .jumlah-card-dashboard{
@@ -200,9 +195,9 @@ font-size: 21px;
     bottom: 0;
     right: 0;
     color: var(--white---color, #FFFAFA);
-font-size: 10px;
-margin: 15px 37px;
-font-weight: 400;
+    font-size: 10px;
+    margin: 15px 37px;
+    font-weight: 400;
 }
 
 .edit-pendaftaran-btn{
@@ -226,22 +221,22 @@ font-weight: 400;
     position: absolute;
     bottom: 42px;
     color: var(--Grey, #7F7F7F);
-font-family: Inter;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 
 .tanggal-pemeriksaan > p{
     color: #000;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-margin-bottom: 16px;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 16px;
 }
 
 .container-tanggal-pemeriksaan{
@@ -266,25 +261,25 @@ margin-bottom: 16px;
 
 .tanggal-buka-tutup{
     color: #000;
-font-family: Inter;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .buka-tutup-btn{
     display: flex;
-padding: 8px 16px;
-justify-content: center;
-align-items: center;
-gap: 16px;
-border-radius: 4px;
-
-/* teks */
-color: var(--white---color, #FFFAFA);
-font-size: 16px;
-font-weight: 600;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    border-radius: 4px;
+    
+    /* teks */
+    color: var(--white---color, #FFFAFA);
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .buka-btn{
@@ -295,3 +290,49 @@ font-weight: 600;
     background: var(--danger, #DC3545);
     
 }
+.dropdown {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display:none;
+    position: absolute;
+    flex: none;
+    min-width: 20vh;
+    /* width: 6vh; */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    margin-left: -10vh;
+    z-index: 1000;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+
+
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-button{
+    background-color: white;
+    border: none;
+    margin-right: 10vh;
+  }
+  
+  .dropdown:hover .dropdown-button {
+    background-color: whitesmoke;
+  }

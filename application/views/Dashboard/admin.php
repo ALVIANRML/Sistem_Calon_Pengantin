@@ -87,7 +87,7 @@
                                 <img src="public/icon/paper.svg" alt="">
                                 <div class="container-judul-jumlah">
                                     <p class="judul-card-dashboard">Data Catin</p>
-                                    <p class="jumlah-card-dashboard">124</p>
+                                    <p class="jumlah-card-dashboard"><?= $this->session->userdata('data_catin') ?></p>
                                 </div>
                                 <p class="selengkapnya-text">Selengkapnya  ></p>
                             </div>
