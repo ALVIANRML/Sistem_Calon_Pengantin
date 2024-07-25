@@ -39,4 +39,10 @@ class m_Auth extends CI_Model
         $this->db->where('id_user', $user_id);
         $this->db->update('users', ['password' => $new_password]);
     }
+
+	public function get_users($id_user) {
+        $this->db->where('id_user', $id_user);
+        $query = $this->db->get('users'); 
+        return $query;
+    }
 }

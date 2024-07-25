@@ -125,7 +125,6 @@ class Auth extends CI_Controller
 			}
 			$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
 			$this->session->set_userdata('status', $status);
-			
 		}
 
 		$this->session->set_userdata('status', $status);
@@ -153,7 +152,7 @@ class Auth extends CI_Controller
 					$this->session->set_userdata('role', $user['role']);
 					switch ($user['role']) {
 						case 1:
-							redirect('Dashboard/view_admin');
+							redirect('Dashboard_Admin/view_admin');
 							break;
 						case 2:
 							redirect('Dashboard/view_kesehatan');
@@ -312,5 +311,68 @@ class Auth extends CI_Controller
 			}
 		} else
 			redirect('auth/lupa_password');
+	}
+
+	public function ganti_password()
+	{
+		// jadi nanti user input password dia yg lama dan password dia yg baru, untuk password dia yg baru dia nginput 2 kali, terus untuk di controllernya pertama
+		// ambil dulu password yg ada di database menggunakan parameter id si user, lalu kita descrypt lah password si user jika passwordnya sama dengan apa yg diinput 
+		// si user maka dia boleh melakukan perubahan si user maka dia boleh melakukan perubahan password, jika tidak maka balik lagi ke halaman ganti_password dan berikan error]
+		// jika berhasil dia bakal ke halaman login terlebih dahulu, user harus login lagi
+
+		$this->form_validation->set_rules(
+			'password_lama',
+			'Password Lama',
+			'required|trim',
+			[
+				'required' => 'Password Lama tidak boleh kosong'
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'password_baru',
+			'Password Baru',
+			'required|trim|matches[password_baru1]',
+			[
+				'required' => 'Password Baru tidak boleh kosong',
+			]
+		);
+		$this->form_validation->set_rules(
+			'password_baru1',
+			'Konfirmasi Password',
+			'required|trim|matches[password_baru]',
+			[
+				'required' => 'Konfirmasi Password tidak boleh kosong',
+			]
+		);
+
+		if ($this->form_validation->run() == false) {
+			$data['title'] = 'Ganti Password';
+			$this->load->view('templates/auth_header', $data);
+			$this->load->view('auth/ganti_password');
+			$this->load->view('templates/auth_footer');
+		} else {
+			$passwordLama = $this->input->post('password_lama');
+			$id_user = $this->session->userdata('id_user');
+
+			$user = $this->m_Auth->get_users($id_user);
+			if ($user->num_rows() > 0) {
+				$user = $user->row_array();
+
+
+				if (password_verify($passwordLama, $user['password'])) {
+					$passwordBaru = $this->input->post('password_baru');
+					$kofirmasiPassword = $this->input->post('password_baru1');
+					$this->m_Auth->update_password($id_user, password_hash($passwordBaru, PASSWORD_DEFAULT));
+
+					redirect('auth/login');
+				} else {
+					$this->session->set_flashdata('reset_error', 'Password salah.');
+					redirect('auth/ganti_password');
+				}
+				$this->session->set_flashdata('reset_error', 'Password salah.');
+				redirect('auth/login');
+			}
+		}
 	}
 }

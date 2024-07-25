@@ -18,62 +18,64 @@
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/alur_pendaftaran.css">
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/struktur.css">
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/contact.css">
-	
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/faq.css">
+
 	<title>Catin DPPKB Tebing Tinggi</title>
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 </head>
+
 <body style="margin: auto; padding-top:0;overflow-x:hidden	">
-    <?php 
-    $tombol = $this->session->userdata('status');
-    $display = ($tombol == 0) ? "display:none" : "display:block";
-    $heroMovement = ($tombol == 0) ? "position: absolute; width: 105%; " : ""; // Tambahkan ini
-    ?>
+	<?php
+	$tombol = $this->session->userdata('status');
+	$display = ($tombol == 0) ? "display:none" : "display:block";
+	$heroMovement = ($tombol == 0) ? "position: absolute; width: 105%; " : ""; // Tambahkan ini
+	?>
 
 	<?php
 	$kuota = 50;
-	if($kuota > 50){
+	if ($kuota > 50) {
 		$display = ($tombol == 0) ? "display:none" : "display:block";
-    $heroMovement = ($tombol == 0) ? "position: absolute; width: 105%; " : ""; // Tambahkan ini
+		$heroMovement = ($tombol == 0) ? "position: absolute; width: 105%; " : ""; // Tambahkan ini
 	}
 
 	?>
-    
-    <!-- home -->
-    <div class="container_home" style="margin-bottom: 30vh;">
-        <header>
-            <div class="header-container">
-                <img class="logo" src="<?= base_url('assets/') ?>img/percantin.png" alt="" style="margin-left:-10vh; width: 13vh;height: 13vh;">
-                <div class="navbar">
-                    <nav>
-                        <ul>
-                            <li><a href="#tentang">Tentang</a></li>
-                            <li><a href="#">Struktur</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#contact">Kontak</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="daftar-masuk">
-                    <a href="<?= base_url('auth/register') ?>"><button class="btn" style="<?php echo $display; ?>">Daftar</button></a>
-                    <a href="<?= base_url('auth/login') ?>"><button class="btn">Masuk</button></a>
-                </div>
-            </div>
-        </header>
-        <div class="home">
-            <img class="hero-home" src="<?= base_url('assets/') ?>img/tugu-13-desember-t-tinggi3.jpg" alt="" style="height:100%; margin-top:10vh; opacity:20%; <?php echo $heroMovement; ?>"> <!-- Tambahkan heroMovement -->
-            <div class="desc-container">
-                <div class="desc">
-                    <p class="teks-1">PERCANTIN</p>
-                    <p class="teks-2">Pemeriksaan Calon</p>
-                    <p class="teks-2">Pengantin</p>
-                </div>
 
-                <a href="<?= base_url('auth/login') ?>"><button class="btn-masuk">Masuk</button></a>
-                <p class="teks-3" style="<?php echo $display; ?>">Belum mempunyai akun? <span class="span-1"><a href="<?= base_url('auth/register') ?>">Daftar</a></span></p>
-            </div>
-            <img src="<?= base_url('assets/') ?>img/percantin.png" alt="" style="margin-right: 20vh;" class="logo-besar">
-        </div>
-    </div>
+	<!-- home -->
+	<div class="container_home" style="margin-bottom: 30vh;">
+		<header>
+			<div class="header-container">
+				<img class="logo" src="<?= base_url('assets/') ?>img/percantin.png" alt="" style="margin-left:-10vh; width: 13vh;height: 13vh;">
+				<div class="navbar">
+					<nav>
+						<ul>
+							<li><a href="#tentang">Tentang</a></li>
+							<li><a href="#">Struktur</a></li>
+							<li><a href="#">FAQ</a></li>
+							<li><a href="#contact">Kontak</a></li>
+						</ul>
+					</nav>
+				</div>
+				<div class="daftar-masuk">
+					<a href="<?= base_url('auth/register') ?>"><button class="btn" style="<?php echo $display; ?>">Daftar</button></a>
+					<a href="<?= base_url('auth/login') ?>"><button class="btn">Masuk</button></a>
+				</div>
+			</div>
+		</header>
+		<div class="home">
+			<img class="hero-home" src="<?= base_url('assets/') ?>img/tugu-13-desember-t-tinggi3.jpg" alt="" style="height:100%; margin-top:10vh; opacity:20%; <?php echo $heroMovement; ?>"> <!-- Tambahkan heroMovement -->
+			<div class="desc-container">
+				<div class="desc">
+					<p class="teks-1">PERCANTIN</p>
+					<p class="teks-2">Pemeriksaan Calon</p>
+					<p class="teks-2">Pengantin</p>
+				</div>
+
+				<a href="<?= base_url('auth/login') ?>"><button class="btn-masuk">Masuk</button></a>
+				<p class="teks-3" style="<?php echo $display; ?>">Belum mempunyai akun? <span class="span-1"><a href="<?= base_url('auth/register') ?>">Daftar</a></span></p>
+			</div>
+			<img src="<?= base_url('assets/') ?>img/logo_besar.svg" alt="" style="margin-right: 20vh;" class="logo-besar">
+		</div>
+	</div>
 </body>
 
 
@@ -88,15 +90,15 @@
 		<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla doloribus odit reiciendis fuga in dicta doloremque suscipit. Tempore inventore vero laboriosam explicabo. At autem reiciendis laudantium iure ullam ex? Fugit sunt, inventore possimus earum aperiam nam eligendi assumenda et repellat.</p>
 	</div>
 	<div class="container-card">
-		<div class="card" data-aos="fade-up" style="height:13vh;"  data-aos-delay="100" >
+		<div class="card" data-aos="fade-up" style="height:13vh;" data-aos-delay="100">
 			<h2>Skrining Kesehatan</h2>
 			<p>Pemeriksaan skrining kesehatan bertujuan untuk mendeteksi penyakit atau kondisi medis yang dapat mempengaruhi kesehatan calon pengantin. Pemeriksaan ini mencakup cek darah, analisis urine, dan pemeriksaan fisik dasar.</p>
 		</div>
-		<div class="card" data-aos="fade-up" style="height:13vh;"  data-aos-delay="200" >
+		<div class="card" data-aos="fade-up" style="height:13vh;" data-aos-delay="200">
 			<h2>Pemeriksaan Narkoba</h2>
 			<p>Pemeriksaan narkoba dilakukan untuk memastikan calon pengantin bebas dari penggunaan zat terlarang. Ini penting untuk menjaga kesehatan dan kesejahteraan pasangan serta keluarga di masa depan.</p>
 		</div>
-		<div class="card" data-aos="fade-up" style="height:13vh;"   data-aos-delay="300" >
+		<div class="card" data-aos="fade-up" style="height:13vh;" data-aos-delay="300">
 			<h2>Pemeriksaan Psikologi</h2>
 			<p>Pemeriksaan psikologi membantu mengidentifikasi kondisi mental dan emosional calon pengantin. Ini bertujuan untuk memastikan kesiapan psikologis dalam menjalani kehidupan pernikahan yang harmonis dan bahagia.</p>
 		</div>
@@ -152,31 +154,31 @@
 </div>
 
 <!-- struktur organisasi -->
-   
-    <div class="header" >
-        <p class="judul" data-aos="fade-up" data-aos-delay="100">Struktur Organisasi</p>
-        <p class="desc">Dinas Pemberdayaan Perempuan, Perlindungan Anak, Pengendalian Penduduk dan Keluarga Berencana.</p>
-    </div>
-    <div class="card-container" data-aos="fade-up" data-aos-delay="100" >
-        <div class="card-struktur" data-aos="fade-up" data-aos-delay="100">
-            <img class="image" src="" alt="">
-            <p class="nama">Atika P. Sary Nasution., S.Rj</p>
-            <p class="NIP">NIP: 196907251995012001</p>
-            <p class="jabatan">Kepala Dinas</p>
-        </div>
-        <div class="card-struktur" data-aos="fade-up" data-aos-delay="100">
-            <img class="image" src="" alt="">
-            <p class="nama">Atika P. Sary Nasution., S.Rj</p>
-            <p class="NIP">NIP: 196907251995012001</p>
-            <p class="jabatan">Kepala Dinas</p>
-        </div>
-        <div class="card-struktur" data-aos="fade-up" data-aos-delay="100">
-            <img class="image" src="" alt="">
-            <p class="nama">Atika P. Sary Nasution., S.Rj</p>
-            <p class="NIP">NIP: 196907251995012001</p>
-            <p class="jabatan">Kepala Dinas</p>
-        </div>
-    </div>
+
+<div class="header">
+	<p class="judul" data-aos="fade-up" data-aos-delay="100">Struktur Organisasi</p>
+	<p class="desc">Dinas Pemberdayaan Perempuan, Perlindungan Anak, Pengendalian Penduduk dan Keluarga Berencana.</p>
+</div>
+<div class="card-container" data-aos="fade-up" data-aos-delay="100">
+	<div class="card-struktur" data-aos="fade-up" data-aos-delay="100">
+		<img class="image" src="" alt="">
+		<p class="nama">Atika P. Sary Nasution., S.Rj</p>
+		<p class="NIP">NIP: 196907251995012001</p>
+		<p class="jabatan">Kepala Dinas</p>
+	</div>
+	<div class="card-struktur" data-aos="fade-up" data-aos-delay="100">
+		<img class="image" src="" alt="">
+		<p class="nama">Atika P. Sary Nasution., S.Rj</p>
+		<p class="NIP">NIP: 196907251995012001</p>
+		<p class="jabatan">Kepala Dinas</p>
+	</div>
+	<div class="card-struktur" data-aos="fade-up" data-aos-delay="100">
+		<img class="image" src="" alt="">
+		<p class="nama">Atika P. Sary Nasution., S.Rj</p>
+		<p class="NIP">NIP: 196907251995012001</p>
+		<p class="jabatan">Kepala Dinas</p>
+	</div>
+</div>
 
 
 
@@ -245,11 +247,80 @@
 
 </div>
 
+<!-- faq -->
+<div class="faq-container" style="margin-top: 10vh;">
+	<h1>FAQ</h1>
+	<div class="faq-item">
+		<div class="faq-question">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+			<span class="plus">+</span>
+		</div>
+		<div class="faq-answer">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book...
+		</div>
+	</div>
+	<div class="faq-item">
+		<div class="faq-question">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+			<span class="plus">+</span>
+		</div>
+		<div class="faq-answer">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book...
+		</div>
+	</div>
+	<div class="faq-item">
+		<div class="faq-question">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+			<span class="plus">+</span>
+		</div>
+		<div class="faq-answer">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book...
+		</div>
+	</div>
+	<div class="faq-item">
+		<div class="faq-question">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+			<span class="plus">+</span>
+		</div>
+		<div class="faq-answer">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book...
+		</div>
+	</div>
+	<div class="faq-item">
+		<div class="faq-question">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+			<span class="plus">+</span>
+		</div>
+		<div class="faq-answer">
+			Ideally, both partners should undergo a pre-wedding medical check-up. It ensures that both individuals are aware of their health status and can take necessary steps to address any concerns.
+		</div>
+	</div>
+	<div class="faq-item">
+		<div class="faq-question">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+			<span class="plus">+</span>
+		</div>
+		<div class="faq-answer">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book...
+		</div>
+	</div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
 	AOS.init();
 </script>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const faqItems = document.querySelectorAll('.faq-item');
 
+		faqItems.forEach(item => {
+			item.querySelector('.faq-question').addEventListener('click', () => {
+				item.classList.toggle('open');
+			});
+		});
+	});
+</script>
 </body>
 
 </html>

@@ -2,6 +2,7 @@ body {
     font-family: 'Inter';
     margin: 0;
     width: 100vw;
+    height: 100vh;
 }
 
 p {
@@ -27,11 +28,13 @@ line-height: 20px;
 }
 
 .header-dashboard-admin {
+    position: sticky;
+    top: 0;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    width: 90%;
     height: 70px;
+    width: 95.55%;
     background: var(--Whites, #FFFFFF);
     padding: 0 32px;
 }
@@ -63,7 +66,7 @@ line-height: 20px;
     position: fixed;
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 240px;
     height: 100vh;
     padding: 32px;
     background-color: #FFFFFF
@@ -81,19 +84,33 @@ margin-bottom: 16px
 .menu{
     display: flex;
     align-items: center;
-    width: 208px;
+    width: 100%;
     height: 50px;
     gap: 16px; 
     border-radius: 6px;
     background: transparent;
     padding-left: 16px;
+    box-sizing: border-box;
     /* teks */
     color: #828282;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.3px;
     fill: #828282;
+    transition: background 0.1s ease, color 0.1s ease;
 }
+
+/* Gaya khusus untuk menu Dashboard */
+.container-sidebar-dashboard-admin .dashboard-menu {
+    background: var(--Primary, #015963); /* Background color */
+    color: #FFFFFF; /* Text color */
+}
+
+.container-sidebar-dashboard-admin .dashboard-menu svg g path {
+    fill: #FFFFFF; /* Icon color */
+    transition: fill 0.1s ease;
+}
+
 
 .container-sidebar-dashboard-admin a {
     text-decoration: none; /* Hilangkan garis bawah pada tautan */
@@ -109,11 +126,16 @@ margin-bottom: 16px
     fill: #FFFFFF;
 }
 
+.container-content{
+    margin-left: 304px;
+    background: #F5F9FA;
+}
+
 .container-content-dashboard-admin{
-	margin-left: auto;
-    background-color: #7F7F7F;
-    height: 100vh;
-	width: 75%;
+    position: relative;
+    background: #F5F9FA;
+    padding: 24px 48px;
+    padding-bottom: 145px;
 }
 
 .container-content-dashboard-admin > p{
@@ -121,5 +143,155 @@ margin-bottom: 16px
     font-size: 32px;
     font-weight: 700;
     letter-spacing: -0.114px;
+}
 
+.container-card-dashboard{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 48px;
+    margin-bottom: 75px;
+    
+}
+
+.card-dashboard{
+    position: relative;
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 24px;
+    width: 330px;
+    height: 200px;
+    border-radius: 8px;
+    padding: 31px 13px;
+    box-sizing: border-box;
+}
+
+#biru{
+    background: var(--primary---color, #015D67);
+}
+
+#hijau{
+    background: #00ACB1;
+}
+
+#merah{
+    background: var(--danger, #DC3545);
+}
+
+.container-judul-jumlah{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.judul-card-dashboard{
+    color: #FFF;
+font-weight: 600;
+font-size: 21px;
+}
+
+.jumlah-card-dashboard{
+    color: #FFF;
+    font-weight: 600;
+    font-size: 38px;
+}
+
+.selengkapnya-text{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: var(--white---color, #FFFAFA);
+font-size: 10px;
+margin: 15px 37px;
+font-weight: 400;
+}
+
+.edit-pendaftaran-btn{
+    display: inline-flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    border-radius: 8px;
+    background: var(--primary---color, #015D67);
+    margin-bottom: 56px;
+}
+
+.edit-pendaftaran-btn > p{
+    color: var(--white---color, #FFFAFA);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.copyright-text{
+    position: absolute;
+    bottom: 42px;
+    color: var(--Grey, #7F7F7F);
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+
+.tanggal-pemeriksaan > p{
+    color: #000;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+margin-bottom: 16px;
+}
+
+.container-tanggal-pemeriksaan{
+    display: flex;
+    justify-content: center;
+    gap: 38px;
+    
+    
+}
+
+.subcontainer-tanggal-pemeriksaan{
+    display: flex;
+    padding: 16px;
+    width: 500px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--grey---for-form, #D9D9D9);
+    background: var(--white---color, #FFFAFA);
+    box-sizing: border-box;
+}
+
+.tanggal-buka-tutup{
+    color: #000;
+font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.buka-tutup-btn{
+    display: flex;
+padding: 8px 16px;
+justify-content: center;
+align-items: center;
+gap: 16px;
+border-radius: 4px;
+
+/* teks */
+color: var(--white---color, #FFFAFA);
+font-size: 16px;
+font-weight: 600;
+}
+
+.buka-btn{
+    background: var(--primary---color, #015D67);
+}
+
+.tutup-btn{
+    background: var(--danger, #DC3545);
+    
 }

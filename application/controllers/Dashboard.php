@@ -15,10 +15,7 @@ class Dashboard extends CI_Controller
 	}
 
 	// admin
-	public function view_admin()
-	{
-		$this->load->view('Dashboard/admin');
-	}
+	
 
 	// kesehatan
 	public function view_kesehatan()
