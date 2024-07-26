@@ -12,7 +12,7 @@ class m_User_detail extends CI_Model
 	}
 
 
-	public function update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status)
+	public function update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered)
 	{
 		$this->db->where('id_user_detail', $id_user);
 		$this->db->update('user_detail', [
@@ -39,6 +39,7 @@ class m_User_detail extends CI_Model
 			'foto_kk' => $fotokk,
 			'foto_surat' => $fotoSurat,
 			'status' => $status,
+			'data_registered' => $data_registered,
 		]);
 	}
 
@@ -87,4 +88,15 @@ class m_User_detail extends CI_Model
 		$CatinBermasalah = $this->db->count_all_results();
 		return $CatinBermasalah;
 	}
+
+
+	public function hitung_kuota($today)
+	{
+		$this->db->where('data_registered', $today);
+		$this->db->from('user_detail');
+		$tes = $this->db->count_all_results();
+		return $tes;
+	}
+
+	
 }

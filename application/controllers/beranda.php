@@ -10,6 +10,7 @@ class beranda extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->model('m_Contact');
 		$this->load->model('m_Tanggal_Pemeriksaan');
+		$this->load->model('m_User_detail');
 		$this->load->library('session');
 	}
 
@@ -19,6 +20,7 @@ class beranda extends CI_Controller
 		$tanggalexisted = $this->m_Tanggal_Pemeriksaan->get_tanggal_by_id($id_tanggal);
 		// $today = date('Y-m-d');
 		$today = '2024-07-17';
+		
 		if ($tanggalexisted->num_rows() > 0) {
 			$tanggalexisted = $tanggalexisted->row_array();
 			$akhir_tanggal = $tanggalexisted['tanggal'];
@@ -29,18 +31,28 @@ class beranda extends CI_Controller
 			} else {
 				$id_status = 1;
 				$this->m_Tanggal_Pemeriksaan->update_id_status($id_tanggal, $id_status);
+				
+				
+			
+			}
+			$todaytes = date('Y-m-d');
+			$tes =$this->m_User_detail->hitung_kuota($todaytes);
+			if ($tes == 10){
+				var_dump($tes);
+				exit;
+				$id_status = 0;
+				$this->m_Tanggal_Pemeriksaan->update_id_status($id_tanggal, $id_status);
+			}
+			else if ($tes < 10 && $tes >= 5){
+				
+				$tes = 10 - $tes;
+				$this->session->set_userdata('kuota', $tes );
 			}
 			$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
 			$this->session->set_userdata('status', $status);
 			$this->load->view('beranda/public');
 		}
 	}
-
-	public function home()
-	{
-		$this->load->view('Beranda/home');
-	}
-
 
 
 	public function contact()

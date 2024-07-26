@@ -42,14 +42,15 @@
 							<span>Halo,</span>
 							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;"><?= $this->session->userdata('username'); ?></b>
 								<div class="dropdown">
-									<button style="border: none; background-color:white; margin-right:5vh; width:2px" >
-										<img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 0px;" class="dropdown-button" >
+									<button style="border: none; background-color:white; margin-right:5vh; width:2px">
+										<img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 0px;" class="dropdown-button">
 							</span>
 							</button>
 							<div class="dropdown-content">
-								<a href="<?= base_url('auth/ganti_password')?>">Ganti Password</a>
-								<a href="<?= base_url('auth/login')?>">Keluar</a>
+								<a href="<?= base_url('auth/ganti_password') ?>">Ganti Password</a>
+								<a href="<?= base_url('auth/login') ?>">Keluar</a>
 
+							</div>
 							</div>
 						</div>
 					</div>

@@ -13,12 +13,14 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 
-	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/home.css">
-	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/tentang.css">
-	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/alur_pendaftaran.css">
-	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/struktur.css">
-	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/contact.css">
-	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/faq.css">
+
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/home.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/tentang.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/alur_pendaftaran.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/struktur.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/contact.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/faq.css') ?>" />
+
 
 	<title>Catin DPPKB Tebing Tinggi</title>
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
@@ -32,8 +34,10 @@
 	?>
 
 	<?php
-	$kuota = 50;
-	if ($kuota > 50) {
+	$kuota = $this->session->userdata('kuota');
+	if ($kuota == 10) {
+
+
 		$display = ($tombol == 0) ? "display:none" : "display:block";
 		$heroMovement = ($tombol == 0) ? "position: absolute; width: 105%; " : ""; // Tambahkan ini
 	}
@@ -107,7 +111,7 @@
 <!-- ALUR PENDAFTARAN -->
 <div class="container_alurpendaftaran" style="background: var(--primary---color, #015D67);" data-aos="fade-up">
 	<div class="elipse"></div>
-	<h1>Alur Pendaftaran</h1>
+	<h1 style="  text-align: center; color: var(--white---color, #FFFAFA);">Alur Pendaftaran</h1>
 	<p class="underHeader">Standar Pelayanan Prosedur Perkawinan (SP3)</p>
 	<div class="container">
 		<div class="box_baris1" data-aos="fade-up" data-aos-delay="100">
@@ -205,7 +209,7 @@
 		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.986706135521!2d99.16206607473123!3d3.353395096621332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x303161da98f8c417%3A0xa9aa16030bbeef11!2sDinas%20PPKB%20Kota%20Tebing%20Tinggi!5e0!3m2!1sid!2sid!4v1705589852672!5m2!1sid!2sid" frameborder="0" style="width:100%; height: 65vh; margin-top:30px; border-radius:10px;" allowfullscreen></iframe>
 	</div>
 
-	<div class="contact_form" data-aos="fade-up" data-aos-delay="100">
+	<div class="contact_form" data-aos="fade-up" data-aos-delay="100" style="width: 50%;">
 		<h1 class="contact_form_title">Form Kontak</h1>
 		<form style="margin-top: 2vh;" action="<?= base_url('beranda/contact') ?>" method="post">
 			<div class="name_container">
