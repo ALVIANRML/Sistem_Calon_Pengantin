@@ -429,8 +429,9 @@ class Dashboard extends CI_Controller
 			if ($fotoSurat == null) {
 				$fotoSurat = $this->session->userdata('foto_surat');
 			}
+			$data_registered = date('Y-m-d');
 			$status = 1;
-			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat,$status);
+			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat,$status,$data_registered);
 			redirect('dashboard/view_catin_pemeriksaan');
 		}
 	}

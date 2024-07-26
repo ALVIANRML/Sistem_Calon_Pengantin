@@ -52,9 +52,7 @@
 									<!-- <i id="toggle-icon-password1" class="fas fa-eye"></i> -->
 								</span>
 								<?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
-								<?php if ($this->session->flashdata('login_error')) : ?>
-									<small class="text-danger pl-3"><?= $this->session->flashdata('login_error') ?></small>
-								<?php endif; ?>
+							
 								<br> <!-- Pindahkan pesan error ke baris baru -->
 								<a class="small" style="color: #015D67; text-align: right; display: block; margin-right: 10px;top=20%;margin-top:-2.5vh;margin-bottom:2vh" href="<?= base_url('auth/lupa_password'); ?>">Lupa Password?</a>
 
@@ -64,7 +62,7 @@
 					</form>
 
 					<div class="text-center" style="margin-top: 3vh;">
-						<p style="color: black; <?php echo $display; ?>">Belum punya Akun? <a class="medium" style="color: #015D67;" href="<?= base_url('auth/register'); ?>">Daftar</a></p>
+						<p style="color: black; <?= $display; ?>">Belum punya Akun? <a class="medium" style="color: #015D67;" href="<?= base_url('auth/register'); ?>">Daftar</a></p>
 					</div>
 				</div>
 			</div>
