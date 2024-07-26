@@ -32,8 +32,8 @@
                         <img src="<?= base_url('assets/img/dropdown.svg') ?>" alt="" style="margin-left: auto; cursor: pointer;" class="dropdown-button">
                     </button>
                     <div class="dropdown-menu">
-                        <a href="<?= base_url('user/change_password') ?>">Ganti Password</a>
-                        <a href="<?= base_url('user/logout') ?>">Keluar</a>
+                    <a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password</a>
+                    <a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar</a>
                     </div>
                 </div>
                 </div>

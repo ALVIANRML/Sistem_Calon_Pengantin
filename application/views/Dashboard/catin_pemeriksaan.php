@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/catin.css">
+	<link rel="stylesheet" href="<?= base_url('assets/css/catin.css') ?>">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,27 +29,28 @@
 		<div class="header-container">
 			<div class="logo-container">
 				<img class="logo" src="<?= base_url('assets/') ?>img/percantin.png" alt="Logo">
-				<span class="logo-text"><b style="font-family: 'Nunito Sans', sans-serif;">DPPKB <br> KOTA TEBING TINGGI</b></span>
+				<span class="logo-text"><b style="font-family: 'Nunito Sans', sans-serif;">PERCATIN</b></span>
 			</div>
 			<nav class="navbar">
 				<ul>
 					<div class="navbar_profil" style="width: 15vw; margin-right:0px">
 						<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
 						<div class="profile-text">
-							<span>Halo,</span>
-							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;"><?= $this->session->userdata('username'); ?></b>
-								<div class="dropdown">
-									<button style="border: none; background-color:white; margin-right:5vh; width:2px">
-										<img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 0px;" class="dropdown-button">
-							</span>
-							</button>
-							<div class="dropdown-content">
-								<a href="<?= base_url('auth/ganti_password') ?>">Ganti Password</a>
-								<a href="<?= base_url('auth/login') ?>">Keluar</a>
-
+							<span>Halo,</span><br> <!-- Menambahkan break line -->
+							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;">
+									<?= $this->session->userdata('username'); ?>
+								</b></span>
+							<div class="dropdown" style="display: inline-block; vertical-align: middle;">
+								<button style="border: 1px; background-color:white; margin-right:5vh; width:2px;">
+									<img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 0px;" class="dropdown-button">
+								</button>
+								<div class="dropdown-content">
+									<a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password</a>
+									<a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar</a>
+								</div>
 							</div>
-
 						</div>
+
 					</div>
 				</ul>
 			</nav>
@@ -68,13 +69,13 @@
 				</a>
 			</div>
 			<div class="isi" style="background-color: #015D67;">
-				<img src="<?= base_url('assets/') ?>img/Frame.svg" alt="Profile Image" class="icon-navigation" style="width:2.5vh; height:2.5vh;">
+				<img src="<?= base_url('assets/') ?>img/Frame.svg" alt="Profile Image" class="icon-navigation">
 				<div class="profile-text" style="color:white;">
 					<span style="color:white">Daftar Pemeriksaan</span>
 				</div>
 			</div>
 		</div>
-		<div class="inti-pemeriksaan" style="height: 100%; background-color: white; border: 2px solid gray;">
+		<div class="inti-pemeriksaan" style=" border: 2px solid gray;margin-left:-20px;">
 			<h1 style="font-size: 30px;"> <img src="<?= base_url('assets/') ?>img/title_pemeriksaan.svg" alt="Profile Image" class="icon-navigation" style=" height:5vh; width: 5vh;">Form Daftar Calon Pengantin</h1>
 			<hr>
 			<h2>informasi dasar</h2>

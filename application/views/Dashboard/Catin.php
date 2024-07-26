@@ -39,21 +39,23 @@
 					<div class="navbar_profil" style="width: 15vw; margin-right:0px">
 						<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
 						<div class="profile-text">
-							<span>Halo,</span>
-							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;"><?= $this->session->userdata('username'); ?></b>
-								<div class="dropdown">
-									<button style="border: none; background-color:white; margin-right:5vh; width:2px">
-										<img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 0px;" class="dropdown-button">
-							</span>
-							</button>
-							<div class="dropdown-content">
-								<a href="<?= base_url('auth/ganti_password') ?>">Ganti Password</a>
-								<a href="<?= base_url('auth/login') ?>">Keluar</a>
-
-							</div>
+							<span>Halo,</span><br> <!-- Menambahkan break line -->
+							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;">
+									<?= $this->session->userdata('username'); ?>
+								</b></span>
+							<div class="dropdown" style="display: inline-block; vertical-align: middle;">
+								<button style="border: 1px; background-color:white; margin-right:5vh; width:2px;">
+									<img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 0px;" class="dropdown-button">
+								</button>
+								<div class="dropdown-content">
+									<a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password</a>
+									<a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar</a>
+								</div>
 							</div>
 						</div>
 					</div>
+
+
 				</ul>
 			</nav>
 		</div>
@@ -78,8 +80,8 @@
 				</div>
 			</div>
 
-			<div class="inti" style="height: 100%;">
-				<h1 style="font-size: large;">DASHBOARD</h1>
+			<div class="inti"">
+				<h1 style=" font-size: large;">DASHBOARD</h1>
 				<div class="informasi">
 					<div class="profil">
 						<div class="img-profil">
