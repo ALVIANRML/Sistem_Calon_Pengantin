@@ -9,9 +9,113 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin.css') ?>" />
+    <
+
+<!-- Custom styles for this template-->
+
+
+<!-- SweetAlert -->
+<script src="<?= base_url() ?>node_modules/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <style>
+        .swal-modal {
+			width: 80% !important;
+			/* Sesuaikan panjang popup */
+			max-width: 600px;
+			/* Batasi lebar maksimum */
+			background-color: white !important;
+			/* Warna background popup */
+			height: auto;
+			/* Atur tinggi secara otomatis */
+		}
+
+		.swal-title {
+			color: #343a40 !important;
+			/* Warna teks judul */
+			font-weight: bold;
+			margin-bottom: 10px;
+			/* Atur margin bawah */
+			margin-top: 20px;
+			/* Atur margin atas */
+			text-align: left;
+			padding-left: 20px;
+			/* Padding kiri */
+		}
+
+		.swal-content {
+			color: white !important;
+			/* Warna teks isi */
+			background-color: #015D67;
+			border-radius: 4px;
+			width: 90%;
+			max-width: 500px;
+			/* Batasi lebar maksimum konten */
+			margin: auto;
+			/* Mengatur margin auto untuk posisi tengah */
+			display: flex;
+			/* Menggunakan flexbox untuk penataan */
+			align-items: center;
+			/* Memusatkan vertikal */
+			justify-content: left;
+			/* Memusatkan horizontal */
+			padding: 20px;
+			/* Atur padding sesuai kebutuhan */
+			text-align: left;
+			font-size: medium;
+		}
+
+		.swal-button {
+			background-color: #015D67 !important;
+			/* Warna tombol */
+			position: relative;
+			top: 50%;
+			/* Geser vertikal */
+			right: 45%;
+			/* Geser horizontal */
+		}
+
+		/* Media query untuk layar yang lebih kecil */
+		@media (max-width: 629px) {
+			.swal-modal {
+				width: 90% !important;
+				/* Sesuaikan lebar untuk layar kecil */
+				max-width: 90%;
+				height: auto;
+				/* Atur tinggi secara otomatis */
+			}
+
+			.swal-content {
+				width: 95%;
+				/* Sesuaikan lebar konten untuk layar kecil */
+				max-width: none;
+				/* Hapus batasan lebar maksimum */
+				height: 10%;
+			}
+		}
+    </style>
 </head>
 
 <body>
+<?php if ($this->session->flashdata('error_tanggal')) { ?>
+	<script>
+		swal({
+			title: "Error!",
+			text: "Tanggal pemeriksaan tidak boleh lebih awal dari tanggal hari ini.",
+			icon: "error"
+		});
+	</script>
+<?php } ?>
+<?php if ($this->session->flashdata('error_tanggal_pemeriksaan')) { ?>
+	<script>
+		swal({
+			title: "Error!",
+			text: "Tanggal Pendaftaran tidak boleh lebih awal dari tanggal hari ini.",
+			icon: "error"
+		});
+	</script>
+<?php } ?>
     <div class="container">
         <div class="header-dashboard-admin">
             <div class="container-logo">
@@ -32,11 +136,11 @@
                         <img src="<?= base_url('assets/img/dropdown.svg') ?>" alt="" style="margin-left: auto; cursor: pointer;" class="dropdown-button">
                     </button>
                     <div class="dropdown-menu">
-                    <a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password</a>
-                    <a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar</a>
+                        <a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password</a>
+                        <a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar</a>
                     </div>
                 </div>
-                </div>
+            </div>
         </div>
         <div class="container-sidebar-dashboard-admin">
             <p>NAVIGASI</p>
@@ -121,7 +225,7 @@
                     <p class="selengkapnya-text">Selengkapnya ></p>
                 </div>
                 <div class="card-dashboard" id="merah">
-                <img class="logo" src="<?= base_url('assets/img/narkobski.svg') ?>" alt="">
+                    <img class="logo" src="<?= base_url('assets/img/narkobski.svg') ?>" alt="">
                     <div class="container-judul-jumlah">
                         <p class="judul-card-dashboard">Data Catin Beresiko Narkoba</p>
                         <p class="jumlah-card-dashboard"><?= $this->session->userdata('catin_bermasalah') ?></p>
@@ -129,7 +233,7 @@
                     <p class="selengkapnya-text">Selengkapnya ></p>
                 </div>
                 <div class="card-dashboard" id="merah">
-                <img class="logo" src="<?= base_url('assets/img/hiv.svg') ?>" alt="">
+                    <img class="logo" src="<?= base_url('assets/img/hiv.svg') ?>" alt="">
                     <div class="container-judul-jumlah">
                         <p class="judul-card-dashboard">Data Catin Beresiko HIV</p>
                         <p class="jumlah-card-dashboard"><?= $this->session->userdata('catin_bermasalah') ?></p>
@@ -138,24 +242,47 @@
                 </div>
             </div>
             <div class="edit-pendaftaran-btn">
-            <img class="logo" src="<?= base_url('assets/') ?>img/edit_tanggal.svg" alt="">
-                <p>Edit Pendaftaran</p>
+                <img class="logo" src="<?= base_url('assets/') ?>img/edit_tanggal.svg" alt="">
+                <p onclick="showPopup()" style="cursor: pointer;">Edit Pendaftaran</p>
+            </div>
+            <div class="overlay" id="overlay"></div>
+            <div class="popup" id="popup">
+                <span class="close-btn" onclick="closePopup()">&times;</span>
+                <h2>Edit Pendaftaran</h2>
+                <form id="popupForm" action="<?= base_url('dashboard/tanggal'); ?>" method="post">
+                    <div>
+                        <label for="tanggal_pendaftaran"><b>Masukkan Batas Pendaftaran</b><br></label>
+                        <input type="date" id="tanggal_pendaftaran" name="tanggal_pendaftaran" required value="<?= $this->session->userdata('tanggal_pendaftaran') ?>">
+                    
+                        <hr>
+                        <label for="tanggal_periksa"><b>Masukkan Tanggal Catin Periksa</b><br></label>
+                        <input type="date" id="tanggal_periksa" name="tanggal_periksa" required value="<?= $this->session->userdata('tanggal') ?>">
+
+                        <hr>
+                        <label for="status_pendaftaran"><b>Status Pendaftaran</b><br></label>
+                        <input type="radio" id="status_pendaftaran" name="status_pendaftaran" required value="1"> Ya
+                        <input type="radio" id="status_pendaftaran" name="status_pendaftaran" required value="0"> Tidak
+                    </div>
+                    <hr>
+
+                    <button type="submit">Submit</button>
+                </form>
             </div>
             <div class="tanggal-pemeriksaan">
                 <p>Tanggal Pemeriksaan</p>
                 <div class="container-tanggal-pemeriksaan">
-                    <?php $buka = 0;
+                    <?php $buka = $this->session->userdata('status');
                     if ($buka == 1) :
                     ?>
-                    <div class="subcontainer-tanggal-pemeriksaan"> 
-                        <div class="tanggal-buka-tutup">03-03-2004</div>
-                        <div class="buka-tutup-btn buka-btn">Pendaftaran Dibuka</div>
-                    </div>
-                    <?php else :?>
-                    <div class="subcontainer-tanggal-pemeriksaan">
-                        <div class="tanggal-buka-tutup">03-03-2004</div>
-                        <div class="buka-tutup-btn tutup-btn">Pendaftaran Ditutup</div>
-                    </div>
+                        <div class="subcontainer-tanggal-pemeriksaan">
+                            <div class="tanggal-buka-tutup"><?= $this->session->userdata('tanggal') ?></div>
+                            <div class="buka-tutup-btn buka-btn">Pendaftaran Dibuka</div>
+                        </div>
+                    <?php else : ?>
+                        <div class="subcontainer-tanggal-pemeriksaan">
+                            <div class="tanggal-buka-tutup"><?= $this->session->userdata('tanggal') ?></div>
+                            <div class="buka-tutup-btn tutup-btn">Pendaftaran Ditutup</div>
+                        </div>
                     <?php endif ?>
                 </div>
             </div>
@@ -166,8 +293,18 @@
     </div>
 
     </div>
-    
 
+    <script>
+        function showPopup() {
+            document.getElementById('popup').classList.add('show');
+            document.getElementById('overlay').classList.add('show');
+        }
+
+        function closePopup() {
+            document.getElementById('popup').classList.remove('show');
+            document.getElementById('overlay').classList.remove('show');
+        }
+    </script>
 </body>
 
 </html>

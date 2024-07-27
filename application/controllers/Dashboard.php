@@ -15,7 +15,7 @@ class Dashboard extends CI_Controller
 	}
 
 	// admin
-	
+
 
 	// kesehatan
 	public function view_kesehatan()
@@ -431,7 +431,7 @@ class Dashboard extends CI_Controller
 			}
 			$data_registered = date('Y-m-d');
 			$status = 1;
-			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat,$status,$data_registered);
+			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered);
 			redirect('dashboard/view_catin_pemeriksaan');
 		}
 	}
@@ -444,15 +444,24 @@ class Dashboard extends CI_Controller
 		// admin
 		if ($role == 1) {
 			$awal_tanggal = date('Y-m-d');
-			$tanggal = $this->input->post('tanggal_pemeriksaan');
+			$tanggal = $this->input->post('tanggal_pendaftaran');
 			if (strtotime($tanggal) < strtotime($awal_tanggal)) {
-				$this->session->set_flashdata('error_tanggal', 'Tanggal pemeriksaan tidak boleh lebih awal dari tanggal hari ini.');
-				redirect('Dashboard/view_admin');
+				$this->session->set_flashdata('error_tanggal', 'Tanggal pendaftaran tidak boleh lebih awal dari tanggal hari ini.');
+
+				redirect('Dashboard_admin/view_admin');
 			}
-			$id_status = $this->input->post('status');
+			$id_status = $this->input->post('status_pendaftaran');
 			$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
 			$this->m_Tanggal_Pemeriksaan->tanggal_pemeriksaan($awal_tanggal, $id_tanggal, $id_status, $tanggal);
-			redirect('Dashboard/view_admin');
+			
+			$id_tanggal = '0ff4c7bc-cf4e-4c38-8d0a-f5a7de5c5c7e';
+			$tanggal = $this->input->post('tanggal_periksa');
+			if (strtotime($tanggal) < strtotime($awal_tanggal)) {
+				$this->session->set_flashdata('error_tanggal_pemeriksaan', 'Tanggal pemeriksaan tidak boleh lebih awal dari tanggal hari ini.');
+				redirect('Dashboard_admin/view_admin');
+			}
+			$this->m_Tanggal_Pemeriksaan->tanggal_periksa($id_tanggal, $tanggal);
+			redirect('Dashboard_admin/view_admin');
 
 			// kesehatan
 		} else if ($role == 2) {
