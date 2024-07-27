@@ -11,6 +11,7 @@ class Auth extends CI_Controller
 		$this->load->model('m_Auth');
 		$this->load->library('twilio');
 		$this->load->library('session');
+		$this->load->model('m_User_detail');
 		$this->load->model('m_Tanggal_Pemeriksaan');
 	}
 
@@ -21,6 +22,20 @@ class Auth extends CI_Controller
 	{
 		$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
 		$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
+		$todaytes = date('Y-m-d');
+			$tes =$this->m_User_detail->hitung_kuota($todaytes);
+			$tes =7;
+			$this->session->set_userdata('kuota', $tes );
+			if ($tes == 10){
+				$id_status = 0;
+				$this->m_Tanggal_Pemeriksaan->update_id_status($id_tanggal, $id_status);
+			}
+			else if ($tes < 10 && $tes >= 5){
+				$tes = 10 - $tes;
+				$this->session->set_userdata('sisa_kuota', $tes );
+			}
+			$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
+			$this->session->set_userdata('status', $status);
 		$this->session->set_userdata('status', $status);
 
 		$this->form_validation->set_rules(

@@ -64,7 +64,7 @@ class Dashboard extends CI_Controller
 			$this->session->set_userdata('foto_surat', $userDetail['foto_surat']);
 			$data['total_asset'] = $this->m_User_detail->hitung($id_user);
 			$data = $this->session->set_userdata('nomor', $data['total_asset']);
-			$this->load->view('Dashboard/catin');
+			$this->load->view('Dashboard/catin/catin');
 		}
 	}
 
@@ -100,7 +100,7 @@ class Dashboard extends CI_Controller
 		}
 
 
-		$this->load->view('Dashboard/catin_pemeriksaan');
+		$this->load->view('Dashboard/catin/catin_pemeriksaan');
 	}
 
 	public function pemeriksaan()
