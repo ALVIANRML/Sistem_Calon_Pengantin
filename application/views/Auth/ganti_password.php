@@ -17,10 +17,10 @@
 						<img src="<?php echo base_url(); ?>assets/img/percatin_log.png" alt="logo percatin" class="img-fluid" style="max-height: 15vh; width: 15vh; margin-left:-35vh; color:#015D67;flex-shrink: 0;">
 
 						<h5 class="text-gray-900 mt-4" style="color: #171717; font-family: 'Arial Black', sans-serif; font-size: 3.4vh; font-weight: 700; letter-spacing: -1.44px; margin-left:-17vh;">
-							<b>Lupa kata sandi?</b>
+							<b>Ganti Password</b>
 						</h5>
 						<p class="mb-4" style="color: #171717; font-family: 'Arial'; font-size: 12px; font-weight: 400; letter-spacing: -0.64px; margin-top: -10px; margin-left: -5vh">
-							Amankan kembali akun Anda dengan reset kata sandi
+						
 						</p>
 					</div>
 					<hr>
