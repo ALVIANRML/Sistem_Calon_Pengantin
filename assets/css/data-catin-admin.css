@@ -28,15 +28,18 @@ line-height: 20px;
 }
 
 .header-dashboard-admin {
-    position: sticky;
+    position: fixed;
     top: 0;
-    display: inline-flex;
+    left: 0;
+    right: 0;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     height: 70px;
-    width: 95.55%;
     background: var(--Whites, #FFFFFF);
     padding: 0 32px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
 }
 
 .profil-container {
@@ -69,7 +72,7 @@ line-height: 20px;
     width: 240px;
     height: 100vh;
     padding: 32px;
-    background-color: #FFFFFF
+    background-color: #FFFFFF;
 }
 
 .container-sidebar-dashboard-admin > p {
@@ -136,6 +139,7 @@ margin-bottom: 16px
     background: #F5F9FA;
     padding: 24px 48px;
     padding-bottom: 145px;
+    margin-top: 70px;
 }
 
 .container-content-data-catin-admin > p{
@@ -385,3 +389,4 @@ text-decoration-line: underline;
     color: var(--white---color, #FFFAFA);
     
 }
+
