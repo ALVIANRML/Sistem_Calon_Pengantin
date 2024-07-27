@@ -21,32 +21,81 @@
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/contact.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/faq.css') ?>" />
 
+	<style>
+		.alert {
+			position: fixed;
+			top: 5px;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: #f8d7da;
+			/* Red background for example */
+			color: #721c24;
+			/* Dark red text */
+			padding: 10px;
+			
+			border: 1px solid #f5c6cb;
+			border-radius: 5px;
+			z-index: 1000;
+			/* Ensures the alert is on top of other content */
+		}
+
+		.alert-message {
+			display: inline-block;
+			/* Center text horizontally within the alert */
+			text-align: center;
+			/* Optionally adjust vertical alignment */
+			vertical-align: middle;
+		}
+
+		.close-btn {
+			background: none;
+			border: none;
+			font-size: 20px;
+			cursor: pointer;
+			color: #721c24;
+			line-height: 1;
+			/* Adjust positioning of the close button if needed */
+			margin-left: 10px;
+		}
+
+		/* You can add more styles for other alert types */
+	</style>
+
 
 	<title>Catin DPPKB Tebing Tinggi</title>
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 </head>
 
+
 <body style="margin: auto; padding-top:0;overflow-x:hidden	">
+
 	<?php
 	$tombol = $this->session->userdata('status');
 	$display = ($tombol == 0) ? "display:none" : "display:block";
 	$heroMovement = ($tombol == 0) ? "position: absolute; width: 105%; " : ""; // Tambahkan ini
 	?>
 
-	<?php
-	$kuota = $this->session->userdata('kuota');
-	if ($kuota == 10) {
-
-
-		$display = ($tombol == 0) ? "display:none" : "display:block";
-		$heroMovement = ($tombol == 0) ? "position: absolute; width: 105%; " : ""; // Tambahkan ini
-	}
-
-	?>
-
 	<!-- home -->
 	<div class="container_home" style="margin-bottom: 30vh;">
 		<header>
+		<?php
+	$kuota = $this->session->userdata('kuota');
+	if ($kuota == 10) :?>
+		<?php $display = "display:none"; "display:block";
+		$heroMovement = "position: absolute; width: 105%; "; ""; ?>
+		<div id="alert-box" class="alert">
+			<span class="alert-message">kuota pendaftaran telah penuh</span>
+			<button id="close-alert" class="close-btn">&times;</button>
+		</div>		
+	<?php endif ?>
+	<?php if($kuota < 10  && $kuota >=5) : ?>
+		<div id="alert-box" class="alert">
+			<span class="alert-message">Sisa kuota pendaftaran adalah <?= $this->session->userdata('sisa_kuota') ?> orang lagi</span>
+			<button id="close-alert" class="close-btn">&times;</button>
+		</div>
+	<?php endif ?>
+
+
 			<div class="header-container">
 				<img class="logo" src="<?= base_url('assets/') ?>img/percantin.png" alt="" style="margin-left:-10vh; width: 13vh;height: 13vh;">
 				<div class="navbar">
@@ -322,6 +371,17 @@
 			item.querySelector('.faq-question').addEventListener('click', () => {
 				item.classList.toggle('open');
 			});
+		});
+	});
+</script>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var closeBtn = document.getElementById('close-alert');
+		var alertBox = document.getElementById('alert-box');
+
+		closeBtn.addEventListener('click', function() {
+			alertBox.style.display = 'none'; // Hide the alert
 		});
 	});
 </script>

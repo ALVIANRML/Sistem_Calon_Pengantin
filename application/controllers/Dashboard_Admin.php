@@ -27,6 +27,10 @@ class Dashboard_Admin extends CI_Controller
         $this->session->set_userdata('data_catin', $dataCatin);
         $this->session->set_userdata('cetak_kartu', $cetakKartu);
         $this->session->set_userdata('catin_bermasalah', $catinBermasalah);
-		$this->load->view('Dashboard/admin');
+		$this->load->view('Dashboard/admin/admin');
+    }
+
+    public function view_data_catin(){
+        $this->load->view('Dashboard/admin/data_catin_admin');
     }
 }

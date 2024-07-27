@@ -107,6 +107,42 @@
 				height: 10%;
 			}
 		}
+
+		.alert {
+			position: fixed;
+			top: 5px;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: #f8d7da;
+			/* Red background for example */
+			color: #721c24;
+			/* Dark red text */
+			padding: 10px;
+			
+			border: 1px solid #f5c6cb;
+			border-radius: 5px;
+			z-index: 1000;
+			/* Ensures the alert is on top of other content */
+		}
+
+		.alert-message {
+			display: inline-block;
+			/* Center text horizontally within the alert */
+			text-align: center;
+			/* Optionally adjust vertical alignment */
+			vertical-align: middle;
+		}
+
+		.close-btn {
+			background: none;
+			border: none;
+			font-size: 20px;
+			cursor: pointer;
+			color: #721c24;
+			line-height: 1;
+			/* Adjust positioning of the close button if needed */
+			margin-left: 10px;
+		}
 	</style>
 
 </head>

@@ -6,7 +6,16 @@
 	?>
 
 <div class="container" style="margin-top: -5vh;">
+<?php
+	$kuota = $this->session->userdata('kuota');
+	 if($kuota < 10  && $kuota >=5) : ?>
+		<div id="alert-box" class="alert">
+			<span class="alert-message">Sisa kuota pendaftaran adalah <?= $this->session->userdata('sisa_kuota') ?> orang lagi</span>
+			<button id="close-alert" class="close-btn">&times;</button>
+		</div>
+	<?php endif ?>
 	<div class="card o-hidden border-0 shadow-lg my-5">
+		
 		<div class="card-body p-0" ">
 			<!-- Nested Row within Card Body -->
 			<div class="row">
@@ -88,5 +97,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+</script>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var closeBtn = document.getElementById('close-alert');
+		var alertBox = document.getElementById('alert-box');
+
+		closeBtn.addEventListener('click', function() {
+			alertBox.style.display = 'none'; // Hide the alert
+		});
+	});
 </script>
 
