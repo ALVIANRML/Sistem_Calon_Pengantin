@@ -3,6 +3,15 @@ class m_User_detail extends CI_Model
 {
 
 
+
+	public function all()
+	{
+
+		$query = $this->db->get('user_detail');
+        // Mengembalikan hasil sebagai array
+        return $query->result_array();
+	}
+
 	public function getAll($id_user)
 	{
 

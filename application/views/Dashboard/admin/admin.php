@@ -206,7 +206,7 @@
                         <p class="judul-card-dashboard">Data Catin</p>
                         <p class="jumlah-card-dashboard"><?= $this->session->userdata('data_catin') ?></p>
                     </div>
-                    <p class="selengkapnya-text">Selengkapnya ></p>
+                    <a href="<?= base_url('dashboard_admin/view_data_catin') ?>" style="cursor:pointer"><p class="selengkapnya-text">Selengkapnya ></p></a>
                 </div>
                 <div class="card-dashboard" id="hijau">
                     <img class="logo" src="<?= base_url('assets/') ?>img/printer.svg" alt="">
