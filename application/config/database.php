@@ -1,7 +1,7 @@
 	<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+	defined('BASEPATH') or exit('No direct script access allowed');
 
-/*
+	/*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
 | -------------------------------------------------------------------
@@ -70,32 +70,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-$active_group = 'default';
-$query_builder = TRUE;
+	$active_group = 'default';
+	$query_builder = TRUE;
 
-// database alvian
+	// database alvian
 
-$db['default'] = array(
-	'dsn'	=> 'pgsql:host=localhost;port=5432;dbname=db_CalonPengantin',
-	'hostname' => 'localhost',
-	'username' => 'postgres',
-	'password' => 'password',
-	'database' => 'db_CalonPengantin',
-	'dbdriver' => 'PDO',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
+	$db['default'] = array(
+		'dsn'	=> 'pgsql:host=localhost;port=5432;dbname=db_CalonPengantin',
+		'hostname' => 'localhost',
+		'username' => 'postgres',
+		'password' => 'password',
+		'database' => 'db_CalonPengantin',
+		'dbdriver' => 'PDO',
+		'dbprefix' => '',
+		'pconnect' => FALSE,
+		'db_debug' => (ENVIRONMENT !== 'production'),
+		'cache_on' => FALSE,
+		'cachedir' => '',
+		'char_set' => 'utf8',
+		'dbcollat' => 'utf8_general_ci',
+		'swap_pre' => '',
+		'encrypt' => FALSE,
+		'compress' => FALSE,
+		'stricton' => FALSE,
+		'failover' => array(),
+		'save_queries' => TRUE
+	);
 
 // database bang raihan
 
@@ -120,5 +120,3 @@ $db['default'] = array(
 // 	'failover' => array(),
 // 	'save_queries' => TRUE
 // );
-
-

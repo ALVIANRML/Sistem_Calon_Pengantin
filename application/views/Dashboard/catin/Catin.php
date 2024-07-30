@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/catin.css">
@@ -25,10 +25,26 @@
 	$nomor = $this->session->userdata('nomor');
 	$usia = $this->session->userdata('usia');
 	$jenisKelamin = $this->session->userdata('jenis_kelamin');
+	$id_status_verifikasi = $this->session->userdata('id_status_verifikasi');
+	$id_status_perpanjangan = $this->session->userdata('id_status_perpanjangan');
+	$id_status_aktif = $this->session->userdata('id_status_aktif');
+	$id_status_kesehatan = $this->session->userdata('id_status_kesehatan');
+	$id_status_bnn = $this->session->userdata('id_status_bnn');
+	$id_status_psikolog = $this->session->userdata('id_status_psikolog');
+	$id_pemeriksaan_psikolog = $this->session->userdata('kuesioner_kepribadian');
+	$id_pemeriksaan_survei = $this->session->userdata('skrining_kesehatan');
+	$tanggal_periksa_catin = $this->session->userdata('tanggal_periksa');
 
+	// Memastikan bahwa $tanggal_periksa_catin tidak null sebelum memformat
+	if ($tanggal_periksa_catin) {
+		// Memformat tanggal menjadi format d/m/Y
+		$tanggal_periksa_catin = date('d/m/Y', strtotime($tanggal_periksa_catin));
+	}
 	?>
 
 	<div class="container_admin">
+
+		<!--Header-->
 		<div class="header-container">
 			<div class="logo-container">
 				<img class="logo" src="<?= base_url('assets/') ?>img/percantin.png" alt="Logo">
@@ -59,6 +75,9 @@
 				</ul>
 			</nav>
 		</div>
+		<!--End Header-->
+
+		<!--Navbar-->
 		<div class="main-content">
 			<div class="navigasi_admin">
 				<h6 style="color: gray; margin: 0; font-size:10px;">NAVIGASI</h6>
@@ -79,13 +98,15 @@
 					</a>
 				</div>
 			</div>
+			<!--End Navbar-->
 
-			<div class="inti"">
+			<!--Information Dashboard-->
+			<div class="inti">
 				<h1 style=" font-size: large;">DASHBOARD</h1>
 				<div class="informasi">
 					<div class="profil">
 						<div class="img-profil">
-							<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user') ?>" alt="Profile Image" style="height: 14.5vh; width: 10vw; border-radius: 50%;">
+							<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user') ?>" alt="Profile Image" class="catin-image">
 						</div>
 						<p style="text-align: center; margin: 0;"><b><?= $nama  ?></b></p>
 						<div class="biodata" style="font-size: 12.5px;">
@@ -127,141 +148,241 @@
 					</div>
 					<!-- 1 -->
 					<div class="status">
-						<h5 style="font-size:medium; margin:10px;margin-bottom:20px;">Skrining kesehatan</h5>
-						<div class="isi-status" onclick="showPopup()" style="border: 1px solid  #015D67;font-weight:bold;">
-							<span>Isi Skrining Kesehatan</span>
-						</div>
-						<div class="status-container">
-							<p>Status:</p>
-							<span style="margin-right: 1vh;">Belum</span>
-							<img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:0px;margin-right:1vh">
-						</div>
+						<h5 style=" margin:10px;margin-bottom:20px; cursor:pointer;">Skrining Kesehatan</h5>
 
+						<?php if ($id_pemeriksaan_survei == 2) { ?>
+							<div class="isi-status" onclick="showPopup()" style="border: 1px solid  #015D67;font-weight:bold;">
+								<span>Hasil Skrining Kesehatan</span>
+							</div>
+							<div class="status-container">
+								<p>Status:</p>
+								<span style="margin-right: 1vh;">Sudah</span>
+								<img src="<?= base_url('assets') ?>/img/sudah.svg" alt="" style="margin-top:0px;margin-right:1vh">
+							</div>
+						<?php } else { ?>
+							<div class="isi-status" onclick="showPopup()" style="border: 1px solid  #015D67;font-weight:bold; cursor:pointer;">
+								<span>Isi Skrining Kesehatan</span>
+							</div>
+							<div class="status-container">
+								<p>Status:</p>
+								<span style="margin-right: 1vh;">Belum</span>
+								<img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:0px;margin-right:1vh">
+							</div>
+						<?php }  ?>
+
+						<!--Pop Up Isi Skrining Kesehatan-->
 						<div class="overlay" id="overlay"></div>
 						<div class="popup" id="popup">
 							<span class="close-btn" onclick="closePopup()">&times;</span>
 							<h2>Isi Skrining Kesehatan</h2>
-							<form id="popupForm" action="<?= base_url('dashboard/skrining_kesehatan'); ?>" method="post">
-								<div>
-									<p>Silahkan isi sesuai dengan kamu</p>
+							<?php
+							if ($id_pemeriksaan_survei == 2) :
+							?>
+								<h1>ini hasil diagnosis</h1>
+							<?php else : ?>
+								<form id="popupForm" action="<?= base_url('dashboard/skrining_kesehatan'); ?>" method="post">
+									<div>
+										<p>Silahkan isi sesuai dengan kamu</p>
+										<?php
 
-									<label for="sk1"><b>Mudah Pusing?</b><br></label>
-									<input type="radio" id="sk1" name="sk1" required> Ya
-									<input type="radio" id="sk1" name="sk1" required> Tidak
+										?>
+										<label for="sk1"><b>Pertanyaan 1</b><br></label>
+										<input type="checkbox" id="sk1" name="sk1" value="1"> Mudah pusing?
 
+										<hr>
+										<label for="sk2"><b>Pertanyaan 2</b><br></label>
+										<input type="checkbox" id="sk2" name="sk2" value="1"> Merasa berat pada bagian tengkuk?
+
+
+										<hr>
+										<label for="sk3"><b>Pertanyaan 3</b><br></label>
+										<input type="checkbox" id="sk3" name="sk3" value="1"> Susah tidur?
+
+										<hr>
+										<label for="sk4"><b>Pertanyaan 4</b><br></label>
+										<input type="checkbox" id="sk4" name="sk4" value="1"> Mulai lelah saat melakukan aktivitas?
+
+										<hr>
+										<label for="sk5"><b>Pertanyaan 5</b><br></label>
+										<input type="checkbox" id="sk5" name="sk5" value="1"> Saat beraktivitas mata sering berkunang kunang?
+									</div>
 									<hr>
-									<label for="ks2"><b>Merasa Berat Pada Bagian Tengkuk?</b><br></label>
-									<input type="radio" id="ks2" name="ks2" required> Ya
-									<input type="radio" id="ks2" name="ks2" required> Tidak
 
-									<hr>
-									<label for="ks3"><b>Susah Tidur?</b><br></label>
-									<input type="radio" id="ks3" name="ks3" required> Ya
-									<input type="radio" id="ks3" name="ks3" required> Tidak
-								</div>
-								<hr>
-
-								<button type="submit">Submit</button>
-							</form>
+									<button type="submit">Submit</button>
+								</form>
+							<?php endif ?>
 						</div>
-
-
 					</div>
+					<!--Akhir Pop Up Isi Skrining Kesehatan-->
+
+
 					<!-- 2 -->
 					<div class="status">
-						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Kuesioner Kepribadian</h5>
-						<div class="isi-status" onclick="showPopup1()" style="border: 1px solid  #015D67; font-weight:bold;">
-							<span>Lihat Data</span>
-						</div>
-						<div class="status-container">
-							<p>Status:</p>
-							<span style="margin-right: 1vh;">Belum</span>
-							<img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:0px;margin-right:1vh">
-						</div>
+						<h5 style=" margin:10px; margin-bottom:20px; cursor:pointer;">Kuesioner Kepribadian</h5>
+						<?php if ($id_pemeriksaan_psikolog == 2) { ?>
+							<div class="isi-status" onclick="showPopup1()" style="border: 1px solid  #015D67; font-weight:bold;">
+								<span style>Hasil Kuesioner Kepribadian</span>
+							</div>
+							<div class="status-container">
+								<p>Status:</p>
+								<span style="margin-right: 1vh;">Sudah</span>
+								<img src="<?= base_url('assets') ?>/img/sudah.svg" alt="" style="margin-top:0px;margin-right:1vh">
+							</div>
+						<?php } else { ?>
+							<div class="isi-status" onclick="showPopup1()" style="border: 1px solid  #015D67; font-weight:bold; cursor:pointer;">
+								<span>Isi Kuesioner Kepribadian</span>
+							</div>
+							<div class="status-container">
+								<p>Status:</p>
+								<span style="margin-right: 1vh;">Belum</span>
+								<img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:0px;margin-right:1vh">
+							</div>
+						<?php }  ?>
+
+						<!--Pop Up Isi Kuesionoer Kesehatan-->
 						<div class="overlay" id="overlay1"></div>
 						<div class="popup" id="popup1">
 							<span class="close-btn" onclick="closePopup1()">&times;</span>
 							<h2>Kuesioner Kepribadian</h2>
-							<form id="popupForm" action="<?= base_url('dashboard/kuisioner_pribadi'); ?>" method="post">
-								<div>
+							<?php
+							if ($id_pemeriksaan_psikolog == 2) :
+							?>
+								<h1>ini hasil diagnosa kuesioner kepridabdian</h1>
+							<?php else : ?>
+								<form id="popupForm" action="<?= base_url('dashboard/kuisioner_kepribadian'); ?>" method="post">
+									<div>
 
-									<p>Silahkan isi sesuai dengan kamu</p>
+										<p>Silahkan isi sesuai dengan kamu</p>
 
-									<label for="ks1"><b>Tenang Menghadapi Masalah?</b><br></label>
-									<input type="radio" id="ks1" name="ks1" required> ya
-									<input type="radio" id="ks1" name="ks1" required> tidak
-								</div>
-								<hr>
-								<div>
-									<label for="ks2"><b>Tidak Mudah Panik?</b><br></label>
-									<input type="radio" id="ks2" name="ks2" required>Ya
-									<input type="radio" id="ks2" name="ks2" required>Tidak
-								</div>
-								<hr>
-								<div>
-									<label for="ks3"><b>Cemas Ketika Menghadapi Masalah Baru?</b><br></label>
-									<input type="radio" id="ks3" name="ks3" required>Ya
-									<input type="radio" id="ks3" name="ks3" required>Tidak
-								</div>
-								<hr>
-								<div>
-									<label for="ks4"><b>Sulit Berkonsentrasi Dalam Mengerjakan Tugas?</b><br></label>
-									<input type="radio" id="ks4" name="ks4" required>Ya
-									<input type="radio" id="ks4" name="ks4" required>Tidak
-								</div>
-								<button type="submit">Submit</button>
-							</form>
+										<label for="ks1"><b>Pertanyaan 1</b><br></label>
+										<input type="checkbox" id="ks1" name="ks1"> Tenang menghadapi masalah?
+
+										<hr>
+										<label for="ks2"><b>Pertanyaan 2</b><br></label>
+										<input type="checkbox" id="ks2" name="ks2"> Tidak mudah panik?
+
+
+										<hr>
+										<label for="ks3"><b>Pertanyaan 3</b><br></label>
+										<input type="checkbox" id="ks3" name="ks3"> Cemas ketika menghadapi masalah baru
+
+										<hr>
+										<label for="ks4"><b>Pertanyaan 4</b><br></label>
+										<input type="checkbox" id="ks4" name="ks4"> Mampu mengendalikan baru?
+
+										<hr>
+										<label for="sk5"><b>Pertanyaan 5</b><br></label>
+										<input type="checkbox" id="sk5" name="sk5"> Saat beraktivitas mata sering berkunang kunang?
+									</div>
+									<button type="submit">Submit</button>
+								</form>
+							<?php endif ?>
 						</div>
 					</div>
 
+					<!--Akhir Pop Up Isi Kuesionoer Kesehatan-->
+
 					<!-- 3 -->
 					<div class="status">
-						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Status Verifikasi</h5>
-						<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
-							<span>Sudah Diverifikasi <img src="<?= base_url('assets') ?>/img/sudah.svg" alt="" style="margin-top:1px"></span>
-						</div>
-						<div class="status-container">
-							<p>Tanggal:</p>
-							<span style="margin-left: 100px;">01/07/2024</span>
+						<h5 style=" margin:10px; margin-bottom:20px;" >Status Verifikasi</h5>
 
+						<?php if ($id_status_verifikasi == 2) { ?>
+							<div class="isi-status" onclick="verifikasi()" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
+								<span>Sudah Diverifikasi <img src="<?= base_url('assets') ?>/img/sudah.svg" alt="" style="margin-top:1px"></span>
+							</div>
+						<?php } else { ?>
+							<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
+								<span>Belum Diverifikasi <img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:1px"></span>
+							</div>
+						<?php }  ?>
+						<div class="status-container" style="position: relative;">
+							<p style="position: absolute; left: 0;">Tanggal Periksa:</p>
+							<span style="margin-left: 150px;"><b><?= $tanggal_periksa_catin ?></b></span>
+						</div>
+						<div class="overlay" id="overlayVerifikasi"></div>
+						<div class="popup" id="verifikasi">
+							<span class="close-btn" onclick="closeverifikasi()">&times;</span>
+							<h2>Status verifikasi</h2>
+							<h1>Status anda sudah di verifikasi</h1>
 						</div>
 					</div>
 					<!-- 4 -->
 					<div class="status">
-						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Status Kesehatan</h5>
-						<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
-							<span>Belum disetujui <img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:1.5px"></span>
-						</div>
+						<h5 style=" margin:10px; margin-bottom:20px;" >Status Kesehatan</h5>
+
+						<?php if ($id_status_kesehatan == 2) { ?>
+							<div class="isi-status" onclick="kesehatan()" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
+								<span>Sudah Disetujui <img src="<?= base_url('assets') ?>/img/sudah.svg" alt="" style="margin-top:1.5px"></span>
+							</div>
+						<?php } else { ?>
+							<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
+								<span>Belum Disetujui <img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:1.5px"></span>
+							</div>
+						<?php }  ?>
+
 						<div class="status-container">
 							<p>Harap menunggu s/d:</p>
-							<span style="margin-left: 0px;"><b>10/07/2024</b></span>
+							<span style="margin-left: 0px;"><b><?= $tanggal_periksa_catin ?></b></span>
 
+						</div>
+						<div class="overlay" id="overlayKesehatan"></div>
+						<div class="popup" id="kesehatan">
+							<span class="close-btn" onclick="closekesehatan()">&times;</span>
+							<h2>Status kesehatan</h2>
+							<h1>Status kesehatan anda sudah di verifikasi</h1>
 						</div>
 					</div>
 					<!-- 5 -->
 					<div class="status">
-						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Status BNN</h5>
-						<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
-							<span>Belum disetujui <img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:1px"></span>
-						</div>
+						<h5 style=" margin:10px; margin-bottom:20px;" >Status BNN</h5>
+						<?php if ($id_status_bnn == 2) { ?>
+							<div class="isi-status" onclick="bnn()" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
+								<span>Sudah Disetujui <img src="<?= base_url('assets') ?>/img/sudah.svg" alt="" style="margin-top:1.5px"></span>
+							</div>
+						<?php } else { ?>
+							<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
+								<span>Belum Disetujui <img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:1.5px"></span>
+							</div>
+						<?php }  ?>
+
 						<div class="status-container">
 							<p>Harap menunggu s/d:</p>
-							<span style="margin-left: 0px;"><b>10/07/2024</b></span>
+							<span style="margin-left: 0px;"><b><?= $tanggal_periksa_catin ?></b></span>
+						</div>
+						<div class="overlay" id="overlaybnn"></div>
+						<div class="popup" id="bnn">
+							<span class="close-btn" onclick="closebnn()">&times;</span>
+							<h2>Status bnn</h2>
+							<h1>Status anda sudah di verifikasi</h1>
 						</div>
 					</div>
 					<!-- 6 -->
 					<div class="status">
-						<h5 style="font-size:medium; margin:10px; margin-bottom:20px;" margin-bottom:20px;>Status Psikolog</h5>
-						<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
-							<span>Belum disetujui <img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:1px"></span>
-						</div>
+						<h5 style=" margin:10px; margin-bottom:20px;" margin-bottom:20px;>Status Psikolog</h5>
+						<?php if ($id_status_psikolog == 2) { ?>
+							<div class="isi-status" onclick="psikolog()" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
+								<span>Sudah Disetujui <img src="<?= base_url('assets') ?>/img/sudah.svg" alt="" style="margin-top:1.5px"></span>
+							</div>
+						<?php } else { ?>
+							<div class="isi-status" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
+								<span>Belum Disetujui <img src="<?= base_url('assets') ?>/img/belum.svg" alt="" style="margin-top:1.5px"></span>
+							</div>
+						<?php }  ?>
+
 						<div class="status-container">
 							<p>Harap menunggu s/d:</p>
-							<span style="margin-left: 0px;"><b>10/07/2024</b></span>
+							<span style="margin-left: 0px;"><b><?= $tanggal_periksa_catin ?></b></span>
+						</div>
+						<div class="overlay" id="overlaypsikolog"></div>
+						<div class="popup" id="psikolog">
+							<span class="close-btn" onclick="closepsikolog()">&times;</span>
+							<h2>Status psikolog</h2>
+							<h1>Status anda sudah di psikolog</h1>
 						</div>
 					</div>
 				</div>
 			</div>
+			<!--End Information Dashboard-->
 		</div>
 	</div>
 	<script>
@@ -283,6 +404,43 @@
 		function closePopup1() {
 			document.getElementById('popup1').classList.remove('show');
 			document.getElementById('overlay1').classList.remove('show');
+		}
+
+		function verifikasi() {
+			document.getElementById('verifikasi').classList.add('show');
+			document.getElementById('overlayVerifikasi').classList.add('show');
+		}
+
+		function closeverifikasi() {
+			document.getElementById('verifikasi').classList.remove('show');
+			document.getElementById('overlayVerifikasi').classList.remove('show');
+		}
+		function kesehatan() {
+			document.getElementById('kesehatan').classList.add('show');
+			document.getElementById('overlayKesehatan').classList.add('show');
+		}
+
+		function closekesehatan() {
+			document.getElementById('kesehatan').classList.remove('show');
+			document.getElementById('overlayKesehatan').classList.remove('show');
+		}
+		function bnn() {
+			document.getElementById('bnn').classList.add('show');
+			document.getElementById('overlaybnn').classList.add('show');
+		}
+
+		function closebnn() {
+			document.getElementById('bnn').classList.remove('show');
+			document.getElementById('overlaybnn').classList.remove('show');
+		}
+		function psikolog() {
+			document.getElementById('psikolog').classList.add('show');
+			document.getElementById('overlaypsikolog').classList.add('show');
+		}
+
+		function closepsikolog() {
+			document.getElementById('psikolog').classList.remove('show');
+			document.getElementById('overlaypsikolog').classList.remove('show');
 		}
 	</script>
 </body>

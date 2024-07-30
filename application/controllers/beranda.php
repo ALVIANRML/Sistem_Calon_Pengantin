@@ -18,8 +18,8 @@ class beranda extends CI_Controller
 	{
 		$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
 		$tanggalexisted = $this->m_Tanggal_Pemeriksaan->get_tanggal_by_id($id_tanggal);
-		// $today = date('Y-m-d');
-		$today = '2024-07-17';
+		$today = date('Y-m-d');
+		// $today = '2024-07-30';
 		
 		if ($tanggalexisted->num_rows() > 0) {
 			$tanggalexisted = $tanggalexisted->row_array();
@@ -31,10 +31,8 @@ class beranda extends CI_Controller
 			} else {
 				$id_status = 1;
 				$this->m_Tanggal_Pemeriksaan->update_id_status($id_tanggal, $id_status);
-				
-				
-			
 			}
+			
 			$todaytes = date('Y-m-d');
 			$kuota =$this->m_User_detail->hitung_kuota($todaytes);
 			$kuota =7;

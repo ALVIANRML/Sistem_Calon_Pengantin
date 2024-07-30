@@ -12,6 +12,12 @@ class m_User_detail extends CI_Model
         return $query->result_array();
 	}
 
+	public function getTanggalPeriksa()
+	{
+		$query = $this->db->query("SELECT * FROM tanggal_pemeriksaan WHERE keterangan = 'tanggal pemeriksaan'");
+		return $query;
+	}
+
 	public function getAll($id_user)
 	{
 
@@ -21,7 +27,7 @@ class m_User_detail extends CI_Model
 	}
 
 
-	public function update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered)
+	public function update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered, $tanggalPeriksa)
 	{
 		$this->db->where('id_user_detail', $id_user);
 		$this->db->update('user_detail', [
@@ -43,6 +49,7 @@ class m_User_detail extends CI_Model
 			'alamat' => $alamat,
 			'pernikahan_ke' => $pernikahanKe,
 			'tanggal_pernikahan' => $tanggalPernikahan,
+			'tanggal_periksa' => $tanggalPeriksa,
 			'foto_user' => $fotoUser,
 			'foto_ktp' => $fotoktp,
 			'foto_kk' => $fotokk,
@@ -52,6 +59,18 @@ class m_User_detail extends CI_Model
 		]);
 	}
 
+	public function update_skrining_kesehatan($id_user,$skrining)
+	{
+		$this->db->where('id_user_detail', $id_user);
+		$this->db->update('user_detail', [
+			'id_pemeriksaan_survei' => $skrining]);
+		}
+	public function update_kuesioner_kepribadian($id_user,$kuesioner)
+	{
+		$this->db->where('id_user_detail', $id_user);
+		$this->db->update('user_detail', [
+			'id_pemeriksaan_psikolog' => $kuesioner]);
+		}
 	public function hitung($id_user)
 	{
 
