@@ -36,7 +36,7 @@ class Dashboard extends CI_Controller
 	public function view_catin()
 	{
 		$id_user = $this->session->userdata('id_user');
-
+		
 		$userDetail = $this->m_User_detail->getAll($id_user);
 		if ($userDetail->num_rows() > 0) {
 			$userDetail = $userDetail->row_array();
@@ -62,6 +62,15 @@ class Dashboard extends CI_Controller
 			$this->session->set_userdata('foto_ktp', $userDetail['foto_ktp']);
 			$this->session->set_userdata('foto_kk', $userDetail['foto_kk']);
 			$this->session->set_userdata('foto_surat', $userDetail['foto_surat']);
+			$this->session->set_userdata('id_status_verifikasi', $userDetail['id_status_verifikasi']);
+			$this->session->set_userdata('id_status_perpanjangan', $userDetail['id_status_perpanjangan']);
+			$this->session->set_userdata('id_status_aktif', $userDetail['id_status_aktif']);
+			$this->session->set_userdata('id_status_kesehatan', $userDetail['id_status_kesehatan']);
+			$this->session->set_userdata('id_status_bnn', $userDetail['id_status_bnn']);
+			$this->session->set_userdata('id_status_psikolog', $userDetail['id_status_psikolog']);
+			$this->session->set_userdata('id_pemeriksaan_survei', $userDetail['id_pemeriksaan_survei']);
+			$this->session->set_userdata('id_pemeriksaan_psikolog', $userDetail['id_pemeriksaan_psikolog']);
+			$this->session->set_userdata('tanggal_periksa', $userDetail['tanggal_periksa']);
 			$data['total_asset'] = $this->m_User_detail->hitung($id_user);
 			$data = $this->session->set_userdata('nomor', $data['total_asset']);
 			$this->load->view('Dashboard/catin/catin');
@@ -97,10 +106,15 @@ class Dashboard extends CI_Controller
 			$this->session->set_userdata('foto_ktp', $userDetail['foto_ktp']);
 			$this->session->set_userdata('foto_kk', $userDetail['foto_kk']);
 			$this->session->set_userdata('foto_surat', $userDetail['foto_surat']);
+			$this->session->set_userdata('id_status_verifikasi', $userDetail['id_status_verifikasi']);
+			$this->session->set_userdata('id_status_perpanjangan', $userDetail['id_status_perpanjangan']);
+			$this->session->set_userdata('id_status_aktif', $userDetail['id_status_aktif']);
+			$this->session->set_userdata('tanggal_periksa', $userDetail['tanggal_periksa']);
 		}
 
+		$data['tglPeriksa'] = $this->m_User_detail->getTanggalPeriksa()->result_array();
 
-		$this->load->view('Dashboard/catin/catin_pemeriksaan');
+		$this->load->view('Dashboard/catin/catin_pemeriksaan', $data);
 	}
 
 	public function pemeriksaan()
@@ -270,7 +284,7 @@ class Dashboard extends CI_Controller
 
 		if ($this->form_validation->run() == false) {
 
-			$this->load->view('Dashboard/catin_pemeriksaan');
+			$this->load->view('Dashboard/catin/catin_pemeriksaan');
 		} else {
 			$fotoUser = null;
 			$fotoktp = null;
@@ -404,6 +418,7 @@ class Dashboard extends CI_Controller
 			$alamat = $this->input->post('alamat');
 			$pernikahanKe = $this->input->post('pernikahan_ke');
 			$tanggalPernikahan = $this->input->post('tanggal_pernikahan');
+			$tanggalPeriksa = $this->input->post('tanggal_periksa');
 
 			if ($provinsi == null) {
 				$provinsi = $this->session->userdata('provinsi');
@@ -431,9 +446,59 @@ class Dashboard extends CI_Controller
 			}
 			$data_registered = date('Y-m-d');
 			$status = 1;
-			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered);
+			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered, $tanggalPeriksa);
 			redirect('dashboard/view_catin_pemeriksaan');
 		}
+	}
+
+	public function skrining_kesehatan(){
+		$sk1 = $this->input->post('sk1');
+		$sk2 = $this->input->post('sk2');
+		$sk3 = $this->input->post('sk3');
+		$sk4 = $this->input->post('sk4');
+		$sk5 = $this->input->post('sk5');
+
+		$this->session->set_userdata('sk1', $sk1);
+		$this->session->set_userdata('sk2', $sk2);
+		$this->session->set_userdata('sk3', $sk3);
+		$this->session->set_userdata('sk4', $sk4);
+		$this->session->set_userdata('sk5', $sk5);
+		$id_user = $this->session->userdata('id_user');
+		$skrining = 2;
+		$this->m_User_detail->update_skrining_kesehatan($id_user,$skrining);
+
+		$skrining_kesehatan = $this->m_User_detail->getAll($id_user);
+		if ($skrining_kesehatan->num_rows() > 0) {
+			$skrining_kesehatan = $skrining_kesehatan->row_array();
+			$sk= $this->session->set_userdata('skrining_kesehatan', $skrining_kesehatan['id_pemeriksaan_survei']);
+		}
+	
+		redirect('dashboard/view_catin');
+
+	}
+	public function kuisioner_kepribadian(){
+		$ks1 = $this->input->post('ks1');
+		$ks2 = $this->input->post('ks2');
+		$ks3 = $this->input->post('ks3');
+		$ks4 = $this->input->post('ks4');
+		$ks5 = $this->input->post('ks5');
+
+		$this->session->set_userdata('ks1', $ks1);
+		$this->session->set_userdata('ks2', $ks2);
+		$this->session->set_userdata('ks3', $ks3);
+		$this->session->set_userdata('ks4', $ks4);
+		$this->session->set_userdata('ks5', $ks5);
+		$id_user = $this->session->userdata('id_user');
+		$kuesioner = 2;
+		$this->m_User_detail->update_kuesioner_kepribadian($id_user,$kuesioner);
+
+		$kuesioner_kepribadian = $this->m_User_detail->getAll($id_user);
+		if ($kuesioner_kepribadian->num_rows() > 0) {
+			$kuesioner_kepribadian = $kuesioner_kepribadian->row_array();
+			$sk= $this->session->set_userdata('kuesioner_kepribadian', $kuesioner_kepribadian['id_pemeriksaan_psikolog']);
+		}
+	
+		redirect('dashboard/view_catin');
 	}
 
 
@@ -461,6 +526,7 @@ class Dashboard extends CI_Controller
 				redirect('Dashboard_admin/view_admin');
 			}
 			$this->m_Tanggal_Pemeriksaan->tanggal_periksa($id_tanggal, $tanggal);
+			
 			redirect('Dashboard_admin/view_admin');
 
 			// kesehatan

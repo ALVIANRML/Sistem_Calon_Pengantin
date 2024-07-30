@@ -23,6 +23,11 @@
 	$foto_kk = $this->session->userdata('foto_kk');
 	$foto_ktp = $this->session->userdata('foto_ktp');
 	$foto_surat = $this->session->userdata('foto_surat');
+	$id_status_verifikasi = $this->session->userdata('id_status_verifikasi');
+	$id_status_perpanjangan = $this->session->userdata('id_status_perpanjangan');
+	$id_status_aktif = $this->session->userdata('id_status_aktif');
+	$tanggal_periksa_catin = $this->session->userdata('tanggal_periksa');
+	
 	?>
 
 	<div class="container_admin">
@@ -31,6 +36,7 @@
 				<img class="logo" src="<?= base_url('assets/') ?>img/percantin.png" alt="Logo">
 				<span class="logo-text"><b style="font-family: 'Nunito Sans', sans-serif;">PERCATIN</b></span>
 			</div>
+			<!--Navbar-->
 			<nav class="navbar">
 				<ul>
 					<div class="navbar_profil" style="width: 15vw; margin-right:0px">
@@ -55,6 +61,9 @@
 				</ul>
 			</nav>
 		</div>
+		<!--End Navbar-->
+
+		<!--Sidebar-->
 		<div class="main-content">
 			<div class="navigasi_admin">
 				<h6 style="color: gray; margin: 0; font-size:10px;">NAVIGASI</h6>
@@ -75,37 +84,51 @@
 				</div>
 			</div>
 		</div>
-		<div class="inti-pemeriksaan" style=" border: 2px solid gray;margin-left:-20px;">
+		<!--End Sidebar-->
+
+		
+		<?php
+		$disabled = ($id_status_verifikasi == 2 OR $id_status_perpanjangan == 2 OR $id_status_aktif == 2) ? 'disabled' : '';
+		?>
+		<!--Form Pendaftaran-->
+		<div class="inti-pemeriksaan">
 			<h1 style="font-size: 30px;"> <img src="<?= base_url('assets/') ?>img/title_pemeriksaan.svg" alt="Profile Image" class="icon-navigation" style=" height:5vh; width: 5vh;">Form Daftar Calon Pengantin</h1>
 			<hr>
-			<h2>informasi dasar</h2>
+		
+			<?php  if($id_status_verifikasi == 2 OR $id_status_perpanjangan == 2 OR $id_status_aktif == 2){?>
+							<h2 style="color: green;">Informasi Dasar Sudah Di Verifikasi</h2>
+                        <?php }else{?>
+							<h2>Informasi Dasar</h2>
+                        <?php }  ?>
+
+
 			<?php echo isset($error) ? $error : ''; ?>
 			<form action="<?= base_url('dashboard/pemeriksaan') ?>" method="post" enctype="multipart/form-data">
 				<div class="form-container">
-					<div class="form-group" style="width: 37.5vw; margin-right:5.5vh;">
+				<div class="khusus">
 						<label for="nama_lengkap">Nama Lengkap</label>
-						<input type="text" id="nama_lengkap" class="inputan" name="nama_lengkap" placeholder="Isi Nama Lengkap" style="width:100%" value="<?= $this->session->userdata('nama_lengkap'); ?>">
+						<input type="text" id="nama_lengkap" class="inputan" name="nama_lengkap" placeholder="Isi Nama Lengkap" style="width:auto" value="<?= $this->session->userdata('nama_lengkap'); ?>" <?= $disabled?>>
 						<?= form_error('nama_lengkap', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 					<div class="form-group">
 						<label for="nik">NIK</label>
-						<input type="text" id="nik" class="inputan" name="nik" placeholder="Isi 16 Digit Nomor NIK" value="<?= $this->session->userdata('nik'); ?>">
+						<input type="text" id="nik" class="inputan" name="nik" placeholder="Isi 16 Digit Nomor NIK" value="<?= $this->session->userdata('nik'); ?>" <?= $disabled?>>
 						<?= form_error('nik', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 					<div class="form-group">
 						<label for="tempat_lahir">Tempat Lahir </label>
-						<input type="text" id="tempat_lahir" name="tempat_lahir" class="inputan" placeholder="Isi Tempat Lahir" value="<?= $this->session->userdata('tempat_lahir'); ?>">
+						<input type="text" id="tempat_lahir" name="tempat_lahir" class="inputan" placeholder="Isi Tempat Lahir" value="<?= $this->session->userdata('tempat_lahir'); ?>" <?= $disabled?>>
 						<?= form_error('tempat_lahir', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
 					<div class="form-group">
 						<label for="tanggal_lahir">Tanggal Lahir</label>
-						<input type="date" id="tanggal_lahir" name="tanggal_lahir" placeholder="Isi Tanggal Lahir" class="inputan" onchange="hitungUmur()" value="<?= $this->session->userdata('tanggal_lahir'); ?>">
+						<input type="date" id="tanggal_lahir" name="tanggal_lahir" placeholder="Isi Tanggal Lahir" class="inputan" onchange="hitungUmur()" value="<?= $this->session->userdata('tanggal_lahir'); ?>" <?= $disabled?>>
 						<?= form_error('tanggal_lahir', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 					<div class="form-group">
 						<label for="umur">Usia</label>
-						<input type="number" id="umur" name="umur" class="inputan" readonly value="<?= $this->session->userdata('usia'); ?>">
+						<input type="number" id="umur" name="umur" class="inputan" readonly value="<?= $this->session->userdata('usia'); ?>" <?= $disabled?>>
 						<?= form_error('umur', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
@@ -114,7 +137,7 @@
 
 					<div class="form-group">
 						<label for="jenis_kelamin">Jenis Kelamin</label>
-						<select name="jenis_kelamin" id="jenis_kelamin" class="inputan">
+						<select name="jenis_kelamin" id="jenis_kelamin" class="inputan" <?= $disabled?>>
 							<option value="" disabled selected>Pilih Jenis Kelamin</option>
 							<option value="Laki-Laki" <?= ($this->session->userdata('jenis_kelamin') == 'Laki-Laki') ? 'selected' : ''; ?>>Laki-Laki</option>
 							<option value="Perempuan" <?= ($this->session->userdata('jenis_kelamin') == 'Perempuan') ? 'selected' : ''; ?>>Perempuan</option>
@@ -123,7 +146,7 @@
 					</div>
 					<div class="form-group">
 						<label for="agama">Agama</label>
-						<select name="agama" id="agama" class="inputan">
+						<select name="agama" id="agama" class="inputan" <?= $disabled?>>
 							<option value="" disabled selected>Pilih Agama</option>
 							<option value="Islam" <?= ($this->session->userdata('agama') == 'Islam') ? 'selected' : ''; ?>>Islam</option>
 							<option value="Kristen" <?= ($this->session->userdata('agama') == 'Kristen') ? 'selected' : ''; ?>>Kristen</option>
@@ -136,7 +159,7 @@
 					</div>
 					<div class="form-group">
 						<label for="pendidikan">Pendidikan Terakhir</label>
-						<select name="pendidikan" id="pendidikan" class="inputan">
+						<select name="pendidikan" id="pendidikan" class="inputan" <?= $disabled?>>
 							<option value="" disabled selected>Pilih Pendidikan Terakhir</option>
 							<option value="PAUD" <?= ($this->session->userdata('pendidikan') == 'PAUD') ? 'selected' : ''; ?>>PAUD</option>
 							<option value="SD" <?= ($this->session->userdata('pendidikan') == 'SD') ? 'selected' : ''; ?>>SD</option>
@@ -152,14 +175,14 @@
 						</select>
 						<?= form_error('pendidikan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
-					<div class="form-group" style="width: 37.5vw; margin-right:5.5vh">
+					<div class="khusus">
 						<label for="pekerjaan">Pekerjaan</label>
-						<input type="text" id="pekerjaan" class="inputan" name="pekerjaan" placeholder="Isi Pekerjaan" style="width: 100%;" value="<?= $this->session->userdata('pekerjaan'); ?>">
+						<input type="text" id="pekerjaan" class="inputan" name="pekerjaan" placeholder="Isi Pekerjaan" style="width: auto;" value="<?= $this->session->userdata('pekerjaan'); ?>" <?= $disabled?>>
 						<?= form_error('pekerjaan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 					<div class="form-group">
 						<label for="nomor_telepon">No.HP</label>
-						<input type="text" id="nomor_telepon" name="nomor_telepon" placeholder="Isi Nomor HP Aktif" class="inputan" value="<?= $this->session->userdata('nomor_telepon'); ?>">
+						<input type="text" inputmode="numeric" id="nomor_telepon" name="nomor_telepon" placeholder="Isi Nomor HP Aktif" class="inputan" value="<?= $this->session->userdata('nomor_telepon'); ?>" <?= $disabled?>>
 						<?= form_error('nomor_telepon', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
@@ -168,7 +191,7 @@
 
 					<div class="form-group" style="width:60vh ;">
 						<label for="provinsi">Provinsi</label>
-						<select name="provinsi" id="provinsi" class="inputan" style="width:100%">
+						<select name="provinsi" id="provinsi" class="inputan" style="width:100%" <?= $disabled?>>
 							<?php if ($provinsi == null) : ?>
 								<!-- <option value="" disabled selected>Pilih Provinsi</option> -->
 							<?php elseif ($provinsi == $this->session->userdata('provinsi')) : ?>
@@ -182,7 +205,7 @@
 					</div>
 					<div class="form-group" style="width: 60vh;">
 						<label for="kota">Kota</label>
-						<select name="kota" id="kota" class="inputan" style="width:100%">
+						<select name="kota" id="kota" class="inputan" style="width:100%" <?= $disabled?>>
 							<?php if ($kota == null) : ?>
 								<option value="" disabled selected>Pilih Kota</option>
 							<?php elseif ($kota == $this->session->userdata('kota')) : ?>
@@ -195,7 +218,7 @@
 					</div>
 					<div class="form-group" style="width: 60vh;">
 						<label for="kecamatan">Kecamatan</label>
-						<select name="kecamatan" id="kecamatan" class="inputan" style="width:100%">
+						<select name="kecamatan" id="kecamatan" class="inputan" style="width:100%" <?= $disabled?>>
 							<?php if ($kecamatan == null) : ?>
 								<option value="" disabled selected>Pilih Kecamatan</option>
 							<?php elseif ($kecamatan == $this->session->userdata('kecamatan')) : ?>
@@ -209,7 +232,7 @@
 					</div>
 					<div class="form-group" style="width: 60vh;">
 						<label for="kelurahan">Kelurahan</label>
-						<select name="kelurahan" id="kelurahan" class="inputan" style="width:100%">
+						<select name="kelurahan" id="kelurahan" class="inputan" style="width:100%" <?= $disabled?>>
 							<?php if ($kelurahan == null) : ?>
 								<option value="" disabled selected>Pilih Kelurahan</option>
 							<?php elseif ($kelurahan == $this->session->userdata('kelurahan')) : ?>
@@ -224,23 +247,37 @@
 
 					<div class="form-group" style="width: 60vh;">
 						<label for="alamat">Alamat Lengkap</label>
-						<textarea id="alamat" class="inputan" name="alamat" placeholder="" value="<?= $this->session->userdata('alamat'); ?>" style="width: 100%;height:20vh;"><?= $this->session->userdata('alamat'); ?></textarea>
+						<textarea id="alamat" class="inputan" name="alamat" placeholder="" value="<?= $this->session->userdata('alamat'); ?>" <?= $disabled?> style="width: 100%;height:20vh;"><?= $this->session->userdata('alamat'); ?></textarea>
 						<?= form_error('alamat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
 					<h2 style="width: 100%;">Dokumen</h2>
-
-					<div class="form-group" style="width: 48vh;">
+					<div></div>
+					<div class="form-group" style="width: 30vh;">
 						<label for="pernikahan_ke">Pernikahan Ke</label>
-						<input type="number" id="pernikahan_ke" class="inputan" name="pernikahan_ke" placeholder="" value="<?= $this->session->userdata('pernikahan_ke'); ?>" style="width:100%" min="1">
+						<input type="number" id="pernikahan_ke" class="inputan" name="pernikahan_ke" placeholder="" value="<?= $this->session->userdata('pernikahan_ke'); ?>" <?= $disabled?> style="width:100%" min="1">
 						<?= form_error('pernikahan_ke', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
 
-					<div class="form-group" style="width: 48vh;">
+					<div class="form-group" style="width: 30vh;">
 						<label for="tanggal_pernikahan">Tanggal Pernikahan</label>
-						<input type="date" id="tanggal_pernikahan" class="inputan" name="tanggal_pernikahan" placeholder="Pilih tanggal_pernikahan" value="<?= $this->session->userdata('tanggal_pernikahan'); ?>" style="width: 100%;">
+						<input type="date" id="tanggal_pernikahan" class="inputan" name="tanggal_pernikahan" placeholder="Pilih tanggal_pernikahan" value="<?= $this->session->userdata('tanggal_pernikahan'); ?>" style="width: 100%;" <?= $disabled?>>
 						<?= form_error('tanggal_pernikahan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
+
+					
+					<?php
+					$id = 0;
+					foreach($tglPeriksa as $i)
+                    :
+					$tanggal_periksa = $i['tanggal']; 
+					?>
+					<div class="form-group" style="width: 30vh;">
+						<b><label for="tanggal_periksa">Tanggal Pemeriksaan Catin</label></b>
+						<input type="date" id="tanggal_periksa" name="tanggal_periksa" placeholder="Isi Tanggal Periksa" class="inputan" value="<?= $tanggal_periksa_catin ?? $tanggal_periksa ?>" readonly>
+						<?= form_error('tanggal_periksa', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+					</div>
+					<?php endforeach;?>
 
 
 
@@ -249,7 +286,7 @@
 							<label for="foto_user">Pas Foto</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
-								<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="uploadfile('foto_user')" style="display: none;" value="<?= $foto_user ?>">
+								<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="uploadfile('foto_user')" style="display: none;" value="<?= $foto_user ?>" <?= $disabled?>>
 								<label for="foto_user" class="custom-file-label">
 									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
 									<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
@@ -263,11 +300,11 @@
 					<?php else : ?>
 
 						<div class="form-group" style="width: 50vh;">
-							<label for="foto_user">Foto KTP</label>
+							<label for="foto_user">Pas Foto</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
 								<img id="uploadImage-foto_user" src="<?= base_url('uploads/photo/pasFoto/') . $foto_user ?>" alt="KTP Image" class="preview-image">
-								<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="updateFile('foto_user')" style="display: none;" value="<?= $foto_user ?>">
+								<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="updateFile('foto_user')" style="display: none;" value="<?= $foto_user ?>" <?= $disabled?>>
 								<div class="image-caption">
 
 								</div>
@@ -285,10 +322,10 @@
 
 					<?php if ($foto_ktp == null) : ?>
 						<div class="form-group" style="width: 50vh;">
-							<label for="foto_ktp">Pas Foto</label>
+							<label for="foto_ktp">Foto KTP</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
-								<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $this->session->userdata('foto_ktp') ?>">
+								<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $this->session->userdata('foto_ktp') ?>" <?= $disabled?>>
 								<label for="foto_ktp" class="custom-file-label">
 									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
 									<img id="preview-image-foto_ktp" class="preview-image" src="" alt="Preview Image" style="display: none;">
@@ -305,7 +342,7 @@
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
 								<img id="uploadImage-foto_ktp" src="<?= base_url('uploads/photo/ktp/') . $foto_ktp ?>" alt="KTP Image" class="preview-image">
-								<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $foto_ktp ?>">
+								<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $foto_ktp ?>" <?= $disabled?>>
 								<div class="image-caption">
 
 								</div>
@@ -325,7 +362,7 @@
 							<label for="foto_kk">Foto Kartu Keluarga</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
-								<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="uploadfile('foto_kk')" style="display: none;">
+								<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="uploadfile('foto_kk')" style="display: none;" <?= $disabled?>>
 								<label for="foto_kk" class="custom-file-label">
 									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
 									<img id="preview-image-foto_kk" class="preview-image" src="" alt="Preview Image" style="display: none;">
@@ -342,7 +379,7 @@
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
 								<img id="uploadImage-foto_kk" src="<?= base_url('uploads/photo/kk/') . $foto_kk ?>" alt="KTP Image" class="preview-image">
-								<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="updateFile('foto_kk')" style="display: none;" value="<?= $foto_kk ?>">
+								<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="updateFile('foto_kk')" style="display: none;" value="<?= $foto_kk ?>" <?= $disabled?>>
 								<div class="image-caption">
 
 								</div>
@@ -362,7 +399,7 @@
 							<label for="foto_surat">Foto Surat Pengantar</label>
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
-								<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="uploadfile('foto_surat')" style="display: none;">
+								<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="uploadfile('foto_surat')" style="display: none;" <?= $disabled?>>
 								<label for="foto_surat" class="custom-file-label">
 									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
 									<img id="preview-image-foto_surat" class="preview-image" src="" alt="Preview Image" style="display: none;">
@@ -379,7 +416,7 @@
 							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
 							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
 								<img id="uploadImage-foto_surat" src="<?= base_url('uploads/photo/surat/') . $foto_surat ?>" alt="KTP Image" class="preview-image">
-								<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="updateFile('foto_surat')" style="display: none;" value="<?= $foto_surat ?>">
+								<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="updateFile('foto_surat')" style="display: none;" value="<?= $foto_surat ?>" <?= $disabled?>>
 								<div class="image-caption">
 
 								</div>
@@ -401,19 +438,27 @@
 						<p> &nbsp;Isi semua kolom yang ada</p>
 					</div>
 					<div class="status-container" style="display: flex;">
+					<?php  if($id_status_verifikasi == 2 OR $id_status_perpanjangan == 2 OR $id_status_aktif == 2){?>
+							
+                        <?php }else{?>
 						<button class="btn-pemeriksaan" style="margin-top: 4px;">
 							<p style="font-weight:bold; color:#015D67; text-align:center; ">Batal</p>
 						</button>
+
 						<button type="submit" name="submit" id="submit" class="btn-pemeriksaan" style="background-color: #015D67;margin-top: 4px;">
-							<p style="font-weight:bold; color:white; text-align:center;">Daftar</p>
+							<p style="font-weight:bold; color:white; text-align:center;" >Daftar</p>
 						</button>
+                        <?php }  ?>
 					</div>
 				</div>
 
 			</form>
 		</div>
+		<!--End Form Pendaftaran-->
+
 
 	</div>
+
 
 
 
@@ -663,6 +708,27 @@
 
 
 		});
+	</script>
+
+	<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var phoneInput = document.getElementById('nomor_telepon');
+		
+		// Prepend +62 if not already present
+		if (phoneInput.value && !phoneInput.value.startsWith('+62')) {
+			phoneInput.value = '+62' + phoneInput.value;
+		}
+		
+		// Handle user input to ensure +62 is always at the start
+		phoneInput.addEventListener('input', function() {
+			if (phoneInput.value.startsWith('+62')) {
+				// Allow user to type after +62
+				phoneInput.value = '+62' + phoneInput.value.slice(3);
+			} else {
+				phoneInput.value = '+62' + phoneInput.value;
+			}
+		});
+	});
 	</script>
 
 </body>
