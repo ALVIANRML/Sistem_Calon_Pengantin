@@ -57,6 +57,8 @@ class m_User_detail extends CI_Model
 			'status' => $status,
 			'data_registered' => $data_registered,
 		]);
+
+		return true;
 	}
 
 	public function update_skrining_kesehatan($id_user,$skrining)
