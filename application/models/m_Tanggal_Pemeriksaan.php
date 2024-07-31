@@ -19,11 +19,11 @@ class m_Tanggal_Pemeriksaan extends CI_Model
 		$this->db->update('tanggal_pemeriksaan', ['tanggal' => $tanggal]);
 	}
 	
-	public function get_tanggal_periksa($id_tanggal)
+	public function get_tanggal_periksa()
 	{
 		$this->db->select('tanggal');
 		$this->db->from('tanggal_pemeriksaan');
-		$this->db->where('id_tanggal', $id_tanggal);
+		$this->db->where('keterangan', 'tanggal pemeriksaan');
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
 			return $query->row()->tanggal;

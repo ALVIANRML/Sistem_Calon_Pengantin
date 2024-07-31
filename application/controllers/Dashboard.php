@@ -36,7 +36,7 @@ class Dashboard extends CI_Controller
 	public function view_catin()
 	{
 		$id_user = $this->session->userdata('id_user');
-		
+
 		$userDetail = $this->m_User_detail->getAll($id_user);
 		if ($userDetail->num_rows() > 0) {
 			$userDetail = $userDetail->row_array();
@@ -111,10 +111,10 @@ class Dashboard extends CI_Controller
 			$this->session->set_userdata('id_status_aktif', $userDetail['id_status_aktif']);
 			$this->session->set_userdata('tanggal_periksa', $userDetail['tanggal_periksa']);
 		}
-
-		$data['tglPeriksa'] = $this->m_User_detail->getTanggalPeriksa()->result_array();
-
-		$this->load->view('Dashboard/catin/catin_pemeriksaan', $data);
+		$tgl_periksa = $this->m_Tanggal_Pemeriksaan->get_tanggal_periksa();
+		$this->session->set_userdata('tgl_periksa', $tgl_periksa);
+		// $data['tglPeriksa'] = $this->m_User_detail->getTanggalPeriksa()->result_array();
+		$this->load->view('Dashboard/catin/catin_pemeriksaan');
 	}
 
 	public function pemeriksaan()
@@ -123,6 +123,7 @@ class Dashboard extends CI_Controller
 		$userDetail = $this->m_User_detail->getAll($id_user);
 		if ($userDetail->num_rows() > 0) {
 			$userDetail = $userDetail->row_array();
+			$this->session->set_userdata('nama_lengkap', $userDetail['nama_lengkap']);
 			$this->session->set_userdata('foto_user', $userDetail['foto_user']);
 			$this->session->set_userdata('foto_ktp', $userDetail['foto_ktp']);
 			$this->session->set_userdata('foto_kk', $userDetail['foto_kk']);
@@ -286,115 +287,75 @@ class Dashboard extends CI_Controller
 
 			$this->load->view('Dashboard/catin/catin_pemeriksaan');
 		} else {
-			$fotoUser = null;
-			$fotoktp = null;
-			$fotokk = null;
-			$fotoSurat = null;
-			if (!is_dir(FCPATH . 'uploads/photo')) {
-				mkdir(FCPATH . 'uploads/photo', 0777, true);
+			$path = 'uploads/photo/';
+			$nama = $this->session->userdata('username');
+			$this->load->library('upload');
+
+			// Konfigurasi upload file
+			$upload_config = [
+				'upload_path' => $path,
+				'allowed_types' => 'jpg|png|jpeg|gif',
+				'max_size' => '100000',  // 20MB max
+				'max_width' => '100000', // pixel
+				'max_height' => '100000' // pixel
+			];
+
+			// Upload dan simpan foto user
+			$upload_config['file_name'] = $nama . '_pas_foto';
+			$this->upload->initialize($upload_config);
+			$foto_saya_upload = $this->upload->do_upload('foto_user');
+
+			$fotoUser = $this->session->userdata('foto_user');
+			if ($foto_saya_upload) {
+				@unlink($path . $fotoUser);
+				$foto_saya = $this->upload->data();
+				$fotoUser = $foto_saya['file_name'];
+			} else {
+				$this->session->set_flashdata('eror_input_file', 'eror_input_file');
 			}
 
-			$config['upload_path'] = FCPATH . 'uploads/photo/pasFoto';
-			$config['allowed_types']        = 'gif|jpg|png|jpeg';
-			$config['max_size'] = 1000000; // 2 MB
-			$config['max_width'] = 1000000;
-			$config['max_height'] = 1000000;
-			$this->load->library('upload', $config);
-
-			$file = 'foto_user';
-			if (!empty($_FILES[$file]['name'])) {
-				$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-				$config['file_name'] = str_replace(' ', '_', $config['file_name']);
-				$this->upload->initialize($config);
-				if (!$this->upload->do_upload($file)) {
-					$error = array('error' => $this->upload->display_errors());
-					var_dump($error);
-					var_dump($config['upload_path']);
-					exit;
-				} else {
-					$data = array('upload_data' => $this->upload->data());
-				}
-				$fotoUser = $config['file_name'];
+			// Upload dan simpan foto KTP
+			$upload_config['file_name'] = $nama . '_ktp';
+			$this->upload->initialize($upload_config);
+			$foto_ktp_upload = $this->upload->do_upload('foto_ktp');
+			$fotoktp = $this->session->userdata('foto_ktp');
+			if ($foto_ktp_upload) {
+				@unlink($path . $fotoktp);
+				$foto_ktp = $this->upload->data();
+				$fotoktp = $foto_ktp['file_name'];
+			} else {
+				$this->session->set_flashdata('eror_input_file', 'eror_input_file');
 			}
 
-			$config['upload_path'] = FCPATH . 'uploads/photo/ktp';
-			$config['allowed_types']        = 'gif|jpg|png|jpeg';
-			$config['max_size'] = 1000000; // 2 MB
-			$config['max_width'] = 1000000;
-			$config['max_height'] = 1000000;
-			$this->load->library('upload', $config);
-
-			$file = 'foto_ktp';
-
-			if (!empty($_FILES[$file]['name'])) {
-				$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-				$config['file_name'] = str_replace(' ', '_', $config['file_name']);
-				$this->upload->initialize($config);
-
-				if (!$this->upload->do_upload($file)) {
-					$error = array('error' => $this->upload->display_errors());
-					var_dump($error);
-					var_dump($config['upload_path']);
-
-					exit;
-				} else {
-					$data = array('upload_data' => $this->upload->data());
-				}
-				$fotoktp = $config['file_name'];
+			// Upload dan simpan foto KK
+			$upload_config['file_name'] = $nama . '_kk';
+			$this->upload->initialize($upload_config);
+			$foto_kk_upload = $this->upload->do_upload('foto_kk');
+			$fotokk = $this->session->userdata('foto_kk');
+			if ($foto_kk_upload) {
+				@unlink($path . $fotokk);
+				$foto_kk = $this->upload->data();
+				$fotokk = $foto_kk['file_name'];
+			} else {
+				$this->session->set_flashdata('eror_input_file', 'eror_input_file');
+				$fotokk = $this->session->userdata('foto_kk');
 			}
-			$config['upload_path'] = FCPATH . 'uploads/photo/kk';
-			$config['allowed_types']        = 'gif|jpg|png|jpeg';
-			$config['max_size'] = 1000000; // 2 MB
-			$config['max_width'] = 1000000;
-			$config['max_height'] = 1000000;
 
-
-			$this->load->library('upload', $config);
-
-
-			$file =  'foto_kk';
-			if (!empty($_FILES[$file]['name'])) {
-				$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-				$config['file_name'] = str_replace(' ', '_', $config['file_name']);
-
-				$this->upload->initialize($config);
-
-				if (!$this->upload->do_upload($file)) {
-					$error = array('error' => $this->upload->display_errors());
-					var_dump($error);
-					var_dump($config['upload_path']);
-
-					exit;
-				} else {
-					$data = array('upload_data' => $this->upload->data());
-				}
-				$fotokk = $config['file_name'];
+			// Upload dan simpan foto Surat
+			$upload_config['file_name'] = $nama . '_surat';
+			$this->upload->initialize($upload_config);
+			$foto_surat_upload = $this->upload->do_upload('foto_surat');
+			$fotoSurat = $this->session->userdata('foto_surat');
+			if ($foto_surat_upload) {
+				@unlink($path . $fotoSurat);
+				$foto_surat = $this->upload->data();
+				$fotoSurat = $foto_surat['file_name'];
+			} else {
+				$this->session->set_flashdata('eror_input_file', 'eror_input_file');
+				$fotoSurat = $this->session->userdata('foto_surat');
 			}
-			$config['upload_path'] = FCPATH . 'uploads/photo/surat';
-			$config['allowed_types']        = 'gif|jpg|png|jpeg';
-			$config['max_size'] = 1000000; // 2 MB
-			$config['max_width'] = 1000000;
-			$config['max_height'] = 1000000;
 
-			$this->load->library('upload', $config);
-
-			$file = 'foto_surat';
-			if (!empty($_FILES[$file]['name'])) {
-				$config['file_name'] = time() . '_' . $_FILES[$file]['name']; // Nama file unik
-				$config['file_name'] = str_replace(' ', '_', $config['file_name']);
-				$this->upload->initialize($config);
-
-				if (!$this->upload->do_upload($file)) {
-					$error = array('error' => $this->upload->display_errors());
-					var_dump($error);
-					var_dump($config['upload_path']);
-
-					exit;
-				} else {
-					$data = array('upload_data' => $this->upload->data());
-				}
-				$fotoSurat = $config['file_name'];
-			}
+			// Data untuk update
 			$id_user = $this->session->userdata('id_user');
 			$nomor = $this->m_User_detail->hitung($id_user);
 			$tanggal_daftar = date('dmy');
@@ -420,6 +381,7 @@ class Dashboard extends CI_Controller
 			$tanggalPernikahan = $this->input->post('tanggal_pernikahan');
 			$tanggalPeriksa = $this->input->post('tanggal_periksa');
 
+
 			if ($provinsi == null) {
 				$provinsi = $this->session->userdata('provinsi');
 			}
@@ -444,14 +406,22 @@ class Dashboard extends CI_Controller
 			if ($fotoSurat == null) {
 				$fotoSurat = $this->session->userdata('foto_surat');
 			}
+
+			
+
 			$data_registered = date('Y-m-d');
 			$status = 1;
-			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered, $tanggalPeriksa);
+			$hasil = $this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered, $tanggalPeriksa);
+
+
+
+			$this->session->set_flashdata('input', 'input');
 			redirect('dashboard/view_catin_pemeriksaan');
 		}
 	}
 
-	public function skrining_kesehatan(){
+	public function skrining_kesehatan()
+	{
 		$sk1 = $this->input->post('sk1');
 		$sk2 = $this->input->post('sk2');
 		$sk3 = $this->input->post('sk3');
@@ -465,18 +435,18 @@ class Dashboard extends CI_Controller
 		$this->session->set_userdata('sk5', $sk5);
 		$id_user = $this->session->userdata('id_user');
 		$skrining = 2;
-		$this->m_User_detail->update_skrining_kesehatan($id_user,$skrining);
+		$this->m_User_detail->update_skrining_kesehatan($id_user, $skrining);
 
 		$skrining_kesehatan = $this->m_User_detail->getAll($id_user);
 		if ($skrining_kesehatan->num_rows() > 0) {
 			$skrining_kesehatan = $skrining_kesehatan->row_array();
-			$sk= $this->session->set_userdata('skrining_kesehatan', $skrining_kesehatan['id_pemeriksaan_survei']);
+			$sk = $this->session->set_userdata('skrining_kesehatan', $skrining_kesehatan['id_pemeriksaan_survei']);
 		}
-	
-		redirect('dashboard/view_catin');
 
+		redirect('dashboard/view_catin');
 	}
-	public function kuisioner_kepribadian(){
+	public function kuisioner_kepribadian()
+	{
 		$ks1 = $this->input->post('ks1');
 		$ks2 = $this->input->post('ks2');
 		$ks3 = $this->input->post('ks3');
@@ -490,14 +460,14 @@ class Dashboard extends CI_Controller
 		$this->session->set_userdata('ks5', $ks5);
 		$id_user = $this->session->userdata('id_user');
 		$kuesioner = 2;
-		$this->m_User_detail->update_kuesioner_kepribadian($id_user,$kuesioner);
+		$this->m_User_detail->update_kuesioner_kepribadian($id_user, $kuesioner);
 
 		$kuesioner_kepribadian = $this->m_User_detail->getAll($id_user);
 		if ($kuesioner_kepribadian->num_rows() > 0) {
 			$kuesioner_kepribadian = $kuesioner_kepribadian->row_array();
-			$sk= $this->session->set_userdata('kuesioner_kepribadian', $kuesioner_kepribadian['id_pemeriksaan_psikolog']);
+			$sk = $this->session->set_userdata('kuesioner_kepribadian', $kuesioner_kepribadian['id_pemeriksaan_psikolog']);
 		}
-	
+
 		redirect('dashboard/view_catin');
 	}
 
@@ -518,7 +488,7 @@ class Dashboard extends CI_Controller
 			$id_status = $this->input->post('status_pendaftaran');
 			$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
 			$this->m_Tanggal_Pemeriksaan->tanggal_pemeriksaan($awal_tanggal, $id_tanggal, $id_status, $tanggal);
-			
+
 			$id_tanggal = '0ff4c7bc-cf4e-4c38-8d0a-f5a7de5c5c7e';
 			$tanggal = $this->input->post('tanggal_periksa');
 			if (strtotime($tanggal) < strtotime($awal_tanggal)) {
@@ -526,7 +496,7 @@ class Dashboard extends CI_Controller
 				redirect('Dashboard_admin/view_admin');
 			}
 			$this->m_Tanggal_Pemeriksaan->tanggal_periksa($id_tanggal, $tanggal);
-			
+
 			redirect('Dashboard_admin/view_admin');
 
 			// kesehatan

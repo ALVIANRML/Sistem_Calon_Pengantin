@@ -53,7 +53,7 @@
 			<nav class="navbar">
 				<ul>
 					<div class="navbar_profil" style="width: 15vw; margin-right:0px">
-						<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
+						<img src="<?= base_url('uploads/photo/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
 						<div class="profile-text">
 							<span>Halo,</span><br> <!-- Menambahkan break line -->
 							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;">
@@ -106,7 +106,7 @@
 				<div class="informasi">
 					<div class="profil">
 						<div class="img-profil">
-							<img src="<?= base_url('uploads/photo/pasFoto/'); ?><?= $this->session->userdata('foto_user') ?>" alt="Profile Image" class="catin-image">
+							<img src="<?= base_url('uploads/photo/'); ?><?= $this->session->userdata('foto_user') ?>" alt="Profile Image" class="catin-image">
 						</div>
 						<p style="text-align: center; margin: 0;"><b><?= $nama  ?></b></p>
 						<div class="biodata" style="font-size: 12.5px;">
