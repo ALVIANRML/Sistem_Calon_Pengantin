@@ -1,0 +1,269 @@
+body {
+    font-family: 'Inter';
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+p {
+    margin: 0;
+}
+
+a {   
+    text-decoration: none; 
+}
+
+button {
+    all: unset; /* Menghapus semua gaya default */
+    cursor: pointer;
+}
+
+/* Header */
+
+.header-dashboard-admin {
+    position: sticky;
+    top: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    width: 100%;
+    background: var(--Whites, #FFFFFF);
+    padding: 0 32px;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.container-logo{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.container-logo > img {
+    width: 35px;
+    height: 40px;
+}
+
+.container-logo > p {
+    color: #262626;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 20px;
+}
+
+.profil-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 100%;
+}
+
+.foto-profil{
+    width: 44px;
+    height: 44px;
+    border-radius: 100%;
+}
+
+.foto-profil > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.nama {
+    color: #161616;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.dropdown {
+    display: block; /* Ensure it is positioned in the layout */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    color: black;
+    width: 100%;
+    opacity: 0; /* Start invisible */
+    visibility: hidden; /* Ensure it is not clickable */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transitions */
+}
+
+.dropdown div {
+    padding: 12px 16px;
+    cursor: pointer;
+}
+
+.dropdown div a {
+    color: #000;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.dropdown div:hover {
+    background-color: #015D67;
+}
+
+.dropdown div:hover a {
+    color: #FFFFFF;
+}
+
+.profil-container:hover .dropdown {
+    opacity: 1; /* Make it visible */
+    visibility: visible; /* Make it clickable */
+}
+
+/* End of header */
+
+
+/* Sidebar */
+
+.container-sidebar-dashboard-admin{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    height: 100vh;
+    padding: 32px;
+    background-color: #FFFFFF
+}
+
+.container-sidebar-dashboard-admin > p {
+    color: #7F7F7F;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.257px;
+    opacity: 0.6;
+    margin-bottom: 16px
+}
+
+.menu{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    gap: 16px; 
+    border-radius: 6px;
+    background: transparent;
+    padding-left: 16px;
+    box-sizing: border-box;
+    /* teks */
+    color: #828282;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    fill: #828282;
+    transition: background 0.1s ease, color 0.1s ease;
+}
+
+.location-menu {
+    background: var(--Primary, #015963); /* Background color */
+    color: #FFFFFF; /* Text color */
+}
+
+.location-menu svg g path {
+    fill: #FFFFFF; /* Icon color */
+    transition: fill 0.1s ease;
+}
+
+.menu:hover {
+    background: var(--Primary, #015963); /* Background color on hover */
+    /* teks */
+    color: #FFFFFF;
+}
+
+.menu:hover svg g path {
+    fill: #FFFFFF;
+}
+.menu:hover svg path {
+    fill: #FFFFFF;
+}
+
+/* menu double */
+.menu-double{
+    border-bottom-left-radius:0 ;
+    border-bottom-right-radius: 0;
+}
+
+.logo-menu-dropdown{
+    position: absolute;
+    right: 24px;
+}
+
+.menu-dropdown-visibility{
+    display: none;
+}
+
+.menu-dropdown{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* teks */
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.menu-dropdown > a > p{
+    background: var(--primary---color, #FFFAFA);
+    color: #828282;
+    padding: 12px 16px;
+}
+
+.menu-double:hover + .menu-dropdown-visibility{
+    display: flex;
+}
+
+.menu-dropdown-visibility:hover{
+    display: flex;
+}
+
+.menu-dropdown p:hover{
+    background: var(--primary---color, #00ACB1);
+    color: var(--white---color, #FFFAFA);
+}
+
+/* end of menu double */
+
+/* End of sidebar */
+
+@media (max-width: 1390px) {
+	body {
+		width: 100%;
+		overflow-y: auto;
+	}
+
+	.header-dashboard-admin {
+		padding-left: 5px;
+	}
+
+	.container-sidebar-dashboard-admin {
+		padding-left: 5px;
+	}
+
+	.dropdown{
+		width: 185px;
+		height: auto;
+		/* margin-left: 30px; */
+
+	}
+
+	.dropdown div {
+		padding: 16px 16px;
+		cursor: pointer;
+		width: auto;
+		
+	}
+
+
+
+
+
+}
+
+/* end of menu double */
+
+/* End of sidebar */

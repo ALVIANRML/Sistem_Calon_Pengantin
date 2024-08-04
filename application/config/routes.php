@@ -55,3 +55,5 @@ $route['translate_uri_dashes'] = FALSE;
 $route['get_kota'] = 'dashboard/get_kota';
 $route['get_kecamatan'] = 'dashboard/get_kecamatan';
 $route['get_kelurahan'] = 'dashboard/get_kelurahan';
+// $route['popup'] = 'popup/index';
+$route['dashboard_admin/filter_hapus_data'] = 'dashboard_admin/filter_hapus_data';

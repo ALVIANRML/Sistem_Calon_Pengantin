@@ -11,6 +11,7 @@ class m_Auth extends CI_Model
 
 		$this->db->query("INSERT INTO users(id_user, nama, password, role, created_at, nomor_telepon, tanggal_lahir,id_user_detail) VALUES ('$id', '$nama', '$password', '$role','$created_at', '$nomorTelepon', '$tanggalLahir','$id')");
 		$this->db->query("INSERT INTO user_detail(id_user_detail) VALUES ('$id')");
+		$this->db->query("INSERT INTO hasil_diagnosa(user_id) VALUES ('$id')");
 		$this->db->trans_complete();
 
 		if ($this->db->trans_status() == true)
@@ -45,4 +46,8 @@ class m_Auth extends CI_Model
         $query = $this->db->get('users'); 
         return $query;
     }
+
+	public function delete_by_id($user_id){
+		$this->db->delete('users', array('id_user' => $user_id));
+	}
 }
