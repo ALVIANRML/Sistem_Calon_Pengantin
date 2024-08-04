@@ -1,134 +1,3 @@
-body {
-    font-family: 'Inter';
-    margin: 0;
-    width: 100vw;
-    height: 100vh;
-}
-
-p {
-    margin: 0;
-}
-
-.container-logo{
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.container-logo > img {
-    width: 35px;
-    height: 40px;
-}
-
-.container-logo > p {
-    color: #262626;
-font-size: 16px;
-font-weight: 800;
-line-height: 20px;
-}
-
-.header-dashboard-admin {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 70px;
-    background: var(--Whites, #FFFFFF);
-    padding: 0 32px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 1000;
-}
-
-.profil-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.foto-profil{
-    width: 44px;
-    height: 44px;
-    border-radius: 100%;
-    background-image: url(public/images/logo.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.nama {
-    color: #161616;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-
-.container-sidebar-dashboard-admin{
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    width: 240px;
-    height: 100vh;
-    padding: 32px;
-    background-color: #FFFFFF;
-}
-
-.container-sidebar-dashboard-admin > p {
-    color: #7F7F7F;
-font-size: 12px;
-font-weight: 700;
-letter-spacing: 0.257px;
-opacity: 0.6;
-margin-bottom: 16px
-}
-
-.menu{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 50px;
-    gap: 16px; 
-    border-radius: 6px;
-    background: transparent;
-    padding-left: 16px;
-    box-sizing: border-box;
-    /* teks */
-    color: #828282;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    fill: #828282;
-    transition: background 0.1s ease, color 0.1s ease;
-}
-
-/* Gaya khusus untuk menu Dashboard */
-.container-sidebar-dashboard-admin .location-menu {
-    background: var(--Primary, #015963); /* Background color */
-    color: #FFFFFF; /* Text color */
-}
-
-.container-sidebar-dashboard-admin .location-menu svg g path {
-    fill: #FFFFFF; /* Icon color */
-    transition: fill 0.1s ease;
-}
-
-
-.container-sidebar-dashboard-admin a {
-    text-decoration: none; /* Hilangkan garis bawah pada tautan */
-}
-
-.container-sidebar-dashboard-admin a:hover .menu {
-    background: var(--Primary, #015963); /* Background color on hover */
-    /* teks */
-    color: #FFFFFF;
-}
-
-.container-sidebar-dashboard-admin a:hover .menu svg g path {
-    fill: #FFFFFF;
-}
-
 .container-content{
     margin-left: 304px;
     background: #F5F9FA;
@@ -139,7 +8,7 @@ margin-bottom: 16px
     background: #F5F9FA;
     padding: 24px 48px;
     padding-bottom: 145px;
-    margin-top: 70px;
+    box-sizing: border-box;
 }
 
 .container-content-data-catin-admin > p{
@@ -172,7 +41,7 @@ font-weight: 400;
 line-height: normal;
 }
 
-/*-------- content -------*/
+/* /-------- content -------/ */
 .form-group{
     width:490px;
 }
@@ -227,9 +96,9 @@ line-height: normal;
     display: flex;
     gap: 8px;
     padding: 12px 16px;
-    background-color: #015D67; /* Merah muda */
+    background-color: #015D67; 
     border-radius: 6px;
-    color: #FFFAFA; /* Merah gelap */
+    color: #FFFAFA; 
     font-size: 16px;
     font-weight: 500;
     white-space: nowrap;
@@ -239,9 +108,9 @@ line-height: normal;
     display: flex;
     gap: 8px;
     padding: 12px 16px;
-    background-color: #DC3545; /* Merah muda */
+    background-color: #DC3545; 
     border-radius: 6px;
-    color: #FFFAFA; /* Merah gelap */
+    color: #FFFAFA; 
     font-size: 16px;
     font-weight: 500;
     white-space: nowrap;
@@ -280,11 +149,15 @@ letter-spacing: -0.114px;
     position: relative; /* Kontainer relatif untuk ikon */
     display: flex;
     align-items: center;
+	height: 40px;
+	
 }
 
 .form-input-cari svg{
     position: absolute;
-    right: 16px;
+    right: 1px;
+	height: 20px;
+
 }
 
 .container-tabel{
@@ -336,8 +209,8 @@ th {
     padding: 10px 12px;
     justify-content: center;
     align-items: center;
-    background-color: #DC3545; /* Merah muda */
-    color: #FFFAFA; /* Merah gelap */
+    background-color: #DC3545; 
+    color: #FFFAFA; 
     border-radius: 4px;
     white-space: nowrap;
 }
@@ -390,3 +263,242 @@ text-decoration-line: underline;
     
 }
 
+
+
+       /* Styling div yang tersembunyi */
+       .hidden {
+        display: none;
+    }
+    .content-div {
+        padding: 10px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        transition: all 0.3s ease;
+    }
+    .show {
+        opacity: 1;
+        display: block;
+    }
+    .hide {
+        max-height: 0;
+        opacity: 0;
+        display: block;
+    }
+
+    /* Styling untuk baris yang tersembunyi */
+    .row-hidden {
+        display: none;
+    }
+    .row-visible {
+        display: table-row;
+    }
+
+    .content-div > ul {
+        list-style: none; /* Menghilangkan bullet points */
+        padding: 0;
+        margin: 0;
+    }
+
+    .content-div > ul > li {
+        display: grid;
+        grid-template-columns: 180px 10px auto;
+        padding: 10px;
+        column-gap: 15px;
+        border-bottom: 1px solid #D9D9D9;
+    }
+
+    .label {
+        grid-column: 1/2;
+        text-align: left; /* Menyelaraskan teks ke kiri */
+    }
+
+    .titik-dua {
+        grid-column: 2/3;
+        text-align: center; /* Menyelaraskan titik dua ke kanan */
+    }
+
+    .value {
+        justify-self: start;
+    }
+
+    .btn{
+        display: inline-flex;
+        gap: 16px;
+        align-items: center;
+        padding: 10px 12px;
+        border-radius: 4px;
+        white-space: nowrap;
+        width: auto;
+    }
+
+    .red-btn{
+        background-color: #DC3545; 
+        color: #FFFAFA;
+    }
+
+    .blue-btn{
+        background-color: #289EA1; 
+        color: #FFFAFA; 
+    }
+
+    .green-btn{
+        background-color: #015D67; 
+        color: #FFFAFA; 
+    }
+
+    .gap-btn{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: auto;
+    }	
+
+	input[type="date"]::-webkit-calendar-picker-indicator {
+		background: none;
+		display: block;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		opacity: 0; /* Make the indicator transparent */
+	}
+
+	.popup {
+		display: none;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 50%;
+		height: auto;
+		padding: 2vh;
+		border-radius: 10px;
+		background-color: white;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+		z-index: 1000;
+	}
+	
+	.popup.show {
+		display: block;
+	}
+	
+	.popup .close-btn {
+		float: right;
+		cursor: pointer;
+		font-size: 2vh;
+		font-size: 24px;
+		font-weight: bold;
+		color: #015D67;
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		transition: color 0.3s ease, transform 0.3s ease;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+	
+	.close-btn:hover {
+		color: #015D67;
+		transform: scale(1.2);
+	}
+
+	/* input[type=""] {
+		border: none;
+		outline: none;
+	
+	} */
+	input[type="date"] {
+		border: none;
+		outline: none;
+	
+	}
+	input[type="text"] {
+		border-color: #F5F9FA;
+		outline-color: #000;
+	
+	}
+	
+	
+	
+	
+	input[type="date"] {
+		font-size: 20px;
+		color: #333;
+		padding: 5px;
+		margin-top: 5px;
+		margin-left: 10px;
+	}
+	input[type="date"] {
+		position: relative; /* Ensure the input has relative positioning for absolute positioning of the indicator */
+	}
+	
+	input[type="date"]::-webkit-calendar-picker-indicator {
+		background: none;
+		display: block;
+		width: 90%; /* Set width to 90% */
+		height: 20px; /* Set height to a specific value */
+		background-color: #000; /* Set background color */
+		cursor: pointer;
+		position: absolute; /* Absolute positioning */
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 10;
+		opacity: 0; /* Make the indicator transparent */
+		/* Optionally center the indicator horizontally */
+		margin-left: 5%; /* Adjust margin to center */
+	}
+
+	.tanggal {
+		margin-top: 10px;
+		float: right;
+		margin-right: 10px;
+	}
+	
+	.input-form {
+		width: 100%;
+		height: 50px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		border: 1px solid #000;
+		border-radius: 10px;
+	}
+	
+	.overlay {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: 999;
+	}
+	
+	.overlay.show {
+		display: block;
+	}
+
+	button[type="submit"] {
+		background-color: #015D67;
+		color: white;
+		border: 2px solid #015D67;
+		border-radius: 5px;
+		padding: 10px 20px;
+		font-size: 16px;
+		cursor: pointer;
+		transition: background-color 0.3s, color 0.3s;
+		margin-top: 30px;
+	}
+	
+	button[type="submit"]:hover {
+		background-color: white;
+		color: #015D67;
+	}
+	

@@ -26,6 +26,14 @@ class m_User_detail extends CI_Model
 		return $query;
 	}
 
+	public function get_by_data_registered($tanggal)
+	{
+
+		$this->db->where('data_registered', $tanggal);
+		$query = $this->db->get('user_detail');
+		return $query->result_array();
+	}
+
 
 	public function update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered, $tanggalPeriksa)
 	{
@@ -126,6 +134,10 @@ class m_User_detail extends CI_Model
 		$this->db->from('user_detail');
 		$tes = $this->db->count_all_results();
 		return $tes;
+	}
+
+	public function delete_by_id($user_id){
+		$this->db->delete('user_detail', array('id_user_detail' => $user_id));
 	}
 
 	
