@@ -14,6 +14,7 @@ class Dashboard_Admin extends CI_Controller
 		$this->load->model('m_Auth');
 		$this->load->model('m_Penyakit');
 		$this->load->model('m_gejala');
+		$this->load->model('m_kelompok_gejala');
 		$this->load->model('m_Hasil_Diagnosa');
 		$this->load->helper(array('form', 'url'));
 	}
@@ -153,7 +154,7 @@ class Dashboard_Admin extends CI_Controller
 		$this->m_Penyakit->add_penyakit($id, $kode, $nama, $keterangan, $pemeriksa);
 		redirect('dashboard_admin/data_penyakit');
 	}
-	
+
 	public function hapus_penyakit()
 	{
 		$id = $this->input->post('penyakit_id');
@@ -162,7 +163,7 @@ class Dashboard_Admin extends CI_Controller
 		// buat bisa edit penyakit
 	}
 
-	
+
 	public function edit_penyakit()
 	{
 		$id 		= $this->input->post('penyakitId');
@@ -194,7 +195,7 @@ class Dashboard_Admin extends CI_Controller
 		$this->m_gejala->add_gejala($id, $kode, $nama, $kelompokGejala);
 		redirect('dashboard_admin/data_gejala');
 	}
-	
+
 	public function hapus_gejala()
 	{
 		$id = $this->input->post('gejala_id');
@@ -203,7 +204,7 @@ class Dashboard_Admin extends CI_Controller
 		// buat bisa edit gejala
 	}
 
-	
+
 	public function edit_gejala()
 	{
 		$id 		= $this->input->post('gejalaId');
@@ -212,6 +213,46 @@ class Dashboard_Admin extends CI_Controller
 		$kelompokGejala = $this->input->post('kelompokGejala');
 		$this->m_gejala->edit_gejala($id, $kode, $nama, $kelompokGejala);
 		redirect('dashboard_admin/data_gejala');
+
+		// buat bisa edit penyakit
+	}
+
+
+	public function view_dinas_pemeriksaan()
+	{
+		$data['id'] = $this->m_kelompok_gejala->kelompok_gejala();
+		$this->load->view('Dashboard/admin/dinas_pemeriksa', $data);
+	}
+
+	public function add_dinas_pemeriksa()
+	{
+		$id 		= bin2hex(random_bytes(16));
+		$kelompok 	= $this->input->post('kelompok');
+		$keterangan = $this->input->post('keterangan');
+		
+
+		$this->m_kelompok_gejala->add_kelompok_gejala($id, $kelompok, $keterangan);
+		redirect('dashboard_admin/view_dinas_pemeriksaan');
+	}
+
+	public function hapus_dinas_pemeriksa()
+	{
+		$id = $this->input->post('gejalaId');
+		$this->m_kelompok_gejala->delete_by_id($id);
+		redirect('dashboard_admin/view_dinas_pemeriksaan');
+		// buat bisa edit gejala
+	}
+	
+
+	public function edit_dinas_pemeriksa()
+	{
+		$id 		= $this->input->post('gejalaId');
+		$kode 		= $this->input->post('kodeGejala');
+		$nama 		= $this->input->post('namaGejala');
+		$kelompokGejala = $this->input->post('kelompokGejala');
+		$this->m_gejala->edit_gejala($id, $kode, $nama, $kelompokGejala);
+		redirect('dashboard_admin/data_view_dinas_pemeriksaan');
+	
 
 		// buat bisa edit penyakit
 	}

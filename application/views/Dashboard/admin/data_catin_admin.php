@@ -8,8 +8,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/data-catin-admin.css') ?>" />
-	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/sidebar_admin.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/data-catin-admin.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 	<!-- SweetAlert -->
 	<script src="<?= base_url() ?>node_modules/sweetalert/dist/sweetalert.min.js"></script>
@@ -221,7 +221,7 @@
 			</div>
 			<div class="menu-dropdown-visibility" id="mdv2">
 				<div class="menu-dropdown">
-					<a href="data-user-admin.html">
+				<a href="<?= base_url('dashboard_admin/view_dinas_pemeriksaan') ?>">
 						<p>Dinas Pemeriksa</p>
 					</a>
 					<a href="#">
