@@ -189,7 +189,7 @@
 			</div>
 			<div class="menu-dropdown-visibility" id="mdv1">
 				<div class="menu-dropdown">
-					<a href="data-gejala-admin.html">
+					<a href="<?= base_url('dashboard_admin/data_penyakit') ?>">
 						<p>Gejala</p>
 					</a>
 					<a href="#">

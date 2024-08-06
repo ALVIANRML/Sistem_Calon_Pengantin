@@ -31,8 +31,11 @@
 }
 
 .copyright-text {
+	flex-shrink: 0; /* Prevent the copyright text from shrinking */
+    text-align: center;
+    margin-top: auto; /* Push it to the bottom */
 	position: absolute;
-	bottom: 42px;
+	bottom: 10%;
 	color: var(--Grey, #7F7F7F);
 	font-family: Inter;
 	font-size: 14px;

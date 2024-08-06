@@ -20,12 +20,12 @@
 		<!-- header -->
 		<div class="header-dashboard-admin">
 			<div class="container-logo">
-				<img src="public/images/logo.png" alt="">
+				<img src="<?= base_url('assets/') ?>img/percantin.png" alt="">
 				<p>PERCATIN</p>
 			</div>
 			<div class="profil-container">
 				<div class="foto-profil">
-					<img src="public/images/logo.png" alt="">
+					<img src="<?= base_url('assets/') ?>img/percantin.png" alt="">
 				</div>
 				<div style="display: flex; flex-direction: column;">
 					<p style="color: #7F7F7F; font-size: 12px; font-weight: 600;">Halo,</p>
@@ -33,10 +33,10 @@
 				</div>
 				<!-- Dropdown -->
 				<div class="dropdown-logo">
-					<img src="public/icon/dropdown.svg" alt="">
+					<img src="<?= base_url('assets/img/dropdown.svg') ?>" alt="">
 					<div class="dropdown">
-						<div><a href="#">Ganti Password</a></div>
-						<div><a href="#">Keluar</a></div>
+						<div><a href="<?= base_url('auth/ganti_password') ?>">Ganti Password</a></div>
+						<div><a href="<?= base_url('auth/login') ?>">Keluar</a></div>
 					</div>
 				</div>
 				<!-- End of Dropdown -->
@@ -46,7 +46,7 @@
 		<!-- sidebar -->
 		<div class="container-sidebar-dashboard-admin">
 			<p>NAVIGASI</p>
-			<a href="dashboard-admin.html">
+			<a href="<?= base_url('dashboard_admin/view_admin') ?>">
 				<div class="menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="Frame">
@@ -56,7 +56,7 @@
 					<p class="menu-text">Dashboard</p>
 				</div>
 			</a>
-			<a href="data-catin-admin.html">
+			<a href="<?= base_url('dashboard_admin/view_data_catin') ?>">
 				<div class="menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="Frame">
@@ -66,7 +66,7 @@
 					<p class="menu-text">Data Catin</p>
 				</div>
 			</a>
-			<a href="data-gejala-admin.html">
+			<a href="<?= base_url('dashboard_admin/data_penyakit') ?>">
 				<div class="menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="material-symbols-light:data-table">
@@ -93,7 +93,7 @@
 					<a href="<?= base_url('dashboard_admin/data_gejala') ?>">
 						<p>Gejala</p>
 					</a>
-					<a href="#">
+					<a href="<?= base_url('dashboard_admin/nilai_pakar') ?>">
 						<p>Nilai Pakar</p>
 					</a>
 				</div>
