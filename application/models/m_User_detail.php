@@ -140,5 +140,17 @@ class m_User_detail extends CI_Model
 		$this->db->delete('user_detail', array('id_user_detail' => $user_id));
 	}
 
+	public function search($keyword)
+{
+	if(!$keyword){
+		return null;
+	}
+	$this->db->like('nama_lengkap', $keyword);
+	$this->db->or_like('nik', $keyword);
+	$this->db->or_like('nomor_telepon', $keyword);
+	$this->db->or_like('no_pendaftaran', $keyword);
+	$query = $this->db->get('user_detail');
+	return $query->result();
+}
 	
 }

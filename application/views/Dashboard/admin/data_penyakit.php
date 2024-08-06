@@ -30,14 +30,15 @@
 				</div>
 				<div style="display: flex; flex-direction: column;">
 					<p style="color: #7F7F7F; font-size: 12px; font-weight: 600;">Halo,</p>
-					<p class="nama">Nama orang</p>
+					<p class="nama"><?= $this->session->userdata('username'); ?></p>
 				</div>
 				<!-- Dropdown -->
 				<div class="dropdown-logo">
 					<img src="<?= base_url('assets/img/dropdown.svg') ?>" alt="">
-					<div class="dropdown">
-						<div><a href="<?= base_url('auth/ganti_password') ?>">Ganti Password</a></div>
-						<div><a href="<?= base_url('auth/login') ?>">Keluar</a></div>
+					<div class="dropdown" style="width: 122%;">
+						<div> <a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password </a>
+						</div>
+						<div><a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar </a></div>
 					</div>
 				</div>
 				<!-- End of Dropdown -->
@@ -113,7 +114,7 @@
 			</div>
 			<div class="menu-dropdown-visibility" id="mdv2">
 				<div class="menu-dropdown">
-				<a href="<?= base_url('dashboard_admin/view_dinas_pemeriksaan') ?>">
+					<a href="<?= base_url('dashboard_admin/view_dinas_pemeriksaan') ?>">
 						<p>Dinas Pemeriksa</p>
 					</a>
 					<a href="#">
@@ -328,14 +329,14 @@
 			document.getElementById('pencegahan').value = pencegahan;
 			document.getElementById('namaPemeriksa').value = namaPemeriksa;
 
-			
+
 			const pencegahanTextarea = document.getElementById('pencegahan');
-    if (pencegahanTextarea) {
-        pencegahanTextarea.value = pencegahan;
-    } else {
-        console.log('Pencegahan Textarea Not Found');
-    }
-			
+			if (pencegahanTextarea) {
+				pencegahanTextarea.value = pencegahan;
+			} else {
+				console.log('Pencegahan Textarea Not Found');
+			}
+
 			if (penyakitId) penyakitId.value = penyakitId;
 			if (kode) kode.value = kodePenyakit;
 			if (nama) nama.value = namaPenyakit;
