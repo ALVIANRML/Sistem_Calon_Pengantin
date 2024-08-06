@@ -12,6 +12,7 @@ class Dashboard_Admin extends CI_Controller
 		$this->load->model('m_Tanggal_Pemeriksaan');
 		$this->load->model('m_User_detail');
 		$this->load->model('m_Auth');
+		$this->load->model('m_Penyakit');
 		$this->load->model('m_Hasil_Diagnosa');
 		$this->load->helper(array('form', 'url'));
 	}
@@ -118,14 +119,13 @@ class Dashboard_Admin extends CI_Controller
 						$this->m_Hasil_Diagnosa->delete_by_id($id_user_detail);
 						$this->m_User_detail->delete_by_id($id_user_detail);
 					}
-					
-		
-						$this->session->set_flashdata('success_delete', 'Anda berhasil menghapus data.');
-						redirect('dashboard_admin/view_data_catin');
+
+
+					$this->session->set_flashdata('success_delete', 'Anda berhasil menghapus data.');
+					redirect('dashboard_admin/view_data_catin');
 				} else {
-					
 				}
-			}else{
+			} else {
 				$this->session->set_flashdata('error_captcha', 'Kode Yang Anda Input Salah');
 				redirect('dashboard_admin/view_data_catin');
 			}
@@ -133,5 +133,47 @@ class Dashboard_Admin extends CI_Controller
 			$this->session->set_flashdata('cancel_delete', 'permintaan anda batal');
 			redirect('dashboard_admin/view_data_catin');
 		}
+	}
+
+	public function data_penyakit()
+	{
+		$data['id'] = $this->m_Penyakit->penyakit();
+		$this->load->view('Dashboard/admin/data_penyakit', $data);
+	}
+
+	public function add_penyakit()
+	{
+		$id 		= bin2hex(random_bytes(16));
+		$kode 		= $this->input->post('kode_penyakit');
+		$nama 		= $this->input->post('nama_penyakit');
+		$keterangan = $this->input->post('pencegahan');
+		$pemeriksa 	= $this->input->post('pemeriksa');
+
+		$this->m_Penyakit->add_penyakit($id, $kode, $nama, $keterangan, $pemeriksa);
+		redirect('dashboard_admin/data_penyakit');
+	}
+	
+	public function hapus_penyakit()
+	{
+		$id = $this->input->post('penyakit_id');
+		$this->m_Penyakit->delete_by_id($id);
+		redirect('dashboard_admin/data_penyakit');
+		// buat bisa edit penyakit
+	}
+
+	
+	public function edit_penyakit()
+	{
+		$id 		= $this->input->post('penyakitId');
+		$kode 		= $this->input->post('kode_penyakit');
+		$nama 		= $this->input->post('nama_penyakit');
+		$keterangan = $this->input->post('pencegahan');
+		$pemeriksa 	= $this->input->post('pemeriksa');
+		// var_dump($id, $kode, $nama, $keterangan, $pemeriksa);
+		// exit;
+		$this->m_Penyakit->edit_penyakit($id, $kode, $nama, $keterangan, $pemeriksa);
+		redirect('dashboard_admin/data_penyakit');
+
+		// buat bisa edit penyakit
 	}
 }
