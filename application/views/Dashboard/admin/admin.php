@@ -134,7 +134,7 @@
 				<!-- Dropdown -->
 				<div class="dropdown-logo">
 					<img src="<?= base_url('assets/img/dropdown.svg') ?>" alt="">
-					<div class="dropdown">
+					<div class="dropdown" style="width: 122%;">
 						<div> <a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password </a>
 						</div>
 						<div><a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar </a></div>
@@ -165,7 +165,7 @@
 					<p class="menu-text">Data Catin</p>
 				</div>
 			</a>
-			<a href="data-penyakit-admin.html">
+			<a href="<?= base_url('dashboard_admin/data_penyakit') ?>">
 				<div class="menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="material-symbols-light:data-table">
