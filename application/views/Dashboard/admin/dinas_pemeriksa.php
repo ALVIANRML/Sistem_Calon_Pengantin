@@ -25,18 +25,19 @@
 			</div>
 			<div class="profil-container">
 				<div class="foto-profil">
-					<img src="<?= base_url('assets/') ?>img/percantin.png" alt="">
+					<img src="<?= base_url('assets/img/profile-admin.png') ?>" alt="">
 				</div>
 				<div style="display: flex; flex-direction: column;">
 					<p style="color: #7F7F7F; font-size: 12px; font-weight: 600;">Halo,</p>
-					<p class="nama">Nama orang</p>
+					<p class="nama"><?= $this->session->userdata('username'); ?></p>
 				</div>
 				<!-- Dropdown -->
 				<div class="dropdown-logo">
 					<img src="<?= base_url('assets/img/dropdown.svg') ?>" alt="">
-					<div class="dropdown">
-						<div><a href="<?= base_url('auth/ganti_password') ?>">Ganti Password</a></div>
-						<div><a href="<?= base_url('auth/login') ?>">Keluar</a></div>
+					<div class="dropdown" style="width: 122%;">
+						<div> <a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password </a>
+						</div>
+						<div><a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar </a></div>
 					</div>
 				</div>
 				<!-- End of Dropdown -->
@@ -46,7 +47,7 @@
 		<!-- sidebar -->
 		<div class="container-sidebar-dashboard-admin">
 			<p>NAVIGASI</p>
-			<a href="dashboard-admin.html">
+			<a href="<?= base_url('dashboard_admin/view_admin') ?>">
 				<div class="menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="Frame">
@@ -56,7 +57,7 @@
 					<p class="menu-text">Dashboard</p>
 				</div>
 			</a>
-			<a href="data-catin-admin.html">
+			<a href="<?= base_url('dashboard_admin/view_data_catin') ?>">
 				<div class="menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="Frame">
@@ -66,7 +67,7 @@
 					<p class="menu-text">Data Catin</p>
 				</div>
 			</a>
-			<a href="data-penyakit-admin.html">
+			<a href="<?= base_url('dashboard_admin/data_penyakit') ?>">
 				<div class="menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="material-symbols-light:data-table">
@@ -90,7 +91,7 @@
 			</div>
 			<div class="menu-dropdown-visibility" id="mdv1">
 				<div class="menu-dropdown">
-					<a href="data-gejala-admin.html">
+				<a href="<?= base_url('dashboard_admin/data_gejala') ?>">
 						<p>Gejala</p>
 					</a>
 					<a href="#">
@@ -128,7 +129,7 @@
 		<div class="container-content">
 			<div class="container-content-data-catin-admin">
 				<p>Dinas Pemeriksa</p>
-				<div class="tambah-data-btn" onclick="showPopup()">
+				<div class="tambah-data-btn" style="cursor: pointer;" onclick="showPopup()">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 						<path d="M12 4C11.7348 4 11.4804 4.10536 11.2929 4.29289C11.1054 4.48043 11 4.73478 11 5V11H5C4.73478 11 4.48043 11.1054 4.29289 11.2929C4.10536 11.4804 4 11.7348 4 12C4 12.2652 4.10536 12.5196 4.29289 12.7071C4.48043 12.8946 4.73478 13 5 13H11V19C11 19.2652 11.1054 19.5196 11.2929 19.7071C11.4804 19.8946 11.7348 20 12 20C12.2652 20 12.5196 19.8946 12.7071 19.7071C12.8946 19.5196 13 19.2652 13 19V13H19C19.2652 13 19.5196 12.8946 19.7071 12.7071C19.8946 12.5196 20 12.2652 20 12C20 11.7348 19.8946 11.4804 19.7071 11.2929C19.5196 11.1054 19.2652 11 19 11H13V5C13 4.73478 12.8946 4.48043 12.7071 4.29289C12.5196 4.10536 12.2652 4 12 4Z" fill="#FFFAFA" />
 					</svg>
@@ -168,7 +169,7 @@
 									<td><?= $kelompok['keterangan'] ?></td>
 									<td>
 										<div class="container-2-btn">
-											<div class="edit-btn"  style="cursor: pointer;" data-id="<?= $kelompok['id'] ?>" data-kelompok="<?= $kelompok['kelompok_gejala_id'] ?>" data-keterangan="<?= $kelompok['keterangan'] ?>" onclick="showPopup2(this)">
+											<div class="edit-btn" style="cursor: pointer;" data-id="<?= $kelompok['id'] ?>" data-kelompok="<?= $kelompok['kelompok_gejala_id'] ?>" data-keterangan="<?= $kelompok['keterangan'] ?>" onclick="showPopup2(this)">
 												<p>Edit</p>
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 													<path d="M18.988 2.01221L21.988 5.01221L19.701 7.30021L16.701 4.30021L18.988 2.01221ZM8 16.0002H11L18.287 8.71321L15.287 5.71321L8 13.0002V16.0002Z" fill="#FFFAFA" />
@@ -185,67 +186,64 @@
 									</td>
 								</tr>
 							<?php endforeach ?>
+
+							<!-- KHUSUS MODAL -->
+							<!-- Modal tambah data -->
+							<div class="overlay" id="overlay"></div>
+							<div class="popup" id="popup">
+								<span class="close-btn" onclick="closePopup()">&times;</span>
+								<h2>Tambah Data Penyakit</h2>
+								<hr style="border-color: #015D67;">
+								<form id="popupForm" action="<?= base_url('dashboard_admin/add_dinas_pemeriksa'); ?>" method="post">
+									<div class="edit-pendaftaran-container">
+										<label for="kelompok"><b class="form-label">Nama Penyakit</b><br></label>
+										<div class="input-form">
+											<input type="text" id="kelompok" class="tambah-data" name="kelompok" required>
+										</div>
+										<label for="keterangan"><b class="form-label">Kode Penyakit</b><br></label>
+										<div class="input-form">
+											<input type="text" id="keterangan" class="tambah-data" name="keterangan" required>
+										</div>
+										<button type="submit">Submit</button>
+									</div>
+								</form>
+							</div>
+
+							<!-- Popup Konfirmasi Hapus -->
+							<div class="overlay" id="overlay1"></div>
+							<div class="popup" id="popup1">
+								<span class="close-btn" onclick="closePopup1()">&times;</span>
+								<form id="popupForm" action="<?= base_url('dashboard_admin/hapus_dinas_pemeriksa'); ?>" method="post">
+									<input type="hidden" name="gejalaId" id="gejalaId" />
+									<h4>Apakah Anda Yakin Menghapus data ini?</h4>
+									<button type="submit">Ya</button>
+									<button type="button" onclick="closePopup1()">Tidak</button>
+								</form>
+							</div>
+
+							<!-- Popup Edit Data Gejala -->
+							<div class="overlay" id="overlay2"></div>
+							<div class="popup" id="popup2">
+								<span class="close-btn" onclick="closePopup2()">&times;</span>
+								<h2>Edit Data Gejala</h2>
+								<hr style="border-color: #015D67;">
+								<form id="popupForm" action="<?= base_url('dashboard_admin/edit_dinas_pemeriksa'); ?>" method="post">
+									<input type="hidden" name="gejalaId" id="gejalaId2" />
+									<div class="edit-pendaftaran-container">
+										<label for="kelompok2"><b class="form-label">Nama Penyakit</b><br></label>
+										<div class="input-form">
+											<input type="text" id="kelompok2" class="tambah-data" name="kelompok" required>
+										</div>
+										<label for="keterangan2"><b class="form-label">Kode Penyakit</b><br></label>
+										<div class="input-form">
+											<input type="text" id="keterangan2" class="tambah-data" name="keterangan" required>
+										</div>
+										<button type="submit">Submit</button>
+									</div>
+								</form>
+							</div>
 						</tbody>
 					</table>
-				</div>
-
-				<!-- KHUSUS MODAL -->
-				<!-- Modal tambah data -->
-				<div class="overlay" id="overlay"></div>
-				<div class="popup" id="popup">
-					<span class="close-btn" onclick="closePopup()">&times;</span>
-					<h2>Tambah Data Penyakit</h2>
-					<hr style="border-color: #015D67;">
-					<form id="popupForm" action="<?= base_url('dashboard_admin/add_dinas_pemeriksa'); ?>" method="post">
-						<div class="edit-pendaftaran-container">
-							<label for="kelompok"><b class="form-label">Nama Penyakit</b><br></label>
-							<div class="input-form">
-								<input type="text" id="kelompok" class="tambah-data" name="kelompok" required>
-							</div>
-							<label for="keterangan"><b class="form-label">Kode Penyakit</b><br></label>
-							<div class="input-form">
-								<input type="text" id="keterangan" class="tambah-data" name="keterangan" required>
-							</div>
-							<button type="submit">Submit</button>
-						</div>
-					</form>
-				</div>
-
-
-				<div class="overlay" id="overlay1"></div>
-				<div class="popup" id="popup1">
-					<span class="close-btn" onclick="closePopup1()">&times;</span>
-					<form id="popupForm" action="<?= base_url('dashboard_admin/hapus_dinas_pemeriksa'); ?>" method="post">
-						<input type="hidden" name="gejalaId" id="gejalaId" />
-						<h4>Apakah Anda Yakin Menghapus data ini?</h4>
-						<button type="submit">Ya</button>
-						<button type="button" onclick="closePopup1()">Tidak</button>
-					</form>
-				</div>
-
-
-				<div class="overlay" id="overlay2"></div>
-				<div class="popup" id="popup2">
-					<span class="close-btn" onclick="closePopup2()">&times;</span>
-					<h2>Tambah Data Gejala</h2>
-					<hr style="border-color: #015D67;">
-					<form id="popupForm" action="<?= base_url('dashboard_admin/edit_dinas_pemeriksa'); ?>" method="post">
-						<div class="edit-pendaftaran-container">
-							<label for="gejalaId" style="display: none;"><b class="form-label">Kode gejala</b><br></label>
-							<div class="input-form">
-								<input type="hidden" id="gejalaId" class="tambah-data" name="gejalaId" required>
-							</div>
-							<label for="kelompok"><b class="form-label">Nama Gejala Pemeriksaan</b><br></label>
-							<div class="input-form">
-								<input type="text" id="kelompok" class="tambah-data" name="kelompok" required>
-							</div>
-							<label for="keterangan"><b class="form-label">Keterangan</b><br></label>
-							<div class="input-form">
-								<input id="keterangan" name="keterangan" class="tambah-data">
-							</div>
-							<button type="submit">Submit</button>
-						</div>
-					</form>
 				</div>
 			</div>
 			<!-- KHUSUS MODAL -->
@@ -256,9 +254,9 @@
 		</div>
 	</div>
 	</div>
-	<script src="<?= base_url('assets/js/sidebar.js') ?>"></script>
 
 	<script>
+		// Fungsi untuk menampilkan popup "Tambah Data Penyakit"
 		function showPopup() {
 			document.getElementById('popup').classList.add('show');
 			document.getElementById('overlay').classList.add('show');
@@ -269,6 +267,7 @@
 			document.getElementById('overlay').classList.remove('show');
 		}
 
+		// Fungsi untuk menampilkan popup konfirmasi hapus
 		function showPopup1(buttonElement) {
 			const gejalaId = buttonElement.getAttribute('data-id');
 			document.getElementById('gejalaId').value = gejalaId;
@@ -281,18 +280,15 @@
 			document.getElementById('overlay1').classList.remove('show');
 		}
 
+		// Fungsi untuk menampilkan popup "Edit Data Gejala"
 		function showPopup2(buttonElement) {
 			const gejalaId = buttonElement.getAttribute('data-id');
 			const kelompok = buttonElement.getAttribute('data-kelompok');
 			const keterangan = buttonElement.getAttribute('data-keterangan');
 
-			console.log('Gejala ID:', gejalaId);
-			console.log('Kelompok:', kelompok);
-			console.log('Keterangan:', keterangan);
-
-			document.getElementById('gejalaId').value = gejalaId;
-			document.getElementById('kelompok').value = kelompok;
-			document.getElementById('keterangan').value = keterangan;
+			document.getElementById('gejalaId2').value = gejalaId;
+			document.getElementById('kelompok2').value = kelompok;
+			document.getElementById('keterangan2').value = keterangan;
 
 			document.getElementById('popup2').classList.add('show');
 			document.getElementById('overlay2').classList.add('show');
@@ -303,6 +299,7 @@
 			document.getElementById('overlay2').classList.remove('show');
 		}
 	</script>
+	<script src="<?= base_url('assets/js/sidebar.js') ?>"></script>
 </body>
 
 </html>

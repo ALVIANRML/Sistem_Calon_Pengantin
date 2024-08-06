@@ -250,10 +250,14 @@ class Dashboard_Admin extends CI_Controller
 		$kode 		= $this->input->post('kodeGejala');
 		$nama 		= $this->input->post('namaGejala');
 		$kelompokGejala = $this->input->post('kelompokGejala');
+		var_dump($id);
+		exit;
 		$this->m_gejala->edit_gejala($id, $kode, $nama, $kelompokGejala);
 		redirect('dashboard_admin/data_view_dinas_pemeriksaan');
 	
 
-		// buat bisa edit penyakit
+
 	}
+
+	// buat search di semua~ page
 }

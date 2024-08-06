@@ -8,8 +8,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/data_gejala_admin.css') ?>" />
-	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/sidebar_admin.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/data_gejala_admin.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
 </head>
 
 <body>
@@ -25,18 +25,19 @@
 			</div>
 			<div class="profil-container">
 				<div class="foto-profil">
-					<img src="<?= base_url('assets/') ?>img/percantin.png" alt="">
+					<img src="<?= base_url('assets/img/profile-admin.png') ?>" alt="">
 				</div>
 				<div style="display: flex; flex-direction: column;">
 					<p style="color: #7F7F7F; font-size: 12px; font-weight: 600;">Halo,</p>
-					<p class="nama">Nama orang</p>
+					<p class="nama"><?= $this->session->userdata('username'); ?></p>
 				</div>
 				<!-- Dropdown -->
 				<div class="dropdown-logo">
 					<img src="<?= base_url('assets/img/dropdown.svg') ?>" alt="">
-					<div class="dropdown">
-						<div><a href="<?= base_url('auth/ganti_password') ?>">Ganti Password</a></div>
-						<div><a href="<?= base_url('auth/login') ?>">Keluar</a></div>
+					<div class="dropdown" style="width: 122%;">
+						<div> <a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password </a>
+						</div>
+						<div><a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar </a></div>
 					</div>
 				</div>
 				<!-- End of Dropdown -->
@@ -112,7 +113,7 @@
 			</div>
 			<div class="menu-dropdown-visibility" id="mdv2">
 				<div class="menu-dropdown">
-					<a href="data-user-admin.html">
+					<a href="<?= base_url('dashboard_admin/view_dinas_pemeriksaan') ?>">
 						<p>Dinas Pemeriksa</p>
 					</a>
 					<a href="#">
@@ -202,7 +203,7 @@
 										<div class="input-form">
 											<input type="text" id="kode_gejala" class="tambah-data" name="kode_gejala" required>
 										</div>
-									<label for="nama_gejala"><b class="form-label">Nama gejala</b><br></label>
+										<label for="nama_gejala"><b class="form-label">Nama gejala</b><br></label>
 										<div class="input-form">
 											<input type="text" id="nama_gejala" class="tambah-data" name="nama_gejala" required>
 										</div>
