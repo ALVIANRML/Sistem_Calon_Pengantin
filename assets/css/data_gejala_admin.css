@@ -1,0 +1,338 @@
+.container-content{
+    margin-left: 304px;
+    background: #F5F9FA;
+}
+
+.container-content-data-catin-admin{
+    position: relative;
+    background: #F5F9FA;
+    padding: 24px 48px;
+    padding-bottom: 145px;
+}
+
+.container-content-data-catin-admin > p{
+    color: #202224;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.114px;
+    margin-bottom: 80px;
+}
+
+.edit-pendaftaran-btn{
+    display: inline-flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    border-radius: 8px;
+    background: var(--primary---color, #015D67);
+    margin-bottom: 56px;
+}
+
+.copyright-text{
+    position: absolute;
+    bottom: 42px;
+    color: var(--Grey, #7F7F7F);
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+/*-------- content -------*/
+
+.container-2-btn{
+    display: flex;
+    justify-content: center;
+    gap:16px;
+}
+.edit-btn{
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    background-color: #015D67; /* Merah muda */
+    border-radius: 6px;
+    color: #FFFAFA; /* Merah gelap */
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.hapus-btn{
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    background-color: #DC3545; /* Merah muda */
+    border-radius: 6px;
+    color: #FFFAFA; /* Merah gelap */
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.tambah-data-btn{
+    display: inline-flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 12px 16px;
+    background: var(--primary---color, #015D67);
+    border-radius: 6px;
+    justify-content: center;
+    color: var(--white---color, #FFFAFA);
+    font-size: 16px;
+    font-weight: 500;
+
+}
+
+.baris-show-entries{
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.show-entries{
+    color: #202224;
+text-align: right;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: -0.114px;
+}
+
+.cari-data form input{
+    width: 289px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--grey---for-form, #D9D9D9);
+    background: var(--white---color, #FFFAFA);
+    color: #28282B;
+    font-size: 16px; 
+    font-weight: 400;
+}
+
+.form-input-cari{
+    position: relative; /* Kontainer relatif untuk ikon */
+    display: flex;
+    align-items: center;
+}
+
+.form-input-cari svg{
+    position: absolute;
+    right: 16px;
+}
+
+.container-tabel{
+    margin-top: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 29px 0;
+    border: 1px solid #015D67
+}
+th, td {
+    padding: 12px;
+    border: 1px solid #015D67;
+}
+table td:first-child{
+    text-align: center; 
+}
+
+table td:nth-child(7), table td:nth-child(8){
+    text-align: center; 
+    color: var(--white---color, #FFFAFA);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.114px;
+}
+td{
+    color: #000;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.114px;
+}
+
+tr:nth-child(odd){
+    background-color: #FFFAFA;
+}
+
+th {
+    background-color: #015D67;
+    text-align: center;
+    color: var(--white---color, #FFFAFA);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.114px;
+}
+
+/* KHUSUS MODAL */
+/* Style for the modal background */
+.modal {
+	display: none;
+	/* Hidden by default */
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%;
+	/* Full width */
+	height: 100%;
+	/* Full height */
+	overflow: auto;
+	/* Enable scroll if needed */
+	background-color: rgba(0, 0, 0, 0.5);
+	/* Black w/ opacity */
+	display: flex;
+	/* Use flexbox for centering */
+	justify-content: center;
+	/* Center horizontally */
+	align-items: center;
+	/* Center vertically */
+}
+
+/* Style for the modal content */
+.modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	/* Could be more or less, depending on screen size */
+	max-width: 500px;
+	/* Limit the width */
+	border-radius: 4px;
+	/* Rounded corners */
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	/* Add shadow */
+}
+
+/* Style for the close button */
+.close-modal {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.popup {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 50%;
+	height: auto;
+	padding: 2vh;
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	z-index: 1000;
+}
+
+.popup.show {
+	display: block;
+}
+
+.popup .close-btn {
+	float: right;
+	cursor: pointer;
+	font-size: 2vh;
+	font-size: 24px;
+	font-weight: bold;
+	color: #015D67;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	transition: color 0.3s ease, transform 0.3s ease;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.close-btn:hover {
+	color: #015D67;
+	transform: scale(1.2);
+}
+
+
+
+.overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+}
+
+.overlay.show {
+	display: block;
+}
+
+
+.tambah-data {
+	width: 90%;
+	background-color: #E9F1F2;
+	outline: none;
+	border: 1px solid #015D67;
+	border-radius: 10px;
+	height: 25px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+b.form-label {
+
+	color: #015D67;
+}
+
+hr {
+	margin-bottom: 20px;
+}
+
+button[type="submit"] {
+	background-color: #015D67;
+	color: white;
+	border: 2px solid #015D67;
+	border-radius: 5px;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+button[type="button"] {
+	background-color: red;
+	color: white;
+	border: 2px solid red;
+	border-radius: 5px;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.edit-pendaftaran-container {
+	margin-left: 50px;
+}
