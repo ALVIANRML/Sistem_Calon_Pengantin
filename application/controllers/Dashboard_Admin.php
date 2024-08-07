@@ -23,12 +23,13 @@ class Dashboard_Admin extends CI_Controller
 
 	public function view_admin()
 	{
-		$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
-		$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
-		$tanggal = $this->m_Tanggal_Pemeriksaan->get_tanggal_periksa($id_tanggal);
-		$this->session->set_userdata('tanggal_pendaftaran', $tanggal);
 		$id_tanggal = '0ff4c7bc-cf4e-4c38-8d0a-f5a7de5c5c7e';
-		$tanggal = $this->m_Tanggal_Pemeriksaan->get_tanggal_periksa($id_tanggal);
+		$tanggal = $this->m_Tanggal_Pemeriksaan->get_tanggal($id_tanggal);
+		$this->session->set_userdata('tanggal_periksa', $tanggal);
+		$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
+		$tanggal = $this->m_Tanggal_Pemeriksaan->get_tanggal($id_tanggal);
+		$this->session->set_userdata('tanggal_pendaftaran', $tanggal);
+		$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
 		$this->session->set_userdata('status', $status);
 		$this->session->set_userdata('tanggal', $tanggal);
 		$dataCatin = $this->m_User_detail->count_data_catin();
@@ -42,11 +43,31 @@ class Dashboard_Admin extends CI_Controller
 
 	public function view_data_catin()
 	{
+		$keyword = $this->input->get('search');
 		$tanggal = $this->session->userdata('admin_tanggal_filter');
-		if ($tanggal == null) {
-			$data['user_detail'] = $this->m_User_detail->all();
+
+		if ($keyword != null) {
+			$keyword = $this->m_User_detail->search($keyword);
+
+			// Ambil ID dari hasil pencarian
+			$id = array_map(function ($user) {
+				return $user['id_user_detail'];
+			}, $keyword);
+
+			if ($tanggal != null) {
+				// Panggil model dengan ID array dan tanggal
+				$data['user_detail'] = $this->m_User_detail->get_by_id_and_tanggal($id, $tanggal);
+			} else {
+				$data['user_detail'] = $keyword;
+			}
 		} else {
-			$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal);
+			if ($tanggal == null) {
+				$data['user_detail'] = $this->m_User_detail->all();
+				// var_dump($data['user_detail']);
+				// exit;
+			} else {
+				$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal);
+			}
 		}
 
 		$this->load->view('Dashboard/admin/data_catin_admin', $data);
@@ -229,7 +250,7 @@ class Dashboard_Admin extends CI_Controller
 		$id 		= bin2hex(random_bytes(16));
 		$kelompok 	= $this->input->post('kelompok');
 		$keterangan = $this->input->post('keterangan');
-		
+
 
 		$this->m_kelompok_gejala->add_kelompok_gejala($id, $kelompok, $keterangan);
 		redirect('dashboard_admin/view_dinas_pemeriksaan');
@@ -242,7 +263,7 @@ class Dashboard_Admin extends CI_Controller
 		redirect('dashboard_admin/view_dinas_pemeriksaan');
 		// buat bisa edit gejala
 	}
-	
+
 
 	public function edit_dinas_pemeriksa()
 	{
@@ -254,10 +275,8 @@ class Dashboard_Admin extends CI_Controller
 		exit;
 		$this->m_gejala->edit_gejala($id, $kode, $nama, $kelompokGejala);
 		redirect('dashboard_admin/data_view_dinas_pemeriksaan');
-	
-
-
 	}
 
 	// buat search di semua~ page
+
 }

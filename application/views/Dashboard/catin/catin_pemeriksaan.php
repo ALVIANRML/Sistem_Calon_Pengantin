@@ -704,10 +704,7 @@
 				updateFile(fileInputId);
 			});
 
-			dropZone.addEventListener('click', function() {
-				var fileInputId = dropZone.id.replace('drop-zone-', '');
-				document.getElementById(fileInputId).click();
-			});
+			
 		});
 	</script>
 

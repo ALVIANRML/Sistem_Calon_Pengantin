@@ -8,14 +8,14 @@ class m_User_detail extends CI_Model
 	{
 
 		$query = $this->db->get('user_detail');
-        // Mengembalikan hasil sebagai array
-        return $query->result_array();
+		// Mengembalikan hasil sebagai array
+		return $query->result_array();
 	}
 
 	public function getTanggalPeriksa()
 	{
 		$query = $this->db->query("SELECT * FROM tanggal_pemeriksaan WHERE keterangan = 'tanggal pemeriksaan'");
-		return $query;
+		return $query->result();
 	}
 
 	public function getAll($id_user)
@@ -29,6 +29,14 @@ class m_User_detail extends CI_Model
 	public function get_by_data_registered($tanggal)
 	{
 
+		$this->db->where('data_registered', $tanggal);
+		$query = $this->db->get('user_detail');
+		return $query->result_array();
+	}
+
+	public function get_by_id_and_tanggal($ids, $tanggal)
+	{
+		$this->db->where_in('id_user_detail', $ids);
 		$this->db->where('data_registered', $tanggal);
 		$query = $this->db->get('user_detail');
 		return $query->result_array();
@@ -69,18 +77,20 @@ class m_User_detail extends CI_Model
 		return true;
 	}
 
-	public function update_skrining_kesehatan($id_user,$skrining)
+	public function update_skrining_kesehatan($id_user, $skrining)
 	{
 		$this->db->where('id_user_detail', $id_user);
 		$this->db->update('user_detail', [
-			'id_pemeriksaan_survei' => $skrining]);
-		}
-	public function update_kuesioner_kepribadian($id_user,$kuesioner)
+			'id_pemeriksaan_survei' => $skrining
+		]);
+	}
+	public function update_kuesioner_kepribadian($id_user, $kuesioner)
 	{
 		$this->db->where('id_user_detail', $id_user);
 		$this->db->update('user_detail', [
-			'id_pemeriksaan_psikolog' => $kuesioner]);
-		}
+			'id_pemeriksaan_psikolog' => $kuesioner
+		]);
+	}
 	public function hitung($id_user)
 	{
 
@@ -136,21 +146,21 @@ class m_User_detail extends CI_Model
 		return $tes;
 	}
 
-	public function delete_by_id($user_id){
+	public function delete_by_id($user_id)
+	{
 		$this->db->delete('user_detail', array('id_user_detail' => $user_id));
 	}
 
 	public function search($keyword)
-{
-	if(!$keyword){
-		return null;
+	{
+		if (!$keyword) {
+			return null;
+		}
+		$this->db->like('nama_lengkap', $keyword);
+		$this->db->or_like('nik', $keyword);
+		$this->db->or_like('nomor_telepon', $keyword);
+		$this->db->or_like('no_pendaftaran', $keyword);
+		$query = $this->db->get('user_detail');
+		return $query->result_array();
 	}
-	$this->db->like('nama_lengkap', $keyword);
-	$this->db->or_like('nik', $keyword);
-	$this->db->or_like('nomor_telepon', $keyword);
-	$this->db->or_like('no_pendaftaran', $keyword);
-	$query = $this->db->get('user_detail');
-	return $query->result();
-}
-	
 }

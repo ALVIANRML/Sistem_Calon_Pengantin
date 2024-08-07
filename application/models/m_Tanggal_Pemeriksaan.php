@@ -7,12 +7,7 @@ class m_Tanggal_Pemeriksaan extends CI_Model
 		$this->db->update('tanggal_pemeriksaan', ['id_status' => $id_status, 'tanggal' => $tanggal, 'awal_tanggal' => $awal_tanggal]);
 	}
 
-	public function update_id_status($id_tanggal, $id_status)
-	{
-		$this->db->where('id_tanggal', $id_tanggal);
-		$this->db->update('tanggal_pemeriksaan', ['id_status' => $id_status]);
-	}
-
+	
 	public function tanggal_periksa($id_tanggal, $tanggal)
 	{
 		$this->db->where('id_tanggal', $id_tanggal);
@@ -32,17 +27,6 @@ class m_Tanggal_Pemeriksaan extends CI_Model
 	}
 
 
-	public function get_status($id_tanggal)
-	{
-		$this->db->select('id_status');
-		$this->db->from('tanggal_pemeriksaan');
-		$this->db->where('id_tanggal', $id_tanggal);
-		$query = $this->db->get();
-		if ($query->num_rows() > 0) {
-			return $query->row()->id_status;
-		}
-		return null;
-	}
 	public function get_tanggal($id_tanggal)
 	{
 
@@ -50,7 +34,7 @@ class m_Tanggal_Pemeriksaan extends CI_Model
 		$this->db->from('tanggal_pemeriksaan');
 		$this->db->where('id_tanggal', $id_tanggal);
 		$query = $this->db->get();
-
+		
 		
 		if ($query->num_rows() > 0) {
 			return $query->row()->tanggal;
@@ -63,4 +47,24 @@ class m_Tanggal_Pemeriksaan extends CI_Model
         $query = $this->db->get('tanggal_pemeriksaan'); 
         return $query;
     }
+
+	
+	public function update_id_status($id_tanggal, $id_status)
+	{
+		$this->db->where('id_tanggal', $id_tanggal);
+		$this->db->update('tanggal_pemeriksaan', ['id_status' => $id_status]);
+	}
+
+	public function get_status($id_tanggal)
+	{
+		$this->db->select('id_status');
+		$this->db->from('tanggal_pemeriksaan');
+		$this->db->where('id_tanggal', $id_tanggal);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->row()->id_status;
+		}
+		return null;
+	}
 }
+

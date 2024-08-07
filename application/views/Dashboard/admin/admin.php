@@ -279,13 +279,26 @@
 				<hr>
 				<form id="popupForm" action="<?= base_url('dashboard/tanggal'); ?>" method="post">
 					<div class="edit-pendaftaran-container">
-						<label for="tanggal_pendaftaran"><b class="form-label" style="color:#015D67; margin-bottom:10px;">Masukkan Tanggal</b><br></label>
+						<label for="tanggal_pendaftaran"><b class="form-label" style="color:#015D67; margin-bottom:10px;">Masukkan Tanggal Batas Pendaftaran</b><br></label>
 						<div class="input-form">
 							<input type="date" id="tanggal_pendaftaran" name="tanggal_pendaftaran" style="width:90%;" required value="<?= $this->session->userdata('tanggal_pendaftaran') ?>">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 								<path d="M9 11H7V13H9V11ZM13 11H11V13H13V11ZM17 11H15V13H17V11ZM19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z" fill="#015963" />
 							</svg>
 						</div>
+
+						<label for="tanggal_periksa"><b class="form-label" style="color:#015D67; margin-bottom:10px;">Masukkan Tanggal Pemriksaan</b><br></label>
+						<div class="input-form">
+							<input type="date" id="tanggal_periksa" name="tanggal_periksa" style="width:90%;" required value="<?= $this->session->userdata('tanggal_periksa') ?>">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+								<path d="M9 11H7V13H9V11ZM13 11H11V13H13V11ZM17 11H15V13H17V11ZM19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z" fill="#015963" />
+							</svg>
+						</div>
+
+
+						<label for="tanggal_periksa"><b class="form-label" style="color:#015D67; margin-bottom:10px;">Apakah Pendaftaran Di buka?</b><br></label>
+						<input type="radio" name="status_pendaftaran" id="status_pendaftaran" value="1" required> Ya
+						<input type="radio" name="status_pendaftaran" id="status_pendaftaran" value="0" required> Tidak <br> <br>
 
 
 						<button type="submit">Submit</button>
@@ -299,12 +312,12 @@
 					if ($buka == 1) :
 					?>
 						<div class="subcontainer-tanggal-pemeriksaan">
-							<div class="tanggal-buka-tutup"><?= $this->session->userdata('tanggal') ?></div>
+							<div class="tanggal-buka-tutup"><?= $this->session->userdata('tanggal_pendaftaran') ?></div>
 							<div class="buka-tutup-btn buka-btn">Pendaftaran Dibuka</div>
 						</div>
 					<?php else : ?>
 						<div class="subcontainer-tanggal-pemeriksaan">
-							<div class="tanggal-buka-tutup"><?= $this->session->userdata('tanggal') ?></div>
+							<div class="tanggal-buka-tutup"><?= $this->session->userdata('tanggal_pendaftaran') ?></div>
 							<div class="buka-tutup-btn tutup-btn">Pendaftaran Ditutup</div>
 						</div>
 					<?php endif ?>
