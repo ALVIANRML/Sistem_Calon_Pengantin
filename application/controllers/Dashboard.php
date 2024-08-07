@@ -14,22 +14,6 @@ class Dashboard extends CI_Controller
 		$this->load->helper(array('form', 'url'));
 	}
 
-	// admin
-
-
-	// kesehatan
-	public function view_kesehatan()
-	{
-		$this->load->view('Dashboard/kesehatan');
-	}
-	public function view_bnn()
-	{
-		$this->load->view('Dashboard/bnn');
-	}
-	public function view_psikolog()
-	{
-		$this->load->view('Dashboard/psikolog');
-	}
 
 
 	//  05 catin
@@ -479,24 +463,25 @@ class Dashboard extends CI_Controller
 		// admin
 		if ($role == 1) {
 			$awal_tanggal = date('Y-m-d');
+			// $awal_tanggal = date('2024-08-01');
 			$tanggal = $this->input->post('tanggal_pendaftaran');
 			if (strtotime($tanggal) < strtotime($awal_tanggal)) {
 				$this->session->set_flashdata('error_tanggal', 'Tanggal pendaftaran tidak boleh lebih awal dari tanggal hari ini.');
 
 				redirect('Dashboard_admin/view_admin');
 			}
-			$id_status = $this->input->post('status_pendaftaran');
-			$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
-			$this->m_Tanggal_Pemeriksaan->tanggal_pemeriksaan($awal_tanggal, $id_tanggal, $id_status, $tanggal);
-
-			$id_tanggal = '0ff4c7bc-cf4e-4c38-8d0a-f5a7de5c5c7e';
+			
 			$tanggal = $this->input->post('tanggal_periksa');
 			if (strtotime($tanggal) < strtotime($awal_tanggal)) {
 				$this->session->set_flashdata('error_tanggal_pemeriksaan', 'Tanggal pemeriksaan tidak boleh lebih awal dari tanggal hari ini.');
 				redirect('Dashboard_admin/view_admin');
 			}
+			$id_tanggal = '0ff4c7bc-cf4e-4c38-8d0a-f5a7de5c5c7e';
 			$this->m_Tanggal_Pemeriksaan->tanggal_periksa($id_tanggal, $tanggal);
-
+			$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
+			$id_status = $this->input->post('status_pendaftaran');
+			$this->m_Tanggal_Pemeriksaan->tanggal_pemeriksaan($awal_tanggal, $id_tanggal, $id_status, $tanggal);
+			
 			redirect('Dashboard_admin/view_admin');
 
 			// kesehatan
