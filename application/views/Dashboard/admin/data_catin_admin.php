@@ -271,13 +271,13 @@
 				<div class="overlay" id="overlay"></div>
 				<div class="popup" id="popup">
 					<span class="close-btn" onclick="closePopup()">&times;</span>
-					<h2>Form 1</h2>
-					<p>Masukkan tanggal untuk menghapus semua data pada tanggal tersebut</p>
+				<h2>Hapus Data</h2>
+					<p>Masukkan tanggal untuk memilih data yang ingin dihapus</p>
 
 					<hr>
 					<form id="popupForm1" action="<?= base_url('dashboard/filter_hapus_data'); ?>" method="post">
 						<div class="hapus_data">
-							<label for="tanggal_del_catin"><b class="form-label" style="color:#015D67; margin-bottom:10px;">Masukkan Batas Pendaftaran</b><br></label>
+							<label for="tanggal_del_catin"><b class="form-label" style="color:#015D67; margin-bottom:10px;">Masukkan Tanggal</b><br></label>
 							<div class="input-form">
 								<input type="date" id="tanggal_del_catin" name="tanggal_del_catin" style="width:90%;" required>
 								<svg class="tanggal" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

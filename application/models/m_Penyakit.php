@@ -34,4 +34,17 @@ class m_Penyakit extends CI_Model
 			'id_pemeriksaan' => $pemeriksa,
 		]);
 	}
+
+
+	public function search($keyword)
+	{
+		if (!$keyword) {
+			return null;
+		}
+		$this->db->like('kode', $keyword);
+		$this->db->or_like('nama', $keyword);
+		$this->db->or_like('id_pemeriksaan', $keyword);
+		$query = $this->db->get('penyakit');
+		return $query->result_array();
+	}
 }

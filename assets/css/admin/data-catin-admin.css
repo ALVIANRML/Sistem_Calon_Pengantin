@@ -544,7 +544,7 @@ button[type="submit"]:hover {
             align-items: center;
             border: 1px solid #ccc;
             border-radius: 25px;
-            padding: 5px 5px;
+            padding: 5px;
         }
         
         .form-input-cari input[type="text"] {

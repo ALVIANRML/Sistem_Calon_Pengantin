@@ -33,4 +33,15 @@ class m_kelompok_gejala extends CI_Model
 
 		]);
 	}
+
+	public function search($keyword)
+	{
+		if (!$keyword) {
+			return null;
+		}
+		$this->db->like('kelompok_gejala_id', $keyword);
+		$this->db->or_like('keterangan', $keyword);
+		$query = $this->db->get('kelompok_gejala');
+		return $query->result_array();
+	}
 }
