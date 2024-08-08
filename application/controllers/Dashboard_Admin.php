@@ -160,7 +160,15 @@ class Dashboard_Admin extends CI_Controller
 
 	public function data_penyakit()
 	{
-		$data['id'] = $this->m_Penyakit->penyakit();
+
+		$keyword = $this->input->get('search');
+
+		if ($keyword != null) {
+			$keyword = $this->m_Penyakit->search($keyword);
+			$data['id'] = $keyword;
+		} else {
+			$data['id'] = $this->m_Penyakit->penyakit();
+		}
 		$this->load->view('Dashboard/admin/data_penyakit', $data);
 	}
 
@@ -202,7 +210,15 @@ class Dashboard_Admin extends CI_Controller
 
 	public function data_gejala()
 	{
-		$data['id'] = $this->m_gejala->gejala();
+		
+		$keyword = $this->input->get('search');
+
+		if ($keyword != null) {
+			$keyword = $this->m_gejala->search($keyword);
+			$data['id'] = $keyword;
+		} else {
+			$data['id'] = $this->m_gejala->gejala();
+		}
 		$this->load->view('Dashboard/admin/data_gejala', $data);
 	}
 
@@ -241,7 +257,14 @@ class Dashboard_Admin extends CI_Controller
 
 	public function view_dinas_pemeriksaan()
 	{
-		$data['id'] = $this->m_kelompok_gejala->kelompok_gejala();
+		$keyword = $this->input->get('search');
+
+		if ($keyword != null) {
+			$keyword = $this->m_kelompok_gejala->search($keyword);
+			$data['id'] = $keyword;
+		} else {
+			$data['id'] = $this->m_kelompok_gejala->kelompok_gejala();
+		}
 		$this->load->view('Dashboard/admin/dinas_pemeriksa', $data);
 	}
 

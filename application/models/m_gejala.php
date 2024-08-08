@@ -34,4 +34,16 @@ class m_gejala extends CI_Model
 
 		]);
 	}
+
+	public function search($keyword)
+	{
+		if (!$keyword) {
+			return null;
+		}
+		$this->db->like('kode', $keyword);
+		$this->db->or_like('kelompok_gejala_id', $keyword);
+		$this->db->or_like('nama_gejala', $keyword);
+		$query = $this->db->get('gejala');
+		return $query->result_array();
+	}
 }
