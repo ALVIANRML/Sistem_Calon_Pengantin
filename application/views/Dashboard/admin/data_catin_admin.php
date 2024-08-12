@@ -271,7 +271,7 @@
 				<div class="overlay" id="overlay"></div>
 				<div class="popup" id="popup">
 					<span class="close-btn" onclick="closePopup()">&times;</span>
-				<h2>Hapus Data</h2>
+					<h2>Hapus Data</h2>
 					<p>Masukkan tanggal untuk memilih data yang ingin dihapus</p>
 
 					<hr>
@@ -342,87 +342,87 @@
 							</form>
 						</div>
 					</div>
-
-					<table>
-						<thead>
-							<tr>
-								<th>No.</th>
-								<th>Username</th>
-								<th>Nomor Telepon</th>
-								<th>Nama Lengkap</th>
-								<th>NIK</th>
-								<th>No Pendaftar</th>
-								<th>Status Verifikasi</th>
-								<th>Status Kesehatan</th>
-								<th>Aksi</th>
-							</tr>
-						</thead>
-						<?php foreach ($user_detail as $datas) : ?>
-							<?php $status_verifikasi = ($datas['id_status_verifikasi'] == 2) ? '<td><span class="status-tabel" style="background-color: green">Sudah diverifikasi</span></td>' : '<td><span class="status-tabel" style="background-color: #DC3545">Belum diverifikasi</span></td>'; ?>
-							<?php $status_kesehatan = ($datas['id_status_kesehatan'] == 2) ? '<td><span class="status-tabel" style="background-color: green">Sudah diverifikasi</span></td>' : '<td><span class="status-tabel" style="background-color: #DC3545">Belum diverifikasi</span></td>'; ?>
-							<?php $status_bnn = ($datas['id_status_bnn'] == 2) ? 'Sudah di setujui' : 'belum di setujui'; ?>
-							<?php $status_psikolog = ($datas['id_status_psikolog'] == 2) ? 'Sudah di setujui' : 'belum di setujui'; ?>
-							<tbody>
+					<div class="table-scroll">
+						<table>
+							<thead>
 								<tr>
-									<td><?= ++$angka; ?></td>
-									<td>user1</td>
-									<td><?= $datas['nomor_telepon'] ?></td>
-									<td><?= $datas['nama_lengkap'] ?></td>
-									<td><?= $datas['nik'] ?></td>
-									<td><?= $datas['no_pendaftaran'] ?></td>
-									<?= $status_verifikasi ?>
-									<?= $status_kesehatan ?>
-
-									<td><button class="toggleContentButton"><span class="detail">Detail</span></button></td>
-								<tr class="row-hidden" class="hiddenRow">
-									<td colspan="100%">
-										<div class="content-div hidden">
-											<ul>
-												<!-- DATANYA MASUKKAN KE DALAM <SPAN></SPAN> CLASS "VALUE"  BAIK ITU TEKS MAUPUN GAMBAR-->
-												<li><span class="label">Status BNN</span><span class="titik-dua">:</span><span class="value"><?= $status_bnn ?></span> </li>
-												<li><span class="label">Status Psikolog</span><span class="titik-dua">:</span><span class="value"><?= $status_psikolog ?></span></li>
-												<li><span class="label">Tempat Lahir</span><span class="titik-dua">:</span><span class="value"><?= $datas['tempat_lahir'] ?></span></li>
-												<li><span class="label">Tanggal Lahir</span><span class="titik-dua">:</span><span class="value"><?= $datas['tanggal_lahir'] ?></span></li>
-												<li><span class="label">Usia</span><span class="titik-dua">:</span><span class="value"><?= $datas['usia'] ?></span></li>
-												<li><span class="label">Jenis Kelamin</span><span class="titik-dua">:</span><span class="value"><?= $datas['jenis_kelamin'] ?></span></li>
-												<li><span class="label">Agama</span><span class="titik-dua">:</span><span class="value"><?= $datas['agama'] ?></span></li>
-												<li><span class="label">Tinggi Badan</span><span class="titik-dua">:</span><span class="value"><?= $datas['tinggi_badan'] ?> cm</span></li>
-												<li><span class="label">Berat Badan</span><span class="titik-dua">:</span><span class="value"><?= $datas['berat_badan'] ?> kg</span></li>
-												<li><span class="label">IMT (Index Massa Tubuh)</span><span class="titik-dua">:</span><span class="value"><?= $datas['imt'] ?></span></li>
-												<li><span class="label">Pendidikan Terakhir</span><span class="titik-dua">:</span><span class="value"><?= $datas['pendidikan'] ?></span></li>
-												<li><span class="label">Pekerjaan</span><span class="titik-dua">:</span><span class="value"><?= $datas['pekerjaan'] ?></span></li>
-												<li><span class="label">No HP</span><span class="titik-dua">:</span><span class="value"><?= $datas['nomor_telepon'] ?></span></li>
-												<li><span class="label">Provinsi</span><span class="titik-dua">:</span><span class="value"><?= $datas['provinsi'] ?></span></li>
-												<li><span class="label">Kota</span><span class="titik-dua">:</span><span class="value"><?= $datas['kota'] ?></span></li>
-												<li><span class="label">Kecamatan</span><span class="titik-dua">:</span><span class="value"><?= $datas['kecamatan'] ?></span></li>
-												<li><span class="label">Kelurahan</span><span class="titik-dua">:</span><span class="value"><?= $datas['kelurahan'] ?></span></li>
-												<li><span class="label">Alamat</span><span class="titik-dua">:</span><span class="value"><?= $datas['alamat'] ?></span></li>
-												<li><span class="label">Pernikahan ke-</span><span class="titik-dua">:</span><span class="value"><?= $datas['pernikahan_ke'] ?></span></li>
-												<li><span class="label">Tanggal Menikah</span><span class="titik-dua">:</span><span class="value"><?= $datas['tanggal_pernikahan'] ?></span></li>
-												<li><span class="label">Tanggal Periksa</span><span class="titik-dua">:</span><span class="value"><?= $datas['tanggal_periksa'] ?></span></li>
-												<li><span class="label">Pas Foto</span><span class="titik-dua">:</span><span class="value"><img src="<?= base_url('uploads/photo/'); ?><?= $datas['foto_user'] ?>" alt="Profile Image" style="weight:400px; height:400px;"></span></li>
-												<li><span class="label">Foto KTP</span><span class="titik-dua">:</span><span class="value"><img src="<?= base_url('uploads/photo/'); ?><?= $datas['foto_ktp'] ?>" alt="Profile Image" style="weight:400px; height:400px;"></span></li>
-												<li><span class="label">Foto Kartu Keluarga</span><span class="titik-dua">:</span><span class="value"><img src="<?= base_url('uploads/photo/'); ?><?= $datas['foto_kk'] ?>" alt="Profile Image" style="weight:400px; height:400px;"></span></li>
-												<li><span class="label">Foto Surat</span><span class="titik-dua">:</span><span class="value"><img src="<?= base_url('uploads/photo/'); ?><?= $datas['foto_surat'] ?>" alt="Profile Image" style="weight:400px; height:400px;"></span></li>
-												<li><span class="label">Tanggal Pendaftaran</span><span class="titik-dua">:</span><span class="value"><?= $datas['data_registered'] ?>"</span></li>
-												<li><span class="label">Hasil Pemeriksaan</span><span class="titik-dua">:</span><span class="value">-</span></li>
-												<li><span class="label">Status Aktif</span><span class="titik-dua">:</span><span class="value">"</span></li>
-												<li><span class="label">Status Perpanjangan</span><span class="titik-dua">:</span><span class="value"><?= $datas['foto_surat'] ?>"</span></li>
-												<li><span class="label">Mulai Berlaku</span><span class="titik-dua">:</span><span class="value"><?= $datas['mulai_berlaku'] ?></span></li>
-												<li><span class="label">Akhir Berlaku</span><span class="titik-dua">:</span><span class="value"><?= $datas['akhir_berlaku'] ?></span></li>
-												<li><span class="label">Verifikasi Data</span><span class="titik-dua">:</span><span class="value">VALUE</span></li>
-												<li><span class="label">Aksi</span><span class="titik-dua">:</span><span class="value">VALUE</span></li>
-											</ul>
-										</div>
-									</td>
+									<th>No.</th>
+									<th>Username</th>
+									<th>Nomor Telepon</th>
+									<th>Nama Lengkap</th>
+									<th>NIK</th>
+									<th>No Pendaftar</th>
+									<th>Status Verifikasi</th>
+									<th>Status Kesehatan</th>
+									<th>Aksi</th>
 								</tr>
-								</tr>
-								<!-- Tambahkan baris data lainnya di sini -->
+							</thead>
+							<?php foreach ($user_detail as $datas) : ?>
+								<?php $status_verifikasi = ($datas['id_status_verifikasi'] == 2) ? '<td><span class="status-tabel" style="background-color: green">Sudah diverifikasi</span></td>' : '<td><span class="status-tabel" style="background-color: #DC3545">Belum diverifikasi</span></td>'; ?>
+								<?php $status_kesehatan = ($datas['id_status_kesehatan'] == 2) ? '<td><span class="status-tabel" style="background-color: green">Sudah diverifikasi</span></td>' : '<td><span class="status-tabel" style="background-color: #DC3545">Belum diverifikasi</span></td>'; ?>
+								<?php $status_bnn = ($datas['id_status_bnn'] == 2) ? 'Sudah di setujui' : 'belum di setujui'; ?>
+								<?php $status_psikolog = ($datas['id_status_psikolog'] == 2) ? 'Sudah di setujui' : 'belum di setujui'; ?>
+								<tbody>
+									<tr>
+										<td><?= ++$angka; ?></td>
+										<td>user1</td>
+										<td><?= $datas['nomor_telepon'] ?></td>
+										<td><?= $datas['nama_lengkap'] ?></td>
+										<td><?= $datas['nik'] ?></td>
+										<td><?= $datas['no_pendaftaran'] ?></td>
+										<?= $status_verifikasi ?>
+										<?= $status_kesehatan ?>
 
-							</tbody>
-						<?php endforeach ?>
-					</table>
+										<td><button class="toggleContentButton"><span class="detail">Detail</span></button></td>
+									<tr class="row-hidden" class="hiddenRow">
+										<td colspan="100%">
+											<div class="content-div hidden">
+												<ul>
+													<!-- DATANYA MASUKKAN KE DALAM <SPAN></SPAN> CLASS "VALUE"  BAIK ITU TEKS MAUPUN GAMBAR-->
+													<li><span class="label">Status BNN</span><span class="titik-dua">:</span><span class="value"><?= $status_bnn ?></span> </li>
+													<li><span class="label">Status Psikolog</span><span class="titik-dua">:</span><span class="value"><?= $status_psikolog ?></span></li>
+													<li><span class="label">Tempat Lahir</span><span class="titik-dua">:</span><span class="value"><?= $datas['tempat_lahir'] ?></span></li>
+													<li><span class="label">Tanggal Lahir</span><span class="titik-dua">:</span><span class="value"><?= $datas['tanggal_lahir'] ?></span></li>
+													<li><span class="label">Usia</span><span class="titik-dua">:</span><span class="value"><?= $datas['usia'] ?></span></li>
+													<li><span class="label">Jenis Kelamin</span><span class="titik-dua">:</span><span class="value"><?= $datas['jenis_kelamin'] ?></span></li>
+													<li><span class="label">Agama</span><span class="titik-dua">:</span><span class="value"><?= $datas['agama'] ?></span></li>
+													<li><span class="label">Tinggi Badan</span><span class="titik-dua">:</span><span class="value"><?= $datas['tinggi_badan'] ?> cm</span></li>
+													<li><span class="label">Berat Badan</span><span class="titik-dua">:</span><span class="value"><?= $datas['berat_badan'] ?> kg</span></li>
+													<li><span class="label">IMT (Index Massa Tubuh)</span><span class="titik-dua">:</span><span class="value"><?= $datas['imt'] ?></span></li>
+													<li><span class="label">Pendidikan Terakhir</span><span class="titik-dua">:</span><span class="value"><?= $datas['pendidikan'] ?></span></li>
+													<li><span class="label">Pekerjaan</span><span class="titik-dua">:</span><span class="value"><?= $datas['pekerjaan'] ?></span></li>
+													<li><span class="label">No HP</span><span class="titik-dua">:</span><span class="value"><?= $datas['nomor_telepon'] ?></span></li>
+													<li><span class="label">Provinsi</span><span class="titik-dua">:</span><span class="value"><?= $datas['provinsi'] ?></span></li>
+													<li><span class="label">Kota</span><span class="titik-dua">:</span><span class="value"><?= $datas['kota'] ?></span></li>
+													<li><span class="label">Kecamatan</span><span class="titik-dua">:</span><span class="value"><?= $datas['kecamatan'] ?></span></li>
+													<li><span class="label">Kelurahan</span><span class="titik-dua">:</span><span class="value"><?= $datas['kelurahan'] ?></span></li>
+													<li><span class="label">Alamat</span><span class="titik-dua">:</span><span class="value"><?= $datas['alamat'] ?></span></li>
+													<li><span class="label">Pernikahan ke-</span><span class="titik-dua">:</span><span class="value"><?= $datas['pernikahan_ke'] ?></span></li>
+													<li><span class="label">Tanggal Menikah</span><span class="titik-dua">:</span><span class="value"><?= $datas['tanggal_pernikahan'] ?></span></li>
+													<li><span class="label">Tanggal Periksa</span><span class="titik-dua">:</span><span class="value"><?= $datas['tanggal_periksa'] ?></span></li>
+													<li><span class="label">Pas Foto</span><span class="titik-dua">:</span><span class="value"><img src="<?= base_url('uploads/photo/'); ?><?= $datas['foto_user'] ?>" alt="Profile Image" style="weight:400px; height:400px;"></span></li>
+													<li><span class="label">Foto KTP</span><span class="titik-dua">:</span><span class="value"><img src="<?= base_url('uploads/photo/'); ?><?= $datas['foto_ktp'] ?>" alt="Profile Image" style="weight:400px; height:400px;"></span></li>
+													<li><span class="label">Foto Kartu Keluarga</span><span class="titik-dua">:</span><span class="value"><img src="<?= base_url('uploads/photo/'); ?><?= $datas['foto_kk'] ?>" alt="Profile Image" style="weight:400px; height:400px;"></span></li>
+													<li><span class="label">Foto Surat</span><span class="titik-dua">:</span><span class="value"><img src="<?= base_url('uploads/photo/'); ?><?= $datas['foto_surat'] ?>" alt="Profile Image" style="weight:400px; height:400px;"></span></li>
+													<li><span class="label">Tanggal Pendaftaran</span><span class="titik-dua">:</span><span class="value"><?= $datas['data_registered'] ?>"</span></li>
+													<li><span class="label">Hasil Pemeriksaan</span><span class="titik-dua">:</span><span class="value">-</span></li>
+													<li><span class="label">Status Aktif</span><span class="titik-dua">:</span><span class="value">"</span></li>
+													<li><span class="label">Status Perpanjangan</span><span class="titik-dua">:</span><span class="value"><?= $datas['foto_surat'] ?>"</span></li>
+													<li><span class="label">Mulai Berlaku</span><span class="titik-dua">:</span><span class="value"><?= $datas['mulai_berlaku'] ?></span></li>
+													<li><span class="label">Akhir Berlaku</span><span class="titik-dua">:</span><span class="value"><?= $datas['akhir_berlaku'] ?></span></li>
+													<li><span class="label">Verifikasi Data</span><span class="titik-dua">:</span><span class="value">VALUE</span></li>
+													<li><span class="label">Aksi</span><span class="titik-dua">:</span><span class="value">VALUE</span></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									</tr>
+									<!-- Tambahkan baris data lainnya di sini -->
 
+								</tbody>
+							<?php endforeach ?>
+						</table>
+					</div>
 				</div>
 				<!--  -->
 				<div class="copyright-text">

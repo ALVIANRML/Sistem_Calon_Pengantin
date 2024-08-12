@@ -451,7 +451,7 @@
 							</button>
 
 							<button type="submit" name="submit" id="submit" class="btn-pemeriksaan" style="background-color: #015D67;margin-top: 4px;">
-								<p style="font-weight:bold; color:white; text-align:center;">Daftar</p>
+								<p style="font-weight:bold; color:white; text-align:center; cursor:pointer;">Daftar</p>
 							</button>
 						<?php }  ?>
 					</div>

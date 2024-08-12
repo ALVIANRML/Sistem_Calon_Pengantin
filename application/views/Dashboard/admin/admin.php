@@ -145,7 +145,7 @@
 		</div>
 		<div class="container-sidebar-dashboard-admin">
 			<p>NAVIGASI</p>
-			<a href="#">
+			<a href="<?= base_url('dashboard_admin/view_admin') ?>">
 				<div class="menu location-menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="Frame">
@@ -192,7 +192,7 @@
 					<a href="<?= base_url('dashboard_admin/data_penyakit') ?>">
 						<p>Gejala</p>
 					</a>
-					<a href="#">
+					<a href="<?= base_url('dashboard_admin/nilai_pakar') ?>">
 						<p>Nilai Pakar</p>
 					</a>
 				</div>
@@ -214,7 +214,7 @@
 					<a href="<?= base_url('dashboard_admin/view_dinas_pemeriksaan') ?>">
 						<p>Dinas Pemeriksa</p>
 					</a>
-					<a href="#">
+					<a href="<?= base_url('dashboard_admin/user_pemeriksa') ?>">
 						<p>User Pemeriksa</p>
 					</a>
 				</div>
