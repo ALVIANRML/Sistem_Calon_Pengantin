@@ -20,7 +20,6 @@ class Dashboard_Admin extends CI_Controller
 	}
 
 
-
 	public function view_admin()
 	{
 		$id_tanggal = '0ff4c7bc-cf4e-4c38-8d0a-f5a7de5c5c7e';
@@ -210,7 +209,7 @@ class Dashboard_Admin extends CI_Controller
 
 	public function data_gejala()
 	{
-		
+
 		$keyword = $this->input->get('search');
 
 		if ($keyword != null) {
@@ -294,12 +293,159 @@ class Dashboard_Admin extends CI_Controller
 		$kode 		= $this->input->post('kodeGejala');
 		$nama 		= $this->input->post('namaGejala');
 		$kelompokGejala = $this->input->post('kelompokGejala');
-		var_dump($id);
-		exit;
+
 		$this->m_gejala->edit_gejala($id, $kode, $nama, $kelompokGejala);
-		redirect('dashboard_admin/data_view_dinas_pemeriksaan');
+		redirect('dashboard_admin/view_dinas_pemeriksaan');
 	}
 
-	// buat search di semua~ page
+	public function nilai_pakar()
+	{
+		$keyword = $this->input->get('search');
 
+		if ($keyword != null) {
+			$keyword = $this->m_kelompok_gejala->search($keyword);
+			$data['id'] = $keyword;
+		} else {
+			$data['id'] = $this->m_Gejala_Penyakit->All();
+		}
+
+		$this->$this->load->view('dashboard/admin/nilai_pakar', $data);
+	}
+
+	public function add_nilai_pakar()
+	{
+
+		$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[users.nama]', [
+			'required' => 'Username wajib diisi',
+			'is_unique' => 'Username sudah digunakan',
+		]);
+
+		$this->form_validation->set_rules('password', 'Password', 'required|trim', [
+			'required' => 'Password wajib diisi',
+			// 'is_unique' => 'Username sudah digunakan',
+		]);
+
+		$this->form_validation->set_rules('password1', 'Password', 'required|trim|matches[password]', [
+			'required' => 'Password wajib diisi',
+			'matches' => 'Password tidak sesuai',
+		]);
+
+		$this->form_validation->set_rules('nomorTelepon', 'Nomor Telepon', 'required|trim|is_unique[users.nomor_telepon]', [
+			'required' => 'Nomor Telepon wajib diisi',
+			'is_unique' => 'Nomor Telepon sudah digunakan',
+		]);
+
+		$this->form_validation->set_rules('username', 'Username', 'required|trim', [
+			'required' => 'Username wajib diisi',
+			// 'is_unique' => 'Username sudah digunakan',
+		]);
+
+
+		$id 			= bin2hex(random_bytes(16));
+		$username 		= $this->input->post('username');
+		$nama 			= $this->input->post('nama');
+		$password =	 password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+		$nomorTelepon 	= $this->input->post('nomorTelepon');
+		$role 			= $this->input->post('statusUser');
+		$created_at 	= date('Y-m-d H:i:s', time());
+		$tanggalLahir	= date('Y-m-d H:i:s', time());
+
+		$this->m_Auth->input_user($id, $username, $password, $role,  $created_at, $nomorTelepon, $tanggalLahir);
+		$this->m_User_detail->add_pemeriksa($id, $nama);
+
+		redirect('dashboard_admin/user_pemeriksa');
+	}
+
+
+	public function user_pemeriksa()
+	{
+		$keyword = $this->input->get('search');
+		if ($keyword != null) {
+			$keywords = $this->m_Auth->search_user_pemeriksa($keyword);
+			// $keywords = $this->m_User_detail->search($keywords);_
+			// var_dump($user_catin);
+			$data['userPemeriksa'] = $keywords;
+		} else {
+
+			$users = $this->m_Auth->user_pemeriksa();
+			foreach ($users as $user) {
+				$id[] = $user['id_user_detail'];
+			}
+			$user_catin = $this->m_Auth->get_by_id($id);
+			$data['userPemeriksa'] = $user_catin;
+		}
+		$this->load->view('dashboard/admin/user_pemeriksa', $data);
+	}
+
+
+
+
+	public function add_user_pemeriksa()
+	{
+
+		$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[users.nama]', [
+			'required' => 'Username wajib diisi',
+			'is_unique' => 'Username sudah digunakan',
+		]);
+
+		$this->form_validation->set_rules('password', 'Password', 'required|trim', [
+			'required' => 'Password wajib diisi',
+			// 'is_unique' => 'Username sudah digunakan',
+		]);
+
+		$this->form_validation->set_rules('password1', 'Password', 'required|trim|matches[password]', [
+			'required' => 'Password wajib diisi',
+			'matches' => 'Password tidak sesuai',
+		]);
+
+		$this->form_validation->set_rules('nomorTelepon', 'Nomor Telepon', 'required|trim|is_unique[users.nomor_telepon]', [
+			'required' => 'Nomor Telepon wajib diisi',
+			'is_unique' => 'Nomor Telepon sudah digunakan',
+		]);
+
+		$this->form_validation->set_rules('username', 'Username', 'required|trim', [
+			'required' => 'Username wajib diisi',
+			// 'is_unique' => 'Username sudah digunakan',
+		]);
+
+
+		$id 			= bin2hex(random_bytes(16));
+		$username 		= $this->input->post('username');
+		$nama 			= $this->input->post('nama');
+		$password =	 password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+		$nomorTelepon 	= $this->input->post('nomorTelepon');
+		$role 			= $this->input->post('statusUser');
+		$created_at 	= date('Y-m-d H:i:s', time());
+		$tanggalLahir	= date('Y-m-d H:i:s', time());
+
+		$this->m_Auth->input_user($id, $username, $password, $role,  $created_at, $nomorTelepon, $tanggalLahir);
+		$this->m_User_detail->add_pemeriksa($id, $nama);
+
+		redirect('dashboard_admin/user_pemeriksa');
+	}
+
+	public function hapus_user_pemeriksa()
+	{
+		$id = $this->input->post('id');
+		$this->m_Auth->delete_by_id($id);
+		$this->m_Hasil_Diagnosa->delete_by_id($id);
+		$this->m_User_detail->delete_by_id($id);
+		redirect('dashboard_admin/user_pemeriksa');
+	}
+
+	public function edit_user_pemeriksa()
+	{
+		$id 			= $this->input->post('Id');
+		$username 		= $this->input->post('username');
+		$nama 			= $this->input->post('nama');
+		$password 		= password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+		$nomorTelepon 	= $this->input->post('nomorTelepon');
+		$role 			= $this->input->post('role');
+		$created_at 	= date('Y-m-d H:i:s', time());
+		$tanggalLahir	= date('Y-m-d H:i:s', time());
+		$this->m_Auth->update_user_pemeriksa($id, $username, $password, $role,  $created_at, $nomorTelepon, $tanggalLahir);
+		$this->m_User_detail->add_pemeriksa($id, $nama);
+
+		redirect('dashboard_admin/user_pemeriksa');
+	}
 }

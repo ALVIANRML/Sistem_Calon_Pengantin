@@ -1,3 +1,7 @@
+body{
+	overflow: hidden;
+}
+
 .container-content {
 	margin-left: 304px;
 	background: #F5F9FA;
@@ -173,8 +177,13 @@
 	margin-top: 0;
 }
 
-table {
+.table-scroll{
 	width: 100%;
+	overflow-x: auto;
+}
+
+table {
+	/* width: 100%; */
 	border-collapse: collapse;
 	margin: 29px 0;
 	border: 1px solid #015D67
@@ -568,3 +577,5 @@ button[type="submit"]:hover {
 			margin-top: -25px;
 			margin-right: 20px;
         }
+
+		

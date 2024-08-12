@@ -26,6 +26,8 @@ class m_User_detail extends CI_Model
 		return $query;
 	}
 
+
+
 	public function get_by_data_registered($tanggal)
 	{
 
@@ -39,7 +41,7 @@ class m_User_detail extends CI_Model
 		$this->db->where_in('id_user_detail', $ids);
 		$this->db->where('data_registered', $tanggal);
 		$query = $this->db->get('user_detail');
-		return $query->result_array();
+		return $query;
 	}
 
 
@@ -77,6 +79,13 @@ class m_User_detail extends CI_Model
 		return true;
 	}
 
+	public function add_pemeriksa($id_user, $nama)
+	{
+		$this->db->where('id_user_detail', $id_user);
+		$this->db->update('user_detail', [
+			'nama_lengkap' => $nama,
+		]);
+	}
 	public function update_skrining_kesehatan($id_user, $skrining)
 	{
 		$this->db->where('id_user_detail', $id_user);
