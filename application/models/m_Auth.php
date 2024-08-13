@@ -105,7 +105,7 @@ class m_Auth extends CI_Model
 
 	}
 
-	public function get_by_id($id_user_details)
+	public function get_by_id()
 	{
 		// Menggunakan where_in untuk filter berdasarkan array
 		$this->db->select('*, users.tanggal_lahir as tanggalLahir, users.nomor_telepon as nomorTelepon');
