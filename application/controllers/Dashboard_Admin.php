@@ -16,6 +16,7 @@ class Dashboard_Admin extends CI_Controller
 		$this->load->model('m_gejala');
 		$this->load->model('m_kelompok_gejala');
 		$this->load->model('m_Hasil_Diagnosa');
+		$this->load->model('m_Nilai_Pakar');
 		$this->load->helper(array('form', 'url'));
 	}
 
@@ -306,55 +307,64 @@ class Dashboard_Admin extends CI_Controller
 			$keyword = $this->m_kelompok_gejala->search($keyword);
 			$data['id'] = $keyword;
 		} else {
-			$data['id'] = $this->m_Gejala_Penyakit->All();
+			$nilai_pakar = $this->m_Nilai_Pakar->nilai_pakar();
+			$nilais = []; // Inisialisasi array $nilais
+
+			foreach ($nilai_pakar as $nilai) {
+				$id_gejala = $nilai['gejala_id'];
+				$id_penyakit = $nilai['penyakit_id'];
+				$id = $nilai['id'];
+				$nilai_hasil = $this->m_Nilai_Pakar->nilai($id_gejala, $id_penyakit, $id);
+				if (!empty($nilai_hasil)) {
+					$nilais[] = $nilai_hasil;
+				}
+			}
+
+			$data['penyakit'] = $this->m_Penyakit->penyakit();
+			$data['gejala'] = $this->m_gejala->gejala();
+
+			$data['id'] = $nilais;
 		}
 
-		$this->$this->load->view('dashboard/admin/nilai_pakar', $data);
+		$this->load->view('dashboard/admin/nilai_pakar', $data);
 	}
 
 	public function add_nilai_pakar()
 	{
 
-		$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[users.nama]', [
-			'required' => 'Username wajib diisi',
-			'is_unique' => 'Username sudah digunakan',
-		]);
+		$id 		= bin2hex(random_bytes(16));
+		$gejala 	= $this->input->post('gejala');
+		$penyakit 	= $this->input->post('penyakit');
+		$mb 		= $this->input->post('mb');
+		$md 		= $this->input->post('md');
+		$cf			= $this->input->post('cf');
 
-		$this->form_validation->set_rules('password', 'Password', 'required|trim', [
-			'required' => 'Password wajib diisi',
-			// 'is_unique' => 'Username sudah digunakan',
-		]);
+		$this->m_Nilai_Pakar->add_nilai_pakar($id, $gejala, $penyakit, $mb, $md, $cf);
 
-		$this->form_validation->set_rules('password1', 'Password', 'required|trim|matches[password]', [
-			'required' => 'Password wajib diisi',
-			'matches' => 'Password tidak sesuai',
-		]);
-
-		$this->form_validation->set_rules('nomorTelepon', 'Nomor Telepon', 'required|trim|is_unique[users.nomor_telepon]', [
-			'required' => 'Nomor Telepon wajib diisi',
-			'is_unique' => 'Nomor Telepon sudah digunakan',
-		]);
-
-		$this->form_validation->set_rules('username', 'Username', 'required|trim', [
-			'required' => 'Username wajib diisi',
-			// 'is_unique' => 'Username sudah digunakan',
-		]);
-
-
-		$id 			= bin2hex(random_bytes(16));
-		$username 		= $this->input->post('username');
-		$nama 			= $this->input->post('nama');
-		$password =	 password_hash($this->input->post('password'), PASSWORD_DEFAULT);
-		$nomorTelepon 	= $this->input->post('nomorTelepon');
-		$role 			= $this->input->post('statusUser');
-		$created_at 	= date('Y-m-d H:i:s', time());
-		$tanggalLahir	= date('Y-m-d H:i:s', time());
-
-		$this->m_Auth->input_user($id, $username, $password, $role,  $created_at, $nomorTelepon, $tanggalLahir);
-		$this->m_User_detail->add_pemeriksa($id, $nama);
-
-		redirect('dashboard_admin/user_pemeriksa');
+		redirect('dashboard_admin/nilai_pakar');
 	}
+
+	public function hapus_nilai_pakar()
+	{
+		$id = $this->input->post('id');
+		$this->m_Nilai_Pakar->delete_by_id($id);
+		redirect('dashboard_admin/nilai_pakar');
+		// buat bisa edit gejala
+	}
+
+	public function edit_nilai_pakar()
+	{
+		$id 		= $this->input->post('id');
+		$gejala 	= $this->input->post('gejala');
+		$penyakit 	= $this->input->post('penyakit');
+		$mb 		= $this->input->post('mb');
+		$md 		= $this->input->post('md');
+		$cf			= $this->input->post('cf');
+
+		$this->m_Nilai_Pakar->edit_nilai_pakar($id, $gejala, $penyakit, $mb, $md, $cf);
+		redirect('dashboard_admin/nilai_pakar');
+	}
+
 
 
 	public function user_pemeriksa()
@@ -373,6 +383,8 @@ class Dashboard_Admin extends CI_Controller
 			}
 			$user_catin = $this->m_Auth->get_by_id($id);
 			$data['userPemeriksa'] = $user_catin;
+			// var_dump($user_catin);
+			// exit;
 		}
 		$this->load->view('dashboard/admin/user_pemeriksa', $data);
 	}
@@ -415,10 +427,10 @@ class Dashboard_Admin extends CI_Controller
 		$password =	 password_hash($this->input->post('password'), PASSWORD_DEFAULT);
 		$nomorTelepon 	= $this->input->post('nomorTelepon');
 		$role 			= $this->input->post('statusUser');
-		$created_at 	= date('Y-m-d H:i:s', time());
+		$md 	= date('Y-m-d H:i:s', time());
 		$tanggalLahir	= date('Y-m-d H:i:s', time());
 
-		$this->m_Auth->input_user($id, $username, $password, $role,  $created_at, $nomorTelepon, $tanggalLahir);
+		$this->m_Auth->input_user($id, $username, $password, $role,  $md, $nomorTelepon, $tanggalLahir);
 		$this->m_User_detail->add_pemeriksa($id, $nama);
 
 		redirect('dashboard_admin/user_pemeriksa');

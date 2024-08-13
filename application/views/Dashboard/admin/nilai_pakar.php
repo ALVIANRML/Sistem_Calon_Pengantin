@@ -14,6 +14,11 @@
 </head>
 
 <body>
+	<?php
+	$angka = 0;
+	$tambahPenyakit = 0;
+	$tambahGejala = 0;
+	?>
 	<div class="container">
 		<!-- header -->
 		<div class="header-dashboard-admin">
@@ -164,72 +169,73 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Sakit Kepala</td>
-								<td>Hipertensi</td>
-								<td>0.65</td>
-								<td>0.04</td>
-								<td>0.61</td>
-								<td>
-									<div class="container-2-btn">
-										<div class="edit-btn">
-											<p>Edit</p>
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-												<path d="M18.988 2.01221L21.988 5.01221L19.701 7.30021L16.701 4.30021L18.988 2.01221ZM8 16.0002H11L18.287 8.71321L15.287 5.71321L8 13.0002V16.0002Z" fill="#FFFAFA" />
-												<path d="M19 19H8.158C8.132 19 8.105 19.01 8.079 19.01C8.046 19.01 8.013 19.001 7.979 19H5V5H11.847L13.847 3H5C3.897 3 3 3.896 3 5V19C3 20.104 3.897 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V10.332L19 12.332V19Z" fill="#FFFAFA" />
-											</svg>
-										</div>
-										<button class="open-modal">
-											<div class="hapus-btn">
-												<p>Hapus</p>
+							<?php foreach ($id as $nilai): ?>
+								<tr>
+									<td><?= ++$angka ?></td>
+									<td><?= $nilai[1]['nama_gejala'] ?></td>
+									<td><?= $nilai[0]['nama'] ?></td>
+									<td><?= $nilai[2]['mb'] ?></td>
+									<td><?= $nilai[2]['md'] ?></td>
+									<td><?= $nilai[2]['cf'] ?></td>
+									<td>
+										<div class="container-2-btn">
+											<div class="edit-btn" data-id="<?= $nilai[2]['id'] ?>" data-gejala="<?= $nilai[1]['id'] ?>" data-penyakit="<?= $nilai[0]['id'] ?>" data-mb="<?= $nilai[2]['mb'] ?>" data-md="<?= $nilai[2]['md'] ?>" data-cf="<?= $nilai[2]['cf'] ?>" onclick="showPopup2(this)">
+												<p>Edit</p>
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M20.0001 6C20.255 6.00028 20.5001 6.09788 20.6855 6.27285C20.8708 6.44782 20.9823 6.68695 20.9973 6.94139C21.0122 7.19584 20.9294 7.44638 20.7658 7.64183C20.6023 7.83729 20.3702 7.9629 20.1171 7.993L20.0001 8H19.9191L19.0001 19C19.0002 19.7652 18.7078 20.5015 18.1828 21.0583C17.6579 21.615 16.94 21.9501 16.1761 21.995L16.0001 22H8.00011C6.40211 22 5.09611 20.751 5.00811 19.25L5.00311 19.083L4.08011 8H4.00011C3.74523 7.99972 3.50008 7.90212 3.31474 7.72715C3.12941 7.55218 3.01788 7.31305 3.00294 7.05861C2.988 6.80416 3.07079 6.55362 3.23438 6.35817C3.39797 6.16271 3.63002 6.0371 3.88311 6.007L4.00011 6H20.0001ZM14.0001 2C14.5305 2 15.0393 2.21071 15.4143 2.58579C15.7894 2.96086 16.0001 3.46957 16.0001 4C15.9998 4.25488 15.9022 4.50003 15.7273 4.68537C15.5523 4.8707 15.3132 4.98223 15.0587 4.99717C14.8043 5.01211 14.5537 4.92933 14.3583 4.76574C14.1628 4.60214 14.0372 4.3701 14.0071 4.117L14.0001 4H10.0001L9.99311 4.117C9.96301 4.3701 9.8374 4.60214 9.64195 4.76574C9.44649 4.92933 9.19595 5.01211 8.94151 4.99717C8.68707 4.98223 8.44793 4.8707 8.27296 4.68537C8.09799 4.50003 8.0004 4.25488 8.00011 4C7.99995 3.49542 8.19052 3.00943 8.53361 2.63945C8.8767 2.26947 9.34696 2.04284 9.85011 2.005L10.0001 2H14.0001Z" fill="#FFFAFA" />
+													<path d="M18.988 2.01221L21.988 5.01221L19.701 7.30021L16.701 4.30021L18.988 2.01221ZM8 16.0002H11L18.287 8.71321L15.287 5.71321L8 13.0002V16.0002Z" fill="#FFFAFA" />
+													<path d="M19 19H8.158C8.132 19 8.105 19.01 8.079 19.01C8.046 19.01 8.013 19.001 7.979 19H5V5H11.847L13.847 3H5C3.897 3 3 3.896 3 5V19C3 20.104 3.897 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V10.332L19 12.332V19Z" fill="#FFFAFA" />
 												</svg>
 											</div>
-										</button>
-									</div>
-								</td>
-							</tr>
+											<button class="open-modal">
+												<div class="hapus-btn" data-id="<?= $nilai[2]['id'] ?>" onclick="showPopup1(this)">
+													<p>Hapus</p>
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+														<path d="M20.0001 6C20.255 6.00028 20.5001 6.09788 20.6855 6.27285C20.8708 6.44782 20.9823 6.68695 20.9973 6.94139C21.0122 7.19584 20.9294 7.44638 20.7658 7.64183C20.6023 7.83729 20.3702 7.9629 20.1171 7.993L20.0001 8H19.9191L19.0001 19C19.0002 19.7652 18.7078 20.5015 18.1828 21.0583C17.6579 21.615 16.94 21.9501 16.1761 21.995L16.0001 22H8.00011C6.40211 22 5.09611 20.751 5.00811 19.25L5.00311 19.083L4.08011 8H4.00011C3.74523 7.99972 3.50008 7.90212 3.31474 7.72715C3.12941 7.55218 3.01788 7.31305 3.00294 7.05861C2.988 6.80416 3.07079 6.55362 3.23438 6.35817C3.39797 6.16271 3.63002 6.0371 3.88311 6.007L4.00011 6H20.0001ZM14.0001 2C14.5305 2 15.0393 2.21071 15.4143 2.58579C15.7894 2.96086 16.0001 3.46957 16.0001 4C15.9998 4.25488 15.9022 4.50003 15.7273 4.68537C15.5523 4.8707 15.3132 4.98223 15.0587 4.99717C14.8043 5.01211 14.5537 4.92933 14.3583 4.76574C14.1628 4.60214 14.0372 4.3701 14.0071 4.117L14.0001 4H10.0001L9.99311 4.117C9.96301 4.3701 9.8374 4.60214 9.64195 4.76574C9.44649 4.92933 9.19595 5.01211 8.94151 4.99717C8.68707 4.98223 8.44793 4.8707 8.27296 4.68537C8.09799 4.50003 8.0004 4.25488 8.00011 4C7.99995 3.49542 8.19052 3.00943 8.53361 2.63945C8.8767 2.26947 9.34696 2.04284 9.85011 2.005L10.0001 2H14.0001Z" fill="#FFFAFA" />
+													</svg>
+												</div>
+											</button>
+										</div>
+									</td>
+								</tr>
+							<?php endforeach ?>
 							<div class="overlay" id="overlay"></div>
 							<div class="popup" id="popup">
 								<span class="close-btn" onclick="closePopup()">&times;</span>
-								<h2>Tambah Data gejala</h2>
+								<h2>Tambah Data Nilai Pakar</h2>
 								<hr style="border-color: #015D67;">
-								<form id="popupForm" action="<?= base_url('dashboard_admin/add_user_pemeriksa'); ?>" method="post">
+								<form id="popupForm" action="<?= base_url('dashboard_admin/add_nilai_pakar'); ?>" method="post">
 									<div class="edit-pendaftaran-container">
-										<label for="username"><b class="form-label">Username</b><br></label>
+										<label for="gejala"><b class="form-label">Gejala</b><br></label>
 										<div class="input-form">
-											<input name="username" class="tambah-data">
+											<select type="text" class="tambah-data" name="gejala" required>
+												<option value="Pilih User">Pilih Gejala</option>
+												<?php foreach ($gejala as $id): ?>
+													<option value="<?= $id['id'] ?>"><?= $id['nama_gejala'] ?></option>
+													<?php endforeach ?>>
+											</select>
 										</div>
-										<label for="password"><b class="form-label">Password</b><br></label>
+										<label for="penyakit"><b class="form-label">Penyakit</b><br></label>
 										<div class="input-form">
-											<input type="password" class="tambah-data" name="password" required>
-										</div>
-										<label for="password1"><b class="form-label">Ulangi Password</b><br></label>
-										<div class="input-form">
-											<input type="password" class="tambah-data" name="password1" required>
-										</div>
-										<label for="nama"><b class="form-label">Nama User</b><br></label>
-										<div class="input-form">
-											<input type="text" class="tambah-data" name="nama" required>
-										</div>
-										<label for="nomorTelepon"><b class="form-label">Nomor Telepon</b><br></label>
-										<div class="input-form">
-											<input type="text" class="tambah-data" name="nomorTelepon" required>
-										</div>
-										<label for="statusUser"><b class="form-label">Status User</b><br></label>
-										<div class="input-form">
-											<select type="text" class="tambah-data" name="statusUser" required>
-												<option value="Pilih User">Pilih User</option>
-												<option value="1">Admin</option>
-												<option value="2">Kesehatan</option>
-												<option value="3">BNN</option>
-												<option value="4">Psikolog</option>
+											<select type="text" class="tambah-data" name="penyakit" required>
+												<option value="Pilih User">Pilih Penyakit</option>
+												<?php foreach ($penyakit as $id): ?>
+													<option value="<?= $id['id'] ?>"><?= $id['nama'] ?></option>
+												<?php endforeach ?>
 											</select>
 										</div>
 
-
+										<label for="mb"><b class="form-label">Nilai MB (Kepercayaan Pakar)</b><br></label>
+										<div class="input-form">
+											<input type="text" class="tambah-data" name="mb" required>
+										</div>
+										<label for="md"><b class="form-label">Nilai MD (Ketidakpercayaan Pakar)</b><br></label>
+										<div class="input-form">
+											<input type="text" class="tambah-data" name="md" required>
+										</div>
+										<label for="cf"><b class="form-label">Nilai CF</b><br></label>
+										<div class="input-form">
+											<input type="text" class="tambah-data" name="cf" required>
+										</div>
 										<button type="submit">Submit</button>
 									</div>
 								</form>
@@ -239,7 +245,7 @@
 							<div class="popup" id="popup1">
 								<span class="close-btn" onclick="closePopup1()">&times;</span>
 
-								<form id="popupForm" action="<?= base_url('dashboard_admin/hapus_user_pemeriksa'); ?>" method="post">
+								<form id="popupForm" action="<?= base_url('dashboard_admin/hapus_nilai_pakar'); ?>" method="post">
 									<input type="hidden" name="id" id="id" />
 									<h4>Apakah Anda Yakin Menghapus data ini?</h4>
 									<button type="submit">Ya</button>
@@ -250,43 +256,41 @@
 							<div class="overlay" id="overlay2"></div>
 							<div class="popup" id="popup2">
 								<span class="close-btn" onclick="closePopup2()">&times;</span>
-								<h2>Tambah Data gejala</h2>
+								<h2>Edit Data Nilai Pakar</h2>
 								<hr style="border-color: #015D67;">
-								<form id="popupForm" action="<?= base_url('dashboard_admin/edit_user_pemeriksa'); ?>" method="post">
+								<form id="popupForm" action="<?= base_url('dashboard_admin/add_nilai_pakar'); ?>" method="post">
 									<div class="edit-pendaftaran-container">
-										<input type="hidden" name="Id" id="Id" />
-										<label for="username"><b class="form-label">Username</b><br></label>
+										<label for="gejala"><b class="form-label">Gejala</b><br></label>
 										<div class="input-form">
-											<input id="username" name="username" class="tambah-data">
+											<select type="text" id="gejala" class="tambah-data" name="gejala" required>
+												<option value="Pilih User">Pilih Gejala</option>
+												<?php foreach ($gejala as $id): ?>
+													<option value="<?= $id['id'] ?>"><?= $id['nama_gejala'] ?></option>
+													<?php endforeach ?>>
+											</select>
 										</div>
-										<label for="password"><b class="form-label">Password</b><br></label>
+										<label for="penyakit"><b class="form-label">Penyakit</b><br></label>
 										<div class="input-form">
-											<input type="password" class="tambah-data" name="password" required>
-										</div>
-										<label for="password1"><b class="form-label">Ulangi Password</b><br></label>
-										<div class="input-form">
-											<input type="password" class="tambah-data" name="password1" required>
-										</div>
-										<label for="nama"><b class="form-label">Nama User</b><br></label>
-										<div class="input-form">
-											<input type="text" class="tambah-data" name="nama" required>
-										</div>
-										<label for="nomorTelepon"><b class="form-label">Nomor Telepon</b><br></label>
-										<div class="input-form">
-											<input type="text" id="nomorTelepon" class="tambah-data" name="nomorTelepon" required>
-										</div>
-										<label for="role"><b class="form-label">Status User</b><br></label>
-										<div class="input-form">
-											<select type="text" id="role" class="tambah-data" name="role" required>
-												<option value="Pilih User">Pilih User</option>
-												<option value="1">Admin</option>
-												<option value="2">Kesehatan</option>
-												<option value="3">BNN</option>
-												<option value="4">Psikolog</option>
+											<select type="text" id="penyakit" class="tambah-data" name="penyakit" required>
+												<option value="Pilih User">Pilih Penyakit</option>
+												<?php foreach ($penyakit as $id): ?>
+													<option value="<?= $id['id'] ?>"><?= $id['nama'] ?></option>
+												<?php endforeach ?>
 											</select>
 										</div>
 
-
+										<label for="mb"><b class="form-label">Nilai MB (Kepercayaan Pakar)</b><br></label>
+										<div class="input-form">
+											<input type="text" id="mb" class="tambah-data" name="mb" required>
+										</div>
+										<label for="md"><b class="form-label">Nilai MD (Ketidakpercayaan Pakar)</b><br></label>
+										<div class="input-form">
+											<input type="text" id="md" class="tambah-data" name="md" required>
+										</div>
+										<label for="cf"><b class="form-label">Nilai CF</b><br></label>
+										<div class="input-form">
+											<input type="text" id="cf" class="tambah-data" name="cf" required>
+										</div>
 										<button type="submit">Submit</button>
 									</div>
 								</form>
@@ -330,20 +334,26 @@
 
 		function showPopup2(buttonElement) {
 			const Id = buttonElement.getAttribute('data-id');
-			const nomorTelepon = buttonElement.getAttribute('data-nomorTelepon');
-			const role = buttonElement.getAttribute('data-role');
-			const username = buttonElement.getAttribute('data-username');
+			const gejala = buttonElement.getAttribute('data-gejala');
+			const penyakit = buttonElement.getAttribute('data-penyakit');
+			const mb = buttonElement.getAttribute('data-mb');
+			const md = buttonElement.getAttribute('data-md');
+			const cf = buttonElement.getAttribute('data-cf');
 
 			console.log('gejala ID:', Id);
-			console.log('kodeGejala:', role);
-			console.log('Kode gejala:', nomorTelepon);
-			console.log('namaGejala:', username);
+			console.log('kodeGejala:', penyakit);
+			console.log('Kode gejala:', gejala);
+			console.log('namaGejala:', mb);
+			console.log('namaGejala:', md);
+			console.log('namaGejala:', cf);
 
 			// Pastikan ID cocok dengan ID elemen di HTML
-			document.getElementById('Id').value = Id;
-			document.getElementById('role').value = role;
-			document.getElementById('nomorTelepon').value = nomorTelepon;
-			document.getElementById('username').value = username;
+			document.getElementById('i	d').value = Id;
+			document.getElementById('gejala').value = gejala;
+			document.getElementById('penyakit').value = penyakit;
+			document.getElementById('mb').value = mb;
+			document.getElementById('md').value = md;
+			document.getElementById('cf').value = cf;
 
 			document.getElementById('popup2').classList.add('show');
 			document.getElementById('overlay2').classList.add('show');
