@@ -304,8 +304,25 @@ class Dashboard_Admin extends CI_Controller
 		$keyword = $this->input->get('search');
 
 		if ($keyword != null) {
-			$keyword = $this->m_kelompok_gejala->search($keyword);
-			$data['id'] = $keyword;
+			$nilai_pakar = $this->m_Nilai_Pakar->search($keyword);
+			$nilais = []; // Inisialisasi array $nilais
+
+			foreach ($nilai_pakar as $nilai) {
+				$id_gejala = $nilai['gejala_id'];
+				$id_penyakit = $nilai['penyakit_id'];
+				$id = $nilai['id'];
+				$nilai_hasil = $this->m_Nilai_Pakar->nilai($id_gejala, $id_penyakit, $id);
+				if (!empty($nilai_hasil)) {
+					$nilais[] = $nilai_hasil;
+				}
+			}
+
+			$data['penyakit'] = $this->m_Penyakit->penyakit();
+			$data['gejala'] = $this->m_gejala->gejala();
+
+			$data['id'] = $nilais;
+
+			// INI BELUM ADA SEARCH NYA UNTUK NILAI PAKAR
 		} else {
 			$nilai_pakar = $this->m_Nilai_Pakar->nilai_pakar();
 			$nilais = []; // Inisialisasi array $nilais

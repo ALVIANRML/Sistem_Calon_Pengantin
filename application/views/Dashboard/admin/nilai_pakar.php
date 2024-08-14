@@ -10,7 +10,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/nilai_pakar.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/modal.css') ?>">
+
 </head>
 
 <body>
@@ -36,16 +36,18 @@
 				</div>
 				<!-- Dropdown -->
 				<div class="dropdown-logo">
-					<img src="public/icon/dropdown.svg" alt="">
-					<div class="dropdown">
-						<div><a href="#">Ganti Password</a></div>
-						<div><a href="#">Keluar</a></div>
+					<img src="<?= base_url('assets/img/dropdown.svg') ?>" alt="">
+					<div class="dropdown" style="width: 122%;">
+						<div> <a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password </a>
+						</div>
+						<div><a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar </a></div>
 					</div>
 				</div>
 				<!-- End of Dropdown -->
 			</div>
 		</div>
 
+		<!-- sidebar -->
 		<!-- sidebar -->
 		<div class="container-sidebar-dashboard-admin">
 			<p>NAVIGASI</p>
@@ -59,7 +61,7 @@
 					<p class="menu-text">Dashboard</p>
 				</div>
 			</a>
-			<a href="data-catin-admin.html">
+			<a href="<?= base_url('dashboard_admin/view_data_catin') ?>">
 				<div class="menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="Frame">
@@ -69,7 +71,7 @@
 					<p class="menu-text">Data Catin</p>
 				</div>
 			</a>
-			<a href="data-penyakit-admin.html">
+			<a href="<?= base_url('dashboard_admin/data_penyakit') ?>">
 				<div class="menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="material-symbols-light:data-table">
@@ -80,7 +82,7 @@
 				</div>
 			</a>
 			<!-- menu double -->
-			<div class="menu menu-double" id="md1">
+			<div class="menu menu-double location-menu" id="md1">
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="material-symbols-light:data-table">
 						<path id="Vector" d="M4.00001 8.92304H20V5.38504C20 5.23104 19.936 5.09004 19.808 4.96204C19.68 4.83404 19.539 4.76971 19.385 4.76904H4.615C4.46167 4.76904 4.32067 4.83304 4.19201 4.96104C4.06334 5.08904 3.99934 5.23004 4.00001 5.38404V8.92304ZM4.00001 14.077H20V9.92304H4.00001V14.077ZM4.615 19.231H19.385C19.5383 19.231 19.6793 19.1667 19.808 19.038C19.9367 18.9094 20.0007 18.7684 20 18.615V15.077H4.00001V18.616C4.00001 18.7694 4.06401 18.9104 4.19201 19.039C4.32001 19.1677 4.461 19.2317 4.615 19.231ZM5.77001 7.65404V6.03904H7.38501V7.65404H5.77001ZM5.77001 12.808V11.192H7.38501V12.808H5.77001ZM5.77001 17.962V16.346H7.38501V17.962H5.77001Z" fill="#828282" />
@@ -93,16 +95,16 @@
 			</div>
 			<div class="menu-dropdown-visibility" id="mdv1">
 				<div class="menu-dropdown">
-					<a href="data-gejala-admin.html">
+					<a href="<?= base_url('dashboard_admin/data_gejala') ?>">
 						<p>Gejala</p>
 					</a>
-					<a href="data-pakar-admin.html\">
+					<a href="<?= base_url('dashboard_admin/nilai_pakar') ?>">
 						<p>Nilai Pakar</p>
 					</a>
 				</div>
 			</div>
 
-			<div class="menu menu-double location-menu" id="md2">
+			<div class="menu menu-double" id="md2">
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="flowbite:users-solid">
 						<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M8 4.00001C6.93913 4.00001 5.92172 4.42144 5.17157 5.17159C4.42143 5.92173 4 6.93915 4 8.00001C4 9.06088 4.42143 10.0783 5.17157 10.8284C5.92172 11.5786 6.93913 12 8 12C9.06087 12 10.0783 11.5786 10.8284 10.8284C11.5786 10.0783 12 9.06088 12 8.00001C12 6.93915 11.5786 5.92173 10.8284 5.17159C10.0783 4.42144 9.06087 4.00001 8 4.00001ZM6 13C4.93913 13 3.92172 13.4214 3.17157 14.1716C2.42143 14.9217 2 15.9391 2 17V18C2 18.5304 2.21071 19.0392 2.58579 19.4142C2.96086 19.7893 3.46957 20 4 20H12C12.5304 20 13.0391 19.7893 13.4142 19.4142C13.7893 19.0392 14 18.5304 14 18V17C14 15.9391 13.5786 14.9217 12.8284 14.1716C12.0783 13.4214 11.0609 13 10 13H6ZM13.25 10.905C13.728 10.045 14 9.05501 14 8.00001C14.0002 6.98345 13.7421 5.9835 13.25 5.09401C13.8178 4.55674 14.5306 4.19763 15.3003 4.06104C16.07 3.92446 16.8628 4.0164 17.5808 4.3255C18.2988 4.6346 18.9106 5.14731 19.3403 5.80026C19.7701 6.45322 19.9992 7.2178 19.9992 7.99951C19.9992 8.78123 19.7701 9.54581 19.3403 10.1988C18.9106 10.8517 18.2988 11.3644 17.5808 11.6735C16.8628 11.9826 16.07 12.0746 15.3003 11.938C14.5306 11.8014 13.8178 11.4423 13.25 10.905ZM15.466 20C15.806 19.412 16.001 18.729 16.001 18V17C16.0028 15.5238 15.4586 14.099 14.473 13H18C19.0609 13 20.0783 13.4214 20.8284 14.1716C21.5786 14.9217 22 15.9391 22 17V18C22 18.5304 21.7893 19.0392 21.4142 19.4142C21.0391 19.7893 20.5304 20 20 20H15.466Z" fill="#828282" />
@@ -115,7 +117,7 @@
 			</div>
 			<div class="menu-dropdown-visibility" id="mdv2">
 				<div class="menu-dropdown">
-					<a href="data-dinas-admin.html">
+					<a href="<?= base_url('dashboard_admin/view_dinas_pemeriksaan') ?>">
 						<p>Dinas Pemeriksa</p>
 					</a>
 					<a href="<?= base_url('dashboard_admin/user_pemeriksa') ?>">
@@ -145,12 +147,14 @@
 						<div class="show-entries">Show 10 entries</Show>
 						</div>
 						<div class="cari-data">
-							<form action="" method="get">
+							<form action="<?= base_url('dashboard_admin/nilai_pakar') ?>" method="get">
 								<div class="form-input-cari">
-									<input type="text" placeholder="Cari data">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-										<path fill-rule="evenodd" clip-rule="evenodd" d="M11 2C9.56238 2.00016 8.14571 2.3447 6.86859 3.00479C5.59146 3.66489 4.49105 4.62132 3.65947 5.79402C2.82788 6.96672 2.28933 8.32158 2.08889 9.74516C1.88844 11.1687 2.03194 12.6196 2.50738 13.9764C2.98281 15.3331 3.77634 16.5562 4.82154 17.5433C5.86673 18.5304 7.13318 19.2527 8.51487 19.6498C9.89656 20.0469 11.3533 20.1073 12.7631 19.8258C14.1729 19.5443 15.4947 18.9292 16.618 18.032L20.293 21.707C20.4816 21.8892 20.7342 21.99 20.9964 21.9877C21.2586 21.9854 21.5094 21.8802 21.6948 21.6948C21.8802 21.5094 21.9854 21.2586 21.9877 20.9964C21.99 20.7342 21.8892 20.4816 21.707 20.293L18.032 16.618C19.09 15.2939 19.7526 13.6979 19.9435 12.0138C20.1344 10.3297 19.8459 8.62586 19.1112 7.0985C18.3764 5.57113 17.2253 4.28228 15.7904 3.38029C14.3554 2.47831 12.6949 1.99985 11 2ZM5 11C5 10.2121 5.1552 9.43185 5.45673 8.7039C5.75825 7.97595 6.20021 7.31451 6.75736 6.75736C7.31451 6.20021 7.97595 5.75825 8.7039 5.45672C9.43186 5.15519 10.2121 5 11 5C11.7879 5 12.5682 5.15519 13.2961 5.45672C14.0241 5.75825 14.6855 6.20021 15.2426 6.75736C15.7998 7.31451 16.2418 7.97595 16.5433 8.7039C16.8448 9.43185 17 10.2121 17 11C17 12.5913 16.3679 14.1174 15.2426 15.2426C14.1174 16.3679 12.5913 17 11 17C9.4087 17 7.88258 16.3679 6.75736 15.2426C5.63214 14.1174 5 12.5913 5 11Z" fill="#E0E0E0" />
-									</svg>
+									<input type="text" name="search" id="search" placeholder="Cari data">
+									<button type="submit">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+											<path fill-rule="evenodd" clip-rule="evenodd" d="M11 2C9.56238 2.00016 8.14571 2.3447 6.86859 3.00479C5.59146 3.66489 4.49105 4.62132 3.65947 5.79402C2.82788 6.96672 2.28933 8.32158 2.08889 9.74516C1.88844 11.1687 2.03194 12.6196 2.50738 13.9764C2.98281 15.3331 3.77634 16.5562 4.82154 17.5433C5.86673 18.5304 7.13318 19.2527 8.51487 19.6498C9.89656 20.0469 11.3533 20.1073 12.7631 19.8258C14.1729 19.5443 15.4947 18.9292 16.618 18.032L20.293 21.707C20.4816 21.8892 20.7342 21.99 20.9964 21.9877C21.2586 21.9854 21.5094 21.8802 21.6948 21.6948C21.8802 21.5094 21.9854 21.2586 21.9877 20.9964C21.99 20.7342 21.8892 20.4816 21.707 20.293L18.032 16.618C19.09 15.2939 19.7526 13.6979 19.9435 12.0138C20.1344 10.3297 19.8459 8.62586 19.1112 7.0985C18.3764 5.57113 17.2253 4.28228 15.7904 3.38029C14.3554 2.47831 12.6949 1.99985 11 2ZM5 11C5 10.2121 5.1552 9.43185 5.45673 8.7039C5.75825 7.97595 6.20021 7.31451 6.75736 6.75736C7.31451 6.20021 7.97595 5.75825 8.7039 5.45672C9.43186 5.15519 10.2121 5 11 5C11.7879 5 12.5682 5.15519 13.2961 5.45672C14.0241 5.75825 14.6855 6.20021 15.2426 6.75736C15.7998 7.31451 16.2418 7.97595 16.5433 8.7039C16.8448 9.43185 17 10.2121 17 11C17 12.5913 16.3679 14.1174 15.2426 15.2426C14.1174 16.3679 12.5913 17 11 17C9.4087 17 7.88258 16.3679 6.75736 15.2426C5.63214 14.1174 5 12.5913 5 11Z" fill="#E0E0E0" />
+										</svg>
+									</button>
 								</div>
 							</form>
 						</div>
@@ -348,7 +352,7 @@
 			console.log('namaGejala:', cf);
 
 			// Pastikan ID cocok dengan ID elemen di HTML
-			document.getElementById('i	d').value = Id;
+			document.getElementById('id').value = Id;
 			document.getElementById('gejala').value = gejala;
 			document.getElementById('penyakit').value = penyakit;
 			document.getElementById('mb').value = mb;

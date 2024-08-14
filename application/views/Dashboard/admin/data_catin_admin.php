@@ -202,7 +202,7 @@
 					<a href="<?= base_url('dashboard_admin/data_penyakit') ?>">
 						<p>Gejala</p>
 					</a>
-					<a href="#">
+					<a href="<?= base_url('dashboard_admin/nilai_pakar') ?>">
 						<p>Nilai Pakar</p>
 					</a>
 				</div>

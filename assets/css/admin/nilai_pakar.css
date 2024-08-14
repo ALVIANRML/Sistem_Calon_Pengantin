@@ -289,6 +289,8 @@ th {
 
 .tambah-data {
 	width: 90%;
+	height: 100%;
+	padding: 5px;
 	background-color: #E9F1F2;
 	outline: none;
 	border: 1px solid #015D67;

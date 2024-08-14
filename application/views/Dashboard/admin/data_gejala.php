@@ -116,7 +116,7 @@
 					<a href="<?= base_url('dashboard_admin/view_dinas_pemeriksaan') ?>">
 						<p>Dinas Pemeriksa</p>
 					</a>
-					<a href="#">
+					<a href="<?= base_url('dashboard_admin/user_pemeriksa') ?>">
 						<p>User Pemeriksa</p>
 					</a>
 				</div>

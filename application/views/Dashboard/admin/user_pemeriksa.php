@@ -60,7 +60,7 @@
 					<p class="menu-text">Dashboard</p>
 				</div>
 			</a>
-			<a href="data-catin-admin.html">
+			<a href="<?= base_url('dashboard_admin/view_data_catin') ?>">
 				<div class="menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="Frame">
@@ -70,7 +70,7 @@
 					<p class="menu-text">Data Catin</p>
 				</div>
 			</a>
-			<a href="data-penyakit-admin.html">
+			<a href="<?= base_url('dashboard_admin/data_penyakit') ?>">
 				<div class="menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="material-symbols-light:data-table">
@@ -94,10 +94,10 @@
 			</div>
 			<div class="menu-dropdown-visibility" id="mdv1">
 				<div class="menu-dropdown">
-					<a href="data-gejala-admin.html">
+				<a href="<?= base_url('dashboard_admin/data_penyakit') ?>">
 						<p>Gejala</p>
 					</a>
-					<a href="data-pakar-admin.html">
+					<a href="<?= base_url('dashboard_admin/nilai_pakar') ?>">
 						<p>Nilai Pakar</p>
 					</a>
 				</div>
@@ -116,10 +116,10 @@
 			</div>
 			<div class="menu-dropdown-visibility" id="mdv2">
 				<div class="menu-dropdown">
-					<a href="data-dinas-admin.html">
+				<a href="<?= base_url('dashboard_admin/view_dinas_pemeriksaan') ?>">
 						<p>Dinas Pemeriksa</p>
 					</a>
-					<a href="data-user-admin.html">
+					<a href="<?= base_url('dashboard_admin/user_pemeriksa') ?>">
 						<p>User Pemeriksa</p>
 					</a>
 				</div>
