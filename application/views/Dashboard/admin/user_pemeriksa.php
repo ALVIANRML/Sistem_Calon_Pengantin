@@ -10,7 +10,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/nilai_pakar.css') ?>">
-	<link rel="stylesheet" href="modal.css">
+	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 </head>
 
 <body>
@@ -23,16 +23,16 @@
 		<!-- header -->
 		<div class="header-dashboard-admin">
 			<div class="container-logo">
-				<img src="public/images/logo.png" alt="">
+				<img src="<?= base_url('assets/') ?>img/percantin.png" alt="">
 				<p>PERCATIN</p>
 			</div>
 			<div class="profil-container">
 				<div class="foto-profil">
-					<img src="public/images/logo.png" alt="">
+					<img src="<?= base_url('assets/img/profile-admin.png') ?>" alt="">
 				</div>
 				<div style="display: flex; flex-direction: column;">
 					<p style="color: #7F7F7F; font-size: 12px; font-weight: 600;">Halo,</p>
-					<p class="nama">Nama orang</p>
+					<p class="nama"><?= $this->session->userdata('username'); ?></p>
 				</div>
 				<!-- Dropdown -->
 				<div class="dropdown-logo">
@@ -94,7 +94,7 @@
 			</div>
 			<div class="menu-dropdown-visibility" id="mdv1">
 				<div class="menu-dropdown">
-				<a href="<?= base_url('dashboard_admin/data_penyakit') ?>">
+					<a href="<?= base_url('dashboard_admin/data_penyakit') ?>">
 						<p>Gejala</p>
 					</a>
 					<a href="<?= base_url('dashboard_admin/nilai_pakar') ?>">
@@ -116,7 +116,7 @@
 			</div>
 			<div class="menu-dropdown-visibility" id="mdv2">
 				<div class="menu-dropdown">
-				<a href="<?= base_url('dashboard_admin/view_dinas_pemeriksaan') ?>">
+					<a href="<?= base_url('dashboard_admin/view_dinas_pemeriksaan') ?>">
 						<p>Dinas Pemeriksa</p>
 					</a>
 					<a href="<?= base_url('dashboard_admin/user_pemeriksa') ?>">
@@ -178,25 +178,25 @@
 									<td><?= isset($user_pemeriksa['nama']) ? $user_pemeriksa['nama'] : 'N/A'; ?></td>
 									<td><?= isset($user_pemeriksa['nama_lengkap']) ? $user_pemeriksa['nama_lengkap'] : 'N/A'; ?></td>
 									<td><?= isset($user_pemeriksa['nomorTelepon']) ? $user_pemeriksa['nomorTelepon'] : 'N/A'; ?></td>
-									<?php if (isset($user_pemeriksa['role'])): ?>
-										<?php if($user_pemeriksa['role'] == 1) : ?>
+									<?php if (isset($user_pemeriksa['role'])) : ?>
+										<?php if ($user_pemeriksa['role'] == 1) : ?>
 											<td>Admin</td>
-											<?php endif ?>
-												<?php if($user_pemeriksa['role'] == 2) : ?>
-													<td>Kesehatan</td>
-													<?php endif ?>
-														<?php if($user_pemeriksa['role'] == 3) : ?>
-															<td>BNN</td>
-															<?php endif ?>
-														<?php if($user_pemeriksa['role'] == 4) : ?>
-															<td>Psikolog</td>
-															<?php endif ?>
-														<?php if($user_pemeriksa['role'] == null) : ?>
-															<td>N/A</td>
-															<?php endif ?>
-									<?php endif ?> 
-									
-								
+										<?php endif ?>
+										<?php if ($user_pemeriksa['role'] == 2) : ?>
+											<td>Kesehatan</td>
+										<?php endif ?>
+										<?php if ($user_pemeriksa['role'] == 3) : ?>
+											<td>BNN</td>
+										<?php endif ?>
+										<?php if ($user_pemeriksa['role'] == 4) : ?>
+											<td>Psikolog</td>
+										<?php endif ?>
+										<?php if ($user_pemeriksa['role'] == null) : ?>
+											<td>N/A</td>
+										<?php endif ?>
+									<?php endif ?>
+
+
 									<td>
 										<div class="container-2-btn">
 											<div class="edit-btn" data-id="<?= $user_pemeriksa['id_user'] ?>" data-username="<?= $user_pemeriksa['nama'] ?>" data-nama="<?= $user_pemeriksa['nama_lengkap'] ?>" data-nomorTelepon=<?= $user_pemeriksa['nomorTelepon'] ?> data-role="<?= $user_pemeriksa['role'] ?>" onclick="showPopup2(this)">

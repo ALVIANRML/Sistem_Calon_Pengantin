@@ -39,8 +39,10 @@ class m_kelompok_gejala extends CI_Model
 		if (!$keyword) {
 			return null;
 		}
-		$this->db->like('kelompok_gejala_id', $keyword);
-		$this->db->or_like('keterangan', $keyword);
+
+		$keyword = strtolower($keyword);
+		$this->db->like('LOWER(kelompok_gejala_id)', $keyword);
+		$this->db->or_like('LOWER(keterangan)', $keyword);
 		$query = $this->db->get('kelompok_gejala');
 		return $query->result_array();
 	}

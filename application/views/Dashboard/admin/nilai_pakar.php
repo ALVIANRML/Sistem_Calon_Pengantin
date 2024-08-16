@@ -10,6 +10,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/nilai_pakar.css') ?>">
+	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
+
 
 </head>
 
@@ -23,16 +25,16 @@
 		<!-- header -->
 		<div class="header-dashboard-admin">
 			<div class="container-logo">
-				<img src="public/images/logo.png" alt="">
+				<img src="<?= base_url('assets/') ?>img/percantin.png" alt="">
 				<p>PERCATIN</p>
 			</div>
 			<div class="profil-container">
 				<div class="foto-profil">
-					<img src="public/images/logo.png" alt="">
+					<img src="<?= base_url('assets/img/profile-admin.png') ?>" alt="">
 				</div>
 				<div style="display: flex; flex-direction: column;">
 					<p style="color: #7F7F7F; font-size: 12px; font-weight: 600;">Halo,</p>
-					<p class="nama">Nama orang</p>
+					<p class="nama"><?= $this->session->userdata('username'); ?></p>
 				</div>
 				<!-- Dropdown -->
 				<div class="dropdown-logo">

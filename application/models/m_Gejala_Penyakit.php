@@ -12,10 +12,11 @@ class m_Gejala_Penyakit extends CI_Model
 		if (!$keyword) {
 			return null;
 		}
-		$this->db->like('nama_lengkap', $keyword);
-		$this->db->or_like('nik', $keyword);
-		$this->db->or_like('nomor_telepon', $keyword);
-		$this->db->or_like('no_pendaftaran', $keyword);
+		$keyword = strtolower($keyword);
+		$this->db->like('LOWER(nama_lengkap)', $keyword);
+		$this->db->or_like('LOWER(nik)', $keyword);
+		$this->db->or_like('LOWER(nomor_telepon)', $keyword);
+		$this->db->or_like('LOWER(no_pendaftaran)', $keyword);
 		$query = $this->db->get('user_detail');
 		return $query->result_array();
 	}
