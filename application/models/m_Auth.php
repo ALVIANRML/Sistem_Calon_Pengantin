@@ -84,10 +84,11 @@ class m_Auth extends CI_Model
 		if (!$keyword) {
 			return null;
 		}
+		$keyword = strtolower($keyword);
 		$this->db->where_in('role', [1, 2, 3, 4]);
-		$this->db->like('nama', $keyword);
-		$this->db->or_like('password', $keyword);
-		$this->db->or_like('nomor_telepon', $keyword);
+		$this->db->like('LOWER(nama)', $keyword);
+		$this->db->or_like('LOWER(password)', $keyword);
+		$this->db->or_like('LOWER(nomor_telepon)', $keyword);
 		$query = $this->db->get('users');
 		return $query->result_array();
 	}

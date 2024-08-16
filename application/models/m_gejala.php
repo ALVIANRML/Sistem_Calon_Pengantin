@@ -40,9 +40,10 @@ class m_gejala extends CI_Model
 		if (!$keyword) {
 			return null;
 		}
-		$this->db->like('kode', $keyword);
-		$this->db->or_like('kelompok_gejala_id', $keyword);
-		$this->db->or_like('nama_gejala', $keyword);
+		$keyword = strtolower($keyword);
+		$this->db->like('LOWER(kode)', $keyword);
+		$this->db->or_like('LOWER(kelompok_gejala_id)', $keyword);
+		$this->db->or_like('LOWER(nama_gejala)', $keyword);
 		$query = $this->db->get('gejala');
 		return $query->result_array();
 	}

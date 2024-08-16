@@ -304,6 +304,7 @@ class Dashboard_Admin extends CI_Controller
 		$keyword = $this->input->get('search');
 
 		if ($keyword != null) {
+			// Melakukan pencarian dengan keyword
 			$nilai_pakar = $this->m_Nilai_Pakar->search($keyword);
 			$nilais = []; // Inisialisasi array $nilais
 
@@ -319,11 +320,9 @@ class Dashboard_Admin extends CI_Controller
 
 			$data['penyakit'] = $this->m_Penyakit->penyakit();
 			$data['gejala'] = $this->m_gejala->gejala();
-
 			$data['id'] = $nilais;
-
-			// INI BELUM ADA SEARCH NYA UNTUK NILAI PAKAR
 		} else {
+			// Menampilkan semua data jika tidak ada keyword
 			$nilai_pakar = $this->m_Nilai_Pakar->nilai_pakar();
 			$nilais = []; // Inisialisasi array $nilais
 
@@ -339,12 +338,12 @@ class Dashboard_Admin extends CI_Controller
 
 			$data['penyakit'] = $this->m_Penyakit->penyakit();
 			$data['gejala'] = $this->m_gejala->gejala();
-
 			$data['id'] = $nilais;
 		}
 
 		$this->load->view('dashboard/admin/nilai_pakar', $data);
 	}
+
 
 	public function add_nilai_pakar()
 	{

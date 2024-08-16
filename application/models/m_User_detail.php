@@ -165,10 +165,16 @@ class m_User_detail extends CI_Model
 		if (!$keyword) {
 			return null;
 		}
-		$this->db->like('nama_lengkap', $keyword);
-		$this->db->or_like('nik', $keyword);
-		$this->db->or_like('nomor_telepon', $keyword);
-		$this->db->or_like('no_pendaftaran', $keyword);
+
+		// Convert keyword to lowercase
+		$keyword = strtolower($keyword);
+
+		// Apply LOWER function on columns
+		$this->db->like('LOWER(nama_lengkap)', $keyword);
+		$this->db->or_like('LOWER(nik)', $keyword);
+		$this->db->or_like('LOWER(nomor_telepon)', $keyword);
+		$this->db->or_like('LOWER(no_pendaftaran)', $keyword);
+
 		$query = $this->db->get('user_detail');
 		return $query->result_array();
 	}
