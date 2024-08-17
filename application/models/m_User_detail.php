@@ -79,11 +79,12 @@ class m_User_detail extends CI_Model
 		return true;
 	}
 
-	public function add_pemeriksa($id_user, $nama)
+	public function add_pemeriksa($id_user, $nama, $dataRegistered)
 	{
 		$this->db->where('id_user_detail', $id_user);
 		$this->db->update('user_detail', [
 			'nama_lengkap' => $nama,
+			'data_registered' => $dataRegistered,
 		]);
 	}
 	public function update_skrining_kesehatan($id_user, $skrining)
@@ -175,6 +176,15 @@ class m_User_detail extends CI_Model
 		$this->db->or_like('LOWER(nomor_telepon)', $keyword);
 		$this->db->or_like('LOWER(no_pendaftaran)', $keyword);
 
+		$query = $this->db->get('user_detail');
+		return $query->result_array();
+	}
+
+	public function tanggal_cetak($tglAwal, $tglAkhir)
+	{
+		// Pastikan format tanggal benar dan sesuai dengan format di database
+		$this->db->where('data_registered >=', $tglAwal);
+		$this->db->where('data_registered <=', $tglAkhir);
 		$query = $this->db->get('user_detail');
 		return $query->result_array();
 	}

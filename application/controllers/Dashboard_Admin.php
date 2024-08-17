@@ -158,6 +158,17 @@ class Dashboard_Admin extends CI_Controller
 		}
 	}
 
+	public function cetak_data(){
+		// $tglAwal  = $this->post->input('tangga_awal');
+		// $tglAkhir = $this->post->input('tanggal_akhir');
+		$tglAwal  = '2024-08-03';
+		$tglAkhir = '2024-08-18';
+
+		$dataa = $this->m_User_detail->tanggal_cetak($tglAwal, $tglAkhir);
+
+		
+	}
+
 	public function data_penyakit()
 	{
 
@@ -445,9 +456,10 @@ class Dashboard_Admin extends CI_Controller
 		$role 			= $this->input->post('statusUser');
 		$md 	= date('Y-m-d H:i:s', time());
 		$tanggalLahir	= date('Y-m-d H:i:s', time());
+		$dataRegistered = date('Y-M-D');
 
-		$this->m_Auth->input_user($id, $username, $password, $role,  $md, $nomorTelepon, $tanggalLahir);
-		$this->m_User_detail->add_pemeriksa($id, $nama);
+		$this->m_Auth->input_user($id, $username, $password, $role,  $md, $nomorTelepon, $tanggalLahir,);
+		$this->m_User_detail->add_pemeriksa($id, $nama, $dataRegistered);
 
 		redirect('dashboard_admin/user_pemeriksa');
 	}

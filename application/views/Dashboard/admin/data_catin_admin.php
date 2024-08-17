@@ -95,7 +95,7 @@
 	</style>
 </head>
 
-<body>
+<body style="overflow-y: scroll;">
 	<?php if ($this->session->flashdata('success_delete')) { ?>
 		<script>
 			swal({
