@@ -178,4 +178,14 @@ class m_User_detail extends CI_Model
 		$query = $this->db->get('user_detail');
 		return $query->result_array();
 	}
+
+	public function getLaporanByDateRange($tanggal_awal, $tanggal_akhir)
+	{
+		$this->db->select('user_detail.*, hasil_diagnosa.*'); // Memilih semua kolom dari tabel user_detail dan hasil kolom 'hasil' dari tabel hasil_diagnosa
+		$this->db->from('user_detail');
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left'); // Menggabungkan tabel user_detail dan hasil_diagnosa berdasarkan kolom user_id
+		$this->db->where('user_detail.tanggal_periksa >=', $tanggal_awal);
+		$this->db->where('user_detail.tanggal_periksa <=', $tanggal_akhir);
+		return $this->db->get()->result_array();
+	}
 }

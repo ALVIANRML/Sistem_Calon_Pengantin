@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 	<script src="<?php echo base_url("js/jquery.min.js"); ?>"></script> <!-- Load library jquery -->
-    <script src="<?php echo base_url("js/config.js"); ?>"></script> <!-- Load file process.js -->
+	<script src="<?php echo base_url("js/config.js"); ?>"></script> <!-- Load file process.js -->
 
 	<!-- SweetAlert -->
 	<script src="<?= base_url() ?>node_modules/sweetalert/dist/sweetalert.min.js"></script>
@@ -95,7 +95,7 @@
 	</style>
 </head>
 
-<body>
+<body style="overflow-y:auto">
 	<?php if ($this->session->flashdata('success_delete')) { ?>
 		<script>
 			swal({
@@ -256,7 +256,7 @@
 						</form>
 					</div>
 					<div class="container-2-btn">
-						<div class="cetak-data-btn">
+						<div class="cetak-data-btn" style="cursor:pointer" onclick="showPopup2()">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 								<path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2ZM15.8 20H14L12 16.6L10 20H8.2L11.1 15.5L8.2 11H10L12 14.4L14 11H15.8L12.9 15.5L15.8 20ZM13 9V3.5L18.5 9H13Z" fill="#FFFAFA" />
 							</svg>
@@ -316,23 +316,12 @@
 					</form>
 				</div>
 
-				<!-- modal
-                    <button id="openModalBtn">Open Modal</button>
-
-                    <div id="myModal" class="modal">
-                        <div class="modal-content">
-                            <span class="modal-btn" style="background-color: #DC3545;">Tidak</span>
-                            <span class="modal-btn" style="background-color: #015D67;">Ya</span>
-                            <p>Hapus Data Catin</p>
-                            <p>Apakah kamu yakin menghapus data ini?</p>
-                        </div>
-                    </div> -->
 
 				<div class="container-tabel">
 					<div class="baris-show-entries">
 						<div class="show-entries">Show 10 entries</Show>
 						</div>
-						<div class="cari-data" >
+						<div class="cari-data">
 							<form action="<?= base_url('dashboard_admin/view_data_catin') ?>" method="get">
 								<div class="form-input-cari">
 									<input type="text" name="search" id="search" placeholder="Cari data">
@@ -426,9 +415,30 @@
 							<?php endforeach ?>
 						</table>
 					</div>
+					<div class="overlay" id="overlay2"></div>
+							<div class="popup" id="popup2">
+								<span class="close-btn" onclick="closePopup2()">&times;</span>
+								<h2>Tambah Data gejala</h2>
+								<hr style="border-color: #015D67;">
+								<form id="popupForm" action="<?= base_url('dashboard_admin/export'); ?>" method="post">
+									<div class="edit-pendaftaran-container">
+										<label for="tanggal_awal"><b class="form-label">Tanggal Awal</b><br></label>
+										<div class="input-form">
+											<input type="date" id="tanggal_awal" class="tambah-data" name="tanggal_awal" required>
+										</div>
+										<label for="tanggal_akhir"><b class="form-label">Tanggal Akhir</b><br></label>
+										<div class="input-form">
+											<input type="date" id="tanggal_akhir" class="tambah-data" name="tanggal_akhir" required>
+										</div>
+
+
+										<button type="submit" onclick="closePopup2()">Submit</button>
+									</div>
+								</form>
+							</div>
 				</div>
 				<!--  -->
-				<div class="copyright-text">
+				<div class="copyright-text" style="bottom: 5%">
 					Copyright © 2024 DPPKB Kota Tebing. Hak cipta dilindungi
 				</div>
 			</div>
@@ -513,7 +523,18 @@
 			});
 		});
 	</script>
-	
+	<script>
+		function showPopup2() {
+			document.getElementById('popup2').classList.add('show');
+			document.getElementById('overlay2').classList.add('show');
+		}
+
+		function closePopup2() {
+			document.getElementById('popup2').classList.remove('show');
+			document.getElementById('overlay2').classList.remove('show');
+		}
+	</script>
+
 
 
 </body>
