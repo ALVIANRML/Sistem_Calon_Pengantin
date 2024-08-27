@@ -72,7 +72,7 @@ class Dashboard_Admin extends CI_Controller
 		} else {
 			if ($tanggal == null) {
 				$data['user_detail'] = $this->m_User_detail->all();
-				// var_dump($data['user_detail']);
+				// var_dump($data);
 				// exit;
 			} else {
 				$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal);

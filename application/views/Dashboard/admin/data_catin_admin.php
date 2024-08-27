@@ -397,13 +397,97 @@
 													<li><span class="label">Foto Kartu Keluarga</span><span class="titik-dua">:</span><span class="value"><img src="<?= base_url('uploads/photo/'); ?><?= $datas['foto_kk'] ?>" alt="Profile Image" style="weight:400px; height:400px;"></span></li>
 													<li><span class="label">Foto Surat</span><span class="titik-dua">:</span><span class="value"><img src="<?= base_url('uploads/photo/'); ?><?= $datas['foto_surat'] ?>" alt="Profile Image" style="weight:400px; height:400px;"></span></li>
 													<li><span class="label">Tanggal Pendaftaran</span><span class="titik-dua">:</span><span class="value"><?= $datas['data_registered'] ?>"</span></li>
-													<li><span class="label">Hasil Pemeriksaan</span><span class="titik-dua">:</span><span class="value">-</span></li>
-													<li><span class="label">Status Aktif</span><span class="titik-dua">:</span><span class="value">"</span></li>
-													<li><span class="label">Status Perpanjangan</span><span class="titik-dua">:</span><span class="value"><?= $datas['foto_surat'] ?>"</span></li>
-													<li><span class="label">Mulai Berlaku</span><span class="titik-dua">:</span><span class="value"><?= $datas['mulai_berlaku'] ?></span></li>
-													<li><span class="label">Akhir Berlaku</span><span class="titik-dua">:</span><span class="value"><?= $datas['akhir_berlaku'] ?></span></li>
-													<li><span class="label">Verifikasi Data</span><span class="titik-dua">:</span><span class="value">VALUE</span></li>
-													<li><span class="label">Aksi</span><span class="titik-dua">:</span><span class="value">VALUE</span></li>
+													<li><span class="label">Hasil Pemeriksaan</span><span class="titik-dua">:</span>
+														<span class="value gap-btn">
+															<button class="open-modal btn green-btn" onclick="showPopup3('popup3-<?= $datas['user_id'] ?>')">Hasil Survei Catin<svg
+																	xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<path
+																		d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11"
+																		stroke="#FFFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+																</svg></button>
+															<button class="open-modal btn green-btn" onclick="showPopup4('popup4-<?= $datas['user_id'] ?>')">Hasil Kesehatan<svg
+																	xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<path
+																		d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11"
+																		stroke="#FFFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+																</svg></button>
+															<button class="open-modal btn green-btn" onclick="showPopup5('popup5-<?= $datas['user_id'] ?>')">Hasil BNN<svg xmlns="http://www.w3.org/2000/svg"
+																	width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<path
+																		d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11"
+																		stroke="#FFFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+																</svg></button>
+															<button class="open-modal btn green-btn" onclick="showPopup6('popup6-<?= $datas['user_id'] ?>')">Hasil Psikolog<svg xmlns="http://www.w3.org/2000/svg"
+																	width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<path
+																		d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11"
+																		stroke="#FFFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+																</svg></button>
+														</span>
+													</li>
+													<li><span class="label">Status Aktif</span><span class="titik-dua">:</span>
+														<span class="value">
+															<button class="btn blue-btn">Selesai Aktif</button>
+														</span>
+													</li>
+													<li><span class="label">Status Perpanjangan</span><span class="titik-dua">:</span>
+														<span class="value">
+															<button class="btn red-btn">Belum Butuh Perpanjangan</button>
+														</span>
+													</li>
+													<li><span class="label">Mulai Berlaku</span><span class="titik-dua">:</span><span
+															class="value">VALUE</span></li>
+													<li><span class="label">Akhir Berlaku</span><span class="titik-dua">:</span><span
+															class="value">VALUE</span></li>
+													<li><span class="label">Verifikasi Data</span><span class="titik-dua">:</span>
+														<span class="value gap-btn">
+															<button class="open-modal btn green-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+																	height="24" viewBox="0 0 24 24" fill="none">
+																	<path
+																		d="M1 3H23V21H1V3ZM3 5V19H21V5H3ZM15.5 9.5C15.7652 9.5 16.0196 9.60536 16.2071 9.79289C16.3946 9.98043 16.5 10.2348 16.5 10.5C16.5 10.7652 16.3946 11.0196 16.2071 11.2071C16.0196 11.3946 15.7652 11.5 15.5 11.5C15.2348 11.5 14.9804 11.3946 14.7929 11.2071C14.6054 11.0196 14.5 10.7652 14.5 10.5C14.5 10.2348 14.6054 9.98043 14.7929 9.79289C14.9804 9.60536 15.2348 9.5 15.5 9.5ZM17.9 12.3C18.2343 11.8543 18.4378 11.3243 18.4879 10.7694C18.5379 10.2145 18.4324 9.65668 18.1833 9.15836C17.9341 8.66004 17.5511 8.24095 17.0772 7.94805C16.6033 7.65514 16.0571 7.5 15.5 7.5C14.9429 7.5 14.3967 7.65514 13.9228 7.94805C13.4489 8.24095 13.0659 8.66004 12.8167 9.15836C12.5676 9.65668 12.4621 10.2145 12.5121 10.7694C12.5622 11.3243 12.7657 11.8543 13.1 12.3C12.6032 12.6726 12.2 13.1557 11.9223 13.7111C11.6446 14.2666 11.5 14.879 11.5 15.5V16.5H13.5V15.5C13.5 14.9696 13.7107 14.4609 14.0858 14.0858C14.4609 13.7107 14.9696 13.5 15.5 13.5C16.0304 13.5 16.5391 13.7107 16.9142 14.0858C17.2893 14.4609 17.5 14.9696 17.5 15.5V16.5H19.5V15.5C19.5 14.191 18.872 13.03 17.9 12.3ZM5 9H9.5V11H5V9ZM5 13H9.5V15H5V13Z"
+																		fill="#FFFAFA" />
+																</svg>Verifikasi Data</button>
+															<button class="open-modal btn green-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+																	height="24" viewBox="0 0 24 24" fill="none">
+																	<path d="M21 3H3V21H21V3ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
+																		fill="#FFFAFA" />
+																</svg>Aktifkan Kartu</button>
+															<button class="btn green-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+																	viewBox="0 0 24 24" fill="none">
+																	<path fill-rule="evenodd" clip-rule="evenodd"
+																		d="M20.75 16.714C20.7488 16.7619 20.7441 16.8097 20.736 16.857C20.7571 16.9656 20.7539 17.0774 20.7267 17.1846C20.6995 17.2918 20.6489 17.3917 20.5785 17.477C20.5082 17.5623 20.4198 17.6311 20.3198 17.6783C20.2198 17.7255 20.1106 17.75 20 17.75H6C5.83585 17.75 5.6733 17.7823 5.52165 17.8451C5.36999 17.908 5.23219 18 5.11612 18.1161C5.00004 18.2322 4.90797 18.37 4.84515 18.5216C4.78233 18.6733 4.75 18.8358 4.75 19C4.75 19.1642 4.78233 19.3267 4.84515 19.4784C4.90797 19.63 5.00004 19.7678 5.11612 19.8839C5.23219 20 5.36999 20.092 5.52165 20.1549C5.6733 20.2177 5.83585 20.25 6 20.25H20C20.1989 20.25 20.3897 20.329 20.5303 20.4697C20.671 20.6103 20.75 20.8011 20.75 21C20.75 21.1989 20.671 21.3897 20.5303 21.5303C20.3897 21.671 20.1989 21.75 20 21.75H6C5.27065 21.75 4.57118 21.4603 4.05546 20.9445C3.53973 20.4288 3.25 19.7293 3.25 19V5C3.25 4.27065 3.53973 3.57118 4.05546 3.05546C4.57118 2.53973 5.27065 2.25 6 2.25H19.4C20.146 2.25 20.75 2.854 20.75 3.6V16.714ZM9 6.25C8.80109 6.25 8.61032 6.32902 8.46967 6.46967C8.32902 6.61032 8.25 6.80109 8.25 7C8.25 7.19891 8.32902 7.38968 8.46967 7.53033C8.61032 7.67098 8.80109 7.75 9 7.75H15C15.1989 7.75 15.3897 7.67098 15.5303 7.53033C15.671 7.38968 15.75 7.19891 15.75 7C15.75 6.80109 15.671 6.61032 15.5303 6.46967C15.3897 6.32902 15.1989 6.25 15 6.25H9Z"
+																		fill="#FFFAFA" />
+																</svg>Cetak Kartu</button>
+															<button class="open-modal btn green-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+																	height="24" viewBox="0 0 24 24" fill="none">
+																	<path
+																		d="M18.988 2.01221L21.988 5.01221L19.701 7.30021L16.701 4.30021L18.988 2.01221ZM8 16.0002H11L18.287 8.71321L15.287 5.71321L8 13.0002V16.0002Z"
+																		fill="#FFFAFA" />
+																	<path
+																		d="M19 19H8.158C8.132 19 8.105 19.01 8.079 19.01C8.046 19.01 8.013 19.001 7.979 19H5V5H11.847L13.847 3H5C3.897 3 3 3.896 3 5V19C3 20.104 3.897 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V10.332L19 12.332V19Z"
+																		fill="#FFFAFA" />
+																</svg>Status Perpanjangan</button>
+														</span>
+													</li>
+													<li><span class="label">Aksi</span><span class="titik-dua">:</span>
+														<span class="value gap-btn">
+															<button class="btn blue-btn">Edit<svg xmlns="http://www.w3.org/2000/svg" width="24"
+																	height="24" viewBox="0 0 24 24" fill="none">
+																	<path
+																		d="M18.988 2.01221L21.988 5.01221L19.701 7.30021L16.701 4.30021L18.988 2.01221ZM8 16.0002H11L18.287 8.71321L15.287 5.71321L8 13.0002V16.0002Z"
+																		fill="#FFFAFA" />
+																	<path
+																		d="M19 19H8.158C8.132 19 8.105 19.01 8.079 19.01C8.046 19.01 8.013 19.001 7.979 19H5V5H11.847L13.847 3H5C3.897 3 3 3.896 3 5V19C3 20.104 3.897 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V10.332L19 12.332V19Z"
+																		fill="#FFFAFA" />
+																</svg></button>
+															<button class="open-modal btn red-btn">Hapus<svg xmlns="http://www.w3.org/2000/svg" width="24"
+																	height="24" viewBox="0 0 24 24" fill="none">
+																	<path
+																		d="M19.9999 6C20.2547 6.00028 20.4999 6.09788 20.6852 6.27285C20.8706 6.44782 20.9821 6.68695 20.997 6.94139C21.012 7.19584 20.9292 7.44638 20.7656 7.64183C20.602 7.83729 20.37 7.9629 20.1169 7.993L19.9999 8H19.9189L18.9999 19C18.9999 19.7652 18.7075 20.5015 18.1826 21.0583C17.6576 21.615 16.9398 21.9501 16.1759 21.995L15.9999 22H7.99987C6.40187 22 5.09587 20.751 5.00787 19.25L5.00287 19.083L4.07987 8H3.99987C3.74499 7.99972 3.49984 7.90212 3.3145 7.72715C3.12916 7.55218 3.01763 7.31305 3.0027 7.05861C2.98776 6.80416 3.07054 6.55362 3.23413 6.35817C3.39772 6.16271 3.62977 6.0371 3.88287 6.007L3.99987 6H19.9999ZM13.9999 2C14.5303 2 15.039 2.21071 15.4141 2.58579C15.7892 2.96086 15.9999 3.46957 15.9999 4C15.9996 4.25488 15.902 4.50003 15.727 4.68537C15.5521 4.8707 15.3129 4.98223 15.0585 4.99717C14.804 5.01211 14.5535 4.92933 14.358 4.76574C14.1626 4.60214 14.037 4.3701 14.0069 4.117L13.9999 4H9.99987L9.99287 4.117C9.96277 4.3701 9.83715 4.60214 9.6417 4.76574C9.44625 4.92933 9.19571 5.01211 8.94126 4.99717C8.68682 4.98223 8.44769 4.8707 8.27272 4.68537C8.09775 4.50003 8.00015 4.25488 7.99987 4C7.99971 3.49542 8.19028 3.00943 8.53337 2.63945C8.87646 2.26947 9.34671 2.04284 9.84987 2.005L9.99987 2H13.9999Z"
+																		fill="#FFFAFA" />
+																</svg></button>
+														</span>
+													</li>
 												</ul>
 											</div>
 										</td>
@@ -412,30 +496,138 @@
 									<!-- Tambahkan baris data lainnya di sini -->
 
 								</tbody>
+								<div class="overlay" id="overlay3"></div>
+								<div class="popup" id="popup3-<?= $datas['user_id'] ?>">
+									<span class="close-btn" onclick="closePopup3('popup3-<?= $datas['user_id'] ?>')">&times;</span>
+									<h2>Tambah Data Penyakit</h2>
+									<hr style="border-color: #015D67;">
+									<div class="edit-pendaftaran-container">
+										<p><b>Tingkat Kepercayaan : <?= $datas['kepercayaan_catin']; ?>%</b></p> <br>
+										<label for="kode_penyakit"><b class="form-label">Kode Penyakit</b><br></label>
+										<div class="input-form" style="border: none;">
+											<input type="text" id="kode_penyakit" value="<?= $datas['kode_catin'] ?>" class="tambah-data" name="kode_penyakit" readonly required>
+										</div>
+										<label for="nama_penyakit"><b class="form-label">Nama Penyakit</b><br></label>
+										<div class="input-form" style="border: none;">
+											<input type="text" id="nama_penyakit" value="<?= $datas['nama_sakit_catin'] ?>" class="tambah-data" name="nama_penyakit" readonly required>
+										</div>
+										<label for="keterangan"><b class="form-label">Keterangan</b><br></label>
+										<div class="input-form" style="border: none;">
+											<textarea name="keterangan" class="tambah-data" style="height: 90px;" readonly><?= $datas['keterangan_catin'] ?></textarea>
+										</div>
+									</div>
+								</div>
+
+								<!-- popup periksa kesehatan -->
+								<div class="overlay" id="overlay4"></div>
+								<div class="popup" id="popup4-<?= $datas['user_id'] ?>">
+								<span class="close-btn" onclick="closePopup4('popup4-<?= $datas['user_id'] ?>')">&times;</span>
+									<h2>Tambah Data Penyakit</h2>
+									<hr style="border-color: #015D67;">
+									<div class="edit-pendaftaran-container">
+										<p>Nama Faskes: UPT Puskesmas Rambung</p><br>
+										<p>Nama Pemeriksa: <?= $datas['nama_pemeriksa_kesehatan'] ?></p><br>
+										<b> Tanda Vital</b>
+										<p>Tekanan Darah: <?= $datas['nama_pemeriksa_kesehatan'] ?></p>
+										<p>Nadi: <?= $datas['nadi'] ?></p>
+										<p>Nafas: <?= $datas['nafas'] ?></p>
+										<p>Suhu: <?= $datas['suhu'] ?></p><br>
+										<p>Berat Badan: <?= $datas['berat_badan'] ?></p><br>
+										<p>Tinggi: <?= $datas['tinggi_badan'] ?></p><br>
+										<p>IMT: <?= $datas['suhu'] ?></p><br>
+										<p>Lila (Lingkar Lengan Atas): <?= $datas['lila'] ?></p><br>
+										<p>Status T: <?= $datas['suntik_tt'] ?></p><br>
+										<p>Tanda Anemia: <?= $datas['tanda_anemia'] ?></p><br>
+										<p>Penunjang:</p><br>
+										<p>HB: <?= $datas['hb'] ?></p><br>
+										<p>Golongan Darah: <?= $datas['gol_darah'] ?></p><br><br>
+										<p><b>Lain-Lain</b></p><br>
+										<p>Rapidtest: <?= $datas['rapid_test'] ?></p><br>
+										<p>Planotest: <?= $datas['plano_test'] ?></p><br><br>
+										<label for="kode_resiko">Kode Kesehatan</label> <br>
+										<input type="text" name="kode_resiko" id="kode_resiko" value="<?= $datas['kode_kesehatan'] ?>" readonly> <br><br>
+										<p><b>Tingkat Kepercayaan : <?= $datas['kepercayaan_kesehatan'] ?>%</b></p> <br>
+										<label for="nama_resiko"></label>
+										<input type="text" name="nama_resiko" id="nama_resiko" value="<?= $datas['nama_sakit_kesehatan'] ?>" readonly><br>
+										<label for="keterangan"><b class="form-label">Keterangan</b><br></label>
+										<div class="input-form" style="border: none;">
+											<textarea name="keterangan" class="tambah-data" style="height: 90px;" readonly><?= $datas['keterangan_kesehatan'] ?></textarea>
+										</div>
+									</div>
+								</div>
+
+								<!-- popup periksa BNN -->
+								<div class="overlay" id="overlay5"></div>
+								<div class="popup" id="popup5-<?= $datas['user_id'] ?>">
+								<span class="close-btn" onclick="closePopup5('popup5-<?= $datas['user_id'] ?>')">&times;</span>
+									<h2>Hasil Periksa BNN Catin</h2>
+									<hr style="border-color: #015D67;">
+									<div class="edit-pendaftaran-container">
+										<p><b>Nama BNN : <?= $datas['nama_bnn'] ?></b></p> <br>
+										<p><b>Nama Pemeriksa : <?= $datas['nama_pemeriksa_bnn'] ?></b></p> <br>
+										<p><b>Hasil Test Narkoba : <?= $datas['narkoba_test'] ?></b></p> <br>
+										<p><b>Tingkat Kepercayaan : <?= $datas['kepercayaan_bnn'] ?>%</b></p> <br>
+
+										<label for="kode"><b class="form-label">Kode BNN</b><br></label>
+										<div class="input-form" style="border: none;">
+											<input type="text" id="kode" value="<?= $datas['kode_bnn'] ?>" class="tambah-data" name="kode_penyakit" readonly required>
+										</div>
+										<label for="nama_penyakit"><b class="form-label">Nama Penyakit</b><br></label>
+										<div class="input-form" style="border: none;">
+											<input type="text" id="nama_penyakit" value="<?= $datas['nama_sakit_bnn'] ?>" class="tambah-data" name="nama_penyakit" readonly required>
+										</div>
+										<label for="keterangan"><b class="form-label">Keterangan</b><br></label>
+										<div class="input-form" style="border: none;">
+											<textarea name="keterangan" class="tambah-data" style="height: 90px;" readonly><?= $datas['keterangan_bnn'] ?></textarea>
+										</div>
+									</div>
+								</div>
+
+								<div class="overlay" id="overlay6"></div>
+								<div class="popup" id="popup6-<?= $datas['user_id'] ?>">
+								<span class="close-btn" onclick="closePopup6('popup6-<?= $datas['user_id'] ?>')">&times;</span>
+									<h2>Tambah Data Penyakit</h2>
+									<hr style="border-color: #015D67;">
+									<div class="edit-pendaftaran-container">
+										<p><b>Tingkat Kepercayaan : <?= $datas['kepercayaan_catin'] ?>%</b></p> <br>
+										<label for="kode_penyakit"><b class="form-label">Kode Penyakit</b><br></label>
+										<div class="input-form" style="border: none;">
+											<input type="text" id="kode_penyakit" value="<?= $datas['kode_catin'] ?>" class="tambah-data" name="kode_penyakit" readonly required>
+										</div>
+										<label for="nama_penyakit"><b class="form-label">Nama Penyakit</b><br></label>
+										<div class="input-form" style="border: none;">
+											<input type="text" id="nama_penyakit" value="<?= $datas['nama_sakit_catin'] ?>" class="tambah-data" name="nama_penyakit" readonly required>
+										</div>
+										<label for="keterangan"><b class="form-label">Keterangan</b><br></label>
+										<div class="input-form" style="border: none;">
+											<textarea name="keterangan" class="tambah-data" style="height: 90px;" readonly><?= $datas['keterangan_catin'] ?></textarea>
+										</div>
+									</div>
+								</div>
 							<?php endforeach ?>
 						</table>
 					</div>
 					<div class="overlay" id="overlay2"></div>
-							<div class="popup" id="popup2">
-								<span class="close-btn" onclick="closePopup2()">&times;</span>
-								<h2>Tambah Data gejala</h2>
-								<hr style="border-color: #015D67;">
-								<form id="popupForm" action="<?= base_url('dashboard_admin/export'); ?>" method="post">
-									<div class="edit-pendaftaran-container">
-										<label for="tanggal_awal"><b class="form-label">Tanggal Awal</b><br></label>
-										<div class="input-form">
-											<input type="date" id="tanggal_awal" class="tambah-data" name="tanggal_awal" required>
-										</div>
-										<label for="tanggal_akhir"><b class="form-label">Tanggal Akhir</b><br></label>
-										<div class="input-form">
-											<input type="date" id="tanggal_akhir" class="tambah-data" name="tanggal_akhir" required>
-										</div>
+					<div class="popup" id="popup2">
+						<span class="close-btn" onclick="closePopup2()">&times;</span>
+						<h2>Tambah Data gejala</h2>
+						<hr style="border-color: #015D67;">
+						<form id="popupForm" action="<?= base_url('dashboard_admin/export'); ?>" method="post">
+							<div class="edit-pendaftaran-container">
+								<label for="tanggal_awal"><b class="form-label">Tanggal Awal</b><br></label>
+								<div class="input-form">
+									<input type="date" id="tanggal_awal" class="tambah-data" name="tanggal_awal" required>
+								</div>
+								<label for="tanggal_akhir"><b class="form-label">Tanggal Akhir</b><br></label>
+								<div class="input-form">
+									<input type="date" id="tanggal_akhir" class="tambah-data" name="tanggal_akhir" required>
+								</div>
 
 
-										<button type="submit" onclick="closePopup2()">Submit</button>
-									</div>
-								</form>
+								<button type="submit" onclick="closePopup2()">Submit</button>
 							</div>
+						</form>
+					</div>
 				</div>
 				<!--  -->
 				<div class="copyright-text" style="bottom: 5%">
@@ -534,6 +726,43 @@
 			document.getElementById('overlay2').classList.remove('show');
 		}
 	</script>
+	<script>
+		function showPopup3(popupId) {
+			document.getElementById(popupId).classList.add('show');
+			document.getElementById('overlay3').classList.add('show');
+		}
+		function closePopup3(popupId) {
+			document.getElementById(popupId).classList.remove('show');
+			document.getElementById('overlay3').classList.remove('show');
+		}
+		function showPopup4(popupId) {
+			document.getElementById(popupId).classList.add('show');
+			document.getElementById('overlay4').classList.add('show');
+		}
+		function closePopup4(popupId) {
+			document.getElementById(popupId).classList.remove('show');
+			document.getElementById('overlay4').classList.remove('show');
+		}
+		function showPopup5(popupId) {
+			document.getElementById(popupId).classList.add('show');
+			document.getElementById('overlay5').classList.add('show');
+		}
+		function closePopup5(popupId) {
+			document.getElementById(popupId).classList.remove('show');
+			document.getElementById('overlay5').classList.remove('show');
+		}
+		function showPopup6(popupId) {
+			document.getElementById(popupId).classList.add('show');
+			document.getElementById('overlay6').classList.add('show');
+		}
+		function closePopup6(popupId) {
+			document.getElementById(popupId).classList.remove('show');
+			document.getElementById('overlay6').classList.remove('show');
+		}
+
+		
+	</script>
+
 
 
 
