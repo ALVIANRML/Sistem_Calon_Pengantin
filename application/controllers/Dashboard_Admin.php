@@ -167,6 +167,7 @@ class Dashboard_Admin extends CI_Controller
 		}
 	}
 
+
 	public function export()
 	{
 		ob_end_clean();
@@ -288,8 +289,6 @@ class Dashboard_Admin extends CI_Controller
 		$writer = new Xlsx($spreadsheet);
 		$writer->save('php://output');
 	}
-
-
 
 	public function data_penyakit()
 	{
@@ -578,9 +577,10 @@ class Dashboard_Admin extends CI_Controller
 		$role 			= $this->input->post('statusUser');
 		$md 	= date('Y-m-d H:i:s', time());
 		$tanggalLahir	= date('Y-m-d H:i:s', time());
+		$dataRegistered = date('Y-M-D');
 
-		$this->m_Auth->input_user($id, $username, $password, $role,  $md, $nomorTelepon, $tanggalLahir);
-		$this->m_User_detail->add_pemeriksa($id, $nama);
+		$this->m_Auth->input_user($id, $username, $password, $role,  $md, $nomorTelepon, $tanggalLahir,);
+		$this->m_User_detail->add_pemeriksa($id, $nama, $dataRegistered);
 
 		redirect('dashboard_admin/user_pemeriksa');
 	}

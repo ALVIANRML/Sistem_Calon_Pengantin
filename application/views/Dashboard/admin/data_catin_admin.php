@@ -95,6 +95,7 @@
 	</style>
 </head>
 
+
 <body style="overflow-y:auto">
 	<?php if ($this->session->flashdata('success_delete')) { ?>
 		<script>

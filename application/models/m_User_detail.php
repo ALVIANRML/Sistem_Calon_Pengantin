@@ -89,11 +89,12 @@ class m_User_detail extends CI_Model
 		return true;
 	}
 
-	public function add_pemeriksa($id_user, $nama)
+	public function add_pemeriksa($id_user, $nama, $dataRegistered)
 	{
 		$this->db->where('id_user_detail', $id_user);
 		$this->db->update('user_detail', [
 			'nama_lengkap' => $nama,
+			'data_registered' => $dataRegistered,
 		]);
 	}
 	public function update_skrining_kesehatan($id_user, $skrining)
@@ -200,5 +201,14 @@ class m_User_detail extends CI_Model
 		$this->db->where('user_detail.tanggal_periksa >=', $tanggal_awal);
 		$this->db->where('user_detail.tanggal_periksa <=', $tanggal_akhir);
 		return $this->db->get()->result_array();
+	}
+
+	public function tanggal_cetak($tglAwal, $tglAkhir)
+	{
+		// Pastikan format tanggal benar dan sesuai dengan format di database
+		$this->db->where('data_registered >=', $tglAwal);
+		$this->db->where('data_registered <=', $tglAkhir);
+		$query = $this->db->get('user_detail');
+		return $query->result_array();
 	}
 }
