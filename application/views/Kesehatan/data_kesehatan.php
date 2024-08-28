@@ -252,7 +252,7 @@
 							<div class="overlay" id="overlay3"></div>
 							<div class="popup" id="popup3-<?= $datas['user_id'] ?>">
 								<span class="close-btn" onclick="closePopup3('popup3-<?= $datas['user_id'] ?>')">&times;</span>
-								<h2>Tambah Data Penyakit</h2>
+								<h2>Hasil Survey Catin</h2>
 								<hr style="border-color: #015D67;">
 								<div class="edit-pendaftaran-container">
 									<p><b>Tingkat Kepercayaan : <?= $datas['kepercayaan_catin']; ?>%</b></p> <br>
@@ -275,11 +275,11 @@
 							<div class="overlay" id="overlay4"></div>
 							<div class="popup" id="popup4-<?= $datas['user_id'] ?>">
 								<span class="close-btn" onclick="closePopup4('popup4-<?= $datas['user_id'] ?>')">&times;</span>
-								<h2>Tambah Data Penyakit</h2>
+								<h2>Hasil Kesehatan</h2>
 								<hr style="border-color: #015D67;">
 								<div class="edit-pendaftaran-container">
 									<p>Nama Faskes: UPT Puskesmas Rambung</p><br>
-									<p>Nama Pemeriksa: <?= $datas['nama_pemeriksa_kesehatan'] ?></p><br>
+									<p>Nama Pemeriksa: <?= $Hasils['nama_pemeriksa_kesehatan'] ?></p><br>
 									<b> Tanda Vital</b>
 									<p>Tekanan Darah: <?= $datas['nama_pemeriksa_kesehatan'] ?></p>
 									<p>Nadi: <?= $datas['nadi'] ?></p>
@@ -313,7 +313,7 @@
 							<div class="overlay" id="overlay5"></div>
 							<div class="popup" id="popup5-<?= $datas['user_id'] ?>">
 								<span class="close-btn" onclick="closePopup5('popup5-<?= $datas['user_id'] ?>')">&times;</span>
-								<h2>Hasil Periksa BNN Catin</h2>
+								<h2>Hasil BNN</h2>
 								<hr style="border-color: #015D67;">
 								<div class="edit-pendaftaran-container">
 									<p><b>Nama BNN : <?= $datas['nama_bnn'] ?></b></p> <br>
@@ -335,25 +335,25 @@
 									</div>
 								</div>
 							</div>
-
+							<!-- psikologi -->
 							<div class="overlay" id="overlay6"></div>
 							<div class="popup" id="popup6-<?= $datas['user_id'] ?>">
 								<span class="close-btn" onclick="closePopup6('popup6-<?= $datas['user_id'] ?>')">&times;</span>
-								<h2>Tambah Data Penyakit</h2>
+								<h2>Hasil Psikolog</h2>
 								<hr style="border-color: #015D67;">
 								<div class="edit-pendaftaran-container">
-									<p><b>Tingkat Kepercayaan : <?= $datas['kepercayaan_catin'] ?>%</b></p> <br>
-									<label for="kode_penyakit"><b class="form-label">Kode Penyakit</b><br></label>
+									<p><b>Tingkat Kepercayaan : <?= $datas['kepercayaan_psikolog'] ?>%</b></p> <br>
+									<label for="kode_penyakit"><b class="form-label">Kode Identifikasi</b><br></label>
 									<div class="input-form" style="border: none;">
-										<input type="text" id="kode_penyakit" value="<?= $datas['kode_catin'] ?>" class="tambah-data" name="kode_penyakit" readonly required>
+										<input type="text" id="kode_penyakit" value="<?= $datas['kode_psikolog'] ?>" class="tambah-data" name="kode_penyakit" readonly required>
 									</div>
-									<label for="nama_penyakit"><b class="form-label">Nama Penyakit</b><br></label>
+									<label for="nama_penyakit"><b class="form-label">Nama Identifikasi Kepribadian Catin</b><br></label>
 									<div class="input-form" style="border: none;">
-										<input type="text" id="nama_penyakit" value="<?= $datas['nama_sakit_catin'] ?>" class="tambah-data" name="nama_penyakit" readonly required>
+										<input type="text" id="nama_penyakit" value="<?= $datas['nama_sakit_psikolog'] ?>" class="tambah-data" name="nama_penyakit" readonly required>
 									</div>
 									<label for="keterangan"><b class="form-label">Keterangan</b><br></label>
 									<div class="input-form" style="border: none;">
-										<textarea name="keterangan" class="tambah-data" style="height: 90px;" readonly><?= $datas['keterangan_catin'] ?></textarea>
+										<textarea name="keterangan" class="tambah-data" style="height: 90px;" readonly><?= $datas['keterangan_psikolog'] ?></textarea>
 									</div>
 								</div>
 							</div>

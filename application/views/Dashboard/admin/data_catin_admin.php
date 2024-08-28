@@ -502,7 +502,7 @@
 									<h2>Tambah Data Penyakit</h2>
 									<hr style="border-color: #015D67;">
 									<div class="edit-pendaftaran-container">
-										<p><b>Tingkat Kepercayaan : <?= $datas['kepercayaan_catin']; ?>%</b></p> <br>
+										<p><b>Tingkat Kepercayaan : <?= $datas['kepercayaan_catin']; ?>%</b></p>
 										<label for="kode_penyakit"><b class="form-label">Kode Penyakit</b><br></label>
 										<div class="input-form" style="border: none;">
 											<input type="text" id="kode_penyakit" value="<?= $datas['kode_catin'] ?>" class="tambah-data" name="kode_penyakit" readonly required>
