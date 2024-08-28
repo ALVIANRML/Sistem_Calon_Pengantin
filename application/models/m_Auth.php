@@ -5,11 +5,11 @@ class m_Auth extends CI_Model
 {
 
 	// register	
-	public function input_user($id, $nama, $password, $role,  $created_at, $nomorTelepon, $tanggalLahir)
+	public function input_user($id, $nama, $password, $role,  $created_at, $nomorTelepon, $tanggalLahir, $dataRegistered)
 	{
 		$this->db->trans_start();
 
-		$this->db->query("INSERT INTO users(id_user, nama, password, role, created_at, nomor_telepon, tanggal_lahir,id_user_detail) VALUES ('$id', '$nama', '$password', '$role','$created_at', '$nomorTelepon', '$tanggalLahir','$id')");
+		$this->db->query("INSERT INTO users(id_user, nama, password, role, created_at, nomor_telepon, tanggal_lahir,id_user_detail,data_registered) VALUES ('$id', '$nama', '$password', '$role','$created_at', '$nomorTelepon', '$tanggalLahir','$id','$dataRegistered')");
 		$this->db->query("INSERT INTO user_detail(id_user_detail) VALUES ('$id')");
 		$this->db->query("INSERT INTO hasil_diagnosa(user_id) VALUES ('$id')");
 		$this->db->trans_complete();
