@@ -512,7 +512,7 @@ class Dashboard extends CI_Controller
 			$this->m_Tanggal_Pemeriksaan->tanggal_pemeriksaan($id_tanggal, $id_status, $tanggal);
 			$tanggalexisted = $this->m_Tanggal_Pemeriksaan->get_tanggal($id_tanggal);
 			$this->session->set_userdata('tanggal', $tanggalexisted);
-			redirect('Dashboard/view_psikolog');
+			redirect('Dashboard_psikolog/view_psikolog');
 		} else {
 			return ('anda tidak memiliki akses');
 		}
