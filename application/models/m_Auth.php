@@ -112,6 +112,7 @@ class m_Auth extends CI_Model
 		$this->db->select('*, users.tanggal_lahir as tanggalLahir, users.nomor_telepon as nomorTelepon');
 		$this->db->from('users');
 		$this->db->join('user_detail', 'user_detail.id_user_detail = users.id_user');
+		$this->db->where_in('role', [1, 2, 3, 4]);
 		$query = $this->db->get();
 		return $query->result_array();
 	}
@@ -128,4 +129,6 @@ class m_Auth extends CI_Model
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+
+	
 }

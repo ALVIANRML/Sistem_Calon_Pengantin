@@ -7,6 +7,13 @@ class m_Penyakit extends CI_Model
 		return $query->result_array();
 	}
 
+	public function get__by_id($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('hasil_diagnosa');
+		return $query->result_array();
+	}
+
 	public function delete_by_id($id)
 	{
 		$this->db->delete('penyakit', array('id' => $id));

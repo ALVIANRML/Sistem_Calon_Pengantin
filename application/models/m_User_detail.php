@@ -1,4 +1,4 @@
-<?php
+x<?php
 class m_User_detail extends CI_Model
 {
 
@@ -7,9 +7,11 @@ class m_User_detail extends CI_Model
 	public function all()
 	{
 
-		$query = $this->db->get('user_detail');
-		// Mengembalikan hasil sebagai array
-		return $query->result_array();
+		$this->db->select('*'); // Memilih semua kolom dari tabel user_detail dan hasil kolom 'hasil' dari tabel hasil_diagnosa
+		$this->db->from('user_detail');
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left'); // Menggabungkan tabel user_detail dan hasil_diagnosa berdasarkan kolom user_id
+		$this->db->where('nik IS NOT NULL');
+		return $this->db->get()->result_array();
 	}
 
 	public function getTanggalPeriksa()
@@ -31,13 +33,21 @@ class m_User_detail extends CI_Model
 	public function get_by_data_registered($tanggal)
 	{
 
+		$this->db->select('*'); // Memilih semua kolom dari tabel user_detail dan hasil kolom 'hasil' dari tabel hasil_diagnosa
+		$this->db->from('user_detail');
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
+
 		$this->db->where('data_registered', $tanggal);
-		$query = $this->db->get('user_detail');
-		return $query->result_array();
+		$this->db->where('nik IS NOT NULL');
+		return $this->db->get()->result_array();
 	}
 
 	public function get_by_id_and_tanggal($ids, $tanggal)
 	{
+		$this->db->select('*'); // Memilih semua kolom dari tabel user_detail dan hasil kolom 'hasil' dari tabel hasil_diagnosa
+		$this->db->from('user_detail');
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
+		$this->db->where('nik IS NOT NULL');
 		$this->db->where_in('id_user_detail', $ids);
 		$this->db->where('data_registered', $tanggal);
 		$query = $this->db->get('user_detail');
@@ -168,16 +178,29 @@ class m_User_detail extends CI_Model
 		}
 
 		// Convert keyword to lowercase
+		if (!$keyword) {
+			return null;
+		}
 		$keyword = strtolower($keyword);
-
-		// Apply LOWER function on columns
+		$this->db->select('user_detail.*, hasil_diagnosa.*'); // Memilih semua kolom dari tabel user_detail dan hasil kolom 'hasil' dari tabel hasil_diagnosa
+		$this->db->from('user_detail');
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left'); // Menggabungkan tabel user_detail dan hasil_diagnosa berdasarkan kolom user_id
+		$this->db->where('nik IS NOT NULL');
 		$this->db->like('LOWER(nama_lengkap)', $keyword);
 		$this->db->or_like('LOWER(nik)', $keyword);
 		$this->db->or_like('LOWER(nomor_telepon)', $keyword);
 		$this->db->or_like('LOWER(no_pendaftaran)', $keyword);
+		return $this->db->get()->result_array();
+	}
 
-		$query = $this->db->get('user_detail');
-		return $query->result_array();
+	public function getLaporanByDateRange($tanggal_awal, $tanggal_akhir)
+	{
+		$this->db->select('user_detail.*, hasil_diagnosa.*'); // Memilih semua kolom dari tabel user_detail dan hasil kolom 'hasil' dari tabel hasil_diagnosa
+		$this->db->from('user_detail');
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left'); // Menggabungkan tabel user_detail dan hasil_diagnosa berdasarkan kolom user_id
+		$this->db->where('user_detail.tanggal_periksa >=', $tanggal_awal);
+		$this->db->where('user_detail.tanggal_periksa <=', $tanggal_akhir);
+		return $this->db->get()->result_array();
 	}
 
 	public function tanggal_cetak($tglAwal, $tglAkhir)

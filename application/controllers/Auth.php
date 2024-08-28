@@ -170,7 +170,7 @@ class Auth extends CI_Controller
 							redirect('Dashboard_Admin/view_admin');
 							break;
 						case 2:
-							redirect('Dashboard/view_kesehatan');
+							redirect('Dashboard_kesehatan/view_kesehatan');
 							break;
 						case 3:
 							redirect('Dashboard/view_bnn');

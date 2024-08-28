@@ -1,0 +1,170 @@
+/* Container Content */
+.container-content {
+	margin-left: 304px;
+	background: #f5f9fa;
+  }
+  
+  .container-content-dashboard-admin {
+	position: relative;
+	background: #f5f9fa;
+	padding: 24px 48px;
+	padding-bottom: 145px;
+	box-sizing: border-box;
+  }
+  
+  .container-content-dashboard-admin > p {
+	color: #202224;
+	font-size: 32px;
+	font-weight: 700;
+	letter-spacing: -0.114px;
+  }
+  
+  /* Card Dashboard */
+  .container-card-dashboard {
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 48px;
+	margin-bottom: 75px;
+	flex-wrap: wrap;
+	gap: 24px;
+  }
+  
+  .card-dashboard {
+	position: relative;
+	display: inline-flex;
+	align-items: flex-start;
+	gap: 24px;
+	width: 330px;
+	height: 200px;
+	border-radius: 8px;
+	padding: 31px 13px;
+	box-sizing: border-box;
+  }
+  
+  #biru {
+	background: var(--primary---color, #015d67);
+  }
+  
+  #hijau {
+	background: #00acb1;
+  }
+  
+  #merah {
+	background: var(--danger, #dc3545);
+  }
+  
+  .container-judul-jumlah {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+  }
+  
+  .judul-card-dashboard {
+	color: #fff;
+	font-weight: 600;
+	font-size: 21px;
+  }
+  
+  .jumlah-card-dashboard {
+	color: #fff;
+	font-weight: 600;
+	font-size: 38px;
+  }
+  
+  .selengkapnya-text {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color: var(--white---color, #fffafa);
+	font-size: 10px;
+	margin: 15px 37px;
+	font-weight: 400;
+  }
+  
+  /* Edit Pendaftaran & Copyright */
+  .edit-pendaftaran-btn {
+	display: inline-flex;
+	padding: 16px;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+	border-radius: 8px;
+	background: var(--primary---color, #015d67);
+	margin-bottom: 56px;
+  }
+  
+  .edit-pendaftaran-btn > p {
+	color: var(--white---color, #fffafa);
+	font-size: 16px;
+	font-weight: 600;
+  }
+  
+  .copyright-text {
+	position: absolute;
+	bottom: 42px;
+	color: var(--Grey, #7f7f7f);
+	font-family: Inter;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+  }
+  
+  /* Tanggal Pemeriksaan */
+  .tanggal-pemeriksaan > p {
+	color: #000;
+	font-family: Inter;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	margin-bottom: 16px;
+  }
+  
+  .container-tanggal-pemeriksaan {
+	display: flex;
+	justify-content: center;
+	gap: 38px;
+  }
+  
+  .subcontainer-tanggal-pemeriksaan {
+	display: flex;
+	padding: 16px;
+	width: 500px;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 8px;
+	border: 1px solid var(--grey---for-form, #d9d9d9);
+	background: var(--white---color, #fffafa);
+	box-sizing: border-box;
+  }
+  
+  .tanggal-buka-tutup {
+	color: #000;
+	font-family: Inter;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+  }
+  
+  .buka-tutup-btn {
+	display: flex;
+	padding: 8px 16px;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+	border-radius: 4px;
+	color: var(--white---color, #fffafa);
+	font-size: 16px;
+	font-weight: 600;
+  }
+  
+  .buka-btn {
+	background: var(--primary---color, #015d67);
+  }
+  
+  .tutup-btn {
+	background: var(--danger, #dc3545);
+  }
+  

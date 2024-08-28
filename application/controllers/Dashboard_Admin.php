@@ -1,5 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
+
+require_once FCPATH . 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class Dashboard_Admin extends CI_Controller
 
 {
@@ -17,7 +24,9 @@ class Dashboard_Admin extends CI_Controller
 		$this->load->model('m_kelompok_gejala');
 		$this->load->model('m_Hasil_Diagnosa');
 		$this->load->model('m_Nilai_Pakar');
-		$this->load->helper(array('form', 'url'));
+		// $this->load->helper(array('form', 'url'));
+		// $this->load->library('Excel');
+		// require_once APPPATH . 'vendor/autoload.php';
 	}
 
 
@@ -63,7 +72,7 @@ class Dashboard_Admin extends CI_Controller
 		} else {
 			if ($tanggal == null) {
 				$data['user_detail'] = $this->m_User_detail->all();
-				// var_dump($data['user_detail']);
+				// var_dump($data);
 				// exit;
 			} else {
 				$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal);
@@ -158,15 +167,127 @@ class Dashboard_Admin extends CI_Controller
 		}
 	}
 
-	public function cetak_data(){
-		// $tglAwal  = $this->post->input('tangga_awal');
-		// $tglAkhir = $this->post->input('tanggal_akhir');
-		$tglAwal  = '2024-08-03';
-		$tglAkhir = '2024-08-18';
 
-		$dataa = $this->m_User_detail->tanggal_cetak($tglAwal, $tglAkhir);
+	public function export()
+	{
+		ob_end_clean();
+		// Ambil tanggal awal dan tanggal akhir dari inputan form
+		$tanggal_awal = $this->input->post('tanggal_awal');
+		$tanggal_akhir = $this->input->post('tanggal_akhir');
+		// $tanggal_awal = '2024-08-20';
+		// $tanggal_akhir = '2024-08-27';
+		// Lakukan query ke database dengan rentang tanggal tertentu
+		$data['laporan'] = $this->m_User_detail->getLaporanByDateRange($tanggal_awal, $tanggal_akhir);
+		// var_dump($data);
+		// exit;
+		// Buat objek Spreadsheet baru
+		$spreadsheet = new Spreadsheet();
 
-		
+		$spreadsheet->getProperties()->setCreator("DPPKB Kota Tebing Tinggi")
+			->setLastModifiedBy("DPPKB Kota Tebing Tinggi")
+			->setTitle("Pemeriksaan Catin");
+
+		$spreadsheet->setActiveSheetIndex(0);
+
+		// Isi data ke dalam sel-sel
+		$spreadsheet->getActiveSheet()->setCellValue('A1', 'No');
+		$spreadsheet->getActiveSheet()->setCellValue('B1', 'NIK');
+		$spreadsheet->getActiveSheet()->setCellValue('C1', 'Nama Lengkap');
+		$spreadsheet->getActiveSheet()->setCellValue('D1', 'Tempat Lahir');
+		$spreadsheet->getActiveSheet()->setCellValue('E1', 'Tanggal Lahir');
+		$spreadsheet->getActiveSheet()->setCellValue('F1', 'Usia');
+		$spreadsheet->getActiveSheet()->setCellValue('G1', 'Jenis Kelamin');
+		$spreadsheet->getActiveSheet()->setCellValue('H1', 'Agama');
+		$spreadsheet->getActiveSheet()->setCellValue('I1', 'Tinggi Badan');
+		$spreadsheet->getActiveSheet()->setCellValue('J1', 'Berat Badan');
+		$spreadsheet->getActiveSheet()->setCellValue('K1', 'IMT');
+		$spreadsheet->getActiveSheet()->setCellValue('L1', 'Pendidikan Terakhir');
+		$spreadsheet->getActiveSheet()->setCellValue('M1', 'Pekerjaan');
+		$spreadsheet->getActiveSheet()->setCellValue('N1', 'Alamat');
+		$spreadsheet->getActiveSheet()->setCellValue('O1', 'Pernikahan Ke');
+		$spreadsheet->getActiveSheet()->setCellValue('P1', 'Tanggal Pernikahan');
+		$spreadsheet->getActiveSheet()->setCellValue('Q1', 'Tanggal Pemeriksaan');
+		$spreadsheet->getActiveSheet()->setCellValue('R1', 'Tanda Anemia');
+		$spreadsheet->getActiveSheet()->setCellValue('S1', 'Rapid Test');
+		$spreadsheet->getActiveSheet()->setCellValue('T1', 'Plano Test');
+		$spreadsheet->getActiveSheet()->setCellValue('U1', 'Test Narkoba');
+		$spreadsheet->getActiveSheet()->setCellValue('V1', 'Hasil Skrining Kesehatan');
+		$spreadsheet->getActiveSheet()->setCellValue('W1', 'Hasil Test Kesehatan');
+		$spreadsheet->getActiveSheet()->setCellValue('X1', 'Hasil Test Narkoba');
+
+
+		// Mengatur ukuran kolom
+		$spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(5);
+		$spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(7);
+		$spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(5);
+		$spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('I')->setWidth(10);
+		$spreadsheet->getActiveSheet()->getColumnDimension('J')->setWidth(10);
+		$spreadsheet->getActiveSheet()->getColumnDimension('K')->setWidth(5);
+		$spreadsheet->getActiveSheet()->getColumnDimension('L')->setWidth(7);
+		$spreadsheet->getActiveSheet()->getColumnDimension('M')->setWidth(16);
+		$spreadsheet->getActiveSheet()->getColumnDimension('N')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('O')->setWidth(6);
+		$spreadsheet->getActiveSheet()->getColumnDimension('P')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('Q')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('R')->setWidth(10);
+		$spreadsheet->getActiveSheet()->getColumnDimension('S')->setWidth(10);
+		$spreadsheet->getActiveSheet()->getColumnDimension('T')->setWidth(10);
+		$spreadsheet->getActiveSheet()->getColumnDimension('U')->setWidth(10);
+		$spreadsheet->getActiveSheet()->getColumnDimension('V')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('W')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('X')->setWidth(20);
+
+		$row = 2;
+		$no = 1;
+		foreach ($data['laporan'] as $item) {
+			$tanggal_lahir_formatted = date('d/m/Y', strtotime($item['tanggal_lahir']));
+			$tanggal_nikah_formatted = date('d/m/Y', strtotime($item['tanggal_pernikahan']));
+			$tanggal_periksa_formatted = date('d/m/Y', strtotime($item['tanggal_periksa']));
+			$spreadsheet->getActiveSheet()->setCellValue('A' . $row, $no++);
+			$spreadsheet->getActiveSheet()->setCellValueExplicit('B' . $row, $item['nik'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+			$spreadsheet->getActiveSheet()->setCellValue('C' . $row, $item['nama_lengkap']);
+			$spreadsheet->getActiveSheet()->setCellValue('D' . $row, $item['tempat_lahir']);
+			$spreadsheet->getActiveSheet()->setCellValue('E' . $row, $tanggal_lahir_formatted);
+			$spreadsheet->getActiveSheet()->setCellValue('F' . $row, $item['usia']);
+			$spreadsheet->getActiveSheet()->setCellValue('G' . $row, $item['jenis_kelamin']);
+			$spreadsheet->getActiveSheet()->setCellValue('H' . $row, $item['agama']);
+			$spreadsheet->getActiveSheet()->setCellValue('I' . $row, $item['tinggi_badan']);
+			$spreadsheet->getActiveSheet()->setCellValue('J' . $row, $item['berat_badan']);
+			$spreadsheet->getActiveSheet()->setCellValue('K' . $row, $item['imt']);
+			$spreadsheet->getActiveSheet()->setCellValue('L' . $row, $item['pendidikan_terakhir']);
+			$spreadsheet->getActiveSheet()->setCellValue('M' . $row, $item['pekerjaan']);
+			$spreadsheet->getActiveSheet()->setCellValue('N' . $row, $item['alamat']);
+			$spreadsheet->getActiveSheet()->setCellValue('O' . $row, $item['pernikahan_ke']);
+			$spreadsheet->getActiveSheet()->setCellValue('P' . $row, $tanggal_nikah_formatted);
+			$spreadsheet->getActiveSheet()->setCellValue('Q' . $row, $tanggal_periksa_formatted);
+			$spreadsheet->getActiveSheet()->setCellValue('R' . $row, $item['tanda_anemia']);
+			$spreadsheet->getActiveSheet()->setCellValue('S' . $row, $item['rapid_test']);
+			$spreadsheet->getActiveSheet()->setCellValue('T' . $row, $item['plano_test']);
+			$spreadsheet->getActiveSheet()->setCellValue('U' . $row, $item['narkoba_test']);
+			$spreadsheet->getActiveSheet()->setCellValue('V' . $row, $item['nama_sakit_catin']);
+			$spreadsheet->getActiveSheet()->setCellValue('W' . $row, $item['nama_sakit_kesehatan']);
+			$spreadsheet->getActiveSheet()->setCellValue('X' . $row, $item['nama_sakit_bnn']);
+			$row++;
+		}
+
+		// Buat file Excel
+		$filename = 'laporan.xlsx';
+		$spreadsheet->getActiveSheet()->setTitle("Pemeriksaan Catin");
+
+		// Set header untuk file Excel
+
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="' . $filename . '"');
+		header('Cache-Control: max-age=0');
+
+		// Tampilkan hasil laporan dalam bentuk file Excel
+		$writer = new Xlsx($spreadsheet);
+		$writer->save('php://output');
 	}
 
 	public function data_penyakit()
