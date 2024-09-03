@@ -76,9 +76,9 @@ class Auth extends CI_Controller
 		if ($this->form_validation->run() == false) {
 			// $this->session->set_flashdata('message', 'validation_erorrs');
 			$data['title'] = 'Percatin Register';
-			$this->load->view('templates/auth_header', $data);
+			$this->load->view('template/auth_header', $data);
 			$this->load->view('auth/register');
-			$this->load->view('templates/auth_footer');
+			$this->load->view('template/auth_footer');
 			// var_dump(20);
 			// exit;
 		} else {
@@ -148,9 +148,9 @@ class Auth extends CI_Controller
 
 		if ($this->form_validation->run() == false) {
 			$data['title'] = 'Login page';
-			$this->load->view('templates/auth_header', $data);
+			$this->load->view('template/auth_header', $data);
 			$this->load->view('auth/login');
-			$this->load->view('templates/auth_footer');
+			$this->load->view('template/auth_footer');
 		} else {
 			$nama = $this->input->post("nama");
 			$password = $this->input->post("password1");
@@ -208,9 +208,9 @@ class Auth extends CI_Controller
 
 		if ($this->form_validation->run() == false) {
 			$data['title'] = 'Lupa Password';
-			$this->load->view('templates/auth_header', $data);
+			$this->load->view('template/auth_header', $data);
 			$this->load->view('auth/lupa_password');
-			$this->load->view('templates/auth_footer');
+			$this->load->view('template/auth_footer');
 		} else {
 			$nomor_telepon = $this->input->post('nomor_telepon');
 			$user = $this->m_Auth->get_user_by_phone($nomor_telepon);
@@ -299,9 +299,9 @@ class Auth extends CI_Controller
 
 			if ($this->form_validation->run() == false) {
 				$data['title'] = 'Reset Password';
-				$this->load->view('templates/auth_header', $data);
+				$this->load->view('template/auth_header', $data);
 				$this->load->view('auth/reset_password');
-				$this->load->view('templates/auth_footer');
+				$this->load->view('template/auth_footer');
 			} else {
 				$nomor_telepon = $this->session->userdata('nomor_telepon');
 
@@ -363,9 +363,9 @@ class Auth extends CI_Controller
 
 		if ($this->form_validation->run() == false) {
 			$data['title'] = 'Ganti Password';
-			$this->load->view('templates/auth_header', $data);
+			$this->load->view('template/auth_header', $data);
 			$this->load->view('auth/ganti_password');
-			$this->load->view('templates/auth_footer');
+			$this->load->view('template/auth_footer');
 		} else {
 			$passwordLama = $this->input->post('password_lama');
 			$id_user = $this->session->userdata('id_user');

@@ -1,4 +1,4 @@
-x<?php
+<?php
 class m_User_detail extends CI_Model
 {
 
@@ -7,11 +7,14 @@ class m_User_detail extends CI_Model
 	public function all()
 	{
 
-		$this->db->select('*'); // Memilih semua kolom dari tabel user_detail dan hasil kolom 'hasil' dari tabel hasil_diagnosa
-		$this->db->from('user_detail');
-		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left'); // Menggabungkan tabel user_detail dan hasil_diagnosa berdasarkan kolom user_id
-		$this->db->where('nik IS NOT NULL');
-		return $this->db->get()->result_array();
+		$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
+		$this->db->from('user_detail'); // Tabel utama
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
+		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
+		$this->db->where('role', 5);
+		$queryHasilDiagnosa = $this->db->get();
+		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
+		return $resultHasilDiagnosa;
 	}
 
 	public function getTanggalPeriksa()
@@ -33,25 +36,32 @@ class m_User_detail extends CI_Model
 	public function get_by_data_registered($tanggal)
 	{
 
-		$this->db->select('*'); // Memilih semua kolom dari tabel user_detail dan hasil kolom 'hasil' dari tabel hasil_diagnosa
-		$this->db->from('user_detail');
-		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
 
+		$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
+		$this->db->from('user_detail'); // Tabel utama
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
+		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
 		$this->db->where('data_registered', $tanggal);
 		$this->db->where('nik IS NOT NULL');
-		return $this->db->get()->result_array();
+		$this->db->where('role', 5);
+		$queryHasilDiagnosa = $this->db->get();
+		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
+		return $resultHasilDiagnosa;
 	}
 
 	public function get_by_id_and_tanggal($ids, $tanggal)
 	{
-		$this->db->select('*'); // Memilih semua kolom dari tabel user_detail dan hasil kolom 'hasil' dari tabel hasil_diagnosa
+		$this->db->select('*, user_detail.nomor_telepon as NomorTelepon'); // Memilih semua kolom dari tabel user_detail dan hasil kolom 'hasil' dari tabel hasil_diagnosa
 		$this->db->from('user_detail');
 		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
+		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
 		$this->db->where('nik IS NOT NULL');
+		$this->db->where('role', 5);
 		$this->db->where_in('id_user_detail', $ids);
 		$this->db->where('data_registered', $tanggal);
-		$query = $this->db->get('user_detail');
-		return $query;
+		$queryHasilDiagnosa = $this->db->get();
+		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
+		return $resultHasilDiagnosa;
 	}
 
 
@@ -185,6 +195,9 @@ class m_User_detail extends CI_Model
 		$this->db->select('user_detail.*, hasil_diagnosa.*'); // Memilih semua kolom dari tabel user_detail dan hasil kolom 'hasil' dari tabel hasil_diagnosa
 		$this->db->from('user_detail');
 		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left'); // Menggabungkan tabel user_detail dan hasil_diagnosa berdasarkan kolom user_id
+		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
+		$this->db->where('nik IS NOT NULL');
+		$this->db->where('role', 5);
 		$this->db->where('nik IS NOT NULL');
 		$this->db->like('LOWER(nama_lengkap)', $keyword);
 		$this->db->or_like('LOWER(nik)', $keyword);
@@ -210,5 +223,15 @@ class m_User_detail extends CI_Model
 		$this->db->where('data_registered <=', $tglAkhir);
 		$query = $this->db->get('user_detail');
 		return $query->result_array();
+	}
+
+	public function update_data_verifikasi($id, $verifikasi){
+		$this->db->where('id_user_detail', $id);
+		$this->db->update('user_detail',['id_status_verifikasi' => $verifikasi]);
+	}
+
+	public function update_data_aktif($id, $aktif){
+		$this->db->where('id_user_detail', $id);
+		$this->db->update('user_detail',['id_status_aktif' => $aktif]);
 	}
 }

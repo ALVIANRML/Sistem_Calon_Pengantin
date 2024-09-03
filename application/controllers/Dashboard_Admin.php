@@ -4,9 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 require_once FCPATH . 'vendor/autoload.php';
 
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
 class Dashboard_Admin extends CI_Controller
 
 {
@@ -24,9 +24,7 @@ class Dashboard_Admin extends CI_Controller
 		$this->load->model('m_kelompok_gejala');
 		$this->load->model('m_Hasil_Diagnosa');
 		$this->load->model('m_Nilai_Pakar');
-		// $this->load->helper(array('form', 'url'));
-		// $this->load->library('Excel');
-		// require_once APPPATH . 'vendor/autoload.php';
+		
 	}
 
 
@@ -76,10 +74,29 @@ class Dashboard_Admin extends CI_Controller
 				// exit;
 			} else {
 				$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal);
+				// var_dump($data);
+				// exit;
 			}
 		}
 
 		$this->load->view('Dashboard/admin/data_catin_admin', $data);
+	}
+
+	public function data_verifikasi(){
+		$verifikasi = $this->input->post('data_verifikasi');
+		$id = $this->input->post('id');
+		$this->m_User_detail->update_data_verifikasi($id,$verifikasi);
+		redirect('dashboard_admin/view_data_catin');
+
+	}
+
+
+	public function aktivasi(){
+		$aktif = $this->input->post('aktif');
+		$id = $this->input->post('id');
+		$this->m_User_detail->update_data_aktif($id,$aktif);
+		redirect('dashboard_admin/view_data_catin');
+
 	}
 
 	public function test()
