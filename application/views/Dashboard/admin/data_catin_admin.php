@@ -358,7 +358,7 @@
 								<tbody>
 									<tr>
 										<td><?= ++$angka; ?></td>
-										<td>user1</td>
+										<td><?= $datas['nama'] ?></td>
 										<td><?= $datas['nomor_telepon'] ?></td>
 										<td><?= $datas['nama_lengkap'] ?></td>
 										<td><?= $datas['nik'] ?></td>
@@ -442,18 +442,18 @@
 															class="value">VALUE</span></li>
 													<li><span class="label">Verifikasi Data</span><span class="titik-dua">:</span>
 														<span class="value gap-btn">
-															<button class="open-modal btn green-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+															<button class="open-modal btn green-btn" onclick="showPopup7('popup7-<?= $datas['user_id'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="24"
 																	height="24" viewBox="0 0 24 24" fill="none">
 																	<path
 																		d="M1 3H23V21H1V3ZM3 5V19H21V5H3ZM15.5 9.5C15.7652 9.5 16.0196 9.60536 16.2071 9.79289C16.3946 9.98043 16.5 10.2348 16.5 10.5C16.5 10.7652 16.3946 11.0196 16.2071 11.2071C16.0196 11.3946 15.7652 11.5 15.5 11.5C15.2348 11.5 14.9804 11.3946 14.7929 11.2071C14.6054 11.0196 14.5 10.7652 14.5 10.5C14.5 10.2348 14.6054 9.98043 14.7929 9.79289C14.9804 9.60536 15.2348 9.5 15.5 9.5ZM17.9 12.3C18.2343 11.8543 18.4378 11.3243 18.4879 10.7694C18.5379 10.2145 18.4324 9.65668 18.1833 9.15836C17.9341 8.66004 17.5511 8.24095 17.0772 7.94805C16.6033 7.65514 16.0571 7.5 15.5 7.5C14.9429 7.5 14.3967 7.65514 13.9228 7.94805C13.4489 8.24095 13.0659 8.66004 12.8167 9.15836C12.5676 9.65668 12.4621 10.2145 12.5121 10.7694C12.5622 11.3243 12.7657 11.8543 13.1 12.3C12.6032 12.6726 12.2 13.1557 11.9223 13.7111C11.6446 14.2666 11.5 14.879 11.5 15.5V16.5H13.5V15.5C13.5 14.9696 13.7107 14.4609 14.0858 14.0858C14.4609 13.7107 14.9696 13.5 15.5 13.5C16.0304 13.5 16.5391 13.7107 16.9142 14.0858C17.2893 14.4609 17.5 14.9696 17.5 15.5V16.5H19.5V15.5C19.5 14.191 18.872 13.03 17.9 12.3ZM5 9H9.5V11H5V9ZM5 13H9.5V15H5V13Z"
 																		fill="#FFFAFA" />
 																</svg>Verifikasi Data</button>
-															<button class="open-modal btn green-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+															<button class="open-modal btn green-btn"  onclick="showPopup8('popup8-<?= $datas['user_id'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="24"
 																	height="24" viewBox="0 0 24 24" fill="none">
 																	<path d="M21 3H3V21H21V3ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
 																		fill="#FFFAFA" />
-																</svg>Aktifkan Kartu</button>
-															<button class="btn green-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+																</svg>Aktifkan Kartu </button>
+															<button class="btn green-btn" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 																	viewBox="0 0 24 24" fill="none">
 																	<path fill-rule="evenodd" clip-rule="evenodd"
 																		d="M20.75 16.714C20.7488 16.7619 20.7441 16.8097 20.736 16.857C20.7571 16.9656 20.7539 17.0774 20.7267 17.1846C20.6995 17.2918 20.6489 17.3917 20.5785 17.477C20.5082 17.5623 20.4198 17.6311 20.3198 17.6783C20.2198 17.7255 20.1106 17.75 20 17.75H6C5.83585 17.75 5.6733 17.7823 5.52165 17.8451C5.36999 17.908 5.23219 18 5.11612 18.1161C5.00004 18.2322 4.90797 18.37 4.84515 18.5216C4.78233 18.6733 4.75 18.8358 4.75 19C4.75 19.1642 4.78233 19.3267 4.84515 19.4784C4.90797 19.63 5.00004 19.7678 5.11612 19.8839C5.23219 20 5.36999 20.092 5.52165 20.1549C5.6733 20.2177 5.83585 20.25 6 20.25H20C20.1989 20.25 20.3897 20.329 20.5303 20.4697C20.671 20.6103 20.75 20.8011 20.75 21C20.75 21.1989 20.671 21.3897 20.5303 21.5303C20.3897 21.671 20.1989 21.75 20 21.75H6C5.27065 21.75 4.57118 21.4603 4.05546 20.9445C3.53973 20.4288 3.25 19.7293 3.25 19V5C3.25 4.27065 3.53973 3.57118 4.05546 3.05546C4.57118 2.53973 5.27065 2.25 6 2.25H19.4C20.146 2.25 20.75 2.854 20.75 3.6V16.714ZM9 6.25C8.80109 6.25 8.61032 6.32902 8.46967 6.46967C8.32902 6.61032 8.25 6.80109 8.25 7C8.25 7.19891 8.32902 7.38968 8.46967 7.53033C8.61032 7.67098 8.80109 7.75 9 7.75H15C15.1989 7.75 15.3897 7.67098 15.5303 7.53033C15.671 7.38968 15.75 7.19891 15.75 7C15.75 6.80109 15.671 6.61032 15.5303 6.46967C15.3897 6.32902 15.1989 6.25 15 6.25H9Z"
@@ -522,7 +522,7 @@
 								<!-- popup periksa kesehatan -->
 								<div class="overlay" id="overlay4"></div>
 								<div class="popup" id="popup4-<?= $datas['user_id'] ?>">
-								<span class="close-btn" onclick="closePopup4('popup4-<?= $datas['user_id'] ?>')">&times;</span>
+									<span class="close-btn" onclick="closePopup4('popup4-<?= $datas['user_id'] ?>')">&times;</span>
 									<h2>Tambah Data Penyakit</h2>
 									<hr style="border-color: #015D67;">
 									<div class="edit-pendaftaran-container">
@@ -560,7 +560,7 @@
 								<!-- popup periksa BNN -->
 								<div class="overlay" id="overlay5"></div>
 								<div class="popup" id="popup5-<?= $datas['user_id'] ?>">
-								<span class="close-btn" onclick="closePopup5('popup5-<?= $datas['user_id'] ?>')">&times;</span>
+									<span class="close-btn" onclick="closePopup5('popup5-<?= $datas['user_id'] ?>')">&times;</span>
 									<h2>Hasil Periksa BNN Catin</h2>
 									<hr style="border-color: #015D67;">
 									<div class="edit-pendaftaran-container">
@@ -584,9 +584,11 @@
 									</div>
 								</div>
 
+
 								<div class="overlay" id="overlay6"></div>
 								<div class="popup" id="popup6-<?= $datas['user_id'] ?>">
-								<span class="close-btn" onclick="closePopup6('popup6-<?= $datas['user_id'] ?>')">&times;</span>
+
+									<span class="close-btn" onclick="closePopup6('popup6-<?= $datas['user_id'] ?>')">&times;</span>
 									<h2>Tambah Data Penyakit</h2>
 									<hr style="border-color: #015D67;">
 									<div class="edit-pendaftaran-container">
@@ -603,6 +605,50 @@
 										<div class="input-form" style="border: none;">
 											<textarea name="keterangan" class="tambah-data" style="height: 90px;" readonly><?= $datas['keterangan_catin'] ?></textarea>
 										</div>
+									</div>
+								</div>
+
+								<div class="overlay" id="overlay7"></div>
+								<div class="popup" id="popup7-<?= $datas['user_id'] ?>">
+									<span class="close-btn" onclick="closePopup7('popup7-<?= $datas['user_id'] ?>')">&times;</span>
+									<h2>Tambah Data Penyakit</h2>
+									<hr style="border-color: #015D67;">
+									<div class="edit-pendaftaran-container">
+										<label for="role"><b class="form-label">Status User</b><br></label>
+										<form action="<?= base_url('dashboard_admin/data_verifikasi'); ?>" method="post">
+											<input type="text" value="<?= $datas['user_id'] ?>" name="id" required hidden> <br>
+											<select type="text" id="role" class="tambah-data" name="data_verifikasi" style="width:100%; height:50px" required>
+												<?php if ($datas['id_status_verifikasi'] == 2) : ?>
+													<option value="2">Sudah Diverifikasi</option>
+													<option value="1">Belum Diverifikasi</option>
+												<?php else : ?>
+													<option value="1">Belum Diverifikasi</option>
+													<option value="2">Sudah Diverifikasi</option>
+													<?php endif ?>
+											</select>
+											<button type="submit">Submit</button>
+										</form>
+									</div>
+								</div>
+
+								<div class="overlay" id="overlay8"></div>
+								<div class="popup" id="popup8-<?= $datas['user_id'] ?>">
+									<span class="close-btn" onclick="closePopup7('popup7-<?= $datas['user_id'] ?>')">&times;</span>
+									<h2>Tambah Data Penyakit</h2>
+									<hr style="border-color: #015D67;">
+									<div class="edit-pendaftaran-container">
+										<label for="role"><b class="form-label">Status Aktif</b><br></label>
+										<form action="<?= base_url('dashboard_admin/aktivasi'); ?>" method="post">
+											<input type="text" value="<?= $datas['user_id'] ?>" name="id" required hidden> <br>
+											<select type="text" id="role" class="tambah-data" name="aktif" style="width:100%; height:50px" required>
+													<option value="2">Aktifkan</option>
+											</select>
+
+											<input type="date" value="<?= $datas['mulai_berlaku'] ?>" style="border: #343a40;" readonly>
+											<input type="date" value="<?= $datas['akhir_berlaku'] ?>" readonly>
+											<br>
+											<button type="submit">Submit</button>
+										</form>
 									</div>
 								</div>
 							<?php endforeach ?>
@@ -732,36 +778,61 @@
 			document.getElementById(popupId).classList.add('show');
 			document.getElementById('overlay3').classList.add('show');
 		}
+
 		function closePopup3(popupId) {
 			document.getElementById(popupId).classList.remove('show');
 			document.getElementById('overlay3').classList.remove('show');
 		}
+
 		function showPopup4(popupId) {
 			document.getElementById(popupId).classList.add('show');
 			document.getElementById('overlay4').classList.add('show');
 		}
+
 		function closePopup4(popupId) {
 			document.getElementById(popupId).classList.remove('show');
 			document.getElementById('overlay4').classList.remove('show');
 		}
+
 		function showPopup5(popupId) {
 			document.getElementById(popupId).classList.add('show');
 			document.getElementById('overlay5').classList.add('show');
 		}
+
 		function closePopup5(popupId) {
 			document.getElementById(popupId).classList.remove('show');
 			document.getElementById('overlay5').classList.remove('show');
 		}
+
 		function showPopup6(popupId) {
 			document.getElementById(popupId).classList.add('show');
 			document.getElementById('overlay6').classList.add('show');
 		}
+
 		function closePopup6(popupId) {
 			document.getElementById(popupId).classList.remove('show');
 			document.getElementById('overlay6').classList.remove('show');
 		}
 
-		
+		function showPopup7(popupId) {
+			document.getElementById(popupId).classList.add('show');
+			document.getElementById('overlay7').classList.add('show');
+		}
+
+		function closePopup7(popupId) {
+			document.getElementById(popupId).classList.remove('show');
+			document.getElementById('overlay7').classList.remove('show');
+		}
+
+		function showPopup8(popupId) {
+			document.getElementById(popupId).classList.add('show');
+			document.getElementById('overlay8').classList.add('show');
+		}
+
+		function closePopup8(popupId) {
+			document.getElementById(popupId).classList.remove('show');
+			document.getElementById('overlay8').classList.remove('show');
+		}
 	</script>
 
 

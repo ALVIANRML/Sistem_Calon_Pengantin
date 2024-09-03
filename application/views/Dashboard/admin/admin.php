@@ -4,47 +4,34 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Dashboard Admin</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/admin.css')?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/admin.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
-
-	<!-- Custom styles for this template-->
-
-
-	<!-- SweetAlert -->
-	<script src="<?= base_url() ?>node_modules/sweetalert/dist/sweetalert.min.js"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+	
 	<style>
 		.swal-modal {
 			width: 80% !important;
-			/* Sesuaikan panjang popup */
 			max-width: 600px;
-			/* Batasi lebar maksimum */
 			background-color: white !important;
-			/* Warna background popup */
 			height: auto;
-			/* Atur tinggi secara otomatis */
+			
 		}
 
 		.swal-title {
 			color: #343a40 !important;
-			/* Warna teks judul */
 			font-weight: bold;
 			margin-bottom: 10px;
-			/* Atur margin bawah */
 			margin-top: 20px;
-			/* Atur margin atas */
 			text-align: left;
 			padding-left: 20px;
-			/* Padding kiri */
 		}
-
+		
 		.swal-content {
 			color: white !important;
 			/* Warna teks isi */
@@ -66,7 +53,7 @@
 			text-align: left;
 			font-size: medium;
 		}
-
+		
 		.swal-button {
 			background-color: #015D67 !important;
 			/* Warna tombol */
@@ -86,7 +73,7 @@
 				height: auto;
 				/* Atur tinggi secara otomatis */
 			}
-
+			
 			.swal-content {
 				width: 95%;
 				/* Sesuaikan lebar konten untuk layar kecil */
@@ -95,7 +82,8 @@
 				height: 10%;
 			}
 		}
-	</style>
+		</style>
+		<title>Dashboard Admin</title>
 </head>
 
 <body>

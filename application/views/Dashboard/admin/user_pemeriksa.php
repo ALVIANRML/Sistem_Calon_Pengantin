@@ -182,7 +182,7 @@
 									<?php if (isset($user_pemeriksa['role'])) : ?>
 										<?php if ($user_pemeriksa['role'] == 1) : ?>
 											<td>Admin</td>
-										<?php endif ?>
+										<?php endif ?> 
 										<?php if ($user_pemeriksa['role'] == 2) : ?>
 											<td>Kesehatan</td>
 										<?php endif ?>
