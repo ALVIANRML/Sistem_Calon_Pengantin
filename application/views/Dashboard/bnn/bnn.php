@@ -145,7 +145,7 @@
 		</div>
 		<div class="container-sidebar-dashboard-admin">
 			<p>NAVIGASI</p>
-			<a href="<?= base_url('dashboard_admin/view_admin') ?>">
+			<a href="<?= base_url('dashboard_bnn/view_bnn') ?>">
 				<div class="menu location-menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="Frame">
@@ -155,7 +155,7 @@
 					<p class="menu-text">Dashboard</p>
 				</div>
 			</a>
-			<a href="<?= base_url('dashboard_admin/view_data_catin') ?>">
+			<a href="<?= base_url('dashboard_bnn/view_data') ?>">
 				<div class="menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="Frame">

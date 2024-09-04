@@ -355,6 +355,19 @@
 								<?php $status_kesehatan = ($datas['id_status_kesehatan'] == 2) ? '<td><span class="status-tabel" style="background-color: green">Sudah diverifikasi</span></td>' : '<td><span class="status-tabel" style="background-color: #DC3545">Belum diverifikasi</span></td>'; ?>
 								<?php $status_bnn = ($datas['id_status_bnn'] == 2) ? 'Sudah di setujui' : 'belum di setujui'; ?>
 								<?php $status_psikolog = ($datas['id_status_psikolog'] == 2) ? 'Sudah di setujui' : 'belum di setujui'; ?>
+
+								<?php
+								$provinsi = $datas['provinsi'];
+								$kota = $datas['kota'];
+								$kecamatan = $datas['kecamatan'];
+								$kelurahan = $datas['kelurahan'];
+								$foto_user = $datas['foto_user'];
+								$foto_kk = $datas['foto_kk'];
+								$foto_ktp = $datas['foto_ktp'];
+								$foto_surat = $datas['foto_surat'];
+								
+
+								?>
 								<tbody>
 									<tr>
 										<td><?= ++$angka; ?></td>
@@ -448,31 +461,24 @@
 																		d="M1 3H23V21H1V3ZM3 5V19H21V5H3ZM15.5 9.5C15.7652 9.5 16.0196 9.60536 16.2071 9.79289C16.3946 9.98043 16.5 10.2348 16.5 10.5C16.5 10.7652 16.3946 11.0196 16.2071 11.2071C16.0196 11.3946 15.7652 11.5 15.5 11.5C15.2348 11.5 14.9804 11.3946 14.7929 11.2071C14.6054 11.0196 14.5 10.7652 14.5 10.5C14.5 10.2348 14.6054 9.98043 14.7929 9.79289C14.9804 9.60536 15.2348 9.5 15.5 9.5ZM17.9 12.3C18.2343 11.8543 18.4378 11.3243 18.4879 10.7694C18.5379 10.2145 18.4324 9.65668 18.1833 9.15836C17.9341 8.66004 17.5511 8.24095 17.0772 7.94805C16.6033 7.65514 16.0571 7.5 15.5 7.5C14.9429 7.5 14.3967 7.65514 13.9228 7.94805C13.4489 8.24095 13.0659 8.66004 12.8167 9.15836C12.5676 9.65668 12.4621 10.2145 12.5121 10.7694C12.5622 11.3243 12.7657 11.8543 13.1 12.3C12.6032 12.6726 12.2 13.1557 11.9223 13.7111C11.6446 14.2666 11.5 14.879 11.5 15.5V16.5H13.5V15.5C13.5 14.9696 13.7107 14.4609 14.0858 14.0858C14.4609 13.7107 14.9696 13.5 15.5 13.5C16.0304 13.5 16.5391 13.7107 16.9142 14.0858C17.2893 14.4609 17.5 14.9696 17.5 15.5V16.5H19.5V15.5C19.5 14.191 18.872 13.03 17.9 12.3ZM5 9H9.5V11H5V9ZM5 13H9.5V15H5V13Z"
 																		fill="#FFFAFA" />
 																</svg>Verifikasi Data</button>
-															<button class="open-modal btn green-btn"  onclick="showPopup8('popup8-<?= $datas['user_id'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+															<button class="open-modal btn green-btn" onclick="showPopup8('popup8-<?= $datas['user_id'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="24"
 																	height="24" viewBox="0 0 24 24" fill="none">
 																	<path d="M21 3H3V21H21V3ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
 																		fill="#FFFAFA" />
 																</svg>Aktifkan Kartu </button>
-															<button class="btn green-btn" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-																	viewBox="0 0 24 24" fill="none">
-																	<path fill-rule="evenodd" clip-rule="evenodd"
-																		d="M20.75 16.714C20.7488 16.7619 20.7441 16.8097 20.736 16.857C20.7571 16.9656 20.7539 17.0774 20.7267 17.1846C20.6995 17.2918 20.6489 17.3917 20.5785 17.477C20.5082 17.5623 20.4198 17.6311 20.3198 17.6783C20.2198 17.7255 20.1106 17.75 20 17.75H6C5.83585 17.75 5.6733 17.7823 5.52165 17.8451C5.36999 17.908 5.23219 18 5.11612 18.1161C5.00004 18.2322 4.90797 18.37 4.84515 18.5216C4.78233 18.6733 4.75 18.8358 4.75 19C4.75 19.1642 4.78233 19.3267 4.84515 19.4784C4.90797 19.63 5.00004 19.7678 5.11612 19.8839C5.23219 20 5.36999 20.092 5.52165 20.1549C5.6733 20.2177 5.83585 20.25 6 20.25H20C20.1989 20.25 20.3897 20.329 20.5303 20.4697C20.671 20.6103 20.75 20.8011 20.75 21C20.75 21.1989 20.671 21.3897 20.5303 21.5303C20.3897 21.671 20.1989 21.75 20 21.75H6C5.27065 21.75 4.57118 21.4603 4.05546 20.9445C3.53973 20.4288 3.25 19.7293 3.25 19V5C3.25 4.27065 3.53973 3.57118 4.05546 3.05546C4.57118 2.53973 5.27065 2.25 6 2.25H19.4C20.146 2.25 20.75 2.854 20.75 3.6V16.714ZM9 6.25C8.80109 6.25 8.61032 6.32902 8.46967 6.46967C8.32902 6.61032 8.25 6.80109 8.25 7C8.25 7.19891 8.32902 7.38968 8.46967 7.53033C8.61032 7.67098 8.80109 7.75 9 7.75H15C15.1989 7.75 15.3897 7.67098 15.5303 7.53033C15.671 7.38968 15.75 7.19891 15.75 7C15.75 6.80109 15.671 6.61032 15.5303 6.46967C15.3897 6.32902 15.1989 6.25 15 6.25H9Z"
-																		fill="#FFFAFA" />
-																</svg>Cetak Kartu</button>
-															<button class="open-modal btn green-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-																	height="24" viewBox="0 0 24 24" fill="none">
-																	<path
-																		d="M18.988 2.01221L21.988 5.01221L19.701 7.30021L16.701 4.30021L18.988 2.01221ZM8 16.0002H11L18.287 8.71321L15.287 5.71321L8 13.0002V16.0002Z"
-																		fill="#FFFAFA" />
-																	<path
-																		d="M19 19H8.158C8.132 19 8.105 19.01 8.079 19.01C8.046 19.01 8.013 19.001 7.979 19H5V5H11.847L13.847 3H5C3.897 3 3 3.896 3 5V19C3 20.104 3.897 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V10.332L19 12.332V19Z"
-																		fill="#FFFAFA" />
-																</svg>Status Perpanjangan</button>
+															<?php $id_user = $datas['user_id']  ?>
+															<a style="padding:0px" href="<?= base_url(); ?>Dashboard_Admin/kartu_kuning/<?= $id_user ?>" class="btn btn-primary">
+																<button class="btn green-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+																		viewBox="0 0 24 24" fill="none">
+																		<path fill-rule="evenodd" clip-rule="evenodd"
+																			d="M20.75 16.714C20.7488 16.7619 20.7441 16.8097 20.736 16.857C20.7571 16.9656 20.7539 17.0774 20.7267 17.1846C20.6995 17.2918 20.6489 17.3917 20.5785 17.477C20.5082 17.5623 20.4198 17.6311 20.3198 17.6783C20.2198 17.7255 20.1106 17.75 20 17.75H6C5.83585 17.75 5.6733 17.7823 5.52165 17.8451C5.36999 17.908 5.23219 18 5.11612 18.1161C5.00004 18.2322 4.90797 18.37 4.84515 18.5216C4.78233 18.6733 4.75 18.8358 4.75 19C4.75 19.1642 4.78233 19.3267 4.84515 19.4784C4.90797 19.63 5.00004 19.7678 5.11612 19.8839C5.23219 20 5.36999 20.092 5.52165 20.1549C5.6733 20.2177 5.83585 20.25 6 20.25H20C20.1989 20.25 20.3897 20.329 20.5303 20.4697C20.671 20.6103 20.75 20.8011 20.75 21C20.75 21.1989 20.671 21.3897 20.5303 21.5303C20.3897 21.671 20.1989 21.75 20 21.75H6C5.27065 21.75 4.57118 21.4603 4.05546 20.9445C3.53973 20.4288 3.25 19.7293 3.25 19V5C3.25 4.27065 3.53973 3.57118 4.05546 3.05546C4.57118 2.53973 5.27065 2.25 6 2.25H19.4C20.146 2.25 20.75 2.854 20.75 3.6V16.714ZM9 6.25C8.80109 6.25 8.61032 6.32902 8.46967 6.46967C8.32902 6.61032 8.25 6.80109 8.25 7C8.25 7.19891 8.32902 7.38968 8.46967 7.53033C8.61032 7.67098 8.80109 7.75 9 7.75H15C15.1989 7.75 15.3897 7.67098 15.5303 7.53033C15.671 7.38968 15.75 7.19891 15.75 7C15.75 6.80109 15.671 6.61032 15.5303 6.46967C15.3897 6.32902 15.1989 6.25 15 6.25H9Z"
+																			fill="#FFFAFA" />
+																	</svg>Cetak Kartu</button><i class="fas fas fa-book"></i></a>
 														</span>
 													</li>
 													<li><span class="label">Aksi</span><span class="titik-dua">:</span>
 														<span class="value gap-btn">
-															<button class="btn blue-btn">Edit<svg xmlns="http://www.w3.org/2000/svg" width="24"
+															<button class="btn blue-btn" onclick="showPopup10('popup10-<?= $datas['user_id'] ?>')">Edit<svg xmlns="http://www.w3.org/2000/svg" width="24"
 																	height="24" viewBox="0 0 24 24" fill="none">
 																	<path
 																		d="M18.988 2.01221L21.988 5.01221L19.701 7.30021L16.701 4.30021L18.988 2.01221ZM8 16.0002H11L18.287 8.71321L15.287 5.71321L8 13.0002V16.0002Z"
@@ -481,7 +487,7 @@
 																		d="M19 19H8.158C8.132 19 8.105 19.01 8.079 19.01C8.046 19.01 8.013 19.001 7.979 19H5V5H11.847L13.847 3H5C3.897 3 3 3.896 3 5V19C3 20.104 3.897 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V10.332L19 12.332V19Z"
 																		fill="#FFFAFA" />
 																</svg></button>
-															<button class="open-modal btn red-btn">Hapus<svg xmlns="http://www.w3.org/2000/svg" width="24"
+															<button class="open-modal btn red-btn" onclick="showPopup9('popup9-<?= $datas['user_id'] ?>')">Hapus<svg xmlns="http://www.w3.org/2000/svg" width="24"
 																	height="24" viewBox="0 0 24 24" fill="none">
 																	<path
 																		d="M19.9999 6C20.2547 6.00028 20.4999 6.09788 20.6852 6.27285C20.8706 6.44782 20.9821 6.68695 20.997 6.94139C21.012 7.19584 20.9292 7.44638 20.7656 7.64183C20.602 7.83729 20.37 7.9629 20.1169 7.993L19.9999 8H19.9189L18.9999 19C18.9999 19.7652 18.7075 20.5015 18.1826 21.0583C17.6576 21.615 16.9398 21.9501 16.1759 21.995L15.9999 22H7.99987C6.40187 22 5.09587 20.751 5.00787 19.25L5.00287 19.083L4.07987 8H3.99987C3.74499 7.99972 3.49984 7.90212 3.3145 7.72715C3.12916 7.55218 3.01763 7.31305 3.0027 7.05861C2.98776 6.80416 3.07054 6.55362 3.23413 6.35817C3.39772 6.16271 3.62977 6.0371 3.88287 6.007L3.99987 6H19.9999ZM13.9999 2C14.5303 2 15.039 2.21071 15.4141 2.58579C15.7892 2.96086 15.9999 3.46957 15.9999 4C15.9996 4.25488 15.902 4.50003 15.727 4.68537C15.5521 4.8707 15.3129 4.98223 15.0585 4.99717C14.804 5.01211 14.5535 4.92933 14.358 4.76574C14.1626 4.60214 14.037 4.3701 14.0069 4.117L13.9999 4H9.99987L9.99287 4.117C9.96277 4.3701 9.83715 4.60214 9.6417 4.76574C9.44625 4.92933 9.19571 5.01211 8.94126 4.99717C8.68682 4.98223 8.44769 4.8707 8.27272 4.68537C8.09775 4.50003 8.00015 4.25488 7.99987 4C7.99971 3.49542 8.19028 3.00943 8.53337 2.63945C8.87646 2.26947 9.34671 2.04284 9.84987 2.005L9.99987 2H13.9999Z"
@@ -624,7 +630,7 @@
 												<?php else : ?>
 													<option value="1">Belum Diverifikasi</option>
 													<option value="2">Sudah Diverifikasi</option>
-													<?php endif ?>
+												<?php endif ?>
 											</select>
 											<button type="submit">Submit</button>
 										</form>
@@ -633,15 +639,16 @@
 
 								<div class="overlay" id="overlay8"></div>
 								<div class="popup" id="popup8-<?= $datas['user_id'] ?>">
-									<span class="close-btn" onclick="closePopup7('popup7-<?= $datas['user_id'] ?>')">&times;</span>
+									<span class="close-btn" onclick="closePopup8('popup8-<?= $datas['user_id'] ?>')">&times;</span>
 									<h2>Tambah Data Penyakit</h2>
 									<hr style="border-color: #015D67;">
 									<div class="edit-pendaftaran-container">
+										<p>Apakah kamu ingin menghapus data</p>
 										<label for="role"><b class="form-label">Status Aktif</b><br></label>
 										<form action="<?= base_url('dashboard_admin/aktivasi'); ?>" method="post">
 											<input type="text" value="<?= $datas['user_id'] ?>" name="id" required hidden> <br>
 											<select type="text" id="role" class="tambah-data" name="aktif" style="width:100%; height:50px" required>
-													<option value="2">Aktifkan</option>
+												<option value="2">Aktifkan</option>
 											</select>
 
 											<input type="date" value="<?= $datas['mulai_berlaku'] ?>" style="border: #343a40;" readonly>
@@ -651,37 +658,362 @@
 										</form>
 									</div>
 								</div>
-							<?php endforeach ?>
-						</table>
-					</div>
-					<div class="overlay" id="overlay2"></div>
-					<div class="popup" id="popup2">
-						<span class="close-btn" onclick="closePopup2()">&times;</span>
-						<h2>Tambah Data gejala</h2>
-						<hr style="border-color: #015D67;">
-						<form id="popupForm" action="<?= base_url('dashboard_admin/export'); ?>" method="post">
-							<div class="edit-pendaftaran-container">
-								<label for="tanggal_awal"><b class="form-label">Tanggal Awal</b><br></label>
-								<div class="input-form">
-									<input type="date" id="tanggal_awal" class="tambah-data" name="tanggal_awal" required>
-								</div>
-								<label for="tanggal_akhir"><b class="form-label">Tanggal Akhir</b><br></label>
-								<div class="input-form">
-									<input type="date" id="tanggal_akhir" class="tambah-data" name="tanggal_akhir" required>
+
+								<div class="overlay" id="overlay9"></div>
+								<div class="popup" id="popup9-<?= $datas['user_id'] ?>">
+									<span class="close-btn" onclick="closePopup9('popup9-<?= $datas['user_id'] ?>')">&times;</span>
+									<h2>Tambah Data Penyakit</h2>
+									<hr style="border-color: #015D67;">
+									<div class="edit-pendaftaran-container">
+										<label for="role"><b class="form-label">Status Aktif</b><br></label>
+										<form action="<?= base_url('dashboard_admin/hapus'); ?>" method="post">
+											<input type="text" value="<?= $datas['id_user_detail'] ?>" name="id" required hidden> <br>
+
+											<button type="submit">Ya</button>
+											<button type="button" onclick="closePopup9('popup9-<?= $datas['user_id'] ?>'">Tidak</button>
+										</form>
+									</div>
 								</div>
 
+								<div class="overlay" id="overlay10"></div>
+								<div class="popup" id="popup10-<?= $datas['user_id'] ?>">
+									<span class="close-btn" onclick="closePopup10('popup10-<?= $datas['user_id'] ?>')">&times;</span>
+									<h2>Tambah Data gejala</h2>
+									<hr style="border-color: #015D67;">
+									<form id="popupForm" action="<?= base_url('dashboard_admin/edit_user_pemeriksa'); ?>" method="post">
+										<div class="edit-pendaftaran-container">
+											<input type="hidden" name="Id" value="<?= $datas['id_user_detail'] ?>" />
+											<label for="no_pendaftaran"><b class="form-label">Nomor Pendaftaran</b><br></label>
+											<div class="input-form">
+												<input type="text" value="<?= $datas['no_pendaftaran'] ?>" name="no_pendaftaran" class="tambah-data">
+											</div>
+											<label for="nik"><b class="form-label">NIK</b><br></label>
+											<div class="input-form">
+												<input type="text" class="tambah-data" value="<?= $datas['nik'] ?>" name="nik" required>
+											</div>
+											<label for="nama"><b class="form-label">Nama Lengkap</b><br></label>
+											<div class="input-form">
+												<input type="text" value="<?= $datas['nama_lengkap'] ?>" name="nama" class="tambah-data">
+											</div>
+											<label for="tempatLahir"><b class="form-label">Tempat Lahir</b><br></label>
+											<div class="input-form">
+												<input type="text" value="<?= $datas['tempat_lahir'] ?>" class="tambah-data" name="tempatLahir" required>
+											</div>
+											<label for="tanggalLahir"><b class="form-label">Tanggal Lahir</b><br></label>
+											<div class="input-form">
+												<input type="date" value="<?= $datas['tanggal_lahir'] ?>" onchange="hitungUmur()" class="tambah-data" name="tanggalLahir" required>
+											</div>
 
-								<button type="submit" onclick="closePopup2()">Submit</button>
-							</div>
-						</form>
+											<label for="umur"><b class="form-label">Usia</b><br></label>
+											<div class="input-form">
+												<input type="date" value="<?= $datas['tanggal_lahir'] ?>" onchange="hitungUmur()" class="tambah-data" name="umur" required>
+											</div>
+											<label for="jenisKelamin"><b class="form-label">Jenis Kelamin</b><br></label>
+											<div class="input-form">
+												<select type="text" class="tambah-data" name="jenisKelamin" required>
+													<option value="<?= $datas['jenis_kelamin'] ?>"><?= $datas['jenis_kelamin'] ?></option>
+													<option value="Laki-Laki">Laki-Laki</option>
+													<option value="Perempuan">Perempuan</option>
+												</select>
+											</div>
+											<label for="agama"><b class="form-label">Agama</b><br></label>
+											<div class="input-form">
+												<select type="text" class="tambah-data" name="agama" required>
+													<option value="<?= $datas['agama'] ?>"><?= $datas['agama'] ?></option>
+													<option value="Islam">Islam</option>
+													<option value="Kristen Protestan">Kristen Protestan</option>
+													<option value="Kristen Katolik">Kristen Katolik</option>
+													<option value="Buddha">Buddha</option>
+													<option value="Hindu">Hindu</option>
+												</select>
+											</div>
+
+											<label for="pendidikan"><b class="form-label">Pendidikan Terakhir</b><br></label>
+											<div class="input-form">
+												<select type="text" class="tambah-data" name="pendidikan" required>
+													<option value="<?= $datas['pendidikan_terakhir'] ?>"><?= $datas['pendidikan_terakhir'] ?></option>
+													<option value="Paud">Paud</option>
+													<option value="SD">SD</option>
+													<option value="SMP">SMP</option>
+													<option value="SMA/SMK">SMA/SMK</option>
+													<option value="S1">S1</option>
+													<option value="S2">S2</option>
+													<option value="S3">S3</option>
+													<option value="D1">D1</option>
+													<option value="D2">D2</option>
+													<option value="D3">D3</option>
+													<option value="Tidak menempuh pendidikan formal ">Tidak menempuh pendidikan formal </option>
+												</select>
+											</div>
+											<label for="jenisKelamin"><b class="form-label">Jenis Kelamin</b><br></label>
+											<div class="input-form">
+												<select type="text" class="tambah-data" name="jenisKelamin" required>
+													<option value="<?= $datas['jenis_kelamin'] ?>"><?= $datas['jenis_kelamin'] ?></option>
+													<option value="Laki-Laki">Laki-Laki</option>
+													<option value="Perempuan">Perempuan</option>
+												</select>
+											</div>
+											<label for="nomorTelepon"><b class="form-label">Tanggal Lahir</b><br></label>
+											<div class="input-form">
+												<input type="text" value="<?= $datas['nomor_telepon'] ?>" class="tambah-data" name="nomorTelepon" required>
+											</div>
+
+											<div class="form-group" style="width:60vh ;">
+												<label for="provinsi">Provinsi</label>
+												<select name="provinsi" id="provinsi" class="inputan" style="width:100%">
+													<?php if ($provinsi == null) : ?>
+														<!-- <option value="" disabled selected>Pilih Provinsi</option> -->
+													<?php elseif ($provinsi == $this->session->userdata('provinsi')) : ?>
+														<option value="<?= $this->session->userdata('provinsi'); ?>" disabled selected> <?= $this->session->userdata('provinsi'); ?> </option>
+													<?php else : ?>
+														<option value="<?= $provinsi ?>" disabled selected><?= $provinsi ?></option>
+													<?php endif ?>
+
+												</select>
+												<?= form_error('provinsi', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+											</div>
+											<div class="form-group" style="width: 60vh;">
+												<label for="kota">Kota</label>
+												<select name="kota" id="kota" class="inputan" style="width:100%">
+													<?php if ($kota == null) : ?>
+														<option value="" disabled selected>Pilih Kota</option>
+													<?php elseif ($kota == $this->session->userdata('kota')) : ?>
+														<option value="<?= $this->session->userdata('kota'); ?>" disabled selected> <?= $this->session->userdata('kota'); ?> </option>
+													<?php else : ?>
+														<option value="<?= $kota ?>" disabled selected><?= $kota ?></option>
+													<?php endif ?>
+												</select>
+												<?= form_error('kota', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+											</div>
+											<div class="form-group" style="width: 60vh;">
+												<label for="kecamatan">Kecamatan</label>
+												<select name="kecamatan" id="kecamatan" class="inputan" style="width:100%">
+													<?php if ($kecamatan == null) : ?>
+														<option value="" disabled selected>Pilih Kecamatan</option>
+													<?php elseif ($kecamatan == $this->session->userdata('kecamatan')) : ?>
+														<option value="<?= $this->session->userdata('kecamatan'); ?>" disabled selected> <?= $this->session->userdata('kecamatan'); ?> </option>
+													<?php else : ?>
+														<option value="<?= $kecamatan ?>" disabled selected><?= $kecamatan ?></option>
+													<?php endif ?>
+
+												</select>
+												<?= form_error('kecamatan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+											</div>
+											<div class="form-group" style="width: 60vh;">
+												<label for="kelurahan">Kelurahan</label>
+												<select name="kelurahan" id="kelurahan" class="inputan" style="width:100%">
+													<?php if ($kelurahan == null) : ?>
+														<option value="" disabled selected>Pilih Kelurahan</option>
+													<?php elseif ($kelurahan == $this->session->userdata('kelurahan')) : ?>
+														<option value="<?= $this->session->userdata('kelurahan'); ?>" disabled selected> <?= $this->session->userdata('kelurahan'); ?> </option>
+													<?php else : ?>
+														<option value="<?= $kelurahan ?>" disabled selected><?= $kelurahan ?></option>
+													<?php endif ?>
+
+												</select>
+												<?= form_error('kelurahan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+											</div>
+
+											<div class="form-group" style="width: 60vh;">
+												<label for="alamat">Alamat Lengkap</label>
+												<textarea id="alamat" class="inputan" name="alamat" placeholder="" value="<?= $this->session->userdata('alamat'); ?>" style="width: 100%;height:20vh;"><?= $this->session->userdata('alamat'); ?></textarea>
+												<?= form_error('alamat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+											</div>
+
+											<label for="pernikahanKe"><b class="form-label">Pernikahan Ke</b><br></label>
+											<div class="input-form">
+												<input type="text" value="<?= $datas['pernikahan_ke'] ?>" class="tambah-data" name="pernikahanKe" required>
+											</div>
+
+											<label for="tanggalPernikahan"><b class="form-label">Pernikahan Ke</b><br></label>
+											<div class="input-form">
+												<input type="date" value="<?= $datas['tanggal_pernikahan'] ?>" class="tambah-data" name="tanggalPernikahan" required>
+											</div>
+
+											<?php if ($foto_user == null) : ?>
+												<div class="form-group" style="width: 50vh;">
+													<label for="foto_user">Pas Foto</label>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
+														<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="uploadfile('foto_user')" style="display: none;" value="<?= $foto_user ?>">
+														<label for="foto_user" class="custom-file-label">
+															<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
+															<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
+															<div class="upload-text">Unggah atau drop file disini</div>
+															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+														</label>
+														<span id="file-name-foto_user" class="file-name"></span>
+													</div>
+													<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+												</div>
+											<?php else : ?>
+
+												<div class="form-group" style="width: 50vh;">
+													<label for="foto_user">Pas Foto</label>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
+														<img id="uploadImage-foto_user" src="<?= base_url('uploads/photo/') . $foto_user ?>" alt="KTP Image" class="preview-image">
+														<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="updateFile('foto_user')" style="display: none;" value="<?= $foto_user ?>">
+														<div class="image-caption">
+
+														</div>
+														<label for="foto_user" class="custom-file-label">
+															<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
+														</label>
+														<span id="file-name-foto_user" class="file-name"></span>
+													</div>
+													<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+													<input type="hidden" name="existing_image" value="<?= $foto_user ?>">
+												</div>
+
+											<?php endif ?>
+
+
+											<?php if ($foto_ktp == null) : ?>
+												<div class="form-group" style="width: 50vh;">
+													<label for="foto_ktp">Foto KTP</label>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
+														<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $this->session->userdata('foto_ktp') ?>">
+														<label for="foto_ktp" class="custom-file-label">
+															<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
+															<img id="preview-image-foto_ktp" class="preview-image" src="" alt="Preview Image" style="display: none;">
+															<div class="upload-text">Unggah atau drop file disini</div>
+															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+														</label>
+														<span id="file-name-foto_ktp" class="file-name"></span>
+													</div>
+													<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+												</div>
+											<?php else : ?>
+												<div class="form-group" style="width: 50vh;">
+													<label for="foto_ktp">Foto KTP</label>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
+														<img id="uploadImage-foto_ktp" src="<?= base_url('uploads/photo/') . $foto_ktp ?>" alt="KTP Image" class="preview-image">
+														<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $foto_ktp ?>">
+														<div class="image-caption">
+
+														</div>
+														<label for="foto_ktp" class="custom-file-label">
+															<img id="preview-image-foto_ktp" class="preview-image" src="" alt="Preview Image" style="display: none;">
+														</label>
+														<span id="file-name-foto_ktp" class="file-name"></span>
+													</div>
+													<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+													<input type="hidden" name="existing_image" value="<?= $foto_ktp ?>">
+												</div>
+
+											<?php endif ?>
+
+											<?php if ($foto_kk == null) : ?>
+												<div class="form-group" style="width: 50vh">
+													<label for="foto_kk">Foto Kartu Keluarga</label>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
+														<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="uploadfile('foto_kk')" style="display: none;">
+														<label for="foto_kk" class="custom-file-label">
+															<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
+															<img id="preview-image-foto_kk" class="preview-image" src="" alt="Preview Image" style="display: none;">
+															<div class="upload-text">Unggah atau drop file disini</div>
+															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+														</label>
+														<span id="file-name-foto_kk" class="file-name"></span>
+													</div>
+													<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+												</div>
+											<?php else : ?>
+												<div class="form-group" style="width: 50vh;">
+													<label for="foto_kk">Foto Kartu Keluarga</label>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
+														<img id="uploadImage-foto_kk" src="<?= base_url('uploads/photo/') . $foto_kk ?>" alt="KTP Image" class="preview-image">
+														<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="updateFile('foto_kk')" style="display: none;" value="<?= $foto_kk ?>">
+														<div class="image-caption">
+
+														</div>
+														<label for="foto_kk" class="custom-file-label">
+															<img id="preview-image-foto_kk" class="preview-image" src="" alt="Preview Image" style="display: none;">
+														</label>
+														<span id="file-name-foto_kk" class="file-name"></span>
+													</div>
+													<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+													<input type="hidden" name="existing_image" value="<?= $foto_kk ?>">
+												</div>
+
+											<?php endif ?>
+
+											<?php if ($foto_surat == null) : ?>
+												<div class="form-group" style="width: 50vh">
+													<label for="foto_surat">Foto Surat Pengantar</label>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
+														<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="uploadfile('foto_surat')" style="display: none;">
+														<label for="foto_surat" class="custom-file-label">
+															<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
+															<img id="preview-image-foto_surat" class="preview-image" src="" alt="Preview Image" style="display: none;">
+															<div class="upload-text">Unggah atau drop file disini</div>
+															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+														</label>
+														<span id="file-name-foto_surat" class="file-name"></span>
+													</div>
+													<?= form_error('foto_surat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+												</div>
+											<?php else : ?>
+												<div class="form-group" style="width: 50vh;">
+													<label for="foto_surat">Foto Surat Pengantar</label>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
+														<img id="uploadImage-foto_surat" src="<?= base_url('uploads/photo/') . $foto_surat ?>" alt="KTP Image" class="preview-image">
+														<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="updateFile('foto_surat')" style="display: none;" value="<?= $foto_surat ?>">
+														<div class="image-caption">
+
+														</div>
+														<label for="foto_surat" class="custom-file-label">
+															<img id="preview-image-foto_surat" class="preview-image" src="" alt="Preview Image" style="display: none;">
+														</label>
+														<span id="file-name-foto_surat" class="file-name"></span>
+													</div>
+													<?= form_error('foto_surat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+													<input type="hidden" name="existing_image" value="<?= $foto_surat ?>">
+												</div>
+											<?php endif ?>
+										</div>
+										<button type="submit">Submit</button>
+								</div>
+								</form>
 					</div>
+				<?php endforeach ?>
+				</table>
 				</div>
-				<!--  -->
-				<div class="copyright-text" style="bottom: 5%">
-					Copyright © 2024 DPPKB Kota Tebing. Hak cipta dilindungi
+				<div class="overlay" id="overlay2"></div>
+				<div class="popup" id="popup2">
+					<span class="close-btn" onclick="closePopup2()">&times;</span>
+					<h2>Tambah Data gejala</h2>
+					<hr style="border-color: #015D67;">
+					<form id="popupForm" action="<?= base_url('dashboard_admin/export'); ?>" method="post">
+						<div class="edit-pendaftaran-container">
+							<label for="tanggal_awal"><b class="form-label">Tanggal Awal</b><br></label>
+							<div class="input-form">
+								<input type="date" id="tanggal_awal" class="tambah-data" name="tanggal_awal" required>
+							</div>
+							<label for="tanggal_akhir"><b class="form-label">Tanggal Akhir</b><br></label>
+							<div class="input-form">
+								<input type="date" id="tanggal_akhir" class="tambah-data" name="tanggal_akhir" required>
+							</div>
+
+
+							<button type="submit" onclick="closePopup2()">Submit</button>
+						</div>
+					</form>
 				</div>
 			</div>
+			<!--  -->
+			<div class="copyright-text" style="bottom: 0%">
+				Copyright © 2024 DPPKB Kota Tebing. Hak cipta dilindungi
+			</div>
 		</div>
+	</div>
 	</div>
 
 	<script src="<?= base_url('assets/js/data-catin-admin.js') ?>"></script>
@@ -833,7 +1165,216 @@
 			document.getElementById(popupId).classList.remove('show');
 			document.getElementById('overlay8').classList.remove('show');
 		}
+
+		function showPopup9(popupId) {
+			document.getElementById(popupId).classList.add('show');
+			document.getElementById('overlay9').classList.add('show');
+		}
+
+		function closePopup9(popupId) {
+			document.getElementById(popupId).classList.remove('show');
+			document.getElementById('overlay9').classList.remove('show');
+		}
+
+		function showPopup10(popupId) {
+			document.getElementById(popupId).classList.add('show');
+			document.getElementById('overlay10').classList.add('show');
+		}
+
+		function closePopup10(popupId) {
+			document.getElementById(popupId).classList.remove('show');
+			document.getElementById('overlay10').classList.remove('show');
+		}
 	</script>
+	<script>
+		function updateFile(fileId) {
+			var input = document.getElementById(fileId);
+			var fileName = input.files.length > 0 ? input.files[0].name : '';
+			document.getElementById('file-name-' + fileId).textContent = fileName;
+
+			var previewImage = document.getElementById('preview-image-' + fileId);
+			var uploadImage = document.getElementById('uploadImage-' + fileId);
+			var uploadIcon = document.querySelector('#drop-zone-' + fileId + ' .upload-icon');
+			var uploadText = document.querySelector('#drop-zone-' + fileId + ' .upload-text');
+			var uploadSubtext = document.querySelector('#drop-zone-' + fileId + ' .upload-subtext');
+
+			if (input.files.length > 0) {
+				var file = input.files[0];
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					previewImage.src = e.target.result;
+					previewImage.style.display = 'block';
+					if (uploadImage) uploadImage.style.display = 'none';
+				};
+
+				reader.readAsDataURL(file);
+
+				if (uploadIcon) uploadIcon.style.display = 'none';
+				if (uploadText) uploadText.style.display = 'none';
+				if (uploadSubtext) uploadSubtext.style.display = 'none';
+			} else {
+				if (uploadImage) uploadImage.src = '';
+				previewImage.src = '';
+				if (uploadImage) uploadImage.style.display = 'block';
+				previewImage.style.display = 'none';
+
+				if (uploadIcon) uploadIcon.style.display = 'block';
+				if (uploadText) uploadText.style.display = 'block';
+				if (uploadSubtext) uploadSubtext.style.display = 'block';
+			}
+		}
+
+		// Event listeners for drag and drop
+		document.querySelectorAll('[id^=drop-zone-]').forEach(function(dropZone) {
+			dropZone.addEventListener('dragover', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				dropZone.classList.add('dragover');
+			});
+
+			dropZone.addEventListener('dragleave', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				dropZone.classList.remove('dragover');
+			});
+
+			dropZone.addEventListener('drop', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				dropZone.classList.remove('dragover');
+				var fileInputId = dropZone.id.replace('drop-zone-', '');
+				var files = e.dataTransfer.files;
+				document.getElementById(fileInputId).files = files;
+				updateFile(fileInputId);
+			});
+
+
+		});
+	</script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var phoneInput = document.getElementById('nomor_telepon');
+
+			// Prepend +62 if not already present
+			if (phoneInput.value && !phoneInput.value.startsWith('+62')) {
+				phoneInput.value = '+62' + phoneInput.value;
+			}
+
+			// Handle user input to ensure +62 is always at the start
+			phoneInput.addEventListener('input', function() {
+				if (phoneInput.value.startsWith('+62')) {
+					// Allow user to type after +62
+					phoneInput.value = '+62' + phoneInput.value.slice(3);
+				} else {
+					phoneInput.value = '+62' + phoneInput.value;
+				}
+			});
+		});
+	</script>
+
+	<script>
+		function hitungUmur() {
+			const tanggalLahir = document.getElementById('tanggalLahir').value;
+			const umurInput = document.getElementById('umur');
+
+			if (tanggalLahir) {
+				const tanggalLahirDate = new Date(tanggalLahir);
+				const today = new Date();
+				let umur = today.getFullYear() - tanggalLahirDate.getFullYear();
+				const bulan = today.getMonth() - tanggalLahirDate.getMonth();
+				if (bulan < 0 || (bulan === 0 && today.getDate() < tanggalLahirDate.getDate())) {
+					umur--;
+				}
+				umurInput.value = umur;
+			} else {
+				umurInput.value = '';
+			}
+		}
+
+		fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/provinces.json`)
+			.then(response => response.json())
+			.then(provinces => {
+				var data = provinces;
+				<?php if ($provinsi == null) : ?>
+
+					var tampung = '<option>Pilih Provinsi</option>';
+				<?php else : ?>
+
+					var tampung = '<option><?= $provinsi ?></option>';
+				<?php endif ?>
+				data.forEach(element => {
+					tampung += `<option data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
+				});
+				document.getElementById('provinsi').innerHTML = tampung;
+			});
+
+		const selectProvinsi = document.getElementById('provinsi');
+
+		selectProvinsi.addEventListener('change', (e) => {
+			var provinsi = e.target.options[e.target.selectedIndex].dataset.reg;
+			fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/regencies/${provinsi}.json`)
+				.then(response => response.json())
+				.then(regencies => {
+					var data = regencies;
+					<?php if ($kota == null) : ?>
+						var tampung = '<option>Pilih Kota</option>';
+					<?php else : ?>
+
+						var tampung = '<option><?= $kota ?></option>';
+					<?php endif ?>
+					data.forEach(element => {
+						tampung += `<option data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
+					});
+					document.getElementById('kota').innerHTML = tampung;
+				});
+		});
+
+		const selectKota = document.getElementById('kota');
+		selectKota.addEventListener('change', (e) => {
+			var kota = e.target.options[e.target.selectedIndex].dataset.reg;
+			fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/districts/${kota}.json`)
+				.then(response => response.json())
+				.then(districts => {
+					districts;
+					var data = districts;
+					<?php if ($kecamatan == null) : ?>
+
+						var tampung = '<option>Pilih Kecamatan</option>';
+					<?php else : ?>
+
+						var tampung = '<option><?= $kecamatan ?></option>';
+					<?php endif ?>
+					data.forEach(element => {
+						tampung += `<option data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
+					});
+					document.getElementById('kecamatan').innerHTML = tampung;
+				});
+		});
+
+		const selectKecamatan = document.getElementById('kecamatan');
+		selectKecamatan.addEventListener('change', (e) => {
+			var kecamatan = e.target.options[e.target.selectedIndex].dataset.reg;
+			fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/villages/${kecamatan}.json`)
+				.then(response => response.json())
+				.then(villages => {
+					villages;
+					var data = villages;
+					<?php if ($kelurahan == null) : ?>
+
+						var tampung = '<option>Pilih kelurahan</option>';
+					<?php else : ?>
+
+						var tampung = '<option><?= $kelurahan ?></option>';
+					<?php endif ?>
+					data.forEach(element => {
+						tampung += `<option data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
+					});
+					document.getElementById('kelurahan').innerHTML = tampung;
+				});
+		});
+	</script>
+
 
 
 

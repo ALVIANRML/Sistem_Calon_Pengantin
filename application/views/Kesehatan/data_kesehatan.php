@@ -10,6 +10,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/kesehatan/data.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
+	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 </head>
 
 <body>
@@ -124,7 +125,7 @@
 							</form>
 						</div>
 					</div>
-
+					<div class="table-scroll">
 					<table>
 						<thead>
 							<tr>
@@ -146,7 +147,7 @@
 							<tbody>
 								<tr>
 									<td><?= ++$angka; ?></td>
-									<td>user1</td>
+									<td><?= $datas['nama'] ?></td>
 									<td><?= $datas['nomor_telepon'] ?></td>
 									<td><?= $datas['nama_lengkap'] ?></td>
 									<td><?= $datas['nik'] ?></td>
@@ -230,7 +231,7 @@
 														class="value">VALUE</span></li>
 												<li><span class="label">Verifikasi Data</span><span class="titik-dua">:</span>
 													<span class="value gap-btn">
-														<button class="open-modal btn green-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+														<button class="open-modal btn green-btn" onclick="showPopup7('popup7-<?= $datas['user_id'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="24"
 																height="24" viewBox="0 0 24 24" fill="none">
 																<path
 																	d="M1 3H23V21H1V3ZM3 5V19H21V5H3ZM15.5 9.5C15.7652 9.5 16.0196 9.60536 16.2071 9.79289C16.3946 9.98043 16.5 10.2348 16.5 10.5C16.5 10.7652 16.3946 11.0196 16.2071 11.2071C16.0196 11.3946 15.7652 11.5 15.5 11.5C15.2348 11.5 14.9804 11.3946 14.7929 11.2071C14.6054 11.0196 14.5 10.7652 14.5 10.5C14.5 10.2348 14.6054 9.98043 14.7929 9.79289C14.9804 9.60536 15.2348 9.5 15.5 9.5ZM17.9 12.3C18.2343 11.8543 18.4378 11.3243 18.4879 10.7694C18.5379 10.2145 18.4324 9.65668 18.1833 9.15836C17.9341 8.66004 17.5511 8.24095 17.0772 7.94805C16.6033 7.65514 16.0571 7.5 15.5 7.5C14.9429 7.5 14.3967 7.65514 13.9228 7.94805C13.4489 8.24095 13.0659 8.66004 12.8167 9.15836C12.5676 9.65668 12.4621 10.2145 12.5121 10.7694C12.5622 11.3243 12.7657 11.8543 13.1 12.3C12.6032 12.6726 12.2 13.1557 11.9223 13.7111C11.6446 14.2666 11.5 14.879 11.5 15.5V16.5H13.5V15.5C13.5 14.9696 13.7107 14.4609 14.0858 14.0858C14.4609 13.7107 14.9696 13.5 15.5 13.5C16.0304 13.5 16.5391 13.7107 16.9142 14.0858C17.2893 14.4609 17.5 14.9696 17.5 15.5V16.5H19.5V15.5C19.5 14.191 18.872 13.03 17.9 12.3ZM5 9H9.5V11H5V9ZM5 13H9.5V15H5V13Z"
@@ -357,8 +358,32 @@
 									</div>
 								</div>
 							</div>
+
+							<div class="overlay" id="overlay7"></div>
+								<div class="popup" id="popup7-<?= $datas['user_id'] ?>">
+									<span class="close-btn" onclick="closePopup7('popup7-<?= $datas['user_id'] ?>')">&times;</span>
+									<h2>Tambah Data Penyakit</h2>
+									<hr style="border-color: #015D67;">
+									<div class="edit-pendaftaran-container">
+										<label for="role"><b class="form-label">Status User</b><br></label>
+										<form action="<?= base_url('dashboard_kesehatan/data_verifikasi'); ?>" method="post">
+											<input type="text" value="<?= $datas['user_id'] ?>" name="id" required hidden> <br>
+											<select type="text" id="role" class="tambah-data" name="data_verifikasi" style="width:100%; height:50px" required>
+												<?php if ($datas['id_status_kesehatan'] == 2) : ?>
+													<option value="2">Sudah Diverifikasi</option>
+													<option value="1">Belum Diverifikasi</option>
+												<?php else : ?>
+													<option value="1">Belum Diverifikasi</option>
+													<option value="2">Sudah Diverifikasi</option>
+												<?php endif ?>
+											</select>
+											<button type="submit">Submit</button>
+										</form>
+									</div>
+								</div>
 						<?php endforeach ?>
 					</table>
+					</div>
 
 				</div>
 				<!--  -->
@@ -417,6 +442,17 @@
 		function closePopup6(popupId) {
 			document.getElementById(popupId).classList.remove('show');
 			document.getElementById('overlay6').classList.remove('show');
+		}
+
+
+		function showPopup7(popupId) {
+			document.getElementById(popupId).classList.add('show');
+			document.getElementById('overlay7').classList.add('show');
+		}
+
+		function closePopup7(popupId) {
+			document.getElementById(popupId).classList.remove('show');
+			document.getElementById('overlay7').classList.remove('show');
 		}
 	</script>
 </body>
