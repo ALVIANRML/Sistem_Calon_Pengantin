@@ -384,7 +384,17 @@ th {
 	width: auto;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+
+
+#uploadImage-foto_user,
+#uploadImage-foto_kk,
+#uploadImage-foto_ktp,
+#uploadImage-foto_surat {
+    width: 320px;
+    height: 420px;
+    object-fit: cover; /* Memastikan gambar tetap memenuhi area tanpa merusak aspek rasio */
+
+}input[type="date"]::-webkit-calendar-picker-indicator {
 	background: none;
 	display: block;
 	width: 100%;
@@ -582,4 +592,5 @@ button[type="submit"]:hover {
 			margin-right: 20px;
         }
 
+		
 		

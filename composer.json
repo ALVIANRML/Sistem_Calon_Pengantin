@@ -14,7 +14,8 @@
 		"php": ">=5.3.7",
 		"twilio/sdk": "^8.2",
 		"phpoffice/phpspreadsheet": "*",
-		"phpoffice/phpexcel": "*"
+		"phpoffice/phpexcel": "*",
+		"dompdf/dompdf": "*"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

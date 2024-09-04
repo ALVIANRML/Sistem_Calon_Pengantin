@@ -31,7 +31,7 @@ class Dashboard_kesehatan extends CI_Controller
 		// var_dump($keyword);
 		// exit;
 		if ($keyword != null) {
-			$keyword = $this->m_Hasil_Diagnosa->search($keyword);
+			$keyword = $this->m_User_detail->search($keyword);
 			// Ambil ID dari hasil pencarian
 			$id = array_map(function ($user) {
 				return $user['id_user_detail'];
@@ -39,20 +39,28 @@ class Dashboard_kesehatan extends CI_Controller
 
 			if ($tanggal != null) {
 				// Panggil model dengan ID array dan tanggal
-				$data['user_detail'] = $this->m_Hasil_Diagnosa->get_by_id_and_tanggal($id, $tanggal);
+				$data['user_detail'] = $this->m_User_detail->get_by_id_and_tanggal($id, $tanggal);
 			} else {
 				$data['user_detail'] = $keyword;
 			}
 		} else {
 			if ($tanggal == null) {
-				$data['user_detail'] = $this->m_Hasil_Diagnosa->all();
+				$data['user_detail'] = $this->m_User_detail->all();
 				// var_dump($data);
 				// exit;
 			} else {
-				$data['user_detail'] = $this->m_Hasil_Diagnosa->get_by_data_registered($tanggal);
+				$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal);
 			}
 		}
 		$this->load->view('Kesehatan/data_kesehatan', $data);
+	}
+
+	public function data_verifikasi()
+	{
+		$verifikasi = $this->input->post('data_verifikasi');
+		$id = $this->input->post('id');
+		$this->m_User_detail->update_kesehatan_verifikasi($id, $verifikasi);
+		redirect('dashboard_kesehatan/data_kesehatan');
 	}
 
 	public function kesehatan_filter_tanggal()

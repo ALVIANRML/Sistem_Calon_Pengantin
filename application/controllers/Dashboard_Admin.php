@@ -60,12 +60,13 @@ class Dashboard_Admin extends CI_Controller
 			$id = array_map(function ($user) {
 				return $user['id_user_detail'];
 			}, $keyword);
-
 			if ($tanggal != null) {
 				// Panggil model dengan ID array dan tanggal
 				$data['user_detail'] = $this->m_User_detail->get_by_id_and_tanggal($id, $tanggal);
 			} else {
 				$data['user_detail'] = $keyword;
+				// var_dump($data);
+				// exit;
 			}
 		} else {
 			if ($tanggal == null) {
@@ -97,6 +98,326 @@ class Dashboard_Admin extends CI_Controller
 		$this->m_User_detail->update_data_aktif($id,$aktif);
 		redirect('dashboard_admin/view_data_catin');
 
+	}
+
+	public function hapus(){
+		$id = $this->input->post('id');
+		$this->m_User_detail->hapus_data($id);
+		redirect('dashboard_admin/view_data_catin');
+
+	}
+
+	public function edit(){
+		$id_user = $this->session->userdata('id_user');
+		$userDetail = $this->m_User_detail->getAll($id_user);
+		if ($userDetail->num_rows() > 0) {
+			$userDetail = $userDetail->row_array();
+			$this->session->set_userdata('nama_lengkap', $userDetail['nama_lengkap']);
+			$this->session->set_userdata('foto_user', $userDetail['foto_user']);
+			$this->session->set_userdata('foto_ktp', $userDetail['foto_ktp']);
+			$this->session->set_userdata('foto_kk', $userDetail['foto_kk']);
+			$this->session->set_userdata('foto_surat', $userDetail['foto_surat']);
+		}
+
+
+		$this->form_validation->set_rules(
+			'nama_lengkap',
+			'Nama',
+			'required|trim',
+			[
+				'required' => 'nama tidak boleh kosong',
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'nik',
+			'NIK',
+			'required|trim|min_length[16]',
+			[
+				'required' => 'NIK tidak boleh kosong',
+				'min_length' => 'NIK terlalu pendek',
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'tempat_lahir',
+			'Tempat Lahir',
+			'required|trim',
+			[
+				'required' => 'Tempat Lahir tidak boleh kosong',
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'tanggal_lahir',
+			'Tanggal Lahir',
+			'required|trim',
+			[
+				'required' => 'Tanggal Lahir tidak boleh kosong',
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'agama',
+			'Agama',
+			'required|trim',
+			[
+				'required' => 'Agama tidak boleh kosong',
+			]
+		);
+		$this->form_validation->set_rules(
+			'pendidikan',
+			'Pendidikan Terakhir',
+			'required|trim',
+			[
+				'required' => 'Pendidikan Terakhir tidak boleh kosong',
+			]
+		);
+		$this->form_validation->set_rules(
+			'pekerjaan',
+			'Pekerjaan',
+			'required|trim',
+			[
+				'required' => 'Pekerjaan tidak boleh kosong',
+			]
+		);
+		$this->form_validation->set_rules(
+			'umur',
+			'Umur',
+			'required|trim',
+			[
+				'required' => 'Umur tidak boleh kosong',
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'jenis_kelamin',
+			'Jenis Kelamin',
+			'required|trim',
+			[
+				'required' => 'Jenis Kelamin tidak boleh kosong',
+			]
+		);
+		$this->form_validation->set_rules(
+			'nomor_telepon',
+			'Nomor HP',
+			'required|trim',
+			[
+				'required' =>  'Nomor HP tidak boleh kosong',
+			]
+		);
+		// $kota = $this->input->post('provinsi');
+		// var_dump($kota);
+		// exit;
+		// $this->form_validation->set_rules(
+		// 	'provinsi',
+		// 	'Provinsi',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Provinsi tidak boleh kosong',
+		// 	]
+
+		// );
+		// $this->form_validation->set_rules(
+		// 	'kota',
+		// 	'Kota',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Kota tidak boleh kosong',
+		// 	]
+		// );
+
+		// $this->form_validation->set_rules(
+		// 	'kecamatan',
+		// 	'Kecamatan',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Kecamatan tidak boleh kosong',
+		// 	]
+		// );
+
+		// $this->form_validation->set_rules(
+		// 	'kelurahan',
+		// 	'Kelurahan',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Kelurahan tidak boleh kosong',
+		// 	]
+		// );
+
+		$this->form_validation->set_rules(
+			'alamat',
+			'Alamat',
+			'required|trim',
+			[
+				'required' => 'Alamat tidak boleh kosong',
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'tanggal_pernikahan',
+			'Tanggal Pernikahan',
+			'required|trim',
+			[
+				'required' => 'Tanggal Pernikahan tidak boleh kosong',
+			]
+		);
+
+		$this->form_validation->set_rules(
+			'pernikahan_ke',
+			'"Pernikahan ke"',
+			'required|trim',
+			[
+				'required' => '"Pernikahan ke" tidak boleh kosong',
+			]
+		);
+
+		if ($this->form_validation->run() == false) {
+
+			$this->load->view('Dashboard/catin/catin_pemeriksaan');
+		} else {
+			$path = 'uploads/photo/';
+			$nama = $this->session->userdata('username');
+			$this->load->library('upload');
+
+			// Konfigurasi upload file
+			$upload_config = [
+				'upload_path' => $path,
+				'allowed_types' => 'jpg|png|jpeg|gif',
+				'max_size' => '100000',  // 20MB max
+				'max_width' => '720', // pixel
+				'max_height' => '720' // pixel
+			];
+
+			// Upload dan simpan foto user
+			$upload_config['file_name'] = $nama . '_pas_foto';
+			$this->upload->initialize($upload_config);
+			$foto_saya_upload = $this->upload->do_upload('foto_user');
+
+			$fotoUser = $this->session->userdata('foto_user');
+			if ($foto_saya_upload) {
+				@unlink($path . $fotoUser);
+				$foto_saya = $this->upload->data();
+				$fotoUser = $foto_saya['file_name'];
+			} else {
+				$this->session->set_flashdata('eror_input_file', 'eror_input_file');
+			}
+
+			// Upload dan simpan foto KTP
+			$upload_config['file_name'] = $nama . '_ktp';
+			$this->upload->initialize($upload_config);
+			$foto_ktp_upload = $this->upload->do_upload('foto_ktp');
+			$fotoktp = $this->session->userdata('foto_ktp');
+			if ($foto_ktp_upload) {
+				@unlink($path . $fotoktp);
+				$foto_ktp = $this->upload->data();
+				$fotoktp = $foto_ktp['file_name'];
+			} else {
+				$this->session->set_flashdata('eror_input_file', 'eror_input_file');
+			}
+
+			// Upload dan simpan foto KK
+			$upload_config['file_name'] = $nama . '_kk';
+			$this->upload->initialize($upload_config);
+			$foto_kk_upload = $this->upload->do_upload('foto_kk');
+			$fotokk = $this->session->userdata('foto_kk');
+			if ($foto_kk_upload) {
+				@unlink($path . $fotokk);
+				$foto_kk = $this->upload->data();
+				$fotokk = $foto_kk['file_name'];
+			} else {
+				$this->session->set_flashdata('eror_input_file', 'eror_input_file');
+				$fotokk = $this->session->userdata('foto_kk');
+			}
+
+			// Upload dan simpan foto Surat
+			$upload_config['file_name'] = $nama . '_surat';
+			$this->upload->initialize($upload_config);
+			$foto_surat_upload = $this->upload->do_upload('foto_surat');
+			$fotoSurat = $this->session->userdata('foto_surat');
+			if ($foto_surat_upload) {
+				@unlink($path . $fotoSurat);
+				$foto_surat = $this->upload->data();
+				$fotoSurat = $foto_surat['file_name'];
+			} else {
+				$this->session->set_flashdata('eror_input_file', 'eror_input_file');
+				$fotoSurat = $this->session->userdata('foto_surat');
+			}
+
+			// Data untuk update
+			$id_user = $this->session->userdata('id_user');
+			$nomor = $this->m_User_detail->hitung($id_user);
+			$tanggal_daftar = date('dmy');
+			$nomor = sprintf("%03d", $nomor);
+			$nomor_pendaftaran = $tanggal_daftar . $nomor;
+
+			$nama = $this->input->post('nama_lengkap');
+			$nik = $this->input->post('nik');
+			$tempatLahir = $this->input->post('tempat_lahir');
+			$tanggalLahir = $this->input->post('tanggal_lahir');
+			$umur = $this->input->post('umur');
+			$jenisKelamin = $this->input->post('jenis_kelamin');
+			$agama = $this->input->post('agama');
+			$pendidikan = $this->input->post('pendidikan');
+			$pekerjaan = $this->input->post('pekerjaan');
+			$nomorTelepon = $this->input->post('nomor_telepon');
+			$provinsi = $this->input->post('provinsi');
+			$kota = $this->input->post('kota');
+			$kecamatan = $this->input->post('kecamatan');
+			$kelurahan = $this->input->post('kelurahan');
+			$alamat = $this->input->post('alamat');
+			$pernikahanKe = $this->input->post('pernikahan_ke');
+			$tanggalPernikahan = $this->input->post('tanggal_pernikahan');
+			$tanggalPeriksa = $this->input->post('tanggal_periksa');
+
+
+			if ($provinsi == null) {
+				$provinsi = $this->session->userdata('provinsi');
+			}
+			if ($kota == null) {
+				$kota = $this->session->userdata('kota');
+			}
+			if ($kecamatan == null) {
+				$kecamatan = $this->session->userdata('kecamatan');
+			}
+			if ($kelurahan == null) {
+				$kelurahan = $this->session->userdata('kelurahan');
+			}
+			if ($fotoUser == null) {
+				$fotoUser = $this->session->userdata('foto_user');
+			}
+			if ($fotokk == null) {
+				$fotokk = $this->session->userdata('foto_kk');
+			}
+			if ($fotoktp == null) {
+				$fotoktp = $this->session->userdata('foto_ktp');
+			}
+			if ($fotoSurat == null) {
+				$fotoSurat = $this->session->userdata('foto_surat');
+			}
+
+			
+
+			$data_registered = date('Y-m-d');
+			$status = 1;
+			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered, $tanggalPeriksa);
+
+
+
+			$this->session->set_flashdata('input', 'input');
+			redirect('dashboard/view_catin_pemeriksaan');
+		}
+	}
+
+	public function kartu_kuning($id_user){
+		$data['user'] = $this->m_User_detail->get_user_detail_by_id($id_user)->result_array();
+        // echo var_dump($data);
+        // die();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->set_option('isRemoteEnabled', true);
+        $this->pdf->filename = "kartu_kendali.pdf";
+        $this->pdf->load_view('kartu_kendali_pdf', $data);
 	}
 
 	public function test()

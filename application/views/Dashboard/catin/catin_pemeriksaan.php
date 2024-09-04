@@ -164,7 +164,7 @@
 							<option value="PAUD" <?= ($this->session->userdata('pendidikan') == 'PAUD') ? 'selected' : ''; ?>>PAUD</option>
 							<option value="SD" <?= ($this->session->userdata('pendidikan') == 'SD') ? 'selected' : ''; ?>>SD</option>
 							<option value="SMP" <?= ($this->session->userdata('pendidikan') == 'SMP') ? 'selected' : ''; ?>>SMP</option>
-							<option value="SMP/SMK" <?= ($this->session->userdata('pendidikan') == 'SMP/SMK') ? 'selected' : ''; ?>>SMP/SMK</option>
+							<option value="SMA/SMK" <?= ($this->session->userdata('pendidikan') == 'SMA/SMK') ? 'selected' : ''; ?>>SMA/SMK</option>
 							<option value="S1" <?= ($this->session->userdata('pendidikan') == 'S1') ? 'selected' : ''; ?>>S1</option>
 							<option value="S2" <?= ($this->session->userdata('pendidikan') == 'S2') ? 'selected' : ''; ?>>S2</option>
 							<option value="S3" <?= ($this->session->userdata('pendidikan') == 'S3') ? 'selected' : ''; ?>>S3</option>
