@@ -6,14 +6,30 @@ body {
 	padding: 0;
 	font-family: 'Inter', sans-serif;
 	background-color: white;
-	overflow-y: hidden;
+	
+}
+button[type="submit"] {
+	background-color: #015D67;
+	color: white;
+	border: 2px solid #015D67;
+	border-radius: 5px;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
+	margin-top: 30px;
+}
+
+button[type="submit"]:hover {
+	background-color: white;
+	color: #015D67;
 }
 
 @media (max-width: 1536px) {
 	body {
 		width: 100%;
 		height: auto;
-		overflow-y:unset;
+		overflow-y:hidden;
 	}
 	
 	.container_admin {
@@ -215,7 +231,7 @@ body {
 	
 	.catin-image {
 		width: 100px;
-		height: 120px;
+		height: 100px;
 		border-radius: 50%;
 	}
 	
@@ -492,7 +508,8 @@ body {
 @media (max-width: 1390px) {
 	body {
 		width: 100%;
-		overflow-y:auto;
+		/* overflow-y:hidden;  */
+		/* overflow-x:hidden; */
 	}
 
 	.container_admin {
@@ -981,7 +998,7 @@ body {
 		padding: 0;
 		font-family: 'Inter', sans-serif;
 		background-color: white;
-		overflow: auto;
+		overflow: hidden;
 		overflow-x: hidden;
 		width: 100%;
 
@@ -1032,7 +1049,7 @@ body {
 		align-items: right;
 		/* Menyelaraskan item secara vertikal di tengah */
 
-		width: 200px;
+		width: 100px;
 	}
 
 	.profile-img {
@@ -1557,7 +1574,7 @@ body {
 		font-family: 'Inter', sans-serif;
 		background-color: white;
 		overflow: auto;
-		overflow-x: hidden;
+		/* overflow-x: hidden; */
 		width: 100%;
 
 

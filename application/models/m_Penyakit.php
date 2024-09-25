@@ -52,8 +52,38 @@ class m_Penyakit extends CI_Model
 		$keyword = strtolower($keyword);
 		$this->db->like('LOWER(kode)', $keyword);
 		$this->db->or_like('LOWER(nama)', $keyword);
-		$this->db->or_like('LOWER(id_pemeriksaan)', $keyword);
+		// $this->db->or_like('LOWER(id_pemeriksaan)', $keyword);
 		$query = $this->db->get('penyakit');
 		return $query->result_array();
 	}
+
+	public function pagination_search($keyword, $limit = null, $start = null) {
+		$keyword = strtolower($keyword);
+		$this->db->like('LOWER(kode)', $keyword);
+		$this->db->or_like('LOWER(nama)', $keyword);
+		$this->db->or_like('LOWER(id_pemeriksaan)', $keyword);
+        if ($limit !== null && $start !== null) {
+            $this->db->limit($limit, $start);
+        }
+        $query = $this->db->get('penyakit');
+        return $query->result_array();
+    }
+
+	public function pagination_penyakit($limit, $start) {
+		$this->db->limit($limit, $start);
+		$query = $this->db->get('penyakit');
+        return $query->result_array();
+    }
+
+	public function count_all_penyakit() {
+        return $this->db->count_all('penyakit');
+    }
+	
+	public function count_search($keyword) {
+        $this->db->like('nama_gejala', $keyword);
+        return $this->db->count_all_results('gejala');
+    }
+
+	
+
 }

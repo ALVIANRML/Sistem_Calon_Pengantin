@@ -280,8 +280,8 @@ class Dashboard extends CI_Controller
 				'upload_path' => $path,
 				'allowed_types' => 'jpg|png|jpeg|gif',
 				'max_size' => '100000',  // 20MB max
-				'max_width' => '720', // pixel
-				'max_height' => '720' // pixel
+				'max_width' => '100000', // pixel
+				'max_height' => '100000' // pixel
 			];
 
 			// Upload dan simpan foto user

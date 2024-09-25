@@ -145,7 +145,7 @@
 		</div>
 		<div class="container-sidebar-dashboard-admin">
 			<p>NAVIGASI</p>
-			<a href="<?= base_url('dashboard_bnn/view_bnn') ?>">
+			<a href="">
 				<div class="menu location-menu">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="Frame">
@@ -180,26 +180,12 @@
 						<p class="judul-card-dashboard">Data Catin</p>
 						<p class="jumlah-card-dashboard"><?= $this->session->userdata('data_catin') ?></p>
 					</div>
-					<a href="<?= base_url('dashboard_admin/view_data_catin') ?>" style="cursor:pointer">
+					<a href="<?= base_url('dashboard_bnn/view_data') ?>" style="cursor:pointer">
 						<p class="selengkapnya-text">Selengkapnya ></p>
 					</a>
 				</div>
-				<div class="card-dashboard" id="hijau">
-					<img class="logo" src="<?= base_url('assets/') ?>img/printer.svg" alt="">
-					<div class="container-judul-jumlah">
-						<p class="judul-card-dashboard">Cetak Kartu</p>
-						<p class="jumlah-card-dashboard"><?= $this->session->userdata('cetak_kartu') ?></p>
-					</div>
-					<p class="selengkapnya-text">Selengkapnya ></p>
-				</div>
-				<div class="card-dashboard" id="merah">
-					<img class="logo" src="<?= base_url('assets/img/warning.svg') ?>" alt="">
-					<div class="container-judul-jumlah">
-						<p class="judul-card-dashboard">Data Catin Beresiko Stunting</p>
-						<p class="jumlah-card-dashboard"><?= $this->session->userdata('catin_bermasalah') ?></p>
-					</div>
-					<p class="selengkapnya-text">Selengkapnya ></p>
-				</div>
+				
+				
 				<div class="card-dashboard" id="merah">
 					<img class="logo" src="<?= base_url('assets/img/narkobski.svg') ?>" alt="">
 					<div class="container-judul-jumlah">
@@ -208,14 +194,7 @@
 					</div>
 					<p class="selengkapnya-text">Selengkapnya ></p>
 				</div>
-				<div class="card-dashboard" id="merah">
-					<img class="logo" src="<?= base_url('assets/img/hiv.svg') ?>" alt="">
-					<div class="container-judul-jumlah">
-						<p class="judul-card-dashboard">Data Catin Beresiko HIV</p>
-						<p class="jumlah-card-dashboard"><?= $this->session->userdata('catin_bermasalah') ?></p>
-					</div>
-					<p class="selengkapnya-text">Selengkapnya ></p>
-				</div>
+				
 			</div>
 			
 			<div class="copyright-text">

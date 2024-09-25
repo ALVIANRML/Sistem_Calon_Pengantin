@@ -4,7 +4,7 @@ class m_User_detail extends CI_Model
 
 
 
-	public function all()
+	public function all($limit, $start)
 	{
 
 		$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
@@ -12,6 +12,21 @@ class m_User_detail extends CI_Model
 		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
 		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
 		$this->db->where('role', 5);
+		$this->db->where('data_registered IS NOT NULL');
+		$this->db->limit($limit, $start);
+		$queryHasilDiagnosa = $this->db->get();
+		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
+		return $resultHasilDiagnosa;
+	}
+	public function all_count()
+	{
+
+		$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
+		$this->db->from('user_detail'); // Tabel utama
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
+		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
+		$this->db->where('role', 5);
+		$this->db->where('data_registered IS NOT NULL');
 		$queryHasilDiagnosa = $this->db->get();
 		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
 		return $resultHasilDiagnosa;
@@ -31,37 +46,117 @@ class m_User_detail extends CI_Model
 		return $query;
 	}
 
-
-
-	public function get_by_data_registered($tanggal)
+	public function get_by_data_registered($tanggal, $limit, $start)
 	{
-
-
 		$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
 		$this->db->from('user_detail'); // Tabel utama
 		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
 		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
+		$this->db->where('data_registered IS NOT NULL');
 		$this->db->where('data_registered', $tanggal);
-		$this->db->where('nik IS NOT NULL');
 		$this->db->where('role', 5);
+		$this->db->limit($limit, $start);
 		$queryHasilDiagnosa = $this->db->get();
 		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
 		return $resultHasilDiagnosa;
 	}
 
-	public function get_by_id_and_tanggal($ids, $tanggal)
-{
-    $this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
-    $this->db->from('user_detail'); // Tabel utama
-    $this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
-    $this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
-    $this->db->where('role', 5);
-    $this->db->where_in('user_detail.id_user_detail', $ids); // Menambahkan nama tabel untuk id_user_detail
-    $this->db->where('data_registered', $tanggal);
-    $queryHasilDiagnosa = $this->db->get();
-    $resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
-    return $resultHasilDiagnosa;
-}
+	public function get_by_data_registered_count($tanggal)
+	{
+		$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
+		$this->db->from('user_detail'); // Tabel utama
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
+		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
+		$this->db->where('data_registered IS NOT NULL');
+		$this->db->where('data_registered', $tanggal);
+		$this->db->where('role', 5);
+		$queryHasilDiagnosa = $this->db->get();
+		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
+		return $resultHasilDiagnosa;
+	}
+	
+	public function get_by_id_and_tanggal_count($ids, $tanggal)
+	{
+		$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
+		$this->db->from('user_detail'); // Tabel utama
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
+		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
+		$this->db->where('role', 5);
+		$this->db->where_in('data_registered IS NOT NULL');
+		$this->db->where_in('data_registered', $tanggal);
+		$this->db->where_in('user_detail.id_user_detail', $ids); // Menambahkan nama tabel untuk id_user_detail
+		$queryHasilDiagnosa = $this->db->get();
+		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
+		return $resultHasilDiagnosa;
+	}
+
+	public function get_by_id_and_tanggal($ids, $tanggal, $limit, $start)
+	{
+		$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
+		$this->db->from('user_detail'); // Tabel utama
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
+		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
+		$this->db->where('role', 5);
+		$this->db->where_in('data_registered IS NOT NULL');
+		$this->db->where_in('data_registered', $tanggal);
+		$this->db->where_in('user_detail.id_user_detail', $ids); // Menambahkan nama tabel untuk id_user_detail
+		$this->db->limit($limit, $start);
+		$queryHasilDiagnosa = $this->db->get();
+		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
+		return $resultHasilDiagnosa;
+	}
+
+	public function search($keyword, $limit, $start)
+	{
+		if (!$keyword) {
+			return null;
+		}
+		$keyword = strtolower($keyword);
+		$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
+		$this->db->from('user_detail'); // Tabel utama
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
+		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
+		$this->db->where('role', 5);
+		$this->db->where('user_detail.data_registered IS NOT NULL'); // Memastikan data_registered tidak NULL
+		$this->db->where('user_detail.nik IS NOT NULL'); // Memastikan nik tidak NULL
+		$this->db->group_start(); // Membuka grup untuk or_like
+		$this->db->like('LOWER(user_detail.nama_lengkap)', $keyword);
+		$this->db->or_like('LOWER(user_detail.nik)', $keyword);
+		$this->db->or_like('LOWER(users.nama)', $keyword);
+		$this->db->or_like('LOWER(user_detail.nomor_telepon)', $keyword); // Menambahkan nama tabel untuk nomor_telepon
+		$this->db->or_like('LOWER(user_detail.no_pendaftaran)', $keyword);
+		$this->db->group_end(); // Menutup grup untuk or_like
+		$this->db->limit($limit, $start);
+		$queryHasilDiagnosa = $this->db->get();
+		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
+		return $resultHasilDiagnosa;
+	}
+
+	public function search_count($keyword)
+	{
+		if (!$keyword) {
+			return null;
+		}
+		$keyword = strtolower($keyword);
+		$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
+		$this->db->from('user_detail'); // Tabel utama
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
+		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
+		$this->db->where('role', 5);
+		$this->db->where('user_detail.data_registered IS NOT NULL'); // Memastikan data_registered tidak NULL
+		$this->db->where('user_detail.nik IS NOT NULL'); // Memastikan nik tidak NULL
+		$this->db->group_start(); // Membuka grup untuk or_like
+		$this->db->like('LOWER(user_detail.nama_lengkap)', $keyword);
+		$this->db->or_like('LOWER(user_detail.nik)', $keyword);
+		$this->db->or_like('LOWER(users.nama)', $keyword);
+		$this->db->or_like('LOWER(user_detail.nomor_telepon)', $keyword); // Menambahkan nama tabel untuk nomor_telepon
+		$this->db->or_like('LOWER(user_detail.no_pendaftaran)', $keyword);
+		$this->db->group_end(); // Menutup grup untuk or_like
+		$queryHasilDiagnosa = $this->db->get();
+		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
+		return $resultHasilDiagnosa;
+	}
+
 
 	public function update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered, $tanggalPeriksa)
 	{
@@ -179,27 +274,6 @@ class m_User_detail extends CI_Model
 		$this->db->delete('user_detail', array('id_user_detail' => $user_id));
 	}
 
-	public function search($keyword)
-{
-    if (!$keyword) {
-        return null;
-    }
-
-    // Convert keyword to lowercase
-    $keyword = strtolower($keyword);
-	$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
-	$this->db->from('user_detail'); // Tabel utama
-	$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
-	$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
-	$this->db->where('role', 5);
-    $this->db->like('LOWER(user_detail.nama_lengkap)', $keyword);
-    $this->db->or_like('LOWER(user_detail.nik)', $keyword);
-    $this->db->or_like('LOWER(user_detail.nomor_telepon)', $keyword); // Menambahkan nama tabel untuk nomor_telepon
-    $this->db->or_like('LOWER(user_detail.no_pendaftaran)', $keyword);
-    $queryHasilDiagnosa = $this->db->get();
-		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
-		return $resultHasilDiagnosa;
-}
 
 	public function getLaporanByDateRange($tanggal_awal, $tanggal_akhir)
 	{
@@ -220,47 +294,53 @@ class m_User_detail extends CI_Model
 		return $query->result_array();
 	}
 
-	public function update_data_verifikasi($id, $verifikasi){
+	public function update_data_verifikasi($id, $verifikasi)
+	{
 		$this->db->where('id_user_detail', $id);
-		$this->db->update('user_detail',['id_status_verifikasi' => $verifikasi]);
-	}
-	
-	public function update_kesehatan_verifikasi($id, $verifikasi){
-		$this->db->where('id_user_detail', $id);
-		$this->db->update('user_detail',['id_status_kesehatan' => $verifikasi]);
+		$this->db->update('user_detail', ['id_status_verifikasi' => $verifikasi]);
 	}
 
-	public function update_bnn_verifikasi($id, $verifikasi){
+	public function update_kesehatan_verifikasi($id, $verifikasi)
+	{
 		$this->db->where('id_user_detail', $id);
-		$this->db->update('user_detail',['id_status_bnn' => $verifikasi]);
+		$this->db->update('user_detail', ['id_status_kesehatan' => $verifikasi]);
 	}
 
-	public function update_psikolog_verifikasi($id, $verifikasi){
+	public function update_bnn_verifikasi($id, $verifikasi)
+	{
 		$this->db->where('id_user_detail', $id);
-		$this->db->update('user_detail',['id_status_psikolog' => $verifikasi]);
+		$this->db->update('user_detail', ['id_status_bnn' => $verifikasi]);
 	}
-	
-	public function update_data_aktif($id, $aktif){
+
+	public function update_psikolog_verifikasi($id, $verifikasi)
+	{
 		$this->db->where('id_user_detail', $id);
-		$this->db->update('user_detail',['id_status_aktif' => $aktif]);
+		$this->db->update('user_detail', ['id_status_psikolog' => $verifikasi]);
 	}
-	
-	public function hapus_data($id){
+
+	public function update_data_aktif($id, $aktif)
+	{
+		$this->db->where('id_user_detail', $id);
+		$this->db->update('user_detail', ['id_status_aktif' => $aktif]);
+	}
+
+	public function hapus_data($id)
+	{
 		// Hapus dari tabel 'user_detail'
 		$this->db->where('id_user_detail', $id);
 		$this->db->delete('user_detail');
-	
+
 		// Hapus dari tabel 'users'
 		$this->db->where('id_user_detail', $id);
 		$this->db->delete('users');
 	}
 
 	public function get_user_detail_by_id($id_user)
-    {
-        $hasil = $this->db->query("SELECT * FROM users 
+	{
+		$hasil = $this->db->query("SELECT * FROM users 
                                     JOIN user_detail ON users.id_user_detail = user_detail.id_user_detail
                                     JOIN hasil_diagnosa ON users.id_user_detail = hasil_diagnosa.user_id 
                                     WHERE  id_user='$id_user'");
-        return $hasil;
-    }
+		return $hasil;
+	}
 }

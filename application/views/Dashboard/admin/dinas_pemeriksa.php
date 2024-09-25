@@ -10,6 +10,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/dinas_pemeriksa.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/pagination.css') ?>" />
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 </head>
 
@@ -139,7 +140,7 @@
 
 				<div class="container-tabel">
 					<div class="baris-show-entries">
-						<div class="show-entries">Show 10 entries</Show>
+						<div class="show-entries"></Show>
 						</div>
 						<div class="cari-data">
 							<form action="<?= base_url('dashboard_admin/view_dinas_pemeriksaan') ?>" method="get">
@@ -247,6 +248,9 @@
 							</div>
 						</tbody>
 					</table>
+					<div>
+						<?= $pagination; ?>
+					</div>
 				</div>
 				<div class="copyright-text">
 					Copyright © 2024 DPPKB Kota Tebing. Hak cipta dilindungi
