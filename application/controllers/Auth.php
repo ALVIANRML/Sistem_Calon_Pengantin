@@ -24,14 +24,13 @@ class Auth extends CI_Controller
 		$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
 		$todaytes = date('Y-m-d');
 			$tes =$this->m_User_detail->hitung_kuota($todaytes);
-			$tes =7;
 			$this->session->set_userdata('kuota', $tes );
-			if ($tes == 10){
+			if ($tes == 50){
 				$id_status = 0;
 				$this->m_Tanggal_Pemeriksaan->update_id_status($id_tanggal, $id_status);
 			}
-			else if ($tes < 10 && $tes >= 5){
-				$tes = 10 - $tes;
+			else if ($tes < 50 && $tes >= 40){
+				$tes = 50 - $tes;
 				$this->session->set_userdata('sisa_kuota', $tes );
 			}
 			$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);

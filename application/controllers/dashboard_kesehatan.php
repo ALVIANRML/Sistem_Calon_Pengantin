@@ -19,7 +19,9 @@ class Dashboard_kesehatan extends CI_Controller
 	}
 
 	public function view_kesehatan()
-	{
+	{	
+		$dataCatin = $this->m_User_detail->count_data_catin();
+		$this->session->set_userdata('data_catin', $dataCatin);
 		$this->load->view('Kesehatan/dashboard_kesehatan');
 	}
 
@@ -42,12 +44,13 @@ class Dashboard_kesehatan extends CI_Controller
 				$data['user_detail'] = $this->m_User_detail->get_by_id_and_tanggal($id, $tanggal);
 			} else {
 				$data['user_detail'] = $keyword;
+				// 	var_dump($data);
+				// exit;
 			}
 		} else {
 			if ($tanggal == null) {
 				$data['user_detail'] = $this->m_User_detail->all();
-				// var_dump($data);
-				// exit;
+			
 			} else {
 				$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal);
 			}
@@ -83,5 +86,9 @@ class Dashboard_kesehatan extends CI_Controller
 		$response['id'] = $this->m_Hasil_Diagnosa->get_by_id($id);
 
 		echo json_encode($response);
+	}
+
+	public function periksa(){
+
 	}
 }

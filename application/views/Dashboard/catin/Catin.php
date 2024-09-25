@@ -34,6 +34,15 @@
 	$id_pemeriksaan_psikolog = $this->session->userdata('kuesioner_kepribadian');
 	$id_pemeriksaan_survei = $this->session->userdata('skrining_kesehatan');
 	$tanggal_periksa_catin = $this->session->userdata('tanggal_periksa');
+	$fotoProfil = $this->session->userdata('foto_user'); 
+
+	if ($fotoProfil == null){
+		$fotoProfil = base_url('assets/img/profilNull.svg');
+	} else{
+		$fotoProfil = base_url('uploads/photo/');$this->session->userdata('foto_user'); 
+	}
+	 $fotoProfil = ($fot == null) ? '' : '<td><span class="status-tabel" style="background-color: #DC3545">Belum diverifikasi</span></td>';
+								
 
 	// Memastikan bahwa $tanggal_periksa_catin tidak null sebelum memformat
 	if ($tanggal_periksa_catin) {
@@ -53,7 +62,7 @@
 			<nav class="navbar">
 				<ul>
 					<div class="navbar_profil" style="width: 15vw; margin-right:0px">
-						<img src="<?= base_url('uploads/photo/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
+					<img src="<?= base_url('uploads/photo/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
 						<div class="profile-text">
 							<span>Halo,</span><br> <!-- Menambahkan break line -->
 							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;">
@@ -106,7 +115,7 @@
 				<div class="informasi">
 					<div class="profil">
 						<div class="img-profil">
-							<img src="<?= base_url('uploads/photo/'); ?><?= $this->session->userdata('foto_user') ?>" alt="Profile Image" class="catin-image">
+							<img src="<?= base_url('uploads/photo/'); ?><?= $this->session->userdata('foto_user') ?>" class="catin-image">
 						</div>
 						<p style="text-align: center; margin: 0;"><b><?= $nama  ?></b></p>
 						<div class="biodata" style="font-size: 12.5px;">

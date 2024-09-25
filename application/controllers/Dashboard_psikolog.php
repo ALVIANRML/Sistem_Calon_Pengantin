@@ -28,7 +28,8 @@ class Dashboard_psikolog extends CI_Controller
 
 	public function view_psikolog()
 	{
-
+		$dataCatin = $this->m_User_detail->count_data_catin();
+		$this->session->set_userdata('data_catin', $dataCatin);
 		$this->load->view('Dashboard/psikolog/psikolog');
 	}
 
