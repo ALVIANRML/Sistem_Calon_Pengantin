@@ -10,6 +10,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/kesehatan/data.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/pagination.css') ?>" />
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 </head>
 
@@ -376,7 +377,7 @@
 					</div>
 
 				</div>
-				<!--  -->
+				<?= $pagination?>
 				<div class="copyright-text">
 					Copyright © 2024 DPPKB Kota Tebing. Hak cipta dilindungi
 				</div>

@@ -5,39 +5,29 @@ class m_Nilai_Pakar extends CI_Model
 	{
 		$query = $this->db->get('gejala_penyakit');
 		return $query->result_array();
-		// $this->db->select('*, penyakit.id as id_penyakit, penyakit.kode as kode_penyakit');
-		// $this->db->from('penyakit');
-		// $this->db->select('*');
-		// $this->db->from('gejala');
-		// $query = $this->db->get();
-		// return $query->result_array();
 	}
 
 
-	public function nilai($id_gejala, $id_penyakit, $id)
+	public function nilai_count()
 	{
-		// Mengambil data penyakit berdasarkan id_penyakit
-		$this->db->select('*, penyakit.id as id_penyakit, penyakit.kode as kode_penyakit');
-		$this->db->from('penyakit');
-		$this->db->where('id', $id_penyakit);
-		$query_penyakit = $this->db->get();
-		$result_penyakit = $query_penyakit->result_array();
-
-		// Mengambil data gejala berdasarkan id_gejala
-		$this->db->select('*');
-		$this->db->from('gejala');
-		$this->db->where('id', $id_gejala);
-		$query_gejala = $this->db->get();
-		$result_gejala = $query_gejala->result_array();
-
-		$this->db->select('*');
+		$this->db->select('*, penyakit.id as id_penyakit, penyakit.kode as kode_penyakit,penyakit.nama as nama_penyakit');
 		$this->db->from('gejala_penyakit');
-		$this->db->where('id', $id);
-		$query_gejala_penyakit = $this->db->get();
-		$result_gejala_penyakit = $query_gejala_penyakit->result_array();
-
-		// Menggabungkan hasil query menjadi satu array
-		return array_merge($result_penyakit, $result_gejala, $result_gejala_penyakit);
+		$this->db->join('penyakit', 'penyakit.id = gejala_penyakit.penyakit_id');
+		$this->db->join('gejala', 'gejala.id = gejala_penyakit.gejala_id');
+		$query = $this->db->get();
+		$result = $query->result_array();
+		return $result;
+	}
+	public function nilai($limit, $start)
+	{
+		$this->db->select('*, penyakit.id as id_penyakit, penyakit.kode as kode_penyakit,penyakit.nama as nama_penyakit');
+		$this->db->from('gejala_penyakit');
+		$this->db->join('penyakit', 'penyakit.id = gejala_penyakit.penyakit_id');
+		$this->db->join('gejala', 'gejala.id = gejala_penyakit.gejala_id');
+		$this->db->limit($limit, $start);
+		$query = $this->db->get();
+		$result = $query->result_array();
+		return $result;
 	}
 
 	public function delete_by_id($id)
@@ -70,7 +60,7 @@ class m_Nilai_Pakar extends CI_Model
 		]);
 	}
 
-	public function search($keyword)
+	public function search_count($keyword)
 	{
 		if (!$keyword) {
 			return null;
@@ -80,7 +70,7 @@ class m_Nilai_Pakar extends CI_Model
 		$keyword = strtolower($keyword);
 
 		// Perform the JOIN between kelompok_gejala and gejala
-		$this->db->select('gejala_penyakit.*, gejala.nama_gejala, penyakit.nama');
+		$this->db->select('*, penyakit.id as id_penyakit, penyakit.kode as kode_penyakit,penyakit.nama as nama_penyakit');
 		$this->db->from('gejala_penyakit');
 		$this->db->join('gejala', 'gejala_penyakit.gejala_id = gejala.id');
 		$this->db->join('penyakit', 'gejala_penyakit.penyakit_id = penyakit.id');
@@ -93,5 +83,31 @@ class m_Nilai_Pakar extends CI_Model
 		$query = $this->db->get();
 
 		return $query->result_array();
+	}
+	public function search($keyword,$limit, $start)
+	{
+		if (!$keyword) {
+			return null;
+		}
+
+		// Convert keyword to lowercase
+		$keyword = strtolower($keyword);
+
+		// Perform the JOIN between kelompok_gejala and gejala
+		$this->db->select('*, penyakit.id as id_penyakit, penyakit.kode as kode_penyakit,penyakit.nama as nama_penyakit');
+		$this->db->from('gejala_penyakit');
+		$this->db->join('gejala', 'gejala_penyakit.gejala_id = gejala.id');
+		$this->db->join('penyakit', 'gejala_penyakit.penyakit_id = penyakit.id');
+
+		// Apply LIKE on the joined column (nama_gejala)
+		$this->db->like('LOWER(gejala.nama_gejala)', $keyword);
+		$this->db->or_like('LOWER(penyakit.nama)', $keyword);
+
+		// Optionally, add more conditions or like clauses here if needed
+		$this->db->limit($limit, $start);
+		$query = $this->db->get();
+
+		$result = $query->result_array();
+		return $result;
 	}
 }

@@ -16,10 +16,11 @@ class Dashboard_kesehatan extends CI_Controller
 		$this->load->model('m_kelompok_gejala');
 		$this->load->model('m_Hasil_Diagnosa');
 		$this->load->model('m_Nilai_Pakar');
+		$this->load->library('pagination');
 	}
 
 	public function view_kesehatan()
-	{	
+	{
 		$dataCatin = $this->m_User_detail->count_data_catin();
 		$this->session->set_userdata('data_catin', $dataCatin);
 		$this->load->view('Kesehatan/dashboard_kesehatan');
@@ -30,31 +31,79 @@ class Dashboard_kesehatan extends CI_Controller
 		$keyword = $this->input->get('search');
 		$tanggal = $this->session->userdata('kesehatan_tanggal_filter');
 
-		// var_dump($keyword);
-		// exit;
+		$config = array();
+		$config['base_url'] = base_url('dashboard_admin/data_kesehatan'); // URL untuk halaman pagination
+		$config['per_page'] = 2; // Jumlah data per halaman
+		$config['uri_segment'] = 3; // Segmen URI untuk mengetahui halaman
+		$config['num_links'] = 5; // Jumlah link angka halaman
 		if ($keyword != null) {
-			$keyword = $this->m_User_detail->search($keyword);
+			$search = $this->m_User_detail->search($keyword, $config['per_page'], $this->uri->segment(3));
+			$count = $this->m_User_detail->search_count($keyword);
+			$config['base_url'] = base_url('dashboard_kesehatan/data_kesehatan');
+			$config['suffix'] = '?search=' . urlencode($keyword); // Tambahkan query string di akhir setiap link
+			$config['first_url'] = $config['base_url'] . $config['suffix'];
+
 			// Ambil ID dari hasil pencarian
 			$id = array_map(function ($user) {
 				return $user['id_user_detail'];
-			}, $keyword);
-
+			}, $count);
 			if ($tanggal != null) {
-				// Panggil model dengan ID array dan tanggal
-				$data['user_detail'] = $this->m_User_detail->get_by_id_and_tanggal($id, $tanggal);
+				$config['base_url'] = base_url('dashboard_kesehatan/data_kesehatan');
+				$config['suffix'] = '?search=' . urlencode($keyword); // Tambahkan query string di akhir setiap link
+				$config['first_url'] = $config['base_url'] . $config['suffix'];
+				$data['id_user_detail'] = $this->m_User_detail->get_by_id_and_tanggal_count($id, $tanggal);
+				$count = count((array) $data['id_user_detail']);
+				$data['user_detail'] = $this->m_User_detail->get_by_id_and_tanggal($id, $tanggal, $config['per_page'], $this->uri->segment(3));
 			} else {
-				$data['user_detail'] = $keyword;
-				// 	var_dump($data);
-				// exit;
+				$data['user_detail'] = $search;
+				$count = count((array) $count);
 			}
 		} else {
 			if ($tanggal == null) {
-				$data['user_detail'] = $this->m_User_detail->all();
-			
+				$config['base_url'] = base_url('dashboard_kesehatan/data_kesehatan');
+				$data['id_user_detail'] = $this->m_User_detail->all_count();
+				$count = count((array) $data['id_user_detail']);
+				$data['user_detail'] = $this->m_User_detail->all($config['per_page'], $this->uri->segment(3));
 			} else {
-				$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal);
+				$config['base_url'] = base_url('dashboard_kesehatan/data_kesehatan');
+				$data['id_user_detail'] = $this->m_User_detail->get_by_data_registered_count($tanggal);
+				$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal, $config['per_page'], $this->uri->segment(3));
+				$count = count((array) $data['id_user_detail']);
 			}
 		}
+		$config['full_tag_open'] = '<nav><ul class="pagination">';
+		$config['full_tag_close'] = '</ul></nav>';
+
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
+
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
+
+		$config['next_link'] = '&raquo;';
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
+
+		$config['prev_link'] = '&laquo;';
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link">';
+		$config['cur_tag_close'] = '</a></li>';
+
+		$config['num_tag_open'] = '<li class="page-item">';
+		$config['num_tag_close'] = '</li>';
+
+		$config['attributes'] = array('class' => 'page-link');
+		$config['total_rows'] = $count;
+		$this->pagination->initialize($config);
+
+		$data['pagination'] = $this->pagination->create_links();
+
+
+
 		$this->load->view('Kesehatan/data_kesehatan', $data);
 	}
 
@@ -88,7 +137,5 @@ class Dashboard_kesehatan extends CI_Controller
 		echo json_encode($response);
 	}
 
-	public function periksa(){
-
-	}
+	public function periksa() {}
 }
