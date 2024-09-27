@@ -34,7 +34,7 @@ class m_kelompok_gejala extends CI_Model
 		]);
 	}
 
-	public function search($keyword)
+	public function search_count($keyword)
 	{
 		if (!$keyword) {
 			return null;
@@ -51,9 +51,7 @@ class m_kelompok_gejala extends CI_Model
 		$keyword = strtolower($keyword);
 		$this->db->like('LOWER(kelompok_gejala_id)', $keyword);
 		$this->db->or_like('LOWER(keterangan)', $keyword);
-        if ($limit !== null && $start !== null) {
             $this->db->limit($limit, $start);
-        }
 		$query = $this->db->get('kelompok_gejala');
         return $query->result_array();
     }

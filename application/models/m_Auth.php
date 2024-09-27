@@ -107,7 +107,18 @@ class m_Auth extends CI_Model
 
 	}
 
-	public function get_by_id()
+	public function all($limit, $start)
+	{
+		// Menggunakan where_in untuk filter berdasarkan array
+		$this->db->select('*, users.tanggal_lahir as tanggalLahir, users.nomor_telepon as nomorTelepon');
+		$this->db->from('users');
+		$this->db->join('user_detail', 'user_detail.id_user_detail = users.id_user');
+		$this->db->where_in('role', [1, 2, 3, 4]);
+		$this->db->limit($limit, $start);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	public function all_count()
 	{
 		// Menggunakan where_in untuk filter berdasarkan array
 		$this->db->select('*, users.tanggal_lahir as tanggalLahir, users.nomor_telepon as nomorTelepon');
@@ -118,7 +129,20 @@ class m_Auth extends CI_Model
 		return $query->result_array();
 	}
 
-	public function search_user_pemeriksa($keyword)
+	public function search_user_pemeriksa($keyword,$limit, $start)
+	{
+		$this->db->where_in('role', [1, 2, 3, 4]);
+		$this->db->select('*, users.tanggal_lahir as tanggalLahir, users.nomor_telepon as nomorTelepon');
+		$this->db->from('users');
+		$this->db->join('user_detail', 'user_detail.id_user_detail = users.id_user');
+		$this->db->like('nama', $keyword);
+		$this->db->or_like('nama_lengkap', $keyword);
+		$this->db->limit($limit, $start);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function search_user_pemeriksa_count($keyword)
 	{
 		$this->db->where_in('role', [1, 2, 3, 4]);
 		$this->db->select('*, users.tanggal_lahir as tanggalLahir, users.nomor_telepon as nomorTelepon');

@@ -986,10 +986,10 @@
 								</form>
 					</div>
 				<?php endforeach ?>
-			</table>
-		</div>
-		<div class="overlay" id="overlay9"></div>
-		<div class="popup" id="popup9">
+				</table>
+				</div>
+				<div class="overlay" id="overlay9"></div>
+				<div class="popup" id="popup9">
 					<span class="close-btn" onclick="closePopup9()">&times;</span>
 					<h2>Tambah Data gejala</h2>
 					<hr style="border-color: #015D67;">
@@ -1003,14 +1003,14 @@
 							<div class="input-form">
 								<input type="date" id="tanggal_akhir" class="tambah-data" name="tanggal_akhir" required>
 							</div>
-							
+
 
 							<button type="submit" onclick="closePopup2()">Submit</button>
 						</div>
 					</form>
 				</div>
 			</div>
-			<?= $pagination?>
+			<?= $pagination ?>
 			<div class="copyright-text" style="bottom: 0%">
 				Copyright © 2024 DPPKB Kota Tebing. Hak cipta dilindungi
 			</div>
