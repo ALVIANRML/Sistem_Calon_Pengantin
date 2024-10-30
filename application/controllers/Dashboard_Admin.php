@@ -54,15 +54,14 @@ class Dashboard_Admin extends CI_Controller
 		$keyword = $this->input->get('search');
 		$tanggal = $this->session->userdata('admin_tanggal_filter');
 		$config = array();
-		// $config['base_url'] = base_url('dashboard_admin/view_data_catin'); // URL untuk halaman pagination
-		$config['per_page'] = 1; // Jumlah data per halaman
+		$config['base_url'] = base_url('dashboard_admin/view_data_catin');
+		$config['per_page'] = 5; // Jumlah data per halaman
 		$config['uri_segment'] = 3; // Segmen URI untuk mengetahui halaman
 		$config['num_links'] = 5; // Jumlah link angka halaman
-
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		if ($keyword != null) {
-			$search = $this->m_User_detail->search($keyword, $config['per_page'], $this->uri->segment(3));
+			$search = $this->m_User_detail->search($keyword, $config['per_page'], $page);
 			$count = $this->m_User_detail->search_count($keyword);
-			$config['base_url'] = base_url('dashboard_admin/view_data_catin');
 			$config['suffix'] = '?search=' . urlencode($keyword); // Tambahkan query string di akhir setiap link
 			$config['first_url'] = $config['base_url'] . $config['suffix'];
 
@@ -71,29 +70,30 @@ class Dashboard_Admin extends CI_Controller
 				return $user['id_user_detail'];
 			}, $count);
 			if ($tanggal != null) {
-				$config['base_url'] = base_url('dashboard_admin/view_data_catin');
+
 				$config['suffix'] = '?search=' . urlencode($keyword); // Tambahkan query string di akhir setiap link
 				$config['first_url'] = $config['base_url'] . $config['suffix'];
 				$data['id_user_detail'] = $this->m_User_detail->get_by_id_and_tanggal_count($id, $tanggal);
 				$count = count((array) $data['id_user_detail']);
-				$data['user_detail'] = $this->m_User_detail->get_by_id_and_tanggal($id, $tanggal, $config['per_page'], $this->uri->segment(3));
+				$data['user_detail'] = $this->m_User_detail->get_by_id_and_tanggal($id, $tanggal, $config['per_page'], $page);
 			} else {
 				$data['user_detail'] = $search;
 				$count = count((array) $count);
 			}
 		} else {
 			if ($tanggal == null) {
-				$config['base_url'] = base_url('dashboard_admin/view_data_catin');
+
 				$data['id_user_detail'] = $this->m_User_detail->all_count();
 				$count = count((array) $data['id_user_detail']);
-				$data['user_detail'] = $this->m_User_detail->all($config['per_page'], $this->uri->segment(3));
+				$data['user_detail'] = $this->m_User_detail->all($config['per_page'], $page);
 			} else {
-				$config['base_url'] = base_url('dashboard_admin/view_data_catin');
+
 				$data['id_user_detail'] = $this->m_User_detail->get_by_data_registered_count($tanggal);
-				$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal, $config['per_page'], $this->uri->segment(3));
+				$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal, $config['per_page'], $page);
 				$count = count((array) $data['id_user_detail']);
 			}
 		}
+		// Pagination configuration
 		$config['full_tag_open'] = '<nav><ul class="pagination">';
 		$config['full_tag_close'] = '</ul></nav>';
 
@@ -120,11 +120,13 @@ class Dashboard_Admin extends CI_Controller
 		$config['num_tag_close'] = '</li>';
 
 		$config['attributes'] = array('class' => 'page-link');
-		$config['total_rows'] = $count;
+		$config['total_rows'] = $count; // Total number of data
 		$this->pagination->initialize($config);
 
-		$data['pagination'] = $this->pagination->create_links();
+		// Add this line to calculate the starting number for row numbers (angka)
+		$data['start'] = $page;
 
+		$data['pagination'] = $this->pagination->create_links();
 
 		$this->load->view('Dashboard/admin/data_catin_admin', $data);
 	}
@@ -253,43 +255,6 @@ class Dashboard_Admin extends CI_Controller
 				'required' =>  'Nomor HP tidak boleh kosong',
 			]
 		);
-		// $kota = $this->input->post('provinsi');
-		// $this->form_validation->set_rules(
-		// 	'provinsi',
-		// 	'Provinsi',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Provinsi tidak boleh kosong',
-		// 	]
-
-		// );
-		// $this->form_validation->set_rules(
-		// 	'kota',
-		// 	'Kota',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Kota tidak boleh kosong',
-		// 	]
-		// );
-
-		// $this->form_validation->set_rules(
-		// 	'kecamatan',
-		// 	'Kecamatan',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Kecamatan tidak boleh kosong',
-		// 	]
-		// );
-
-		// $this->form_validation->set_rules(
-		// 	'kelurahan',
-		// 	'Kelurahan',
-		// 	'required|trim',
-		// 	[
-		// 		'required' => 'Kelurahan tidak boleh kosong',
-		// 	]
-		// );
-
 		$this->form_validation->set_rules(
 			'alamat',
 			'Alamat',
@@ -445,6 +410,8 @@ class Dashboard_Admin extends CI_Controller
 
 			$data_registered = date('Y-m-d');
 			$status = 1;
+			var_dump($status);
+			exit;
 			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered, $tanggalPeriksa);
 
 
@@ -664,24 +631,27 @@ class Dashboard_Admin extends CI_Controller
 
 	public function data_penyakit()
 	{
-
-		$keyword = $this->input->get('search');
+		$keyword = $this->input->post('input');
 
 		$config = array();
-		$config['base_url'] = base_url('dashboard_admin/data_penyakit'); // URL untuk halaman pagination
-		$config['per_page'] = 5; // Jumlah data per halaman
-		$config['uri_segment'] = 3; // Segmen URI untuk mengetahui halaman
-		$config['num_links'] = 5; // Jumlah link angka halaman
+		$config['base_url'] = base_url('dashboard_admin/data_penyakit'); // URL for pagination
+		$config['per_page'] = 5; // Number of items per page
+		$config['uri_segment'] = 3; // URI segment for pagination page number
+		$config['num_links'] = 5; // Number of pagination links
+
+		// Get the current page number
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
 		if ($keyword != null) {
-			// Jika ada keyword pencarian
-			$total_rows = $this->m_Penyakit->count_search($keyword); // Hitung total hasil pencarian
-			$data['id'] = $this->m_Penyakit->pagination_search($keyword, $config['per_page'], $this->uri->segment(3));
+			// If a search keyword is provided
+			$total_rows = $this->m_Penyakit->count_search($keyword); // Count search results
+			$data['id'] = $this->m_Penyakit->pagination_search($keyword, $config['per_page'], $page);
 		} else {
-			// Jika tidak ada keyword pencarian
-			$total_rows = $this->m_Penyakit->count_all_penyakit(); // Hitung total semua data
-			$data['id'] = $this->m_Penyakit->pagination_penyakit($config['per_page'], $this->uri->segment(3));
+			// If no search keyword is provided
+			$total_rows = $this->m_Penyakit->count_all_penyakit(); // Count all results
+			$data['id'] = $this->m_Penyakit->pagination_penyakit($config['per_page'], $page);
 		}
+		// Pagination configuration
 		$config['full_tag_open'] = '<nav><ul class="pagination">';
 		$config['full_tag_close'] = '</ul></nav>';
 
@@ -708,12 +678,16 @@ class Dashboard_Admin extends CI_Controller
 		$config['num_tag_close'] = '</li>';
 
 		$config['attributes'] = array('class' => 'page-link');
-		$config['total_rows'] = $total_rows; // Total data
+		$config['total_rows'] = $total_rows; // Total number of data
 		$this->pagination->initialize($config);
 
+		// Add this line to calculate the starting number for row numbers (angka)
+		$data['start'] = $page;
 		$data['pagination'] = $this->pagination->create_links();
-		$this->load->view('Dashboard/admin/data_penyakit', $data);
+		
+			$this->load->view('Dashboard/admin/data_penyakit', $data);
 	}
+
 
 	public function add_penyakit()
 	{
@@ -760,7 +734,7 @@ class Dashboard_Admin extends CI_Controller
 		$config['per_page'] = 5; // Jumlah data per halaman
 		$config['uri_segment'] = 3; // Segmen URI untuk mengetahui halaman
 		$config['num_links'] = 5; // Jumlah link angka halaman
-
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		if ($keyword != null) {
 			// Jika ada keyword pencarian
 			$config['base_url'] = base_url('dashboard_admin/data_gejala'); // Base URL tanpa query string
@@ -771,11 +745,11 @@ class Dashboard_Admin extends CI_Controller
 			$total_rows = $this->m_gejala->count_search($keyword);
 
 			// Dapatkan hasil pencarian dengan pagination
-			$data['id'] = $this->m_gejala->pagination_search($keyword, $config['per_page'], $this->uri->segment(3));
+			$data['id'] = $this->m_gejala->pagination_search($keyword, $config['per_page'], $page);
 		} else {
 			// Jika tidak ada keyword pencarian
 			$total_rows = $this->m_gejala->count_all_gejala(); // Hitung total semua data
-			$data['id'] = $this->m_gejala->pagination_gejala($config['per_page'], $this->uri->segment(3));
+			$data['id'] = $this->m_gejala->pagination_gejala($config['per_page'], $page);
 		}
 
 		// Menambahkan tag pembuka dan penutup pada pagination
@@ -811,7 +785,8 @@ class Dashboard_Admin extends CI_Controller
 
 		// Inisialisasi pagination
 		$this->pagination->initialize($config);
-
+		$data['start'] = $page;
+		// var_dump($data['start']);exit;
 		// Menyimpan link pagination dalam $data['pagination']
 		$data['pagination'] = $this->pagination->create_links();
 
@@ -846,6 +821,7 @@ class Dashboard_Admin extends CI_Controller
 		$config['per_page'] = 5; // Jumlah data per halaman
 		$config['uri_segment'] = 3; // Segmen URI untuk mengetahui halaman
 		$config['num_links'] = 5; // Jumlah link angka halaman
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
 		if ($keyword != null) {
 			// Jika ada keyword pencarian
@@ -854,11 +830,11 @@ class Dashboard_Admin extends CI_Controller
 			$config['first_url'] = $config['base_url'] . $config['suffix'];
 			$count = $this->m_kelompok_gejala->search_count($keyword); // Hitung total hasil pencarian
 			$count = count((array) $count);
-			$data['id'] = $this->m_kelompok_gejala->pagination_search($keyword, $config['per_page'], $this->uri->segment(3));
+			$data['id'] = $this->m_kelompok_gejala->pagination_search($keyword, $config['per_page'], $page);
 		} else {
 			// Jika tidak ada keyword pencarian
 			$count = $this->m_kelompok_gejala->count_all_kelompok_gejala(); // Hitung total semua data
-			$data['id'] = $this->m_kelompok_gejala->pagination_kelompok_gejala($config['per_page'], $this->uri->segment(3));
+			$data['id'] = $this->m_kelompok_gejala->pagination_kelompok_gejala($config['per_page'], $page);
 		}
 		$config['full_tag_open'] = '<nav><ul class="pagination">';
 		$config['full_tag_close'] = '</ul></nav>';
@@ -888,7 +864,7 @@ class Dashboard_Admin extends CI_Controller
 		$config['attributes'] = array('class' => 'page-link');
 		$config['total_rows'] = $count; // Total data
 		$this->pagination->initialize($config);
-
+		$data['start'] = $page;
 		$data['pagination'] = $this->pagination->create_links();
 		$this->load->view('Dashboard/admin/dinas_pemeriksa', $data);
 	}
@@ -931,7 +907,7 @@ class Dashboard_Admin extends CI_Controller
 		$config['uri_segment'] = 3; // Segmen URI untuk mengetahui halaman
 		$config['num_links'] = 5; // Jumlah link angka halaman
 		$keyword = $this->input->get('search');
-
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		if ($keyword != null) {
 			// Base URL tanpa query string
 			$config['base_url'] = base_url('dashboard_admin/nilai_pakar');
@@ -940,13 +916,13 @@ class Dashboard_Admin extends CI_Controller
 
 			// Menghitung jumlah hasil pencarian
 			$jumlah = $this->m_Nilai_Pakar->search_count($keyword);
-			$data['id'] = $this->m_Nilai_Pakar->search($keyword, $config['per_page'], $this->uri->segment(3));
+			$data['id'] = $this->m_Nilai_Pakar->search($keyword, $config['per_page'], $page);
 			$count = count((array)$jumlah);
 		} else {
 			// Tanpa pencarian
 			$config['base_url'] = base_url('dashboard_admin/nilai_pakar');
 			$jumlah = $this->m_Nilai_Pakar->nilai_count();
-			$data['id'] = $this->m_Nilai_Pakar->nilai($config['per_page'], $this->uri->segment(3));
+			$data['id'] = $this->m_Nilai_Pakar->nilai($config['per_page'], $page);
 			$count = count((array)$jumlah);
 		}
 
@@ -984,7 +960,7 @@ class Dashboard_Admin extends CI_Controller
 		$data['pagination'] = $this->pagination->create_links();
 		$data['penyakit'] = $this->m_Penyakit->penyakit();
 		$data['gejala'] = $this->m_gejala->gejala();
-
+		$data['start'] = $page;
 		$this->load->view('dashboard/admin/nilai_pakar', $data);
 	}
 
@@ -1033,16 +1009,17 @@ class Dashboard_Admin extends CI_Controller
 		$config['per_page'] = 5; // Jumlah data per halaman
 		$config['uri_segment'] = 3; // Segmen URI untuk mengetahui halaman
 		$config['num_links'] = 5; // Jumlah link angka halaman
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		$keyword = $this->input->get('search');
 		if ($keyword != null) {
 			$jumlah = $this->m_Auth->search_user_pemeriksa_count($keyword);
 			$count = count((array) $jumlah);
-			$data['userPemeriksa'] = $this->m_Auth->search_user_pemeriksa($keyword, $config['per_page'], $this->uri->segment(3));
+			$data['userPemeriksa'] = $this->m_Auth->search_user_pemeriksa($keyword, $config['per_page'], $page);
 		} else {
 
 			$jumlah = $this->m_Auth->all_count();
 			$count = count((array) $jumlah);
-			$data['userPemeriksa'] = $this->m_Auth->all($config['per_page'], $this->uri->segment(3));
+			$data['userPemeriksa'] = $this->m_Auth->all($config['per_page'], $page);
 			// var_dump($data['userPemeriksa']);exit;
 		}
 		$config['full_tag_open'] = '<nav><ul class="pagination">';
@@ -1073,7 +1050,7 @@ class Dashboard_Admin extends CI_Controller
 		$config['attributes'] = array('class' => 'page-link');
 		$config['total_rows'] = $count; // Total data
 		$this->pagination->initialize($config);
-
+		$data['start'] = $page;
 		$data['pagination'] = $this->pagination->create_links();
 		$this->load->view('dashboard/admin/user_pemeriksa', $data);
 	}

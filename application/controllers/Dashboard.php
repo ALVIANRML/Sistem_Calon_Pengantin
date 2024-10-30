@@ -11,19 +11,24 @@ class Dashboard extends CI_Controller
 		$this->load->library('session');
 		$this->load->model('m_Tanggal_Pemeriksaan');
 		$this->load->model('m_User_detail');
+		$this->load->model('m_gejala');
+		$this->load->model('m_Penyakit');
 		$this->load->helper(array('form', 'url'));
 	}
 
 
-
+	
 	//  05 catin
 	public function view_catin()
 	{
 		$id_user = $this->session->userdata('id_user');
-
+		
+		// var_dump($gejala); exit;
 		$userDetail = $this->m_User_detail->getAll($id_user);
-		if ($userDetail->num_rows() > 0) {
+		$userPemeriksaan = $this->m_User_detail->getAllPemeriksaan($id_user);
+		if ($userDetail->num_rows() > 0 && $userPemeriksaan->num_rows() > 0) {
 			$userDetail = $userDetail->row_array();
+			$userPemeriksaan = $userPemeriksaan->row_array();
 			$this->session->set_userdata('no_pendaftaran', $userDetail['no_pendaftaran']);
 			$this->session->set_userdata('nama_lengkap', $userDetail['nama_lengkap']);
 			$this->session->set_userdata('nik', $userDetail['nik']);
@@ -55,16 +60,28 @@ class Dashboard extends CI_Controller
 			$this->session->set_userdata('id_pemeriksaan_survei', $userDetail['id_pemeriksaan_survei']);
 			$this->session->set_userdata('id_pemeriksaan_psikolog', $userDetail['id_pemeriksaan_psikolog']);
 			$this->session->set_userdata('tanggal_periksa', $userDetail['tanggal_periksa']);
+			//For Hasil Skrining Kesehatan 
+			$this->session->set_userdata('kode_catin', $userPemeriksaan['kode_catin']);
+			$this->session->set_userdata('nama_sakit_catin', $userPemeriksaan['nama_sakit_catin']);
+			$this->session->set_userdata('kepercayaan_catin', $userPemeriksaan['kepercayaan_catin']);
+			$this->session->set_userdata('keterangan_catin', $userPemeriksaan['keterangan_catin']);
+			//For Hasil Psikolog
+			$this->session->set_userdata('kode_psikolog', $userPemeriksaan['kode_psikolog']);
+			$this->session->set_userdata('nama_sakit_psikolog', $userPemeriksaan['nama_sakit_psikolog']);
+			$this->session->set_userdata('kepercayaan_psikolog', $userPemeriksaan['kepercayaan_psikolog']);
+			$this->session->set_userdata('keterangan_psikolog', $userPemeriksaan['keterangan_psikolog']);
 			$data['total_asset'] = $this->m_User_detail->hitung($id_user);
 			$data = $this->session->set_userdata('nomor', $data['total_asset']);
-			$this->load->view('Dashboard/catin/catin');
+			// var_dump($userDetail['id_pemeriksaan_survei']);exit;
+			$data['gejalaCatin'] = $this->m_User_detail->get_all_gejala_catin()->result_array();
+			$data['gejalaPsikolog'] = $this->m_User_detail->get_all_gejala_psikolog()->result_array();
+			$this->load->view('Dashboard/catin/catin',$data);
 		}
 	}
 
 	public function view_catin_pemeriksaan()
 	{
 		$id_user = $this->session->userdata('id_user');
-
 		$userDetail = $this->m_User_detail->getAll($id_user);
 		if ($userDetail->num_rows() > 0) {
 			$userDetail = $userDetail->row_array();
@@ -97,7 +114,6 @@ class Dashboard extends CI_Controller
 		}
 		$tgl_periksa = $this->m_Tanggal_Pemeriksaan->get_tanggal_periksa();
 		$this->session->set_userdata('tgl_periksa', $tgl_periksa);
-		// $data['tglPeriksa'] = $this->m_User_detail->getTanggalPeriksa()->result_array();
 		$this->load->view('Dashboard/catin/catin_pemeriksaan');
 	}
 
@@ -390,9 +406,7 @@ class Dashboard extends CI_Controller
 			if ($fotoSurat == null) {
 				$fotoSurat = $this->session->userdata('foto_surat');
 			}
-
 			
-
 			$data_registered = date('Y-m-d');
 			$status = 1;
 			$this->m_User_detail->update($id_user, $nomor_pendaftaran, $nama, $nik, $tempatLahir, $tanggalLahir, $umur, $jenisKelamin, $agama, $pendidikan, $pekerjaan, $nomorTelepon, $provinsi, $kota, $kecamatan, $kelurahan, $alamat, $pernikahanKe, $tanggalPernikahan, $fotoUser, $fotoktp, $fotokk, $fotoSurat, $status, $data_registered, $tanggalPeriksa);
@@ -404,55 +418,130 @@ class Dashboard extends CI_Controller
 		}
 	}
 
-	public function skrining_kesehatan()
-	{
-		$sk1 = $this->input->post('sk1');
-		$sk2 = $this->input->post('sk2');
-		$sk3 = $this->input->post('sk3');
-		$sk4 = $this->input->post('sk4');
-		$sk5 = $this->input->post('sk5');
 
-		$this->session->set_userdata('sk1', $sk1);
-		$this->session->set_userdata('sk2', $sk2);
-		$this->session->set_userdata('sk3', $sk3);
-		$this->session->set_userdata('sk4', $sk4);
-		$this->session->set_userdata('sk5', $sk5);
+	public function skrining_kesehatan ()
+	{
 		$id_user = $this->session->userdata('id_user');
 		$skrining = 2;
-		$this->m_User_detail->update_skrining_kesehatan($id_user, $skrining);
 
-		$skrining_kesehatan = $this->m_User_detail->getAll($id_user);
-		if ($skrining_kesehatan->num_rows() > 0) {
-			$skrining_kesehatan = $skrining_kesehatan->row_array();
-			$sk = $this->session->set_userdata('skrining_kesehatan', $skrining_kesehatan['id_pemeriksaan_survei']);
+		if (!$this->input->post('skrining_kesehatan')){
+			$this->session->set_flashdata('eror_survei', 'eror_survei');
+            redirect('dashboard/view_catin');
+		} else{
+			$gejala = implode(",", $this->input->post("skrining_kesehatan"));
+			$data["listGejala"] = $this->m_Penyakit->get_list_by_id($gejala);
+			//Menghitung Nilai Kemungkinan
+			$listPenyakit = $this->m_Penyakit->get_by_gejala($gejala);
+			$penyakit = array();
+			$i=0;
+			foreach($listPenyakit->result() as $value){
+				$listGejala = $this->m_Penyakit->get_gejala_by_penyakit($value->penyakit_id,$gejala);
+				$combineCFmb=0;
+				$combineCFmd=0;
+				$CFBefore=0;
+				$j=0;
+                $cfawal=0;
+				foreach($listGejala->result() as $value2){
+					//Hitung Nilai CF yang Baru
+					$cfold = $cfawal + ($value2->cf * (1 - $cfawal));
+					//Melakukan Update nilai CF 
+					$cfawal = $cfold;
+				}
+				$combineHasil = $cfawal;
+				if($combineHasil)
+				{
+					$penyakit[$i]=array('kode'=>$value->kode,
+										'nama'=>$value->nama,
+										'kepercayaan'=>number_format($combineHasil * 100, 1),
+										'keterangan'=>$value->keterangan);
+										// 'user_id' =>$user_login);
+					// $this->db->insert('hasil_diagnosa', $penyakit[$i]);
+					$i++;
+				}
+			}
+
+			function cmp($a, $b)
+			{
+				return ($a["kepercayaan"] > $b["kepercayaan"]) ? -1 : 1;
+			}
+			usort($penyakit, "cmp");
+			$data["listPenyakit"] = $penyakit;
+			$data_hasil = array(
+				'kode_catin' =>$penyakit[0]['kode'],
+				'nama_sakit_catin' =>$penyakit[0]['nama'],
+				'kepercayaan_catin' =>$penyakit[0]['kepercayaan'],
+				'keterangan_catin' =>$penyakit[0]['keterangan'],
+			);
+			$this->db->where('user_id', $id_user);
+			$this->db->update('hasil_diagnosa', $data_hasil);
+			$this->m_User_detail->update_skrining_kesehatan($id_user, $skrining);
+			redirect('dashboard/view_catin');
 		}
 
-		redirect('dashboard/view_catin');
 	}
+
+
 	public function kuisioner_kepribadian()
 	{
-		$ks1 = $this->input->post('ks1');
-		$ks2 = $this->input->post('ks2');
-		$ks3 = $this->input->post('ks3');
-		$ks4 = $this->input->post('ks4');
-		$ks5 = $this->input->post('ks5');
-
-		$this->session->set_userdata('ks1', $ks1);
-		$this->session->set_userdata('ks2', $ks2);
-		$this->session->set_userdata('ks3', $ks3);
-		$this->session->set_userdata('ks4', $ks4);
-		$this->session->set_userdata('ks5', $ks5);
 		$id_user = $this->session->userdata('id_user');
 		$kuesioner = 2;
-		$this->m_User_detail->update_kuesioner_kepribadian($id_user, $kuesioner);
 
-		$kuesioner_kepribadian = $this->m_User_detail->getAll($id_user);
-		if ($kuesioner_kepribadian->num_rows() > 0) {
-			$kuesioner_kepribadian = $kuesioner_kepribadian->row_array();
-			$sk = $this->session->set_userdata('kuesioner_kepribadian', $kuesioner_kepribadian['id_pemeriksaan_psikolog']);
+		if (!$this->input->post('kuisioner_kepribadian')){
+			$this->session->set_flashdata('eror_survei', 'eror_survei');
+            redirect('dashboard/view_catin');
+		} else{
+			$gejala = implode(",", $this->input->post("kuisioner_kepribadian"));
+			$data["listGejala"] = $this->m_Penyakit->get_list_by_id($gejala);
+			//Menghitung Nilai Kemungkinan
+			$listPenyakit = $this->m_Penyakit->get_by_gejala($gejala);
+			$penyakit = array();
+			$i=0;
+			foreach($listPenyakit->result() as $value){
+				$listGejala = $this->m_Penyakit->get_gejala_by_penyakit($value->penyakit_id,$gejala);
+				$combineCFmb=0;
+				$combineCFmd=0;
+				$CFBefore=0;
+				$j=0;
+                $cfawal=0;
+				foreach($listGejala->result() as $value2){
+					//Hitung Nilai CF yang Baru
+					$cfold = $cfawal + ($value2->cf * (1 - $cfawal));
+					//Melakukan Update nilai CF 
+					$cfawal = $cfold;
+				}
+				$combineHasil = $cfawal;
+				if($combineHasil)
+				{
+					$penyakit[$i]=array('kode'=>$value->kode,
+										'nama'=>$value->nama,
+										'kepercayaan'=>number_format($combineHasil * 100, 1),
+										'keterangan'=>$value->keterangan);
+										// 'user_id' =>$user_login);
+					// $this->db->insert('hasil_diagnosa', $penyakit[$i]);
+					$i++;
+				}
+			}
+
+			function cmp($a, $b)
+			{
+				return ($a["kepercayaan"] > $b["kepercayaan"]) ? -1 : 1;
+			}
+			usort($penyakit, "cmp");
+			$data["listPenyakit"] = $penyakit;
+			$data_hasil = array(
+				'kode_psikolog' =>$penyakit[0]['kode'],
+				'nama_sakit_psikolog' =>$penyakit[0]['nama'],
+				'kepercayaan_psikolog' =>$penyakit[0]['kepercayaan'],
+				'keterangan_psikolog' =>$penyakit[0]['keterangan'],
+			);
+			$this->db->where('user_id', $id_user);
+			$this->db->update('hasil_diagnosa', $data_hasil);
+			$this->m_User_detail->update_kuesioner_kepribadian($id_user, $kuesioner);
+			redirect('dashboard/view_catin');
 		}
+		
 
-		redirect('dashboard/view_catin');
+
 	}
 
 
@@ -466,7 +555,7 @@ class Dashboard extends CI_Controller
 			// $awal_tanggal = date('2024-08-01');
 			$tanggal = $this->input->post('tanggal_pendaftaran');
 			if (strtotime($tanggal) < strtotime($awal_tanggal)) {
-				$this->session->set_flashdata('error_tanggal', 'Tanggal pendaftaran tidak boleh lebih awal dari tanggal hari ini.');
+				$this->session->set_flashdata('error_tanggal', 'Tanggal pendaftaran tidak boleh sebelum dari tanggal hari ini.');
 
 				redirect('Dashboard_admin/view_admin');
 			}

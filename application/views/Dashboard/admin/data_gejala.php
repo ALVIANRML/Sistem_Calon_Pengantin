@@ -11,14 +11,13 @@
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/data_gejala_admin.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/pagination.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/responsive.css') ?>" />
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 
 </head>
 
 <body>
-	<?php
-	$angka = 0; // Inisialisasi variabel $angka
-	?>
+
 	<div class="container">
 		<!-- header -->
 		<div class="header-dashboard-admin">
@@ -141,7 +140,8 @@
 
 				<div class="container-tabel">
 					<div class="baris-show-entries">
-						<div class="show-entries"></Show>
+						<div class="show-entries">
+							</Show>
 						</div>
 						<div class="cari-data">
 							<form action="<?= base_url('dashboard_admin/data_gejala') ?>" method="get">
@@ -168,6 +168,9 @@
 							</tr>
 						</thead>
 						<tbody>
+							<?php
+							$angka = $start; // Inisialisasi variabel $angka
+							?>
 							<?php foreach ($id as $gejala) : ?>
 								<tr>
 									<td><?= ++$angka; ?></td>

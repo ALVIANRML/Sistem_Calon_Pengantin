@@ -11,13 +11,11 @@
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/dinas_pemeriksa.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/pagination.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/responsive.css') ?>" />
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 </head>
 
 <body>
-	<?php
-	$angka = 0;
-	?>
 	<div class="container">
 		<!-- header -->
 		<div class="header-dashboard-admin">
@@ -166,6 +164,7 @@
 							</tr>
 						</thead>
 						<tbody>
+							<?php $angka = $start;?>
 							<?php foreach ($id as $kelompok) : ?>
 								<tr>
 									<td><?= ++$angka ?></td>

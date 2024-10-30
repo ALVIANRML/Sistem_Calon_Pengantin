@@ -69,4 +69,43 @@ class m_Hasil_Diagnosa extends CI_Model
 		$this->db->where('nik IS NOT NULL' );
 		return $this->db->get()->result_array();
 	}
+
+	public function update_pemeriksaan_bnn($id_user, $nama_bnn, $nama_pemeriksa, $narkoba, $status_bnn, $id_pemeriksaan_bnn){
+		$data = array(
+			'id_pemeriksaan_bnn'=>$id_pemeriksaan_bnn,
+			'nama_bnn'=>$nama_bnn,
+			'nama_pemeriksa_bnn'=>$nama_pemeriksa,
+			'narkoba_test'=>$narkoba,
+			'id_status_bnn'=>$status_bnn,
+		);
+		$this->db->where('id_user_detail',$id_user);
+		$this->db->update('user_detail', $data);
+	}
+
+	public function update_pemeriksaan_kesehatan($id_user, $nama_faskes, $nama_pemeriksa_kesehatan, $tekanan_sistolik, $tekanan_diastolik, $nadi, $nafas, $suhu, $berat_badan, $tinggi_badan, $imt, $lila, $suntik_tt, $tanda_anemia, $hb, $gol_darah, $rapid_test, $plano_test, $status_kesehatan, $id_pemeriksaan_kesehatan)
+	{
+		$data = array(
+			'berat_badan'=>$berat_badan,
+            'tinggi_badan'=>$tinggi_badan,
+            'imt'=>$imt,
+			'id_pemeriksaan_kesehatan'=>$id_pemeriksaan_kesehatan,
+            'nama_faskes'=>$nama_faskes,
+            'nama_pemeriksa_kesehatan'=>$nama_pemeriksa_kesehatan,
+            'tekanan_sistolik'=>$tekanan_sistolik,
+            'tekanan_diasistolik'=>$tekanan_diastolik,
+            'nadi'=>$nadi,
+            'nafas'=>$nafas,
+            'suhu'=>$suhu,
+            'lila'=>$lila,
+            'suntik_tt'=>$suntik_tt,
+            'hb'=>$hb,
+            'gol_darah'=>$gol_darah,
+            'rapid_test'=>$rapid_test,
+            'plano_test'=>$plano_test,
+            'id_status_kesehatan'=>$status_kesehatan,
+            'tanda_anemia'=>$tanda_anemia,
+		);
+		$this->db->where('id_user_detail',$id_user);
+		$this->db->update('user_detail', $data);
+	}
 }

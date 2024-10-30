@@ -35,17 +35,20 @@ class Dashboard_psikolog extends CI_Controller
 
 	public function view_data()
 	{
-
+		$id_pemeriksa = $this->session->userdata('id_user');
+		$id_pemeriksa = $this->m_User_detail->getpemeriksa($id_pemeriksa);
+		$this->session->set_userdata('nama_pemeriksa', $id_pemeriksa[0]['nama_lengkap']);
 		$keyword = $this->input->get('search');
 		$tanggal = $this->session->userdata('psikolog_tanggal_filter');
 
 		$config = array();
 		$config['base_url'] = base_url('dashboard_admin/view_data'); // URL untuk halaman pagination
-		$config['per_page'] = 2; // Jumlah data per halaman
+		$config['per_page'] = 5; // Jumlah data per halaman
 		$config['uri_segment'] = 3; // Segmen URI untuk mengetahui halaman
 		$config['num_links'] = 5; // Jumlah link angka halaman
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		if ($keyword != null) {
-			$search = $this->m_User_detail->search($keyword, $config['per_page'], $this->uri->segment(3));
+			$search = $this->m_User_detail->search($keyword, $config['per_page'], $page);
 			$count = $this->m_User_detail->search_count($keyword);
 			$config['base_url'] = base_url('dashboard_psikolog/view_data');
 			$config['suffix'] = '?search=' . urlencode($keyword); // Tambahkan query string di akhir setiap link
@@ -61,7 +64,7 @@ class Dashboard_psikolog extends CI_Controller
 				$config['first_url'] = $config['base_url'] . $config['suffix'];
 				$data['id_user_detail'] = $this->m_User_detail->get_by_id_and_tanggal_count($id, $tanggal);
 				$count = count((array) $data['id_user_detail']);
-				$data['user_detail'] = $this->m_User_detail->get_by_id_and_tanggal($id, $tanggal, $config['per_page'], $this->uri->segment(3));
+				$data['user_detail'] = $this->m_User_detail->get_by_id_and_tanggal($id, $tanggal, $config['per_page'], $page);
 			} else {
 				$data['user_detail'] = $search;
 				$count = count((array) $count);
@@ -71,11 +74,11 @@ class Dashboard_psikolog extends CI_Controller
 				$config['base_url'] = base_url('dashboard_psikolog/view_data');
 				$data['id_user_detail'] = $this->m_User_detail->all_count();
 				$count = count((array) $data['id_user_detail']);
-				$data['user_detail'] = $this->m_User_detail->all($config['per_page'], $this->uri->segment(3));
+				$data['user_detail'] = $this->m_User_detail->all($config['per_page'], $page);
 			} else {
 				$config['base_url'] = base_url('dashboard_psikolog/view_data');
 				$data['id_user_detail'] = $this->m_User_detail->get_by_data_registered_count($tanggal);
-				$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal, $config['per_page'], $this->uri->segment(3));
+				$data['user_detail'] = $this->m_User_detail->get_by_data_registered($tanggal, $config['per_page'], $page);
 				$count = count((array) $data['id_user_detail']);
 			}
 		}
@@ -107,18 +110,17 @@ class Dashboard_psikolog extends CI_Controller
 		$config['attributes'] = array('class' => 'page-link');
 		$config['total_rows'] = $count;
 		$this->pagination->initialize($config);
-
+		$data['start'] = $page;
 		$data['pagination'] = $this->pagination->create_links();
-
 		$this->load->view('Dashboard/psikolog/data_psikolog', $data);
 	}
 
-	public function data_verifikasi(){
+	public function data_verifikasi()
+	{
 		$verifikasi = $this->input->post('data_verifikasi');
 		$id = $this->input->post('id');
-		$this->m_User_detail->update_psikolog_verifikasi($id,$verifikasi);
+		$this->m_User_detail->update_psikolog_verifikasi($id, $verifikasi);
 		redirect('dashboard_psikolog/view_data');
-
 	}
 
 	public function psikolog_filter_tanggal()

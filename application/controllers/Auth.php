@@ -23,18 +23,16 @@ class Auth extends CI_Controller
 		$id_tanggal = 'd4973c6f-3510-4edc-8b49-e044b873bb26';
 		$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
 		$todaytes = date('Y-m-d');
-			$tes =$this->m_User_detail->hitung_kuota($todaytes);
-			$this->session->set_userdata('kuota', $tes );
-			if ($tes == 50){
-				$id_status = 0;
-				$this->m_Tanggal_Pemeriksaan->update_id_status($id_tanggal, $id_status);
-			}
-			else if ($tes < 50 && $tes >= 40){
-				$tes = 50 - $tes;
-				$this->session->set_userdata('sisa_kuota', $tes );
-			}
-			$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
-			$this->session->set_userdata('status', $status);
+		$tes = $this->m_User_detail->hitung_kuota($todaytes);
+		$this->session->set_userdata('kuota', $tes);
+		if ($tes == 50) {
+			$id_status = 0;
+			$this->m_Tanggal_Pemeriksaan->update_id_status($id_tanggal, $id_status);
+		} else if ($tes < 50 && $tes >= 40) {
+			$tes = 50 - $tes;
+			$this->session->set_userdata('sisa_kuota', $tes);
+		}
+		$status = $this->m_Tanggal_Pemeriksaan->get_status($id_tanggal);
 		$this->session->set_userdata('status', $status);
 
 		$this->form_validation->set_rules(

@@ -1,0 +1,46 @@
+/* Untuk layar lebih kecil dari 576px (ponsel kecil) */
+/* @media (min-width:600px) {
+
+} */
+
+@media (max-width:600px) {
+    html{
+        font-size: 9px;
+    }
+
+    .dropdown-logo{
+        display: none;
+    }
+
+    .open-sidebar{
+        display: block;
+    }
+
+    .container-sidebar-dashboard-admin{
+        display: none;
+        right: 0;
+        width: 220px;
+        z-index: 9;
+        box-shadow: -4px 15px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .container-ganti-password-dan-keluar-btn{
+        display: unset;
+    }
+
+    .container-content-dashboard-admin{
+        margin-left: unset;
+        width: 100%;
+    }
+
+    .container-content-data-catin-admin{
+        margin-left: unset;
+        width: 100%;
+    }
+    
+    .form-input-tanggal{
+        max-width: 150px;
+    }
+
+
+}

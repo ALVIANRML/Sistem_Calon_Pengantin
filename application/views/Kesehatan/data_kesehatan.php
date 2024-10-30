@@ -15,9 +15,6 @@
 </head>
 
 <body>
-	<?php
-	$angka = 0; // Inisialisasi variabel $angka
-	?>
 	<div class="container">
 		<!-- header -->
 		<div class="header-dashboard-admin">
@@ -140,6 +137,9 @@
 									<th>Status Kesehatan</th>
 								</tr>
 							</thead>
+							<?php
+							$angka = $start;
+							?>
 							<?php foreach ($user_detail as $datas) : ?>
 								<?php $status_verifikasi = ($datas['id_status_verifikasi'] == 2) ? '<td><span class="status-tabel" style="background-color: green">Sudah diverifikasi</span></td>' : '<td><span class="status-tabel" style="background-color: #DC3545">Belum diverifikasi</span></td>'; ?>
 								<?php $status_kesehatan = ($datas['id_status_kesehatan'] == 2) ? '<td><span class="status-tabel" style="background-color: green">Sudah diverifikasi</span></td>' : '<td><span class="status-tabel" style="background-color: #DC3545">Belum diverifikasi</span></td>'; ?>
@@ -189,31 +189,31 @@
 													<li><span class="label">Foto Surat</span><span class="titik-dua">:</span><span class="value"><img src="<?= base_url('uploads/photo/'); ?><?= $datas['foto_surat'] ?>" alt="Profile Image" style="weight:400px; height:400px;"></span></li>
 													<li><span class="label">Tanggal Pendaftaran</span><span class="titik-dua">:</span><span class="value"><?= $datas['data_registered'] ?>"</span></li>
 													<li><span class="label">Hasil Pemeriksaan</span><span class="titik-dua">:</span>
-														<span class="value gap-btn">
-															<button class="open-modal btn green-btn" onclick="showPopup1('popup1-<?= $datas['user_id'] ?>')">Hasil Survei Catin<svg
-																	xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-																	<path
-																		d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11"
-																		stroke="#FFFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-																</svg></button>
-															<button class="open-modal btn green-btn" onclick="showPopup2('popup2-<?= $datas['user_id'] ?>')">Hasil Kesehatan<svg
-																	xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-																	<path
-																		d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11"
-																		stroke="#FFFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-																</svg></button>
-															<button class="open-modal btn green-btn" onclick="showPopup3('popup3-<?= $datas['user_id'] ?>')">Hasil BNN<svg xmlns="http://www.w3.org/2000/svg"
-																	width="24" height="24" viewBox="0 0 24 24" fill="none">
-																	<path
-																		d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11"
-																		stroke="#FFFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-																</svg></button>
-															<button class="open-modal btn green-btn" onclick="showPopup4('popup4-<?= $datas['user_id'] ?>')">Hasil Psikolog<svg xmlns="http://www.w3.org/2000/svg"
-																	width="24" height="24" viewBox="0 0 24 24" fill="none">
-																	<path
-																		d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11"
-																		stroke="#FFFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-																</svg></button>
+														<span class="value gap-btn" style="display: flex; justify-content: flex-end;">
+															<button class="open-modal btn green-btn" style="display: flex; align-items: center; padding-right: 5px;" onclick="showPopup1('popup1-<?= $datas['user_id'] ?>')">
+																Hasil Survei Catin
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-left: auto;">
+																	<path d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11" stroke="#FFFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+																</svg>
+															</button>
+															<button class="open-modal btn green-btn" style="display: flex; align-items: center; padding-right: 5px;" onclick="showPopup2('popup2-<?= $datas['user_id'] ?>')">
+																Hasil Kesehatan
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-left: auto;">
+																	<path d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11" stroke="#FFFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+																</svg>
+															</button>
+															<button class="open-modal btn green-btn" style="display: flex; align-items: center; padding-right: 5px;" onclick="showPopup3('popup3-<?= $datas['user_id'] ?>')">
+																Hasil BNN
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-left: auto;">
+																	<path d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11" stroke="#FFFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+																</svg>
+															</button>
+															<button class="open-modal btn green-btn" style="display: flex; align-items: center; padding-right: 5px;" onclick="showPopup4('popup4-<?= $datas['user_id'] ?>')">
+																Hasil Psikolog
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-left: auto;">
+																	<path d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11" stroke="#FFFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+																</svg>
+															</button>
 														</span>
 													</li>
 													<li><span class="label">Mulai Berlaku</span><span class="titik-dua">:</span><span
@@ -231,18 +231,14 @@
 															</button>
 														</span>
 													</li>
-													<?php $periksa = ($datas['id_status_kesehatan'] == null) ? 'style=""' : 'style="display:none;"'; ?>
-
-
+													<?php $periksa = ($datas['id_pemeriksaan_kesehatan'] == null) ? 'style=""' : 'style="display:none;"'; ?>
 													<li <?= $periksa ?>><span class="label">Periksa Catin</span><span class="titik-dua">:</span>
 														<span class="value gap-btn">
-															<button class="open-modal btn green-btn" onclick="showPopup6('popup6-<?= $datas['user_id'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-																	height="24" viewBox="0 0 24 24" fill="none">
-																	<path
-																		d="M1 3H23V21H1V3ZM3 5V19H21V5H3ZM15.5 9.5C15.7652 9.5 16.0196 9.60536 16.2071 9.79289C16.3946 9.98043 16.5 10.2348 16.5 10.5C16.5 10.7652 16.3946 11.0196 16.2071 11.2071C16.0196 11.3946 15.7652 11.5 15.5 11.5C15.2348 11.5 14.9804 11.3946 14.7929 11.2071C14.6054 11.0196 14.5 10.7652 14.5 10.5C14.5 10.2348 14.6054 9.98043 14.7929 9.79289C14.9804 9.60536 15.2348 9.5 15.5 9.5ZM17.9 12.3C18.2343 11.8543 18.4378 11.3243 18.4879 10.7694C18.5379 10.2145 18.4324 9.65668 18.1833 9.15836C17.9341 8.66004 17.5511 8.24095 17.0772 7.94805C16.6033 7.65514 16.0571 7.5 15.5 7.5C14.9429 7.5 14.3967 7.65514 13.9228 7.94805C13.4489 8.24095 13.0659 8.66004 12.8167 9.15836C12.5676 9.65668 12.4621 10.2145 12.5121 10.7694C12.5622 11.3243 12.7657 11.8543 13.1 12.3C12.6032 12.6726 12.2 13.1557 11.9223 13.7111C11.6446 14.2666 11.5 14.879 11.5 15.5V16.5H13.5V15.5C13.5 14.9696 13.7107 14.4609 14.0858 14.0858C14.4609 13.7107 14.9696 13.5 15.5 13.5C16.0304 13.5 16.5391 13.7107 16.9142 14.0858C17.2893 14.4609 17.5 14.9696 17.5 15.5V16.5H19.5V15.5C19.5 14.191 18.872 13.03 17.9 12.3ZM5 9H9.5V11H5V9ZM5 13H9.5V15H5V13Z"
-																		fill="#FFFAFA" />
-																</svg>Periksa Catin
+															<button class="open-modal btn green-btn" onclick="showPopup6('popup6-<?= $datas['user_id'] ?>')">
+																<img src="<?= base_url('assets/img/periksa_catin.svg') ?>" style="filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(360deg) brightness(200%);" alt="periksa_catin Icon" width="24" height="24">
+																Periksa Catin
 															</button>
+
 														</span>
 													</li>
 												</ul>
@@ -278,43 +274,59 @@
 								</div>
 
 								<!-- popup periksa kesehatan -->
-								<div class="overlay" id="overlay2" onclick="closePopup2('popup2-<?= $datas['user_id'] ?>')"></div>
+								<!-- popup periksa kesehatan -->
+								<div class="overlay" id="overlay2"></div>
 								<div class="popup" id="popup2-<?= $datas['user_id'] ?>">
 									<span class="close-btn" onclick="closePopup2('popup2-<?= $datas['user_id'] ?>')">&times;</span>
 									<h2>Hasil Kesehatan</h2>
 									<hr style="border-color: #015D67;">
 									<div class="edit-pendaftaran-container">
-										<p>Nama Faskes: <?= $datas['nama_faskes'] ?></p><br>
+										<p>Nama Faskes: UPT Puskesmas Rambung</p><br>
 										<p>Nama Pemeriksa: <?= $datas['nama_pemeriksa_kesehatan'] ?></p><br>
-										<b> Tanda Vital</b>
-										<p>Tekanan Darah: <?= $datas['nama_pemeriksa_kesehatan'] ?></p>
-										<p>Nadi: <?= $datas['nadi'] ?></p>
-										<p>Nafas: <?= $datas['nafas'] ?></p>
-										<p>Suhu: <?= $datas['suhu'] ?></p><br>
-										<p>Berat Badan: <?= $datas['berat_badan'] ?></p><br>
-										<p>Tinggi: <?= $datas['tinggi_badan'] ?></p><br>
-										<p>IMT: <?= $datas['suhu'] ?></p><br>
-										<p>Lila (Lingkar Lengan Atas): <?= $datas['lila'] ?></p><br>
-										<p>Status T: <?= $datas['suntik_tt'] ?></p><br>
-										<p>Tanda Anemia: <?= $datas['tanda_anemia'] ?></p><br>
-										<p>Penunjang:</p><br>
-										<p>HB: <?= $datas['hb'] ?></p><br>
-										<p>Golongan Darah: <?= $datas['gol_darah'] ?></p><br><br>
+										<b>Tanda Vital</b>
+
+										<p>Tekanan Darah: <?= !empty($datas['tekanan_sistolik']) && !empty($datas['tekanan_diasistolik']) ? $datas['tekanan_sistolik'] . '/' . $datas['tekanan_diasistolik'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+
+										<p>Nadi: <?= !empty($datas['nadi']) ? $datas['nadi'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+
+										<p>Nafas: <?= !empty($datas['nafas']) ? $datas['nafas'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+
+										<p>Suhu: <?= !empty($datas['suhu']) ? $datas['suhu'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+
+										<br>
+										<p>Berat Badan: <?= !empty($datas['berat_badan']) ? $datas['berat_badan'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+										<p>Tinggi: <?= !empty($datas['tinggi_badan']) ? $datas['tinggi_badan'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+										<p>IMT: <?= !empty($datas['imt']) ? $datas['imt'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+										<p>Lila (Lingkar Lengan Atas): <?= !empty($datas['lila']) ? $datas['lila'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+										<p>Status T: <?= !empty($datas['suntik_tt']) ? $datas['suntik_tt'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+										<p>Tanda Anemia: <?= !empty($datas['tanda_anemia']) ? $datas['tanda_anemia'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+										<br>
+										<p><strong>Penunjang:</strong></p>
+										<p>HB: <?= !empty($datas['hb']) ? $datas['hb'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+										<p>Golongan Darah: <?= !empty($datas['gol_darah']) ? $datas['gol_darah'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+
+										<br>
 										<p><b>Lain-Lain</b></p><br>
-										<p>Rapidtest: <?= $datas['rapid_test'] ?></p><br>
-										<p>Planotest: <?= $datas['plano_test'] ?></p><br><br>
-										<label for="kode_resiko">Kode Kesehatan</label> <br>
-										<input type="text" name="kode_resiko" id="kode_resiko" value="<?= $datas['kode_kesehatan'] ?>" readonly> <br><br>
-										<p><b>Tingkat Kepercayaan : <?= $datas['kepercayaan_kesehatan'] ?>%</b></p> <br>
+
+										<p>Rapidtest: <?= !empty($datas['rapid_test']) ? $datas['rapid_test'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+										<p>Planotest: <?= !empty($datas['plano_test']) ? $datas['plano_test'] : '<span style="color: red;">Data tidak tersedia</span>' ?></p>
+
+										<br>
+										<label for="kode_resiko"><strong> Kesehatan </strong></label><br>
+										<input type="text" name="kode_resiko" id="kode_resiko" value="<?= !empty($datas['kode_kesehatan']) ? $datas['kode_kesehatan'] : '<span style="color: red;">Data tidak tersedia</span>' ?>" readonly><br><br>
+
+										<p><b>Tingkat Kepercayaan : <?= !empty($datas['kepercayaan_kesehatan']) ? $datas['kepercayaan_kesehatan'] : '<span style="color: red;">Data tidak tersedia</span>' ?>%</b></p>
 										<label for="nama_resiko"></label>
-										<input type="text" name="nama_resiko" id="nama_resiko" value="<?= $datas['nama_sakit_kesehatan'] ?>" readonly><br>
+										<input type="text" name="nama_resiko" id="nama_resiko" value="<?= !empty($datas['nama_sakit_kesehatan']) ? $datas['nama_sakit_kesehatan'] : '<span style="color: red;">Data tidak tersedia</span>' ?>" readonly><br>
+
+										<br>
 										<label for="keterangan"><b class="form-label">Keterangan</b><br></label>
 										<div class="input-form" style="border: none;">
-											<textarea name="keterangan" class="tambah-data" style="height: 90px;" readonly><?= $datas['keterangan_kesehatan'] ?></textarea>
+											<textarea name="keterangan" class="tambah-data" style="height: 90px; width: 700px;" readonly><?= !empty($datas['keterangan_kesehatan']) ? $datas['keterangan_kesehatan'] : '<span style="color: red;">Data tidak tersedia</span>' ?></textarea>
 										</div>
+
 									</div>
 								</div>
-
 								<!-- popup periksa BNN -->
 								<div class="overlay" id="overlay3"></div>
 								<div class="popup" id="popup3-<?= $datas['user_id'] ?>">
@@ -392,10 +404,13 @@
 									<h2>Periksa Catin</h2>
 									<hr style="border-color: #015D67;">
 									<div class="edit-pendaftaran-container">
-										<form action="<?= base_url('dashboard_kesehatan/periksa'); ?>" method="post">
+										<form action="<?= base_url('dashboard_kesehatan/periksa_kesehatan'); ?>" method="post">
+											<div class="col-md-12">
+												<input type="hidden" name="id" value="<?= $datas['user_id'] ?>" />
+											</div>
 											<label for="nama_faskes">Nama Faskes</label>
 											<div class="input-form" style="border: none;">
-												<input type="text" value="<?= $datas['nama_faskes'] ?>" readonly>
+												<input type="text" name="nama_faskes" id="nama_faskes" value="<?= $this->session->userdata('nama_pemeriksa') ?>" readonly>
 											</div>
 
 											<label for="nama_pemeriksa">Nama Pemeriksa</label>
@@ -428,19 +443,19 @@
 												<input type="text" id="suhu" name="suhu">
 											</div>
 
-											<label for="berat_badan">Berat Badan (Kg)</label>
+											<label for="berat_badan<?= $datas['user_id'] ?>">Berat Badan (Kg)</label>
 											<div class="input-form" style="border: none;">
-												<input type="text" name="berat_badan" id="berat_badan">
+												<input type="text" name="berat_badan" id="berat_badan<?= $datas['user_id'] ?>">
 											</div>
 
-											<label for="tinggi">Tinggi Badan (cm)</label>
+											<label for="tinggi<?= $datas['user_id'] ?>">Tinggi Badan (cm)</label>
 											<div class="input-form" style="border: none;">
-												<input type="text" name="tinggi" id="tinggi">
+												<input type="text" name="tinggi" id="tinggi<?= $datas['user_id'] ?>">
 											</div>
 
-											<label for="imb">Index Massa Tubuh (kg/m²)</label>
+											<label for="imt">Index Massa Tubuh (kg/m²)</label>
 											<div class="input-form" style="border: none;">
-												<input type="text" value="<?= $datas['nama_faskes'] ?>" readonly>
+												<input type="text" name="imt" id="imt<?= $datas['user_id'] ?>" readonly>
 											</div>
 
 											<label for="lila">LILA (cm)</label>
@@ -448,9 +463,9 @@
 												<input type="text" name="lila" id="lila">
 											</div>
 
-											<label for="status_t">Status T</label>
+											<label for="suntik_tt">Suntik TT</label>
 											<div class="input-form" style="border: none;">
-												<input type="text" name="status_t" id="status_t">
+												<input type="text" name="suntik_tt" id="suntik_tt">
 											</div>
 
 											<label for="anemia">Tanda Anemia</label>
@@ -510,28 +525,48 @@
 											</select>
 
 											<p><b>Silahkan Ceklis Gejala yang sesuai dengan Catin</b></p><br>
-											<input type="checkbox" id="gejala1" name="gejala1" value="2">
-											<label for="gejala1"> GC004 - Palpitasi jantung (detak jantung yang tidak teratur atau cepat)</label><br>
-
-											<input type="checkbox" id="gejala2" name="gejala2" value="2">
-											<label for="gejala2"> GC005 - Luka yang Sulit Sembuh</label><br>
+											<?php foreach ($gejalaKesehatan as $skrining): ?>
+												<input type="checkbox" id="periksa_kesehatan[]" name="periksa_kesehatan[]" value="<?= $skrining['id'] ?>">
+												<label for="periksa_kesehatan[]"> <?= $skrining['nama_gejala'] ?></label><br>
+											<?php endforeach; ?>
 											<button type="submit">Submit</button>
 										</form>
 									</div>
 								</div>
-								<?php endforeach ?>
-							</table>
-						</div>
-						
+							<?php endforeach ?>
+						</table>
 					</div>
-					<!--  -->
-					<?= $pagination ?>
+
+				</div>
+				<!--  -->
+				<?= $pagination ?>
 				<div class="copyright-text">
 					Copyright © 2024 DPPKB Kota Tebing. Hak cipta dilindungi
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<script>
+		// Tambahkan event listener ke input berat badan dan tinggi badan
+		document.getElementById('berat_badan<?= $datas['user_id'] ?>').addEventListener('input', calculateIMT);
+		document.getElementById('tinggi<?= $datas['user_id'] ?>').addEventListener('input', calculateIMT);
+		// Fungsi untuk menghitung IMT
+		function calculateIMT() {
+			// Ambil nilai berat badan dan tinggi badan dari input
+			var berat_badan = parseFloat(document.getElementById('berat_badan<?= $datas['user_id'] ?>').value) || 0;
+			var tinggi_badan_cm = parseFloat(document.getElementById('tinggi<?= $datas['user_id'] ?>').value) || 0;
+
+			// Konversi tinggi badan dari cm ke meter
+			var tinggi_badan_m = tinggi_badan_cm / 100;
+
+			// Hitung IMT
+			var imt = berat_badan / (tinggi_badan_m * tinggi_badan_m);
+
+			// Set hasil IMT pada input IMT
+			document.getElementById('imt<?= $datas['user_id'] ?>').value = imt.toFixed(1); // Menampilkan IMT dengan 1 angka di belakang koma
+		}
+	</script>
 
 
 
@@ -540,8 +575,8 @@
 	<script src="<?= base_url('assets/js/sidebar.js') ?>"></script>
 	<script src="<?= base_url('assets/js/detail-baris-table.js') ?>"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	
-	
+
+
 	<script src="<?= base_url('assets/js/popup.js') ?>"></script>
 </body>
 

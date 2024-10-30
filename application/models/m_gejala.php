@@ -75,5 +75,17 @@ class m_gejala extends CI_Model
         $this->db->like('nama_gejala', $keyword);
         return $this->db->count_all_results('gejala');
     }
+
+	public function get_all_gejala_bnn()
+    {
+        $hasil = $this->db->query("SELECT * FROM gejala WHERE kelompok_gejala_id='BNN'");
+        return $hasil;
+    }
+
+	public function get_all_gejala_kesehatan()
+    {
+        $hasil = $this->db->query("SELECT * FROM gejala WHERE kelompok_gejala_id='Kesehatan'");
+        return $hasil;
+    }
 }
 
