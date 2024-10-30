@@ -11,16 +11,11 @@
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/nilai_pakar.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/pagination.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/responsive.css') ?>" />
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 </head>
 
 <body>
-
-	<?php
-	$angka = 0;
-	?>
-
-
 	<div class="container">
 		<!-- header -->
 		<div class="header-dashboard-admin">
@@ -173,7 +168,7 @@
 							</tr>
 						</thead>
 						<tbody>
-
+						<?php $angka = $start ?>
 							<?php foreach ($userPemeriksa as $user_pemeriksa) : ?>
 								<tr>
 									<td><?= ++$angka; ?></td>

@@ -84,6 +84,78 @@ class m_Penyakit extends CI_Model
         return $this->db->count_all_results('gejala');
     }
 
+	function get_list_by_id($ids) {
+		// Jika $ids adalah string, ubah menjadi array
+		if (is_string($ids)) {
+			$ids = explode(',', $ids);
+		}
+	
+		// Pastikan $ids adalah array
+		if (!is_array($ids)) {
+			throw new InvalidArgumentException('Input harus berupa array atau string yang dipisahkan koma');
+		}
+	
+		// Bersihkan dan bungkus setiap ID dengan tanda kutip
+		$quoted_ids = array_map(function($id) {
+			return "'" . $this->db->escape_str(trim($id)) . "'";
+		}, $ids);
+	
+		$id_list = implode(',', $quoted_ids);
+	
+		$sql = "SELECT id, kode, nama_gejala FROM gejala WHERE id IN ($id_list)";
+		return $this->db->query($sql);
+	}
+
+	function get_by_gejala($gejala) {
+		// Jika $gejala adalah String, ubah menjadi Sebuah Array
+		if (is_string($gejala)) {
+			$gejala = explode(',', $gejala);
+		}
+		//Pastikan $gejala adalah Array
+		if (!is_array($gejala)) {
+			throw new InvalidArgumentException('Input harus berupa array atau string yang dipisahkan koma');
+		}
+
+		//Bersihkan dan Bungkus Setiap ID dengan tanda Kutip
+		$qouted_gejala = array_map(function($id) {
+			return "'" . $this->db->escape_str(trim($id)). "'";
+		}, $gejala);
+
+		$gejala_list = implode(',', $qouted_gejala);
+		$sql = "select distinct penyakit_id,p.kode,p.nama,p.keterangan,gp.gejala_id from gejala_penyakit gp inner join penyakit p on gp.penyakit_id=p.id where gejala_id in ($gejala_list) order by penyakit_id,gejala_id";
+		return $this->db->query($sql);
+	}
+
+	function get_gejala_by_penyakit($id, $gejala = null) {
+		// Bungkus $id dengan tanda kutip
+		$id = $this->db->escape($id);
+		
+		$sql = "SELECT gejala_penyakit.gejala_id, mb, md, cf 
+				FROM gejala_penyakit 
+				WHERE penyakit_id = $id";
+		
+		if ($gejala != null) {
+			if (is_string($gejala)) {
+				// Jika $gejala adalah string, pisahkan dan bungkus setiap nilai
+				$gejala_array = explode(',', $gejala);
+				$gejala_array = array_map('trim', $gejala_array);
+				$gejala_array = array_map(array($this->db, 'escape'), $gejala_array);
+				$gejala = implode(',', $gejala_array);
+			} elseif (is_array($gejala)) {
+				// Jika $gejala adalah array, bungkus setiap nilai
+				$gejala = array_map(array($this->db, 'escape'), $gejala);
+				$gejala = implode(',', $gejala);
+			}
+			$sql .= " AND gejala_id IN ($gejala)";
+		}
+		
+		$sql .= " ORDER BY gejala_id";
+		
+		return $this->db->query($sql);
+	}
+	
+	
+
 	
 
 }

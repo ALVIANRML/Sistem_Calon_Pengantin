@@ -10,6 +10,7 @@
 
 <?php 
     $tombol = $this->session->userdata('status');
+	// var_dump($tombol);exit;
     $display = ($tombol == 0) ? "display:none" : "display:block";
     $heroMovement = ($tombol == 0) ? "position: absolute; width: 105%; " : ""; // Tambahkan ini
     ?>

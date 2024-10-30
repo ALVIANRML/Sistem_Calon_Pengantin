@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/admin.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/responsive.css') ?>" />
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	
@@ -275,7 +276,7 @@
 							</svg>
 						</div>
 
-						<label for="tanggal_periksa"><b class="form-label" style="color:#015D67; margin-bottom:10px;">Masukkan Tanggal Pemriksaan</b><br></label>
+						<label for="tanggal_periksa"><b class="form-label" style="color:#015D67; margin-bottom:10px;">Masukkan Tanggal Pemeriksaan</b><br></label>
 						<div class="input-form">
 							<input type="date" id="tanggal_periksa" name="tanggal_periksa" style="width:90%;" required value="<?= $this->session->userdata('tanggal_periksa') ?>">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

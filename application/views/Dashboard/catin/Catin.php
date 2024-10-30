@@ -26,23 +26,34 @@
 	$usia = $this->session->userdata('usia');
 	$jenisKelamin = $this->session->userdata('jenis_kelamin');
 	$id_status_verifikasi = $this->session->userdata('id_status_verifikasi');
+	// var_dump($id_pemeriksaan_survei);exit;
 	$id_status_perpanjangan = $this->session->userdata('id_status_perpanjangan');
 	$id_status_aktif = $this->session->userdata('id_status_aktif');
 	$id_status_kesehatan = $this->session->userdata('id_status_kesehatan');
 	$id_status_bnn = $this->session->userdata('id_status_bnn');
 	$id_status_psikolog = $this->session->userdata('id_status_psikolog');
-	$id_pemeriksaan_psikolog = $this->session->userdata('kuesioner_kepribadian');
-	$id_pemeriksaan_survei = $this->session->userdata('skrining_kesehatan');
+	$id_pemeriksaan_psikolog = $this->session->userdata('id_pemeriksaan_psikolog');
+	$id_pemeriksaan_survei = $this->session->userdata('id_pemeriksaan_survei');
 	$tanggal_periksa_catin = $this->session->userdata('tanggal_periksa');
-	$fotoProfil = $this->session->userdata('foto_user'); 
-
-	if ($fotoProfil == null){
+	//For Data Hasil Pemeriksaan
+	$kode_catin = $this->session->userdata('kode_catin');
+	$nama_sakit_catin = $this->session->userdata('nama_sakit_catin');
+	$kepercayaan_catin = $this->session->userdata('kepercayaan_catin');
+	$keterangan_catin = $this->session->userdata('keterangan_catin');
+	$kode_psikolog = $this->session->userdata('kode_psikolog');
+	$nama_sakit_psikolog = $this->session->userdata('nama_sakit_psikolog');
+	$kepercayaan_psikolog = $this->session->userdata('kepercayaan_psikolog');
+	$keterangan_psikolog = $this->session->userdata('keterangan_psikolog');
+	$fotoProfil = $this->session->userdata('foto_user');
+	// var_dump($id_pemeriksaan_survei);exit;
+	if ($fotoProfil == null) {
 		$fotoProfil = base_url('assets/img/profilNull.svg');
-	} else{
-		$fotoProfil = base_url('uploads/photo/');$this->session->userdata('foto_user'); 
+	} else {
+		$fotoProfil = base_url('uploads/photo/');
+		$this->session->userdata('foto_user');
 	}
-	 $fotoProfil = ($fot == null) ? '' : '<td><span class="status-tabel" style="background-color: #DC3545">Belum diverifikasi</span></td>';
-								
+	$fotoProfil = ($fotoProfil == null) ? '' : '<td><span class="status-tabel" style="background-color: #DC3545">Belum diverifikasi</span></td>';
+
 
 	// Memastikan bahwa $tanggal_periksa_catin tidak null sebelum memformat
 	if ($tanggal_periksa_catin) {
@@ -62,7 +73,7 @@
 			<nav class="navbar">
 				<ul>
 					<div class="navbar_profil" style="width: 15vw; margin-right:0px">
-					<img src="<?= base_url('uploads/photo/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
+						<img src="<?= base_url('uploads/photo/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
 						<div class="profile-text">
 							<span>Halo,</span><br> <!-- Menambahkan break line -->
 							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;">
@@ -180,46 +191,43 @@
 						<?php }  ?>
 
 						<!--Pop Up Isi Skrining Kesehatan-->
-						<div class="overlay" id="overlay"></div>
+						<div class="overlay" id="overlay">
+						</div>
 						<div class="popup" id="popup">
 							<span class="close-btn" onclick="closePopup()">&times;</span>
-							<h2>Isi Skrining Kesehatan</h2>
-							<?php
-							if ($id_pemeriksaan_survei == 2) :
-							?>
-								<h1>ini hasil diagnosis</h1>
-							<?php else : ?>
-								<form id="popupForm" action="<?= base_url('dashboard/skrining_kesehatan'); ?>" method="post">
-									<div>
-										<p>Silahkan isi sesuai dengan kamu</p>
-										<?php
-
-										?>
-										<label for="sk1"><b>Pertanyaan 1</b><br></label>
-										<input type="checkbox" id="sk1" name="sk1" value="1"> Mudah pusing?
-
-										<hr>
-										<label for="sk2"><b>Pertanyaan 2</b><br></label>
-										<input type="checkbox" id="sk2" name="sk2" value="1"> Merasa berat pada bagian tengkuk?
-
-
-										<hr>
-										<label for="sk3"><b>Pertanyaan 3</b><br></label>
-										<input type="checkbox" id="sk3" name="sk3" value="1"> Susah tidur?
-
-										<hr>
-										<label for="sk4"><b>Pertanyaan 4</b><br></label>
-										<input type="checkbox" id="sk4" name="sk4" value="1"> Mulai lelah saat melakukan aktivitas?
-
-										<hr>
-										<label for="sk5"><b>Pertanyaan 5</b><br></label>
-										<input type="checkbox" id="sk5" name="sk5" value="1"> Saat beraktivitas mata sering berkunang kunang?
+							<?php if ($id_pemeriksaan_survei == 2): ?>
+								<h1>Hasil Skrining Kesehatan</h1>
+									<hr style="border-color: #015D67;">
+									<div class="edit-pendaftaran-container">
+										<p><b>Tingkat Kepercayaan : <?= $kepercayaan_catin ?>%</b></p>
+										<label for="kode_penyakit"><b class="form-label">Kode Penyakit</b><br></label>
+										<div class="input-form" style="border: none;">
+											<input type="text" id="kode_penyakit" value="<?= $kode_catin ?>" class="tambah-data" name="kode_penyakit" readonly required>
+										</div>
+										<label for="nama_penyakit"><b class="form-label">Nama Penyakit</b><br></label>
+										<div class="input-form" style="border: none;">
+											<input type="text" id="nama_penyakit" value="<?= $nama_sakit_catin ?>" class="tambah-data" name="nama_penyakit" readonly required>
+										</div>
+										<label for="keterangan"><b class="form-label">Keterangan</b><br></label>
+										<div class="input-form" style="border: none;">
+											<textarea name="keterangan" class="tambah-data" style="height: 90px; width: 700px;" readonly><?= $keterangan_catin ?></textarea>
+										</div>
 									</div>
-									<hr>
-
-									<button type="submit">Submit</button>
+							<?php else: ?>
+								<h2 style="color:#015D67">Isi Skrining Kesehatan</h2>
+								<form id="popupForm" action="<?= base_url('dashboard/skrining_kesehatan'); ?>" method="post">
+									<p>Silahkan isi sesuai dengan kamu</p>
+									<div class="input-form">
+										<?php foreach ($gejalaCatin as $skrining): ?>
+											<label for="skrining_kesehatan[]"><b></b><br></label>
+											<!-- Unique ID for each checkbox, using $index to ensure IDs don't repeat -->
+											<input type="checkbox" style="color:#015D67" " name="skrining_kesehatan[]" id="skrining_kesehatan[]" value="<?= $skrining['id'] ?>"> <?= $skrining['nama_gejala'] ?>
+											<hr>
+										<?php endforeach; ?>
+										<button type="submit">Submit</button>
+									</div>
 								</form>
-							<?php endif ?>
+							<?php endif; ?>
 						</div>
 					</div>
 					<!--Akhir Pop Up Isi Skrining Kesehatan-->
@@ -248,52 +256,52 @@
 							</div>
 						<?php }  ?>
 
-						<!--Pop Up Isi Kuesionoer Kesehatan-->
+						<!--Pop Up Isi Kuesionoer Psikologi-->
 						<div class="overlay" id="overlay1"></div>
 						<div class="popup" id="popup1">
 							<span class="close-btn" onclick="closePopup1()">&times;</span>
-							<h2>Kuesioner Kepribadian</h2>
 							<?php
 							if ($id_pemeriksaan_psikolog == 2) :
 							?>
-								<h1>ini hasil diagnosa kuesioner kepridabdian</h1>
+								<h1>Hasil Kusesioner Kepribadian</h1>
+									<hr style="border-color: #015D67;">
+									<div class="edit-pendaftaran-container">
+										<p><b>Tingkat Kepercayaan : <?= $kepercayaan_psikolog ?>%</b></p>
+										<label for="kode_penyakit"><b class="form-label">Kode Penyakit</b><br></label>
+										<div class="input-form" style="border: none;">
+											<input type="text" id="kode_penyakit" value="<?= $kode_psikolog ?>" class="tambah-data" name="kode_penyakit" readonly required>
+										</div>
+										<label for="nama_penyakit"><b class="form-label">Nama Penyakit</b><br></label>
+										<div class="input-form" style="border: none;">
+											<input type="text" id="nama_penyakit" value="<?= $nama_sakit_psikolog ?>" class="tambah-data" name="nama_penyakit" readonly required>
+										</div>
+										<label for="keterangan"><b class="form-label">Keterangan</b><br></label>
+										<div class="input-form" style="border: none;">
+											<textarea name="keterangan" class="tambah-data" style="height: 90px; width: 700px;" readonly><?= $keterangan_psikolog ?></textarea>
+										</div>
+									</div>
 							<?php else : ?>
 								<form id="popupForm" action="<?= base_url('dashboard/kuisioner_kepribadian'); ?>" method="post">
-									<div>
-
-										<p>Silahkan isi sesuai dengan kamu</p>
-
-										<label for="ks1"><b>Pertanyaan 1</b><br></label>
-										<input type="checkbox" id="ks1" name="ks1"> Tenang menghadapi masalah?
-
-										<hr>
-										<label for="ks2"><b>Pertanyaan 2</b><br></label>
-										<input type="checkbox" id="ks2" name="ks2"> Tidak mudah panik?
-
-
-										<hr>
-										<label for="ks3"><b>Pertanyaan 3</b><br></label>
-										<input type="checkbox" id="ks3" name="ks3"> Cemas ketika menghadapi masalah baru
-
-										<hr>
-										<label for="ks4"><b>Pertanyaan 4</b><br></label>
-										<input type="checkbox" id="ks4" name="ks4"> Mampu mengendalikan baru?
-
-										<hr>
-										<label for="sk5"><b>Pertanyaan 5</b><br></label>
-										<input type="checkbox" id="sk5" name="sk5"> Saat beraktivitas mata sering berkunang kunang?
+									<p>Silahkan isi sesuai dengan kamu</p>
+									<div class="input-form">
+										<?php foreach ($gejalaPsikolog as $skrining): ?>
+											<label for="kuisioner_kepribadian[]"><b></b><br></label>
+											<!-- Unique ID for each checkbox, using $index to ensure IDs don't repeat -->
+											<input type="checkbox"  name="kuisioner_kepribadian[]" id="kuisioner_kepribadian[]" value="<?= $skrining['id'] ?>"> <?= $skrining['nama_gejala'] ?>
+											<hr>
+										<?php endforeach; ?>
+										<button type="submit">Submit</button>
 									</div>
-									<button type="submit">Submit</button>
 								</form>
 							<?php endif ?>
 						</div>
 					</div>
 
-					<!--Akhir Pop Up Isi Kuesionoer Kesehatan-->
+					<!--Akhir Pop Up Isi Kuesionoer Psikologi-->
 
 					<!-- 3 -->
 					<div class="status">
-						<h5 style=" margin:10px; margin-bottom:20px;" >Status Verifikasi</h5>
+						<h5 style=" margin:10px; margin-bottom:20px;">Status Verifikasi</h5>
 
 						<?php if ($id_status_verifikasi == 2) { ?>
 							<div class="isi-status" onclick="verifikasi()" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
@@ -317,7 +325,7 @@
 					</div>
 					<!-- 4 -->
 					<div class="status">
-						<h5 style=" margin:10px; margin-bottom:20px;" >Status Kesehatan</h5>
+						<h5 style=" margin:10px; margin-bottom:20px;">Status Kesehatan</h5>
 
 						<?php if ($id_status_kesehatan == 2) { ?>
 							<div class="isi-status" onclick="kesehatan()" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
@@ -343,7 +351,7 @@
 					</div>
 					<!-- 5 -->
 					<div class="status">
-						<h5 style=" margin:10px; margin-bottom:20px;" >Status BNN</h5>
+						<h5 style=" margin:10px; margin-bottom:20px;">Status BNN</h5>
 						<?php if ($id_status_bnn == 2) { ?>
 							<div class="isi-status" onclick="bnn()" style="background-color: white; border: 1px solid  #015D67;color:#015D67; font-weight:bold;">
 								<span>Sudah Disetujui <img src="<?= base_url('assets') ?>/img/sudah.svg" alt="" style="margin-top:1.5px"></span>
@@ -424,6 +432,7 @@
 			document.getElementById('verifikasi').classList.remove('show');
 			document.getElementById('overlayVerifikasi').classList.remove('show');
 		}
+
 		function kesehatan() {
 			document.getElementById('kesehatan').classList.add('show');
 			document.getElementById('overlayKesehatan').classList.add('show');
@@ -433,6 +442,7 @@
 			document.getElementById('kesehatan').classList.remove('show');
 			document.getElementById('overlayKesehatan').classList.remove('show');
 		}
+
 		function bnn() {
 			document.getElementById('bnn').classList.add('show');
 			document.getElementById('overlaybnn').classList.add('show');
@@ -442,6 +452,7 @@
 			document.getElementById('bnn').classList.remove('show');
 			document.getElementById('overlaybnn').classList.remove('show');
 		}
+
 		function psikolog() {
 			document.getElementById('psikolog').classList.add('show');
 			document.getElementById('overlaypsikolog').classList.add('show');

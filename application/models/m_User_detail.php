@@ -38,11 +38,39 @@ class m_User_detail extends CI_Model
 		return $query->result();
 	}
 
+	public function get_all_gejala_catin()
+	{
+		$hasil = $this->db->query("SELECT * FROM gejala WHERE kelompok_gejala_id='Catin'");
+		return $hasil;
+	}
+
+	public function get_all_gejala_psikolog()
+	{
+		$hasil = $this->db->query("SELECT * FROM gejala WHERE kelompok_gejala_id='Psikolog'");
+		return $hasil;
+	}
+
 	public function getAll($id_user)
 	{
 
 		$this->db->where('id_user_detail', $id_user);
 		$query = $this->db->get('user_detail');
+		return $query;
+	}
+
+	public function getpemeriksa($id_user)
+	{
+
+		$this->db->where('id_user_detail', $id_user);
+		$query = $this->db->get('user_detail');
+		$query = $query->result_array();
+		return $query;
+	}
+
+	public function getAllPemeriksaan($id_user)
+	{
+		$this->db->where('user_id', $id_user);
+		$query = $this->db->get('hasil_diagnosa');
 		return $query;
 	}
 
@@ -74,7 +102,7 @@ class m_User_detail extends CI_Model
 		$resultHasilDiagnosa = $queryHasilDiagnosa->result_array();
 		return $resultHasilDiagnosa;
 	}
-	
+
 	public function get_by_id_and_tanggal_count($ids, $tanggal)
 	{
 		$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
