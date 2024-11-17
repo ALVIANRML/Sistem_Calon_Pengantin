@@ -33,10 +33,10 @@
 	flex-shrink: 0;
 	/* Prevent the copyright text from shrinking */
 	text-align: center;
-	margin-top: auto;
+	margin-left: 5vw;
 	/* Push it to the bottom */
 	position: absolute;
-	bottom: 10%;
+	bottom:-60% ;
 	color: var(--Grey, #7F7F7F);
 	font-family: Inter;
 	font-size: 14px;
@@ -128,7 +128,7 @@
 
 .form-input-cari {
 	position: relative;
-	/* Kontainer relatif untuk ikon */
+	height: 5vh;
 	display: flex;
 	align-items: center;
 }

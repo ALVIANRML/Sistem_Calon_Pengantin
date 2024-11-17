@@ -284,7 +284,7 @@ class Dashboard_Admin extends CI_Controller
 
 		if ($this->form_validation->run() == false) {
 
-			$this->load->view('Dashboard/catin/catin_pemeriksaan');
+			redirect('dashboard_admin/view_data_catin');
 		} else {
 			$path = 'uploads/photo/';
 			$nama = $this->session->userdata('username');
@@ -417,7 +417,7 @@ class Dashboard_Admin extends CI_Controller
 
 
 			$this->session->set_flashdata('input', 'input');
-			redirect('dashboard/view_catin_pemeriksaan');
+			redirect('dashboard_admin/view_data_catin');
 		}
 	}
 
@@ -630,63 +630,77 @@ class Dashboard_Admin extends CI_Controller
 	}
 
 	public function data_penyakit()
-	{
-		$keyword = $this->input->post('input');
+{
+    $keyword = $this->input->post('input'); // Ambil kata kunci pencarian jika ada
+    $page = $this->input->post('page') ?? 1; // Nomor halaman dari AJAX, default ke 1 jika kosong
+    $per_page = 5; // Jumlah data per halaman
 
-		$config = array();
-		$config['base_url'] = base_url('dashboard_admin/data_penyakit'); // URL for pagination
-		$config['per_page'] = 5; // Number of items per page
-		$config['uri_segment'] = 3; // URI segment for pagination page number
-		$config['num_links'] = 5; // Number of pagination links
+    // Menghitung jumlah total data berdasarkan pencarian
+    if ($keyword) {
+        $total_rows = $this->m_Penyakit->count_search($keyword); // Jumlah total hasil pencarian
+        $data['id'] = $this->m_Penyakit->pagination_search($keyword, $per_page, ($page - 1) * $per_page);
+    } else {
+        $total_rows = $this->m_Penyakit->count_all_penyakit(); // Jumlah total data tanpa pencarian
+        $data['id'] = $this->m_Penyakit->pagination_penyakit($per_page, ($page - 1) * $per_page);
+    }
 
-		// Get the current page number
-		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+    // Pengaturan pagination
+    $this->load->library('pagination');
+    // $config['base_url'] = base_url('dashboard_admin/data_penyakit');
+    $config['base_url'] = '#';
+    $config['total_rows'] = $total_rows;
+    $config['per_page'] = $per_page;
+    $config['use_page_numbers'] = TRUE; // Menggunakan nomor halaman, bukan offset
+    $config['num_links'] = 5; // Jumlah link di kiri dan kanan halaman aktif
+	// $config['total_rows'] = $total_rows;
 
-		if ($keyword != null) {
-			// If a search keyword is provided
-			$total_rows = $this->m_Penyakit->count_search($keyword); // Count search results
-			$data['id'] = $this->m_Penyakit->pagination_search($keyword, $config['per_page'], $page);
-		} else {
-			// If no search keyword is provided
-			$total_rows = $this->m_Penyakit->count_all_penyakit(); // Count all results
-			$data['id'] = $this->m_Penyakit->pagination_penyakit($config['per_page'], $page);
-		}
-		// Pagination configuration
-		$config['full_tag_open'] = '<nav><ul class="pagination">';
-		$config['full_tag_close'] = '</ul></nav>';
+    // Pengaturan tampilan HTML untuk pagination
+	$config['full_tag_open'] = '<nav><ul class="pagination">';
+	$config['full_tag_close'] = '</ul></nav>';
 
-		$config['first_link'] = 'First';
-		$config['first_tag_open'] = '<li class="page-item">';
-		$config['first_tag_close'] = '</li>';
+	$config['first_link'] = 'First';
+	$config['first_tag_open'] = '<li class="page-item">';
+	$config['first_tag_close'] = '</li>';
 
-		$config['last_link'] = 'Last';
-		$config['last_tag_open'] = '<li class="page-item">';
-		$config['last_tag_close'] = '</li>';
+	$config['last_link'] = 'Last';
+	$config['last_tag_open'] = '<li class="page-item">';
+	$config['last_tag_close'] = '</li>';
 
-		$config['next_link'] = '&raquo;';
-		$config['next_tag_open'] = '<li class="page-item">';
-		$config['next_tag_close'] = '</li>';
+	$config['next_link'] = '&raquo;';
+	$config['next_tag_open'] = '<li class="page-item">';
+	$config['next_tag_close'] = '</li>';
 
-		$config['prev_link'] = '&laquo;';
-		$config['prev_tag_open'] = '<li class="page-item">';
-		$config['prev_tag_close'] = '</li>';
+	$config['prev_link'] = '&laquo;';
+	$config['prev_tag_open'] = '<li class="page-item">';
+	$config['prev_tag_close'] = '</li>';
 
-		$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link">';
-		$config['cur_tag_close'] = '</a></li>';
+	$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link">';
+	$config['cur_tag_close'] = '</a></li>';
 
-		$config['num_tag_open'] = '<li class="page-item">';
-		$config['num_tag_close'] = '</li>';
+	$config['num_tag_open'] = '<li class="page-item">';
+	$config['num_tag_close'] = '</li>';
 
-		$config['attributes'] = array('class' => 'page-link');
-		$config['total_rows'] = $total_rows; // Total number of data
-		$this->pagination->initialize($config);
+	$config['attributes'] = array('class' => 'page-link');
 
-		// Add this line to calculate the starting number for row numbers (angka)
-		$data['start'] = $page;
-		$data['pagination'] = $this->pagination->create_links();
-		
-			$this->load->view('Dashboard/admin/data_penyakit', $data);
-	}
+
+    $this->pagination->initialize($config);
+    $data['pagination'] = $this->pagination->create_links();
+
+    // Jika request AJAX, kirim respons dalam bentuk JSON
+    if ($this->input->is_ajax_request()) {
+        echo json_encode([
+            'results' => $data['id'],
+            'pagination' => $data['pagination']
+        ]);
+        return;
+    }
+
+    // Jika bukan request AJAX, tampilkan view biasa
+    $data['start'] = ($page - 1) * $per_page;
+    $this->load->view('Dashboard/admin/data_penyakit', $data);
+}
+
+
 
 
 	public function add_penyakit()

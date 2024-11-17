@@ -35,7 +35,7 @@ class beranda extends CI_Controller
 			
 			$todaytes = date('Y-m-d');
 			$kuota =$this->m_User_detail->hitung_kuota($todaytes);
-			$kuota =7;
+			// $kuota =7;
 			$this->session->set_userdata('kuota', $kuota );
 			if ($kuota == 10){
 				$id_status = 0;
