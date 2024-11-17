@@ -132,31 +132,7 @@
 	?>
 	<div class="container">
 		<!-- header -->
-		<div class="header-dashboard-admin">
-			<div class="container-logo">
-				<img src="<?= base_url('assets/') ?>img/percantin.png" alt="">
-				<p>PERCATIN</p>
-			</div>
-			<div class="profil-container">
-				<div class="foto-profil">
-					<img src="<?= base_url('assets/img/profile-admin.png') ?>" alt="">
-				</div>
-				<div style="display: flex; flex-direction: column;">
-					<p style="color: #7F7F7F; font-size: 12px; font-weight: 600;">Halo,</p>
-					<p class="nama"><?= $this->session->userdata('username'); ?></p>
-				</div>
-				<!-- Dropdown -->
-				<div class="dropdown-logo">
-					<img src="<?= base_url('assets/img/dropdown.svg') ?>" alt="">
-					<div class="dropdown">
-						<div> <a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password</a>
-						</div>
-						<div><a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar</a></div>
-					</div>
-				</div>
-				<!-- End of Dropdown -->
-			</div>
-		</div>
+		<?php $this->load->view('Dashboard/partial/header-dashboard-admin.php') ?>
 
 		<!-- sidebar -->
 		<div class="container-sidebar-dashboard-admin">
@@ -720,13 +696,15 @@
 											<label for="tempatLahir"><b class="form-label">Tempat Lahir</b><br></label>
 											<input type="text" value="<?= $datas['tempat_lahir'] ?>" class="input-form" name="tempatLahir" required>
 											<label for="tanggalLahir"><b class="form-label">Tanggal Lahir</b><br></label>
-											<div class="input-form">
-												<input type="date" value="<?= $datas['tanggal_lahir'] ?>" onchange="hitungUmur()" class="tambah-data" name="tanggalLahir" required>
+											<div class="input-form" style="height: 50px; padding:0px">
+												<div class="form-input-tanggal">
+													<input type="date" id="tanggal" name="tanggal" value="<?= $this->session->userdata('admin_tanggal_filter') ?>" onchange="this.form.submit()">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+														<path d="M9 11H7V13H9V11ZM13 11H11V13H13V11ZM17 11H15V13H17V11ZM19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z" fill="#015963" />
+													</svg>
+												</div>
 											</div>
-											<label for="umur"><b class="form-label">Usia</b><br></label>
-											<div class="input-form">
-												<input type="date" value="<?= $datas['tanggal_lahir'] ?>" onchange="hitungUmur()" class="tambah-data" name="umur" required>
-											</div>
+											<input type="text" value="<?= $datas['tempat_lahir'] ?>" class="input-form" name="tempatLahir" required>
 											<label for="jenisKelamin"><b class="form-label">Jenis Kelamin</b><br></label>
 
 											<select type="text" class="tambah-data" name="jenisKelamin" required>

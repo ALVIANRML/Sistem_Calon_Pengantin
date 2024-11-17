@@ -12,16 +12,16 @@
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/responsive.css') ?>" />
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	
+
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	
+
 	<style>
 		.swal-modal {
 			width: 80% !important;
 			max-width: 600px;
 			background-color: white !important;
 			height: auto;
-			
+
 		}
 
 		.swal-title {
@@ -32,7 +32,7 @@
 			text-align: left;
 			padding-left: 20px;
 		}
-		
+
 		.swal-content {
 			color: white !important;
 			/* Warna teks isi */
@@ -54,7 +54,7 @@
 			text-align: left;
 			font-size: medium;
 		}
-		
+
 		.swal-button {
 			background-color: #015D67 !important;
 			/* Warna tombol */
@@ -74,7 +74,7 @@
 				height: auto;
 				/* Atur tinggi secara otomatis */
 			}
-			
+
 			.swal-content {
 				width: 95%;
 				/* Sesuaikan lebar konten untuk layar kecil */
@@ -83,8 +83,8 @@
 				height: 10%;
 			}
 		}
-		</style>
-		<title>Dashboard Admin</title>
+	</style>
+	<title>Dashboard Admin</title>
 </head>
 
 <body>
@@ -107,31 +107,9 @@
 		</script>
 	<?php } ?>
 	<div class="container">
-		<div class="header-dashboard-admin">
-			<div class="container-logo">
-				<img src="<?= base_url('assets/') ?>img/percantin.png" alt="">
-				<p>PERCATIN</p>
-			</div>
-			<div class="profil-container">
-				<div class="foto-profil">
-					<img src="<?= base_url('assets/img/profile-admin.png') ?>" alt="">
-				</div>
-				<div style="display: flex; flex-direction: column;">
-					<p style="color: #7F7F7F; font-size: 12px; font-weight: 600;">Halo,</p>
-					<p class="nama"><?= $this->session->userdata('username'); ?></p>
-				</div>
-				<!-- Dropdown -->
-				<div class="dropdown-logo">
-					<img src="<?= base_url('assets/img/dropdown.svg') ?>" alt="">
-					<div class="dropdown" style="width: 122%;">
-						<div> <a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password </a>
-						</div>
-						<div><a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar </a></div>
-					</div>
-				</div>
-				<!-- End of Dropdown -->
-			</div>
-		</div>
+		<?php $this->load->view('Dashboard/partial/header-dashboard-admin.php') ?>
+
+		
 		<div class="container-sidebar-dashboard-admin">
 			<p>NAVIGASI</p>
 			<a href="<?= base_url('dashboard_admin/view_admin') ?>">
@@ -318,7 +296,7 @@
 		</div>
 	</div>
 
-	</div>
+
 
 	<script>
 		function showPopup() {
