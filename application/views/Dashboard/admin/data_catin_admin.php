@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/data-catin-admin.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/sidebar_admin.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/pagination.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/admin/foto.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/responsive.css') ?>" />
 	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
 	<script src="<?php echo base_url("js/jquery.min.js"); ?>"></script> <!-- Load library jquery -->
@@ -704,7 +705,6 @@
 													</svg>
 												</div>
 											</div>
-											<input type="text" value="<?= $datas['tempat_lahir'] ?>" class="input-form" name="tempatLahir" required>
 											<label for="jenisKelamin"><b class="form-label">Jenis Kelamin</b><br></label>
 
 											<select type="text" class="tambah-data" name="jenisKelamin" required>
@@ -751,12 +751,11 @@
 											</select>
 
 											<label for="nomorTelepon"><b class="form-label">Nomor Telepon</b><br></label>
-
 											<input type="text" value="<?= $datas['nomor_telepon'] ?>" class="tambah-data" name="nomorTelepon" required>
 
 
 
-											<label for="provinsi">Provinsi</label>
+											<label for="provinsi"><b>Provinsi</b></label>
 											<select name="provinsi" id="provinsi" class="tambah-data" style="width:100%">
 												<?php if ($provinsi == null) : ?>
 													<!-- <option value="" disabled selected>Pilih Provinsi</option> -->
@@ -770,7 +769,7 @@
 											<?= form_error('provinsi', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 
 
-											<label for="kota">Kota</label>
+											<label for="kota"><b>Kota</b></label>
 											<select name="kota" id="kota" class="tambah-data" style="width:100%">
 												<?php if ($kota == null) : ?>
 													<option value="" disabled selected>Pilih Kota</option>
@@ -783,7 +782,7 @@
 											<?= form_error('kota', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 
 
-											<label for="kecamatan">Kecamatan</label>
+											<label for="kecamatan"><b>Kecamatan</b></label>
 											<select name="kecamatan" id="kecamatan" class="tambah-data" style="width:100%">
 												<?php if ($kecamatan == null) : ?>
 													<option value="" disabled selected>Pilih Kecamatan</option>
@@ -797,7 +796,7 @@
 											<?= form_error('kecamatan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 
 
-											<label for="kelurahan">Kelurahan</label>
+											<label for="kelurahan"><b>Kelurahan</b></label>
 											<select name="kelurahan" id="kelurahan" class="tambah-data" style="width:100%">
 												<?php if ($kelurahan == null) : ?>
 													<option value="" disabled selected>Pilih Kelurahan</option>
@@ -812,140 +811,169 @@
 
 
 
-											<label for="alamat">Alamat Lengkap</label>
+											<label for="alamat"><b>Alamat Lengkap</b></label>
 											<textarea id="alamat" class="tambah-data" name="alamat" placeholder="" value="<?= $this->session->userdata('alamat'); ?>" style="width: 100%;height:20vh;"><?= $this->session->userdata('alamat'); ?></textarea>
 											<?= form_error('alamat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 
 
-											<label for="pernikahanKe"><b class="form-label">Pernikahan Ke</b><br></label>
+											<label for="pernikahanKe"><b class="form-label">Pernikahan Ke</b></label>
 											<div class="input-form" style='border:none; outline: none;'>
 												<input type="text" value="<?= $datas['pernikahan_ke'] ?>" class="tambah-data" name="pernikahanKe" required>
 											</div>
 
-											<label for="tanggalPernikahan"><b class="form-label">Pernikahan Ke</b><br></label>
-											<div class="input-form" style='border:none; outline: none;'>
-												<input type="date" value="<?= $datas['tanggal_pernikahan'] ?>" class="tambah-data" name="tanggalPernikahan" required>
+											<label for="tanggalPernikahan"><b class="form-label"><b>Tanggal Pernikahan</b></label>
+											<div class="input-form" style="height: 50px; padding:0px">
+												<div class="form-input-tanggal">
+													<input type="date" id="tanggal" name="tanggal" value="<?= $datas['tanggal_pernikahan'] ?>" onchange="this.form.submit()">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+														<path d="M9 11H7V13H9V11ZM13 11H11V13H13V11ZM17 11H15V13H17V11ZM19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z" fill="#015963" />
+													</svg>
+												</div>
+											</div>
+											<br>
+
+											<div class="file-upload-container">
+											<label for="foto_user"><b>Pas Foto</b></label>
+												<?php if ($foto_user == null) : ?>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" id="drop-zone-foto_user">
+														<label for="foto_user" class="file-upload-label">
+															<div class="upload-icon">+</div>
+															<div class="upload-text">Unggah atau drop file disini</div>
+															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+															<input type="file" id="foto_user" name="foto_user" onchange="uploadfile('foto_user')" accept="image/png, image/jpeg" hidden>
+														</label>
+														<div id="preview-container">
+															<img id="preview-image-foto_user" src="" alt="Preview Image" class="preview-image" style="display: none;">
+														</div>
+													</div>
+													<?= form_error('foto_user', '<small class="text-danger">', '</small>'); ?>
+													<?php echo form_close(); ?>
+												<?php else : ?>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload">
+														<div id="preview-container">
+															<img id="uploadImage-foto_user" src="<?= base_url('uploads/photo/') . $foto_user ?>" alt="Pas Foto" class="preview-image">
+														</div>
+														<label for="foto_user" class="file-upload-label">
+															<div class="image-caption">Klik untuk mengganti gambar</div>
+														</label>
+														<input type="file" id="foto_user" name="foto_user" onchange="updateFile('foto_user')" hidden>
+													</div>
+													<?= form_error('foto_user', '<small class="text-danger">', '</small>'); ?>
+													<input type="hidden" name="existing_image" value="<?= $foto_user ?>">
+													<?php echo form_close(); ?>
+												<?php endif ?>
+											</div>
+											<br>
+
+
+											<div class="file-upload-container">
+												<!-- Foto KTP -->
+												<label for="foto_ktp"><b>Foto KTP</b></label>
+												<?php if ($foto_ktp == null) : ?>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" id="drop-zone-foto_ktp">
+														<label for="foto_ktp" class="file-upload-label">
+															<div class="upload-icon">+</div>
+															<div class="upload-text">Unggah atau drop file disini</div>
+															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+															<input type="file" id="foto_ktp" name="foto_ktp" onchange="uploadfile('foto_ktp')" accept="image/png, image/jpeg" hidden>
+														</label>
+														<div id="preview-container">
+															<img id="preview-image-foto_ktp" src="" alt="Preview Image" class="preview-image" style="display: none;">
+														</div>
+													</div>
+													<?= form_error('foto_ktp', '<small class="text-danger">', '</small>'); ?>
+													<?php echo form_close(); ?>
+												<?php else : ?>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" id="drop-zone-foto_ktp">
+														<div id="preview-container">
+															<img id="uploadImage-foto_ktp" src="<?= base_url('uploads/photo/') . $foto_ktp ?>" alt="Foto KTP" class="preview-image">
+														</div>
+														<label for="foto_ktp" class="file-upload-label">
+															<div class="image-caption">Klik untuk mengganti gambar</div>
+														</label>
+														<input type="file" id="foto_ktp" name="foto_ktp" onchange="updateFile('foto_ktp')" hidden>
+													</div>
+													<?= form_error('foto_ktp', '<small class="text-danger">', '</small>'); ?>
+													<input type="hidden" name="existing_image" value="<?= $foto_ktp ?>">
+													<?php echo form_close(); ?>
+												<?php endif ?>
+												<br>
+
+												<!-- Foto Kartu Keluarga (KK) -->
+												<label for="foto_kk"><b>Foto Kartu Keluarga</b></label>
+												<?php if ($foto_kk == null) : ?>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" id="drop-zone-foto_kk">
+														<label for="foto_kk" class="file-upload-label">
+															<div class="upload-icon">+</div>
+															<div class="upload-text">Unggah atau drop file disini</div>
+															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+															<input type="file" id="foto_kk" name="foto_kk" onchange="uploadfile('foto_kk')" accept="image/png, image/jpeg" hidden>
+														</label>
+														<div id="preview-container">
+															<img id="preview-image-foto_kk" src="" alt="Preview Image" class="preview-image" style="display: none;">
+														</div>
+													</div>
+													<?= form_error('foto_kk', '<small class="text-danger">', '</small>'); ?>
+													<?php echo form_close(); ?>
+												<?php else : ?>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" id="drop-zone-foto_kk">
+														<div id="preview-container">
+															<img id="uploadImage-foto_kk" src="<?= base_url('uploads/photo/') . $foto_kk ?>" alt="Foto KK" class="preview-image">
+														</div>
+														<label for="foto_kk" class="file-upload-label">
+															<div class="image-caption">Klik untuk mengganti gambar</div>
+														</label>
+														<input type="file" id="foto_kk" name="foto_kk" onchange="updateFile('foto_kk')" hidden>
+													</div>
+													<?= form_error('foto_kk', '<small class="text-danger">', '</small>'); ?>
+													<input type="hidden" name="existing_image" value="<?= $foto_kk ?>">
+													<?php echo form_close(); ?>
+												<?php endif ?>
+												<br>
+
+												<!-- Foto Surat Pengantar -->
+												<label for="foto_surat"><b>Foto Surat Pengantar</b></label>
+												<?php if ($foto_surat == null) : ?>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" id="drop-zone-foto_surat">
+														<label for="foto_surat" class="file-upload-label">
+															<div class="upload-icon">+</div>
+															<div class="upload-text">Unggah atau drop file disini</div>
+															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+															<input type="file" id="foto_surat" name="foto_surat" onchange="uploadfile('foto_surat')" accept="image/png, image/jpeg" hidden>
+														</label>
+														<div id="preview-container">
+															<img id="preview-image-foto_surat" src="" alt="Preview Image" class="preview-image" style="display: none;">
+														</div>
+													</div>
+													<?= form_error('foto_surat', '<small class="text-danger">', '</small>'); ?>
+													<?php echo form_close(); ?>
+												<?php else : ?>
+													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<div class="custom-file-upload" id="drop-zone-foto_surat">
+														<div id="preview-container">
+															<img id="uploadImage-foto_surat" src="<?= base_url('uploads/photo/') . $foto_surat ?>" alt="Foto Surat" class="preview-image">
+														</div>
+														<label for="foto_surat" class="file-upload-label">
+															<div class="image-caption">Klik untuk mengganti gambar</div>
+														</label>
+														<input type="file" id="foto_surat" name="foto_surat" onchange="updateFile('foto_surat')" hidden>
+													</div>
+													<?= form_error('foto_surat', '<small class="text-danger">', '</small>'); ?>
+													<input type="hidden" name="existing_image" value="<?= $foto_surat ?>">
+													<?php echo form_close(); ?>
+												<?php endif ?>
 											</div>
 
-											<?php if ($foto_user == null) : ?>
-												<label for="foto_user">Pas Foto</label>
-												<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-												<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
-													<input type="file" id="foto_user" class="tambah-data" name="foto_user" onchange="uploadfile('foto_user')" style="display: none;" value="<?= $foto_user ?>">
-													<label for="foto_user" class="custom-file-label">
-														<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-														<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
-														<div class="upload-text">Unggah atau drop file disini</div>
-														<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
-													</label>
-													<span id="file-name-foto_user" class="file-name"></span>
-												</div>
-												<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-											<?php else : ?>
-												<label for="foto_user">Pas Foto</label>
-												<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-												<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
-													<img id="uploadImage-foto_user" src="<?= base_url('uploads/photo/') . $foto_user ?>" alt="KTP Image" class="preview-image">
-													<input type="file" id="foto_user" class="tambah-data" name="foto_user" onchange="updateFile('foto_user')" style="display: none;" value="<?= $foto_user ?>">
-													<div class="image-caption"></div>
-													<label for="foto_user" class="custom-file-label">
-														<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
-													</label>
-													<span id="file-name-foto_user" class="file-name"></span>
-												</div>
-												<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-												<input type="hidden" name="existing_image" value="<?= $foto_user ?>">
-											<?php endif ?>
+											<br>
 
-											<?php if ($foto_ktp == null) : ?>
-												<label for="foto_ktp">Foto KTP</label>
-												<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-												<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
-													<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $this->session->userdata('foto_ktp') ?>">
-													<label for="foto_ktp" class="custom-file-label">
-														<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-														<img id="preview-image-foto_ktp" class="preview-image" src="" alt="Preview Image" style="display: none;">
-														<div class="upload-text">Unggah atau drop file disini</div>
-														<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
-													</label>
-													<span id="file-name-foto_ktp" class="file-name"></span>
-												</div>
-												<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-											<?php else : ?>
-												<label for="foto_ktp">Foto KTP</label>
-												<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-												<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
-													<img id="uploadImage-foto_ktp" src="<?= base_url('uploads/photo/') . $foto_ktp ?>" alt="KTP Image" class="preview-image">
-													<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $foto_ktp ?>">
-													<div class="image-caption"></div>
-													<label for="foto_ktp" class="custom-file-label">
-														<img id="preview-image-foto_ktp" class="preview-image" src="" alt="Preview Image" style="display: none;">
-													</label>
-													<span id="file-name-foto_ktp" class="file-name"></span>
-												</div>
-												<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-												<input type="hidden" name="existing_image" value="<?= $foto_ktp ?>">
-											<?php endif ?>
 
-											<?php if ($foto_kk == null) : ?>
-												<label for="foto_kk">Foto Kartu Keluarga</label>
-												<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-												<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
-													<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="uploadfile('foto_kk')" style="display: none;">
-													<label for="foto_kk" class="custom-file-label">
-														<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-														<img id="preview-image-foto_kk" class="preview-image" src="" alt="Preview Image" style="display: none;">
-														<div class="upload-text">Unggah atau drop file disini</div>
-														<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
-													</label>
-													<span id="file-name-foto_kk" class="file-name"></span>
-												</div>
-												<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-											<?php else : ?>
-												<label for="foto_kk">Foto Kartu Keluarga</label>
-												<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-												<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
-													<img id="uploadImage-foto_kk" src="<?= base_url('uploads/photo/') . $foto_kk ?>" alt="KTP Image" class="preview-image">
-													<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="updateFile('foto_kk')" style="display: none;" value="<?= $foto_kk ?>">
-													<div class="image-caption"></div>
-													<label for="foto_kk" class="custom-file-label">
-														<img id="preview-image-foto_kk" class="preview-image" src="" alt="Preview Image" style="display: none;">
-													</label>
-													<span id="file-name-foto_kk" class="file-name"></span>
-												</div>
-												<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-												<input type="hidden" name="existing_image" value="<?= $foto_kk ?>">
-											<?php endif ?>
-
-											<?php if ($foto_surat == null) : ?>
-												<label for="foto_surat">Foto Surat Pengantar</label>
-												<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-												<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
-													<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="uploadfile('foto_surat')" style="display: none;">
-													<label for="foto_surat" class="custom-file-label">
-														<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-														<img id="preview-image-foto_surat" class="preview-image" src="" alt="Preview Image" style="display: none;">
-														<div class="upload-text">Unggah atau drop file disini</div>
-														<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
-													</label>
-													<span id="file-name-foto_surat" class="file-name"></span>
-												</div>
-												<?= form_error('foto_surat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-											<?php else : ?>
-												<label for="foto_surat">Foto Surat Pengantar</label>
-												<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-												<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
-													<img id="uploadImage-foto_surat" src="<?= base_url('uploads/photo/') . $foto_surat ?>" alt="KTP Image" class="preview-image">
-													<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="updateFile('foto_surat')" style="display: none;" value="<?= $foto_surat ?>">
-													<div class="image-caption"></div>
-													<label for="foto_surat" class="custom-file-label">
-														<img id="preview-image-foto_surat" class="preview-image" src="" alt="Preview Image" style="display: none;">
-													</label>
-													<span id="file-name-foto_surat" class="file-name"></span>
-												</div>
-												<?= form_error('foto_surat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-												<input type="hidden" name="existing_image" value="<?= $foto_surat ?>">
-											<?php endif ?>
 										</div>
 										<button type="submit">Submit</button>
 									</form>

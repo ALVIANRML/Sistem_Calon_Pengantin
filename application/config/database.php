@@ -76,11 +76,11 @@
 	// database alvian
 
 	$db['default'] = array(
-		'dsn'	=> 'pgsql:host=localhost;port=5432;dbname=db_CalonPengantin',
+		'dsn'	=> 'pgsql:host=localhost;port=5432;dbname=db_Calon_Pengantin',
 		'hostname' => 'localhost',
 		'username' => 'postgres',
 		'password' => 'password',
-		'database' => 'db_CalonPengantin',
+		'database' => 'db_Calon_Pengantin',
 		'dbdriver' => 'PDO',
 		'dbprefix' => '',
 		'pconnect' => FALSE,
