@@ -280,6 +280,7 @@
 								</form>
 							</div>
 						</tbody>
+						<?= $pagination?>
 					</table>
 					<?= $pagination?>
 				</div>

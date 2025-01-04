@@ -4,18 +4,28 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="<?= base_url('assets/css/catin.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/responsive.css') ?>" />
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/percatin_log.png" />
-	<title>D_catin</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/catin.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/form.css') ?>">
+	<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+	<title>Non-Scrollable Layout</title>
+
 </head>
 
-<body style="overflow-y: auto;">
-	<!-- declatation -->
+<body style="overflow-y: scroll;">
+
+	<!-- declaration -->
 	<?php
+	$nomor_pendaftaran = $this->session->userdata('no_pendaftaran');
+	$nama = $this->session->userdata('nama_lengkap');
+	$nik = $this->session->userdata('nik');
+	$fotoUser = $this->session->userdata('foto_user');
+	$tempatLahir = $this->session->userdata('tempat_lahir');
+	$tanggalLahir = $this->session->userdata('tanggal_lahir');
+	$nomor = $this->session->userdata('nomor');
+	$usia = $this->session->userdata('usia');
+	$jenisKelamin = $this->session->userdata('jenis_kelamin');
+	$id_status_verifikasi = $this->session->userdata('id_status_verifikasi');
 	$provinsi = $this->session->userdata('provinsi');
 	$kota = $this->session->userdata('kota');
 	$kecamatan = $this->session->userdata('kecamatan');
@@ -25,689 +35,406 @@
 	$foto_ktp = $this->session->userdata('foto_ktp');
 	$foto_surat = $this->session->userdata('foto_surat');
 	$id_status_verifikasi = $this->session->userdata('id_status_verifikasi');
+	// var_dump($id_pemeriksaan_survei);exit;
 	$id_status_perpanjangan = $this->session->userdata('id_status_perpanjangan');
 	$id_status_aktif = $this->session->userdata('id_status_aktif');
+	$id_status_kesehatan = $this->session->userdata('id_status_kesehatan');
+	$id_status_bnn = $this->session->userdata('id_status_bnn');
+	$id_status_psikolog = $this->session->userdata('id_status_psikolog');
+	$id_pemeriksaan_psikolog = $this->session->userdata('id_pemeriksaan_psikolog');
+	$id_pemeriksaan_survei = $this->session->userdata('id_pemeriksaan_survei');
 	$tanggal_periksa_catin = $this->session->userdata('tanggal_periksa');
+	//For Data Hasil Pemeriksaan
+	$kode_catin = $this->session->userdata('kode_catin');
+	$nama_sakit_catin = $this->session->userdata('nama_sakit_catin');
+	$kepercayaan_catin = $this->session->userdata('kepercayaan_catin');
+	$keterangan_catin = $this->session->userdata('keterangan_catin');
+	$kode_psikolog = $this->session->userdata('kode_psikolog');
+	$nama_sakit_psikolog = $this->session->userdata('nama_sakit_psikolog');
+	$kepercayaan_psikolog = $this->session->userdata('kepercayaan_psikolog');
+	$keterangan_psikolog = $this->session->userdata('keterangan_psikolog');
+	$fotoProfil = $this->session->userdata('foto_user');
+	// var_dump($id_pemeriksaan_survei);exit;
+	if ($fotoProfil == null) {
+		$fotoProfil = base_url('assets/img/null_profile.svg');
+		// var_dump('2');exit;
+	} else {
+		$fotoProfil = base_url('uploads/photo/') . $foto_user;
+		$this->session->userdata('foto_user');
+	}
+	// $fotoProfil = ($fotoProfil == null) ? '' : '<td><span class="status-tabel" style="background-color: #DC3545">Belum diverifikasi</span></td>';
 
+
+	// Memastikan bahwa $tanggal_periksa_catin tidak null sebelum memformat
+	if ($tanggal_periksa_catin) {
+		// Memformat tanggal menjadi format d/m/Y
+		$tanggal_periksa_catin = date('d/m/Y', strtotime($tanggal_periksa_catin));
+	}
+	?>
+	
+	<?php
+	//matikan komen kalok mau ngetes disable
+	// $id_status_verifikasi = 2; $id_status_perpanjangan = 2; $id_status_aktif= 2;
+	$disabled = ($id_status_verifikasi == 2 or $id_status_perpanjangan == 2 or $id_status_aktif == 2) ? 'disabled' : '';
 	?>
 
-	<div class="container_admin">
-		<div class="header-container">
-			<div class="logo-container">
-				<img class="logo" src="<?= base_url('assets/') ?>img/percantin.png" alt="Logo">
-				<span class="logo-text"><b style="font-family: 'Nunito Sans', sans-serif;">PERCATIN</b></span>
-			</div>
-			<!--Navbar-->
-			<nav class="navbar">
-				<ul>
-					<div class="navbar_profil" style="width: 15vw; margin-right:0px">
-						<img src="<?= base_url('uploads/photo/'); ?><?= $this->session->userdata('foto_user'); ?>" alt="Profile Image" class="profile-img">
-						<div class="profile-text">
-							<span>Halo,</span><br> <!-- Menambahkan break line -->
-							<span><b style="color:black; font-family: 'Nunito Sans', sans-serif;">
-									<?= $this->session->userdata('username'); ?>
-								</b></span>
-							<div class="dropdown" style="display: inline-block; vertical-align: middle;">
-								<button style="border: 1px; background-color:white; margin-right:5vh; width:2px;">
-									<img src="<?= base_url('assets/') ?>/img/dropdown.png" alt="Profile Image" style="width: 10px; height: 10px; margin-left: 0px;" class="dropdown-button">
-								</button>
-								<div class="dropdown-content">
-									<a href="<?= base_url('auth/ganti_password') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Ganti Password</a>
-									<a href="<?= base_url('auth/login') ?>" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Keluar</a>
-								</div>
-							</div>
-						</div>
 
-					</div>
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<button class="btn btn-light me-3" id="toggleSidebar">
+				<i class="bx bx-menu"></i>
+			</button>
+			<img src="<?= base_url('assets/') ?>img/percantin.png" alt="" class="logo">
+			<p class="logo-percatin"><b>PERCATIN</b></p>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+
+					<li class="nav-item dropdown" style="margin-right: 5vh;">
+						<a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<img src="<?= $fotoProfil ?>" alt="Profile Picture" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
+							<div class="text-start">
+								<p class="mb-0">Halo,</p>
+								<p class="mb-0 fw-bold"><?= $nama ?></p>
+							</div>
+
+						</a>
+						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="<?= base_url('auth/ganti_password') ?>">Ganti Password</a></li>
+							<li><a class="dropdown-item" href="<?= base_url('auth/login') ?>">Logout</a></li>
+						</ul>
+					</li>
+
 				</ul>
-			</nav>
-		</div>
-		<!--End Navbar-->
-
-		<!--Sidebar-->
-		<div class="main-content">
-			<div class="navigasi_admin">
-				<h6 style="color: gray; margin: 0; font-size:10px;">NAVIGASI</h6>
-				<a href="<?= base_url('dashboard/view_catin') ?>" style="text-decoration: none;">
-					<div class="navigasi_admin_menu">
-						<div class="isi" style="background-color: white;">
-							<img src="<?= base_url('assets/') ?>img/dashboard_black.svg" alt="Profile Image" class="icon-navigation" style="width:2.5vh; height:2.5vh;">
-							<div class="profile-text">
-								<span>Dashboard</span>
-							</div>
-						</div>
-				</a>
 			</div>
-			<div class="isi" style="background-color: #015D67;">
-				<img src="<?= base_url('assets/') ?>img/Frame.svg" alt="Profile Image" class="icon-navigation">
-				<div class="profile-text" style="color:white;">
-					<span style="color:white">Daftar Pemeriksaan</span>
+		</div>
+	</nav>
+
+	<!-- Sidebar -->
+	<div class="sidebar" id="sidebar">
+		<ul class="menu_items">
+			<li class="item"><a href="<?= base_url('dashboard/view_catin') ?>"><i class="bx bx-grid-alt"></i>Dashboard</a></li>
+			<li class="item" style="background-color: #015D67;"><a href="<?= base_url('dashboard/view_catin_pemeriksaan') ?>" style="color:white"><i class="bx bx-edit"></i>Daftar Pemeriksaan</a></li>
+		</ul>
+	</div>
+
+	<form action="<?= base_url('dashboard/pemeriksaan') ?>" method="post" enctype="multipart/form-data">
+		<div class="form" style="background-color: whitesmoke;">
+			<h2 style="color: #015D67;"><i class="bx bx-edit"></i>Form Daftar Calon Pengantin</a></li>
+			</h2>
+			<!-- baris pertama -->
+			<div class="mb-3 row">
+				<div class="col-12 col-md-8">
+					<label for="nama_lengkap" class="form-label">Nama Lengkap</label>
+					<input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Masukkan Nama Lengkap Anda" value="<?= $this->session->userdata('nama_lengkap'); ?>"<?= $disabled ?>>
+					<?= form_error('nama_lengkap', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+				</div>
+				<div class="col-12 col-md-4">
+					<label for="nik" class="form-label">NIK</label>
+					<input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK Anda" value="<?= $this->session->userdata('nik'); ?>"<?= $disabled ?>>
+					<?= form_error('nik', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 				</div>
 			</div>
-		</div>
-		<!--End Sidebar-->
 
-
-		<?php
-		$disabled = ($id_status_verifikasi == 2 or $id_status_perpanjangan == 2 or $id_status_aktif == 2) ? 'disabled' : '';
-		?>
-		<!--Form Pendaftaran-->
-		<div class="inti-pemeriksaan">
-			<h1 style="font-size: 30px;"> <img src="<?= base_url('assets/') ?>img/title_pemeriksaan.svg" alt="Profile Image" class="icon-navigation" style=" height:5vh; width: 5vh;">Form Daftar Calon Pengantin</h1>
-			<hr>
-
-			<?php if ($id_status_verifikasi == 2 or $id_status_perpanjangan == 2 or $id_status_aktif == 2) { ?>
-				<h2 style="color: green;">Informasi Dasar Sudah Di Verifikasi</h2>
-			<?php } else { ?>
-				<h2>Informasi Dasar</h2>
-			<?php }  ?>
-
-
-			<?php echo isset($error) ? $error : ''; ?>
-			<form action="<?= base_url('dashboard/pemeriksaan') ?>" method="post" enctype="multipart/form-data">
-				<div class="form-container">
-					<div class="khusus">
-						<label for="nama_lengkap">Nama Lengkap</label>
-						<input type="text" id="nama_lengkap" class="inputan" name="nama_lengkap" placeholder="Isi Nama Lengkap" style="width:auto" value="<?= $this->session->userdata('nama_lengkap'); ?>" <?= $disabled ?>>
-						<?= form_error('nama_lengkap', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-					<div class="form-group">
-						<label for="nik">NIK</label>
-						<input type="text" id="nik" class="inputan" name="nik" placeholder="Isi 16 Digit Nomor NIK" value="<?= $this->session->userdata('nik'); ?>" <?= $disabled ?>>
-						<?= form_error('nik', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-					<div class="form-group">
-						<label for="tempat_lahir">Tempat Lahir </label>
-						<input type="text" id="tempat_lahir" name="tempat_lahir" class="inputan" placeholder="Isi Tempat Lahir" value="<?= $this->session->userdata('tempat_lahir'); ?>" <?= $disabled ?>>
-						<?= form_error('tempat_lahir', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-
-					<div class="form-group">
-						<label for="tanggal_lahir">Tanggal Lahir</label>
-						<input type="date" id="tanggal_lahir" name="tanggal_lahir" placeholder="Isi Tanggal Lahir" class="inputan" onchange="hitungUmur()" value="<?= $this->session->userdata('tanggal_lahir'); ?>" <?= $disabled ?>>
+			<!-- baris kedua -->
+			<div class="mb-3 row">
+				<div class="col-12 col-md-4">
+					<label for="tempat_lahir" class="form-label">Tempat Lahir</label>
+					<input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Isi Tempat Lahir" value="<?= $this->session->userdata('tempat_lahir'); ?>"<?= $disabled ?>>
+					<?= form_error('tempat_lahir', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+				</div>
+				<div class="col-12 col-md-4">
+					<label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+					<div class="input-group">
+						<input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" onchange="hitungUmur()" placeholder="Isi Tanggal Lahir" value="<?= $this->session->userdata('tanggal_lahir'); ?>"<?= $disabled ?>>
 						<?= form_error('tanggal_lahir', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
 					</div>
-					<div class="form-group">
-						<label for="umur">Usia</label>
-						<input type="number" id="umur" name="umur" class="inputan" readonly value="<?= $this->session->userdata('usia'); ?>" <?= $disabled ?>>
-						<?= form_error('umur', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+				</div>
+				<div class="col-12 col-md-4">
+					<label for="umur" class="form-label">Umur</label>
+					<input type="number" class="form-control" id="umur" name="umur" placeholder="0" readonly value="<?= $this->session->userdata('usia'); ?>"<?= $disabled ?>>
+				</div>
+			</div>
+
+			<!-- baris ketiga -->
+			<div class="mb-3 row">
+				<div class="col-12 col-md-4">
+					<label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+					<select name="jenis_kelamin" id="jenis_kelamin" class="form-select" <?= $disabled ?> value="<?= $this->session->userdata('jenis_kelamin'); ?>">
+						<option value="" disabled selected>Pilih Jenis Kelamin</option>
+						<option value="Laki-Laki" <?= ($this->session->userdata('jenis_kelamin') == 'Laki-Laki') ? 'selected' : ''; ?>>Laki-Laki</option>
+						<option value="Perempuan" <?= ($this->session->userdata('jenis_kelamin') == 'Perempuan') ? 'selected' : ''; ?>>Perempuan</option>
+					</select>
+					<?= form_error('jenis_kelamin', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+				</div>
+				<div class="col-12 col-md-4">
+					<label for="agama" class="form-label">Agama</label>
+					<select name="agama" id="agama" class="form-select" <?= $disabled ?> value="<?= $this->session->userdata('agama'); ?>">
+						<option value="" disabled selected>Pilih Agama</option>
+						<option value="Islam" <?= ($this->session->userdata('agama') == 'Islam') ? 'selected' : ''; ?>>Islam</option>
+						<option value="Kristen" <?= ($this->session->userdata('agama') == 'Kristen') ? 'selected' : ''; ?>>Kristen</option>
+						<option value="Katolik" <?= ($this->session->userdata('agama') == 'Katolik') ? 'selected' : ''; ?>>Katolik</option>
+						<option value="Buddha" <?= ($this->session->userdata('agama') == 'Buddha') ? 'selected' : ''; ?>>Buddha</option>
+						<option value="Hindu" <?= ($this->session->userdata('agama') == 'Hindu') ? 'selected' : ''; ?>>Hindu</option>
+						<option value="Khonghucu" <?= ($this->session->userdata('agama') == 'Khonghucu') ? 'selected' : ''; ?>>Khonghucu</option>
+					</select>
+					<?= form_error('agama', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+				</div>
+				<div class="col-12 col-md-4">
+					<label for="pendidikan_terakhir" class="form-label">Pendidikan Terakhir</label>
+					<select name="pendidikan_terakhir" id="pendidikan_terakhir" class="form-select" <?= $disabled ?> value="<?= $this->session->userdata('pendidikan_terakhir'); ?>">
+						<option value="" disabled selected>Pilih Pendidikan Terakhir</option>
+						<option value="PAUD" <?= ($this->session->userdata('pendidikan_terakhir') == 'PAUD') ? 'selected' : ''; ?>>PAUD</option>
+						<option value="SD" <?= ($this->session->userdata('pendidikan_terakhir') == 'SD') ? 'selected' : ''; ?>>SD</option>
+						<option value="SMP" <?= ($this->session->userdata('pendidikan_terakhir') == 'SMP') ? 'selected' : ''; ?>>SMP</option>
+						<option value="SMA/SMK" <?= ($this->session->userdata('pendidikan_terakhir') == 'SMA/SMK') ? 'selected' : ''; ?>>SMA/SMK</option>
+						<option value="S1" <?= ($this->session->userdata('pendidikan_terakhir') == 'S1') ? 'selected' : ''; ?>>S1</option>
+						<option value="S2" <?= ($this->session->userdata('pendidikan_terakhir') == 'S2') ? 'selected' : ''; ?>>S2</option>
+						<option value="S3" <?= ($this->session->userdata('pendidikan_terakhir') == 'S3') ? 'selected' : ''; ?>>S3</option>
+						<option value="D1" <?= ($this->session->userdata('pendidikan_terakhir') == 'D1') ? 'selected' : ''; ?>>D1</option>
+						<option value="D2" <?= ($this->session->userdata('pendidikan_terakhir') == 'D2') ? 'selected' : ''; ?>>D2</option>
+						<option value="D3" <?= ($this->session->userdata('pendidikan_terakhir') == 'D3') ? 'selected' : ''; ?>>D3</option>
+						<option value="Tidak menempuh pendidikan formal" <?= ($this->session->userdata('pendidikan') == 'Tidak menempuh pendidikan formal') ? 'selected' : ''; ?>>Tidak menempuh pendidikan formal</option>
+					</select>
+					<?= form_error('pendidikan_terakhir', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+				</div>
+			</div>
+
+			<!-- baris Keempat -->
+			<div class="mb-3 row">
+				<div class="col-12 col-md-8">
+					<label for="pekerjaan" class="form-label">Pekerjaan</label>
+					<input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="Isi Pekerjaan" value="<?= $this->session->userdata('pekerjaan'); ?>"<?= $disabled ?>>
+					<?= form_error('pekerjaan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+				</div>
+				<div class="col-12 col-md-4">
+					<label for="nomor_telepon" class="form-label">No. Hp</label>
+					<input type="text" class="form-control" id="nomor_telepon" name="nomor_telepon" placeholder="Isi Nomor HP Aktif" value="<?= $this->session->userdata('nomor_telepon'); ?>"<?= $disabled ?>>
+					<?= form_error('nomor_telepon', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
+				</div>
+			</div>
+			<br>
+			<h2 style="color: #015D67;">Alamat</h2>
+
+			<div class="row">
+				<!-- Form Group untuk Provinsi -->
+				<div class="col-12 col-md-6 mb-3">
+					<label for="provinsi" class="form-label">Provinsi</label>
+					<select name="provinsi" id="provinsi" class="form-select" <?= $disabled ?>>
+						<?php if ($provinsi == null) : ?>
+							<!-- <option value="" disabled selected>Pilih Provinsi</option> -->
+						<?php elseif ($provinsi == $this->session->userdata('provinsi')) : ?>
+							<option value="<?= $this->session->userdata('provinsi'); ?>" disabled selected> <?= $this->session->userdata('provinsi'); ?> </option>
+						<?php else : ?>
+							<option value="<?= $provinsi ?>" disabled selected><?= $provinsi ?></option>
+						<?php endif ?>
+					</select>
+					<?= form_error('provinsi', '<small class="text-danger">', '</small>'); ?>
+				</div>
+
+				<!-- Form Group untuk Kota -->
+				<div class="col-12 col-md-6 mb-3">
+					<label for="kota" class="form-label">Kota</label>
+					<select name="kota" id="kota" class="form-select" <?= $disabled ?>>
+						<?php if ($kota == null) : ?>
+							<option value="" disabled selected>Pilih Kota</option>
+						<?php elseif ($kota == $this->session->userdata('kota')) : ?>
+							<option value="<?= $this->session->userdata('kota'); ?>" disabled selected> <?= $this->session->userdata('kota'); ?> </option>
+						<?php else : ?>
+							<option value="<?= $kota ?>" disabled selected><?= $kota ?></option>
+						<?php endif ?>
+					</select>
+					<?= form_error('kota', '<small class="text-danger">', '</small>'); ?>
+				</div>
+
+				<!-- Form Group untuk Kecamatan -->
+				<div class="col-12 col-md-6 mb-3">
+					<label for="kecamatan" class="form-label">Kecamatan</label>
+					<select name="kecamatan" id="kecamatan" class="form-select" <?= $disabled ?>>
+						<?php if ($kecamatan == null) : ?>
+							<option value="" disabled selected>Pilih Kecamatan</option>
+						<?php elseif ($kecamatan == $this->session->userdata('kecamatan')) : ?>
+							<option value="<?= $this->session->userdata('kecamatan'); ?>" disabled selected> <?= $this->session->userdata('kecamatan'); ?> </option>
+						<?php else : ?>
+							<option value="<?= $kecamatan ?>" disabled selected><?= $kecamatan ?></option>
+						<?php endif ?>
+					</select>
+					<?= form_error('kecamatan', '<small class="text-danger">', '</small>'); ?>
+				</div>
+
+				<!-- Form Group untuk Kelurahan -->
+				<div class="col-12 col-md-6 mb-3">
+					<label for="kelurahan" class="form-label">Kelurahan</label>
+					<select name="kelurahan" id="kelurahan" class="form-select" <?= $disabled ?>>
+						<?php if ($kelurahan == null) : ?>
+							<option value="" disabled selected>Pilih Kelurahan</option>
+						<?php elseif ($kelurahan == $this->session->userdata('kelurahan')) : ?>
+							<option value="<?= $this->session->userdata('kelurahan'); ?>" disabled selected> <?= $this->session->userdata('kelurahan'); ?> </option>
+						<?php else : ?>
+							<option value="<?= $kelurahan ?>" disabled selected><?= $kelurahan ?></option>
+						<?php endif ?>
+					</select>
+					<?= form_error('kelurahan', '<small class="text-danger">', '</small>'); ?>
+				</div>
+				<div class="mb-3">
+					<label for="alamat" class="form-label">Alamat</label>
+					<textarea class="form-control" id="alamat" name="alamat" <?= $disabled ?> rows="3"><?= $this->session->userdata('alamat'); ?></textarea>
+					<?= form_error('alamat', '<small class="text-danger">', '</small>'); ?>
+				</div>
+			</div>
+
+			<h2 style="color: #015D67;">Dokumen</h2>
+
+			<div class="mb-3 row">
+				<div class="col-12 col-md-4">
+					<label for="penikahan_ke" class="form-label">Pernikahan Ke</label>
+					<input type="number" id="pernikahan_ke" class="form-control" name="pernikahan_ke" placeholder="" min="1" value="<?= $this->session->userdata('pernikahan_ke'); ?>" <?= $disabled ?>>
+					<?= form_error('pernikahan_ke', '<small class="text-danger">', '</small>'); ?>
+				</div>
+				<div class="col-12 col-md-4">
+					<label for="tanggal_pernikahan" class="form-label">Tanggal Pernikahan</label>
+					<div class="input-group">
+						<input type="date" class="form-control" id="tanggal_pernikahan" name="tanggal_pernikahan" placeholder="Pilih Tanggal Pernikahan" value="<?= $this->session->userdata('tanggal_pernikahan'); ?>" <?= $disabled ?>>
+						<?= form_error('tanggal_pernikahan', '<small class="text-danger">', '</small>'); ?>
 					</div>
-
-
-
-
-					<div class="form-group">
-						<label for="jenis_kelamin">Jenis Kelamin</label>
-						<select name="jenis_kelamin" id="jenis_kelamin" class="inputan" <?= $disabled ?>>
-							<option value="" disabled selected>Pilih Jenis Kelamin</option>
-							<option value="Laki-Laki" <?= ($this->session->userdata('jenis_kelamin') == 'Laki-Laki') ? 'selected' : ''; ?>>Laki-Laki</option>
-							<option value="Perempuan" <?= ($this->session->userdata('jenis_kelamin') == 'Perempuan') ? 'selected' : ''; ?>>Perempuan</option>
-						</select>
-						<?= form_error('jenis_kelamin', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-					<div class="form-group">
-						<label for="agama">Agama</label>
-						<select name="agama" id="agama" class="inputan" <?= $disabled ?>>
-							<option value="" disabled selected>Pilih Agama</option>
-							<option value="Islam" <?= ($this->session->userdata('agama') == 'Islam') ? 'selected' : ''; ?>>Islam</option>
-							<option value="Kristen" <?= ($this->session->userdata('agama') == 'Kristen') ? 'selected' : ''; ?>>Kristen</option>
-							<option value="Katolik" <?= ($this->session->userdata('agama') == 'Katolik') ? 'selected' : ''; ?>>Katolik</option>
-							<option value="Buddha" <?= ($this->session->userdata('agama') == 'Buddha') ? 'selected' : ''; ?>>Buddha</option>
-							<option value="Hindu" <?= ($this->session->userdata('agama') == 'Hindu') ? 'selected' : ''; ?>>Hindu</option>
-							<option value="Khonghucu" <?= ($this->session->userdata('agama') == 'Khonghucu') ? 'selected' : ''; ?>>Khonghucu</option>
-						</select>
-						<?= form_error('agama', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-					<div class="form-group">
-						<label for="pendidikan">Pendidikan Terakhir</label>
-						<select name="pendidikan" id="pendidikan" class="inputan" <?= $disabled ?>>
-							<option value="" disabled selected>Pilih Pendidikan Terakhir</option>
-							<option value="PAUD" <?= ($this->session->userdata('pendidikan') == 'PAUD') ? 'selected' : ''; ?>>PAUD</option>
-							<option value="SD" <?= ($this->session->userdata('pendidikan') == 'SD') ? 'selected' : ''; ?>>SD</option>
-							<option value="SMP" <?= ($this->session->userdata('pendidikan') == 'SMP') ? 'selected' : ''; ?>>SMP</option>
-							<option value="SMA/SMK" <?= ($this->session->userdata('pendidikan') == 'SMA/SMK') ? 'selected' : ''; ?>>SMA/SMK</option>
-							<option value="S1" <?= ($this->session->userdata('pendidikan') == 'S1') ? 'selected' : ''; ?>>S1</option>
-							<option value="S2" <?= ($this->session->userdata('pendidikan') == 'S2') ? 'selected' : ''; ?>>S2</option>
-							<option value="S3" <?= ($this->session->userdata('pendidikan') == 'S3') ? 'selected' : ''; ?>>S3</option>
-							<option value="D1" <?= ($this->session->userdata('pendidikan') == 'D1') ? 'selected' : ''; ?>>D1</option>
-							<option value="D2" <?= ($this->session->userdata('pendidikan') == 'D2') ? 'selected' : ''; ?>>D2</option>
-							<option value="D3" <?= ($this->session->userdata('pendidikan') == 'D3') ? 'selected' : ''; ?>>D3</option>
-							<option value="Tidak menempuh pendidikan formal" <?= ($this->session->userdata('pendidikan') == 'Tidak menempuh pendidikan formal') ? 'selected' : ''; ?>>Tidak menempuh pendidikan formal</option>
-						</select>
-						<?= form_error('pendidikan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-					<div class="khusus">
-						<label for="pekerjaan">Pekerjaan</label>
-						<input type="text" id="pekerjaan" class="inputan" name="pekerjaan" placeholder="Isi Pekerjaan" style="width: auto;" value="<?= $this->session->userdata('pekerjaan'); ?>" <?= $disabled ?>>
-						<?= form_error('pekerjaan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-					<div class="form-group">
-						<label for="nomor_telepon">No.HP</label>
-						<input type="text" inputmode="numeric" id="nomor_telepon" name="nomor_telepon" placeholder="Isi Nomor HP Aktif" class="inputan" value="<?= $this->session->userdata('nomor_telepon'); ?>" <?= $disabled ?>>
-						<?= form_error('nomor_telepon', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-
-					<h2 style="width: 100%;">Alamat</h2>
-
-
-					<div class="form-group" style="width:60vh ;">
-						<label for="provinsi">Provinsi</label>
-						<select name="provinsi" id="provinsi" class="inputan" style="width:100%" <?= $disabled ?>>
-							<?php if ($provinsi == null) : ?>
-								<!-- <option value="" disabled selected>Pilih Provinsi</option> -->
-							<?php elseif ($provinsi == $this->session->userdata('provinsi')) : ?>
-								<option value="<?= $this->session->userdata('provinsi'); ?>" disabled selected> <?= $this->session->userdata('provinsi'); ?> </option>
-							<?php else : ?>
-								<option value="<?= $provinsi ?>" disabled selected><?= $provinsi ?></option>
-							<?php endif ?>
-
-						</select>
-						<?= form_error('provinsi', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-					<div class="form-group" style="width: 60vh;">
-						<label for="kota">Kota</label>
-						<select name="kota" id="kota" class="inputan" style="width:100%" <?= $disabled ?>>
-							<?php if ($kota == null) : ?>
-								<option value="" disabled selected>Pilih Kota</option>
-							<?php elseif ($kota == $this->session->userdata('kota')) : ?>
-								<option value="<?= $this->session->userdata('kota'); ?>" disabled selected> <?= $this->session->userdata('kota'); ?> </option>
-							<?php else : ?>
-								<option value="<?= $kota ?>" disabled selected><?= $kota ?></option>
-							<?php endif ?>
-						</select>
-						<?= form_error('kota', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-					<div class="form-group" style="width: 60vh;">
-						<label for="kecamatan">Kecamatan</label>
-						<select name="kecamatan" id="kecamatan" class="inputan" style="width:100%" <?= $disabled ?>>
-							<?php if ($kecamatan == null) : ?>
-								<option value="" disabled selected>Pilih Kecamatan</option>
-							<?php elseif ($kecamatan == $this->session->userdata('kecamatan')) : ?>
-								<option value="<?= $this->session->userdata('kecamatan'); ?>" disabled selected> <?= $this->session->userdata('kecamatan'); ?> </option>
-							<?php else : ?>
-								<option value="<?= $kecamatan ?>" disabled selected><?= $kecamatan ?></option>
-							<?php endif ?>
-
-						</select>
-						<?= form_error('kecamatan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-					<div class="form-group" style="width: 60vh;">
-						<label for="kelurahan">Kelurahan</label>
-						<select name="kelurahan" id="kelurahan" class="inputan" style="width:100%" <?= $disabled ?>>
-							<?php if ($kelurahan == null) : ?>
-								<option value="" disabled selected>Pilih Kelurahan</option>
-							<?php elseif ($kelurahan == $this->session->userdata('kelurahan')) : ?>
-								<option value="<?= $this->session->userdata('kelurahan'); ?>" disabled selected> <?= $this->session->userdata('kelurahan'); ?> </option>
-							<?php else : ?>
-								<option value="<?= $kelurahan ?>" disabled selected><?= $kelurahan ?></option>
-							<?php endif ?>
-
-						</select>
-						<?= form_error('kelurahan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-
-					<div class="form-group" style="width: 60vh;">
-						<label for="alamat">Alamat Lengkap</label>
-						<textarea id="alamat" class="inputan" name="alamat" placeholder="" value="<?= $this->session->userdata('alamat'); ?>" <?= $disabled ?> style="width: 100%;height:20vh;"><?= $this->session->userdata('alamat'); ?></textarea>
-						<?= form_error('alamat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-
-					<h2 style="width: 100%;">Dokumen</h2>
-					<div></div>
-					<div class="form-group" style="width: 30vh;">
-						<label for="pernikahan_ke">Pernikahan Ke</label>
-						<input type="number" id="pernikahan_ke" class="inputan" name="pernikahan_ke" placeholder="" value="<?= $this->session->userdata('pernikahan_ke'); ?>" <?= $disabled ?> style="width:100%" min="1">
-						<?= form_error('pernikahan_ke', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-
-					<div class="form-group" style="width: 30vh;">
-						<label for="tanggal_pernikahan">Tanggal Pernikahan</label>
-						<input type="date" id="tanggal_pernikahan" class="inputan" name="tanggal_pernikahan" placeholder="Pilih tanggal_pernikahan" value="<?= $this->session->userdata('tanggal_pernikahan'); ?>" style="width: 100%;" <?= $disabled ?>>
-						<?= form_error('tanggal_pernikahan', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-
-
+				</div>
+				<div class="col-12 col-md-4">
 					<?php
 					//foreach($tglPeriksa as $i)
 					//:
 					//$tanggal_periksa = $i['tanggal']; 
 
 					$tanggal_periksa = $this->session->userdata('tgl_periksa');
+					// var_dump($tanggal_periksa);exit
 					?>
-					<div class="form-group" style="width: 30vh;">
-						<b><label for="tanggal_periksa">Tanggal Pemeriksaan Catin</label></b>
-						<input type="date" id="tanggal_periksa" name="tanggal_periksa" placeholder="Isi Tanggal Periksa" class="inputan" value="<?= $tanggal_periksa_catin ?? $tanggal_periksa ?>" readonly>
-						<?= form_error('tanggal_periksa', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-					</div>
-					<? //php endforeach;
-					?>
-
-
-
-
-
-
-					<?php if ($foto_user == null) : ?>
-						<div class="form-group" style="width: 50vh;">
-							<label for="foto_user">Pas Foto</label>
-							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
-								<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="uploadfile('foto_user')" style="display: none;" value="<?= $foto_user ?>" <?= $disabled ?>>
-								<label for="foto_user" class="custom-file-label">
-									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-									<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
-									<div class="upload-text">Unggah atau drop file disini</div>
-									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
-								</label>
-								<span id="file-name-foto_user" class="file-name"></span>
-							</div>
-							<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-						</div>
-					<?php else : ?>
-
-						<div class="form-group" style="width: 50vh;">
-							<label for="foto_user">Pas Foto</label>
-							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_user">
-								<img id="uploadImage-foto_user" src="<?= base_url('uploads/photo/') . $foto_user ?>" alt="KTP Image" class="preview-image">
-								<input type="file" id="foto_user" class="inputan" name="foto_user" onchange="updateFile('foto_user')" style="display: none;" value="<?= $foto_user ?>" <?= $disabled ?>>
-								<div class="image-caption">
-
-								</div>
-								<label for="foto_user" class="custom-file-label">
-									<img id="preview-image-foto_user" class="preview-image" src="" alt="Preview Image" style="display: none;">
-								</label>
-								<span id="file-name-foto_user" class="file-name"></span>
-							</div>
-							<?= form_error('foto_user', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-							<input type="hidden" name="existing_image" value="<?= $foto_user ?>">
-						</div>
-
-					<?php endif ?>
-
-
-					<?php if ($foto_ktp == null) : ?>
-						<div class="form-group" style="width: 50vh;">
-							<label for="foto_ktp">Foto KTP</label>
-							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
-								<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $this->session->userdata('foto_ktp') ?>" <?= $disabled ?>>
-								<label for="foto_ktp" class="custom-file-label">
-									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-									<img id="preview-image-foto_ktp" class="preview-image" src="" alt="Preview Image" style="display: none;">
-									<div class="upload-text">Unggah atau drop file disini</div>
-									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
-								</label>
-								<span id="file-name-foto_ktp" class="file-name"></span>
-							</div>
-							<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-						</div>
-					<?php else : ?>
-						<div class="form-group" style="width: 50vh;">
-							<label for="foto_ktp">Foto KTP</label>
-							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_ktp">
-								<img id="uploadImage-foto_ktp" src="<?= base_url('uploads/photo/') . $foto_ktp ?>" alt="KTP Image" class="preview-image">
-								<input type="file" id="foto_ktp" class="inputan" name="foto_ktp" onchange="updateFile('foto_ktp')" style="display: none;" value="<?= $foto_ktp ?>" <?= $disabled ?>>
-								<div class="image-caption">
-
-								</div>
-								<label for="foto_ktp" class="custom-file-label">
-									<img id="preview-image-foto_ktp" class="preview-image" src="" alt="Preview Image" style="display: none;">
-								</label>
-								<span id="file-name-foto_ktp" class="file-name"></span>
-							</div>
-							<?= form_error('foto_ktp', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-							<input type="hidden" name="existing_image" value="<?= $foto_ktp ?>">
-						</div>
-
-					<?php endif ?>
-
-					<?php if ($foto_kk == null) : ?>
-						<div class="form-group" style="width: 50vh">
-							<label for="foto_kk">Foto Kartu Keluarga</label>
-							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
-								<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="uploadfile('foto_kk')" style="display: none;" <?= $disabled ?>>
-								<label for="foto_kk" class="custom-file-label">
-									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-									<img id="preview-image-foto_kk" class="preview-image" src="" alt="Preview Image" style="display: none;">
-									<div class="upload-text">Unggah atau drop file disini</div>
-									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
-								</label>
-								<span id="file-name-foto_kk" class="file-name"></span>
-							</div>
-							<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-						</div>
-					<?php else : ?>
-						<div class="form-group" style="width: 50vh;">
-							<label for="foto_kk">Foto Kartu Keluarga</label>
-							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_kk">
-								<img id="uploadImage-foto_kk" src="<?= base_url('uploads/photo/') . $foto_kk ?>" alt="KTP Image" class="preview-image">
-								<input type="file" id="foto_kk" class="inputan" name="foto_kk" onchange="updateFile('foto_kk')" style="display: none;" value="<?= $foto_kk ?>" <?= $disabled ?>>
-								<div class="image-caption">
-
-								</div>
-								<label for="foto_kk" class="custom-file-label">
-									<img id="preview-image-foto_kk" class="preview-image" src="" alt="Preview Image" style="display: none;">
-								</label>
-								<span id="file-name-foto_kk" class="file-name"></span>
-							</div>
-							<?= form_error('foto_kk', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-							<input type="hidden" name="existing_image" value="<?= $foto_kk ?>">
-						</div>
-
-					<?php endif ?>
-
-					<?php if ($foto_surat == null) : ?>
-						<div class="form-group" style="width: 50vh">
-							<label for="foto_surat">Foto Surat Pengantar</label>
-							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
-								<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="uploadfile('foto_surat')" style="display: none;" <?= $disabled ?>>
-								<label for="foto_surat" class="custom-file-label">
-									<div class="upload-icon" style="text-align: center; font-size: 2rem; color: #d3d3d3;">+</div>
-									<img id="preview-image-foto_surat" class="preview-image" src="" alt="Preview Image" style="display: none;">
-									<div class="upload-text">Unggah atau drop file disini</div>
-									<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
-								</label>
-								<span id="file-name-foto_surat" class="file-name"></span>
-							</div>
-							<?= form_error('foto_surat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-						</div>
-					<?php else : ?>
-						<div class="form-group" style="width: 50vh;">
-							<label for="foto_surat">Foto Surat Pengantar</label>
-							<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
-							<div class="custom-file-upload" style="cursor: pointer;" id="drop-zone-foto_surat">
-								<img id="uploadImage-foto_surat" src="<?= base_url('uploads/photo/') . $foto_surat ?>" alt="KTP Image" class="preview-image">
-								<input type="file" id="foto_surat" class="inputan" name="foto_surat" onchange="updateFile('foto_surat')" style="display: none;" value="<?= $foto_surat ?>" <?= $disabled ?>>
-								<div class="image-caption">
-
-								</div>
-								<label for="foto_surat" class="custom-file-label">
-									<img id="preview-image-foto_surat" class="preview-image" src="" alt="Preview Image" style="display: none;">
-								</label>
-								<span id="file-name-foto_surat" class="file-name"></span>
-							</div>
-							<?= form_error('foto_surat', '<small class="text-danger pl-3" style="color: red;">', '</small>'); ?>
-							<input type="hidden" name="existing_image" value="<?= $foto_surat ?>">
-						</div>
-					<?php endif ?>
-				</div>
-
-				<hr style=" margin-top:20px;">
-				<div class="main-container" style="display: flex; align-items: center; justify-content: space-between;">
-					<div class="info-container" style="display: flex; align-items: center;">
-						<img src="<?= base_url('assets') ?>/img/caution.svg" alt="" style="margin-top:1px;">
-						<p> &nbsp;Isi semua kolom yang ada</p>
-					</div>
-					<div class="status-container" style="display: flex;">
-						<?php if ($id_status_verifikasi == 2 or $id_status_perpanjangan == 2 or $id_status_aktif == 2) { ?>
-
-						<?php } else { ?>
-							<button class="btn-pemeriksaan" style="margin-top: 4px;">
-								<p style="font-weight:bold; color:#015D67; text-align:center; ">Batal</p>
-							</button>
-
-							<button type="submit" name="submit" id="submit" class="btn-pemeriksaan" style="background-color: #015D67;margin-top: 4px;">
-								<p style="font-weight:bold; color:white; text-align:center; cursor:pointer;">Daftar</p>
-							</button>
-						<?php }  ?>
+					<label for="tanggal_periksa" class="form-label">Tanggal Periksa</label>
+					<div class="input-group">
+						<input type="text" id="tanggal_periksa" name="tanggal_periksa" placeholder="Isi Tanggal Periksa" class="form-control" value="<?= $tanggal_periksa_catin ?? $tanggal_periksa ?>" readonly <?= $disabled ?>>
 					</div>
 				</div>
 
-			</form>
+				<div class="container mt-5">
+					<div class="row">
+						<!-- Pas Foto -->
+						<div class="col-md-6">
+							<p>Pas Foto</p>
+							<div class="upload-box" onclick="document.getElementById('fileInput1').click();">
+								<img
+									id="previewImage1"
+									src="<?= isset($fotoUser) ? base_url('uploads/photo/' . $fotoUser) : 'placeholder.png'; ?>"
+									alt="Preview Image"
+									style="display: block;">
+								<p>Unggah Pas Foto Disini Ukuran 4X3</p>
+								<p class="text-muted">Format PNG/JPG/JPEG (Max 2MB)</p>
+							</div>
+							<input
+								type="file"
+								id="fileInput1"
+								accept="image/png, image/jpeg"
+								name="foto_user"
+								style="display: none;"
+								onchange="showPreview(event, 'previewImage1');" <?= $disabled ?>>
+						</div>
+
+						<!-- Foto KTP -->
+						<div class="col-md-6">
+							<p>Foto KTP</p>
+							<div class="upload-box" onclick="document.getElementById('fileInput2').click();">
+								<img
+									id="previewImage2"
+									src="<?= isset($foto_ktp) ? base_url('uploads/photo/' . $foto_ktp) : 'placeholder.png'; ?>"
+									alt="Preview Image"
+									style="display: block;">
+								<p>Unggah Foto KTP</p>
+								<p class="text-muted">Format PNG/JPG/JPEG (Max 2MB)</p>
+							</div>
+							<input type="file" id="fileInput2" accept="image/png, image/jpeg" name="foto_ktp" style="display: none;" onchange="showPreview(event, 'previewImage2');"<?= $disabled ?>>
+						</div>
+					</div>
+				</div>
+
+				<div class="container mt-5">
+					<div class="row">
+						<!-- Foto Kartu Keluarga -->
+						<div class="col-md-6">
+							<p>Foto Kartu Keluarga</p>
+							<div class="upload-box" onclick="document.getElementById('fileInput3').click();">
+								<img id="previewImage3"
+									src="<?= isset($foto_kk) ? base_url('uploads/photo/' . $foto_kk) : 'placeholder.png'; ?>"
+									alt="Preview Image"
+									style="display: block;">
+								<p>Unggah Foto Kartu Keluarga</p>
+								<p class="text-muted">Format PNG/JPG/JPEG (Max 2MB)</p>
+							</div>
+							<input type="file" id="fileInput3" accept="image/png, image/jpeg" name="foto_kk" style="display: none;" onchange="showPreview(event, 'previewImage3');"<?= $disabled ?>>
+						</div>
+
+						<!-- Foto Surat -->
+						<div class="col-md-6">
+							<p>Foto Surat</p>
+							<div class="upload-box" onclick="document.getElementById('fileInput4').click();">
+								<img id="previewImage4"
+									src="<?= isset($foto_surat) ? base_url('uploads/photo/' . $foto_surat) : 'placeholder.png'; ?>"
+									alt="Preview Image"
+									style="display: block;">
+								<p>Unggah Foto Surat Pengantar</p>
+								<p class="text-muted">Format PNG/JPG/JPEG (Max 2MB)</p>
+							</div>
+							<input type="file" id="fileInput4" accept="image/png, image/jpeg" name="foto_surat" style="display: none;" onchange="showPreview(event, 'previewImage4');"<?= $disabled ?>>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<hr>
+			<div class="text-end">
+				<button type="submit" style="background-color: #015D67;" class="btn btn-primary"<?= $disabled ?>>Submit</button>
+			</div>
 		</div>
-		<!--End Form Pendaftaran-->
-
-
-	</div>
-
+	</form>
 
 
 
 	<script>
-		function hitungUmur() {
-			const tanggalLahir = document.getElementById('tanggal_lahir').value;
-			const umurInput = document.getElementById('umur');
+		function showPreview(event, previewId) {
+			const file = event.target.files[0];
 
-			if (tanggalLahir) {
-				const tanggalLahirDate = new Date(tanggalLahir);
-				const today = new Date();
-				let umur = today.getFullYear() - tanggalLahirDate.getFullYear();
-				const bulan = today.getMonth() - tanggalLahirDate.getMonth();
-				if (bulan < 0 || (bulan === 0 && today.getDate() < tanggalLahirDate.getDate())) {
-					umur--;
+			if (file) {
+				// Validasi Ukuran File (maksimal 2MB)
+				if (file.size > 8 * 1024 * 1024) {
+					alert("File size exceeds 2MB. Please upload a smaller file.");
+					event.target.value = ""; // Reset input file
+					return;
 				}
-				umurInput.value = umur;
-			} else {
-				umurInput.value = '';
-			}
-		}
 
-		fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/provinces.json`)
-			.then(response => response.json())
-			.then(provinces => {
-				var data = provinces;
-				<?php if ($provinsi == null) : ?>
+				// Validasi Tipe File (PNG, JPG, JPEG)
+				const validTypes = ["image/png", "image/jpeg"];
+				if (!validTypes.includes(file.type)) {
+					alert("Invalid file format. Please upload a PNG, JPG, or JPEG file.");
+					event.target.value = ""; // Reset input file
+					return;
+				}
 
-					var tampung = '<option>Pilih Provinsi</option>';
-				<?php else : ?>
-
-					var tampung = '<option><?= $provinsi ?></option>';
-				<?php endif ?>
-				data.forEach(element => {
-					tampung += `<option data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
-				});
-				document.getElementById('provinsi').innerHTML = tampung;
-			});
-
-		const selectProvinsi = document.getElementById('provinsi');
-
-		selectProvinsi.addEventListener('change', (e) => {
-			var provinsi = e.target.options[e.target.selectedIndex].dataset.reg;
-			fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/regencies/${provinsi}.json`)
-				.then(response => response.json())
-				.then(regencies => {
-					var data = regencies;
-					<?php if ($kota == null) : ?>
-						var tampung = '<option>Pilih Kota</option>';
-					<?php else : ?>
-
-						var tampung = '<option><?= $kota ?></option>';
-					<?php endif ?>
-					data.forEach(element => {
-						tampung += `<option data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
-					});
-					document.getElementById('kota').innerHTML = tampung;
-				});
-		});
-
-		const selectKota = document.getElementById('kota');
-		selectKota.addEventListener('change', (e) => {
-			var kota = e.target.options[e.target.selectedIndex].dataset.reg;
-			fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/districts/${kota}.json`)
-				.then(response => response.json())
-				.then(districts => {
-					districts;
-					var data = districts;
-					<?php if ($kecamatan == null) : ?>
-
-						var tampung = '<option>Pilih Kecamatan</option>';
-					<?php else : ?>
-
-						var tampung = '<option><?= $kecamatan ?></option>';
-					<?php endif ?>
-					data.forEach(element => {
-						tampung += `<option data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
-					});
-					document.getElementById('kecamatan').innerHTML = tampung;
-				});
-		});
-
-		const selectKecamatan = document.getElementById('kecamatan');
-		selectKecamatan.addEventListener('change', (e) => {
-			var kecamatan = e.target.options[e.target.selectedIndex].dataset.reg;
-			fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/villages/${kecamatan}.json`)
-				.then(response => response.json())
-				.then(villages => {
-					villages;
-					var data = villages;
-					<?php if ($kelurahan == null) : ?>
-
-						var tampung = '<option>Pilih kelurahan</option>';
-					<?php else : ?>
-
-						var tampung = '<option><?= $kelurahan ?></option>';
-					<?php endif ?>
-					data.forEach(element => {
-						tampung += `<option data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
-					});
-					document.getElementById('kelurahan').innerHTML = tampung;
-				});
-		});
-	</script>
-
-
-
-	<script>
-		function uploadfile(fileId) {
-			var input = document.getElementById(fileId);
-			var fileName = input.files.length > 0 ? input.files[0].name : '';
-			document.getElementById('file-name-' + fileId).textContent = fileName;
-
-			var previewImage = document.getElementById('preview-image-' + fileId);
-			var uploadIcon = document.querySelector('#drop-zone-' + fileId + ' .upload-icon');
-			var uploadText = document.querySelector('#drop-zone-' + fileId + ' .upload-text');
-			var uploadSubtext = document.querySelector('#drop-zone-' + fileId + ' .upload-subtext');
-
-			if (input.files.length > 0) {
-				var file = input.files[0];
-				var reader = new FileReader();
-
+				const reader = new FileReader();
 				reader.onload = function(e) {
+					const previewImage = document.getElementById(previewId);
 					previewImage.src = e.target.result;
-					previewImage.style.display = 'block';
+					previewImage.style.display = "block"; // Pastikan gambar terlihat
 				};
-
 				reader.readAsDataURL(file);
-
-				// Hide the upload text and subtext
-				uploadIcon.style.display = 'none';
-				uploadText.style.display = 'none';
-				uploadSubtext.style.display = 'none';
 			} else {
-				previewImage.src = '';
-				previewImage.style.display = 'none';
-
-				// Show the upload text and subtext
-				uploadIcon.style.display = 'block';
-				uploadText.style.display = 'block';
-				uploadSubtext.style.display = 'block';
+				// Reset ke placeholder jika tidak ada file
+				const previewImage = document.getElementById(previewId);
+				previewImage.src = "placeholder.png";
+				previewImage.style.display = "block";
 			}
 		}
-
-		// Set up event listeners for drag and drop
-		var dropZones = document.querySelectorAll('[id^=drop-zone-]');
-
-		dropZones.forEach(function(dropZone) {
-			dropZone.addEventListener('dragover', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				dropZone.classList.add('dragover');
-			});
-
-			dropZone.addEventListener('dragleave', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				dropZone.classList.remove('dragover');
-			});
-
-			dropZone.addEventListener('drop', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				dropZone.classList.remove('dragover');
-				var fileInputId = dropZone.id.replace('drop-zone-', '');
-				var files = e.dataTransfer.files;
-				document.getElementById(fileInputId).files = files;
-				uploadfile(fileInputId);
-			});
-
-
-		});
 	</script>
 
 
-
-
-	<script>
-		function updateFile(fileId) {
-			var input = document.getElementById(fileId);
-			var fileName = input.files.length > 0 ? input.files[0].name : '';
-			document.getElementById('file-name-' + fileId).textContent = fileName;
-
-			var previewImage = document.getElementById('preview-image-' + fileId);
-			var uploadImage = document.getElementById('uploadImage-' + fileId);
-			var uploadIcon = document.querySelector('#drop-zone-' + fileId + ' .upload-icon');
-			var uploadText = document.querySelector('#drop-zone-' + fileId + ' .upload-text');
-			var uploadSubtext = document.querySelector('#drop-zone-' + fileId + ' .upload-subtext');
-
-			if (input.files.length > 0) {
-				var file = input.files[0];
-				var reader = new FileReader();
-
-				reader.onload = function(e) {
-					previewImage.src = e.target.result;
-					previewImage.style.display = 'block';
-					if (uploadImage) uploadImage.style.display = 'none';
-				};
-
-				reader.readAsDataURL(file);
-
-				if (uploadIcon) uploadIcon.style.display = 'none';
-				if (uploadText) uploadText.style.display = 'none';
-				if (uploadSubtext) uploadSubtext.style.display = 'none';
-			} else {
-				if (uploadImage) uploadImage.src = '';
-				previewImage.src = '';
-				if (uploadImage) uploadImage.style.display = 'block';
-				previewImage.style.display = 'none';
-
-				if (uploadIcon) uploadIcon.style.display = 'block';
-				if (uploadText) uploadText.style.display = 'block';
-				if (uploadSubtext) uploadSubtext.style.display = 'block';
-			}
-		}
-
-		// Event listeners for drag and drop
-		document.querySelectorAll('[id^=drop-zone-]').forEach(function(dropZone) {
-			dropZone.addEventListener('dragover', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				dropZone.classList.add('dragover');
-			});
-
-			dropZone.addEventListener('dragleave', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				dropZone.classList.remove('dragover');
-			});
-
-			dropZone.addEventListener('drop', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				dropZone.classList.remove('dragover');
-				var fileInputId = dropZone.id.replace('drop-zone-', '');
-				var files = e.dataTransfer.files;
-				document.getElementById(fileInputId).files = files;
-				updateFile(fileInputId);
-			});
-
-			
-		});
-	</script>
 
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
@@ -730,6 +457,112 @@
 		});
 	</script>
 
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		// Toggle Sidebar
+		const toggleSidebar = document.getElementById('toggleSidebar');
+		const sidebar = document.getElementById('sidebar');
+
+		toggleSidebar.addEventListener('click', () => {
+			sidebar.classList.toggle('hidden');
+		});
+	</script>
+
+	<script>
+		function hitungUmur() {
+			const tanggalLahir = document.getElementById('tanggal_lahir').value;
+			const umurInput = document.getElementById('umur');
+
+			// Pastikan tanggal lahir terisi dan valid
+			if (tanggalLahir) {
+				// Mengonversi tanggal lahir ke dalam objek Date
+				const tanggalLahirDate = new Date(tanggalLahir);
+
+				// Cek apakah tanggal lahir valid
+				if (isNaN(tanggalLahirDate)) {
+					umurInput.value = '';
+					return;
+				}
+
+				const today = new Date();
+
+				// Menghitung umur berdasarkan tahun
+				let umur = today.getFullYear() - tanggalLahirDate.getFullYear();
+				const bulan = today.getMonth() - tanggalLahirDate.getMonth();
+
+				// Menyesuaikan umur jika belum ulang tahun di tahun ini
+				if (bulan < 0 || (bulan === 0 && today.getDate() < tanggalLahirDate.getDate())) {
+					umur--;
+				}
+
+				// Menampilkan hasil umur pada input
+				umurInput.value = umur;
+			} else {
+				// Jika tanggal tidak diisi, set umur ke kosong
+				umurInput.value = '';
+			}
+		}
+	</script>
+
+	<script>
+		function loadData(apiUrl, defaultOption, selectId, selectedValue = null) {
+			fetch(apiUrl)
+				.then(response => response.json())
+				.then(data => {
+					let options = `<option>${defaultOption}</option>`;
+					if (selectedValue) {
+						options = `<option>${selectedValue}</option>`;
+					}
+					data.forEach(element => {
+						options += `<option data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
+					});
+					document.getElementById(selectId).innerHTML = options;
+				})
+				.catch(error => console.error('Error:', error));
+		}
+
+		// Memuat daftar provinsi
+		loadData(
+			'https://kanglerian.github.io/api-wilayah-indonesia/api/provinces.json',
+			'Pilih Provinsi',
+			'provinsi',
+			"<?= $provinsi ?? null ?>"
+		);
+
+		// Event listener untuk pemilihan provinsi
+		document.getElementById('provinsi').addEventListener('change', (e) => {
+			const provinsiId = e.target.options[e.target.selectedIndex].dataset.reg;
+			loadData(
+				`https://kanglerian.github.io/api-wilayah-indonesia/api/regencies/${provinsiId}.json`,
+				'Pilih Kota',
+				'kota',
+				"<?= $kota ?? null ?>"
+			);
+		});
+
+		// Event listener untuk pemilihan kota
+		document.getElementById('kota').addEventListener('change', (e) => {
+			const kotaId = e.target.options[e.target.selectedIndex].dataset.reg;
+			loadData(
+				`https://kanglerian.github.io/api-wilayah-indonesia/api/districts/${kotaId}.json`,
+				'Pilih Kecamatan',
+				'kecamatan',
+				"<?= $kecamatan ?? null ?>"
+			);
+		});
+
+		// Event listener untuk pemilihan kecamatan
+		document.getElementById('kecamatan').addEventListener('change', (e) => {
+			const kecamatanId = e.target.options[e.target.selectedIndex].dataset.reg;
+			loadData(
+				`https://kanglerian.github.io/api-wilayah-indonesia/api/villages/${kecamatanId}.json`,
+				'Pilih Kelurahan',
+				'kelurahan',
+				"<?= $kelurahan ?? null ?>"
+			);
+		});
+	</script>
 </body>
 
 </html>

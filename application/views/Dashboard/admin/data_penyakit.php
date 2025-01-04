@@ -123,11 +123,16 @@
 							</Show>
 						</div>
 						<div class="cari-data">
-							<div class="form-input-cari">
-								<input type="text" name="search" id="search" placeholder="Cari data">
-
-								</button>
-							</div>
+							<form action="<?= base_url('dashboard_admin/data_penyakit') ?>" method="get">
+								<div class="form-input-cari">
+									<input type="text" name="search" id="search" placeholder="Cari data">
+									<button type="submit" id="btn-search">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+											<path fill-rule="evenodd" clip-rule="evenodd" d="M11 2C9.56238 2.00016 8.14571 2.3447 6.86859 3.00479C5.59146 3.66489 4.49105 4.62132 3.65947 5.79402C2.82788 6.96672 2.28933 8.32158 2.08889 9.74516C1.88844 11.1687 2.03194 12.6196 2.50738 13.9764C2.98281 15.3331 3.77634 16.5562 4.82154 17.5433C5.86673 18.5304 7.13318 19.2527 8.51487 19.6498C9.89656 20.0469 11.3533 20.1073 12.7631 19.8258C14.1729 19.5443 15.4947 18.9292 16.618 18.032L20.293 21.707C20.4816 21.8892 20.7342 21.99 20.9964 21.9877C21.2586 21.9854 21.5094 21.8802 21.6948 21.6948C21.8802 21.5094 21.9854 21.2586 21.9877 20.9964C21.99 20.7342 21.8892 20.4816 21.707 20.293L18.032 16.618C19.09 15.2939 19.7526 13.6979 19.9435 12.0138C20.1344 10.3297 19.8459 8.62586 19.1112 7.0985C18.3764 5.57113 17.2253 4.28228 15.7904 3.38029C14.3554 2.47831 12.6949 1.99985 11 2ZM5 11C5 10.2121 5.1552 9.43185 5.45673 8.7039C5.75825 7.97595 6.20021 7.31451 6.75736 6.75736C7.31451 6.20021 7.97595 5.75825 8.7039 5.45672C9.43186 5.15519 10.2121 5 11 5C11.7879 5 12.5682 5.15519 13.2961 5.45672C14.0241 5.75825 14.6855 6.20021 15.2426 6.75736C15.7998 7.31451 16.2418 7.97595 16.5433 8.7039C16.8448 9.43185 17 10.2121 17 11C17 12.5913 16.3679 14.1174 15.2426 15.2426C14.1174 16.3679 12.5913 17 11 17C9.4087 17 7.88258 16.3679 6.75736 15.2426C5.63214 14.1174 5 12.5913 5 11Z" fill="#E0E0E0" />
+										</svg>
+									</button>
+								</div>
+							</form>
 						</div>
 					</div>
 					<table>
@@ -251,10 +256,8 @@
 								</form>
 							</div>
 						</tbody>
-						<div id="pagination-container">
-							<?= $pagination 
-							
-							?>
+						<div>
+							<?= $pagination; ?>
 						</div>
 					</table>
 				</div>
@@ -324,70 +327,7 @@
 		}
 	</script>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-    // Fungsi untuk memuat data dengan AJAX
-    function loadData(page = 1, input = '') {
-        $.ajax({
-            url: "<?= base_url('dashboard_admin/data_penyakit') ?>",
-            type: "POST",
-            data: {
-                input: input, // Kirim kata kunci pencarian
-                page: page    // Kirim nomor halaman
-            },
-            dataType: "json",
-            success: function(response) {
-                // Render hasil data di tabel
-                var rows = response.results.map(function(penyakit, index) {
-                    return `
-                        <tr>
-                            <td>${(page - 1) * 5 + index + 1}</td>
-                            <td>${penyakit.kode}</td>
-                            <td>${penyakit.nama}</td>
-                            <td>${penyakit.keterangan}</td>
-                            <td>${penyakit.id_pemeriksaan}</td>
-                            <td>
-                                <div class="container-2-btn">
-                                    <div class="edit-btn" data-id="${penyakit.id}" data-kode="${penyakit.kode}" data-namaPenyakit="${penyakit.nama}" data-pencegahan="${penyakit.keterangan}" data-pemeriksa="${penyakit.id_pemeriksaan}" onclick="showPopup2(this)">
-                                        <p>Edit</p>
-                                    </div>
-                                    <button type="input" name="hapus" id="hapus" data-id="${penyakit.id}" onclick="showPopup1(this)">
-                                        <div class="hapus-btn">
-                                            <p>Hapus</p>
-                                        </div>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
-                }).join('');
 
-                // Update tabel dengan data baru
-                $('#data-container').html(rows);
-
-                // Update pagination
-                $('#pagination-container').html(response.pagination);
-            }
-        });
-    }
-
-    // Event pencarian
-    $('#search').on('keyup', function() {
-        var input = $(this).val();
-        loadData(1, input); // Muat data untuk halaman pertama dengan kata kunci pencarian
-    });
-
-    // Event pagination
-    $(document).on('click', '.page-link', function(e) {
-        e.preventDefault();
-        var page = $(this).data('ci-pagination-page'); // Nomor halaman dari link
-        var input = $('#search').val(); // Kata kunci pencarian saat ini
-        loadData(page, input); // Muat data untuk halaman tertentu dengan kata kunci pencarian
-    });
-});
-
-	</script>
 
 
 </body>
