@@ -114,7 +114,8 @@
 
 				<div class="container-tabel">
 					<div class="baris-show-entries">
-						<div class="show-entries"></Show>
+						<div class="show-entries">
+							</Show>
 						</div>
 						<div class="cari-data">
 							<form action="<?= base_url('dashboard_admin/view_dinas_pemeriksaan') ?>" method="get">
@@ -140,7 +141,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php $angka = $start;?>
+							<?php $angka = $start; ?>
 							<?php foreach ($id as $kelompok) : ?>
 								<tr>
 									<td><?= ++$angka ?></td>
@@ -222,6 +223,9 @@
 								</form>
 							</div>
 						</tbody>
+						<div>
+							<?= $pagination; ?>
+						</div>
 					</table>
 					<div>
 						<?= $pagination; ?>

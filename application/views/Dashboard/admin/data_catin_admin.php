@@ -342,6 +342,7 @@
 								<?php $status_kesehatan = ($datas['id_status_kesehatan'] == 2) ? '<td><span class="status-tabel" style="background-color: green">Sudah diverifikasi</span></td>' : '<td><span class="status-tabel" style="background-color: #DC3545">Belum diverifikasi</span></td>'; ?>
 								<?php $status_bnn = ($datas['id_status_bnn'] == 2) ? '<span class="status-tabel" style="background-color: green">Sudah di setujui</span>' : '<span class="status-tabel" style="background-color: #DC3545">Belum di setujui</span>'; ?>
 								<?php $status_psikolog = ($datas['id_status_psikolog'] == 2) ? '<span class="status-tabel" style="background-color: green">Sudah di setujui</span>' : '<span class="status-tabel" style="background-color: #DC3545">Belum di setujui</span>'; ?>
+								<?php $display = ($datas['id_status_verifikasi'] == 2) ? 'display:' :'display:none'; ?>
 
 
 								<?php
@@ -444,13 +445,13 @@
 															class="value"><?= $datas['akhir_berlaku'] ?></span></li>
 													<li><span class="label">Verifikasi Data</span><span class="titik-dua">:</span>
 														<span class="value gap-btn">
-															<button class="open-modal btn green-btn" onclick="showPopup5('popup5-<?= $datas['user_id'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+															<button class="open-modal btn green-btn"  style="<?= $display ?>" onclick="showPopup5('popup5-<?= $datas['user_id'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="24"
 																	height="24" viewBox="0 0 24 24" fill="none">
 																	<path
 																		d="M1 3H23V21H1V3ZM3 5V19H21V5H3ZM15.5 9.5C15.7652 9.5 16.0196 9.60536 16.2071 9.79289C16.3946 9.98043 16.5 10.2348 16.5 10.5C16.5 10.7652 16.3946 11.0196 16.2071 11.2071C16.0196 11.3946 15.7652 11.5 15.5 11.5C15.2348 11.5 14.9804 11.3946 14.7929 11.2071C14.6054 11.0196 14.5 10.7652 14.5 10.5C14.5 10.2348 14.6054 9.98043 14.7929 9.79289C14.9804 9.60536 15.2348 9.5 15.5 9.5ZM17.9 12.3C18.2343 11.8543 18.4378 11.3243 18.4879 10.7694C18.5379 10.2145 18.4324 9.65668 18.1833 9.15836C17.9341 8.66004 17.5511 8.24095 17.0772 7.94805C16.6033 7.65514 16.0571 7.5 15.5 7.5C14.9429 7.5 14.3967 7.65514 13.9228 7.94805C13.4489 8.24095 13.0659 8.66004 12.8167 9.15836C12.5676 9.65668 12.4621 10.2145 12.5121 10.7694C12.5622 11.3243 12.7657 11.8543 13.1 12.3C12.6032 12.6726 12.2 13.1557 11.9223 13.7111C11.6446 14.2666 11.5 14.879 11.5 15.5V16.5H13.5V15.5C13.5 14.9696 13.7107 14.4609 14.0858 14.0858C14.4609 13.7107 14.9696 13.5 15.5 13.5C16.0304 13.5 16.5391 13.7107 16.9142 14.0858C17.2893 14.4609 17.5 14.9696 17.5 15.5V16.5H19.5V15.5C19.5 14.191 18.872 13.03 17.9 12.3ZM5 9H9.5V11H5V9ZM5 13H9.5V15H5V13Z"
 																		fill="#FFFAFA" />
 																</svg>Verifikasi Data</button>
-															<button class="open-modal btn green-btn" onclick="showPopup6('popup6-<?= $datas['user_id'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+															<button class="open-modal btn green-btn" style="<?= $display ?>" onclick="showPopup6('popup6-<?= $datas['user_id'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="24"
 																	height="24" viewBox="0 0 24 24" fill="none">
 																	<path d="M21 3H3V21H21V3ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
 																		fill="#FFFAFA" />
@@ -685,7 +686,7 @@
 									<span class="close-btn" onclick="closePopup11('popup11-<?= $datas['user_id'] ?>')">&times;</span>
 									<h2>Edit</h2>
 									<hr style="border-color: #015D67;">
-									<form id="popupForm" action="<?= base_url('dashboard_admin/edit'); ?>" method="post">
+									<form action="<?= base_url('dashboard_admin/edit') ?>" method="post" enctype="multipart/form-data">
 										<div class="edit-pendaftaran-container">
 											<input type="hidden" name="Id" value="<?= $datas['id_user_detail'] ?>" />
 											<label for="no_pendaftaran"><b class="form-label">Nomor Pendaftaran</b><br></label>
@@ -833,14 +834,14 @@
 											<br>
 
 											<div class="file-upload-container">
-											<label for="foto_user"><b>Pas Foto</b></label>
+												<label for="foto_user"><b>Pas Foto</b></label>
 												<?php if ($foto_user == null) : ?>
-													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<?php echo form_open_multipart('dashboard_admin/edit'); ?>
 													<div class="custom-file-upload" id="drop-zone-foto_user">
 														<label for="foto_user" class="file-upload-label">
 															<div class="upload-icon">+</div>
 															<div class="upload-text">Unggah atau drop file disini</div>
-															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 8MB)</div>
 															<input type="file" id="foto_user" name="foto_user" onchange="uploadfile('foto_user')" accept="image/png, image/jpeg" hidden>
 														</label>
 														<div id="preview-container">
@@ -850,7 +851,7 @@
 													<?= form_error('foto_user', '<small class="text-danger">', '</small>'); ?>
 													<?php echo form_close(); ?>
 												<?php else : ?>
-													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<?php echo form_open_multipart('dashboard_admin/edit'); ?>
 													<div class="custom-file-upload">
 														<div id="preview-container">
 															<img id="uploadImage-foto_user" src="<?= base_url('uploads/photo/') . $foto_user ?>" alt="Pas Foto" class="preview-image">
@@ -872,12 +873,12 @@
 												<!-- Foto KTP -->
 												<label for="foto_ktp"><b>Foto KTP</b></label>
 												<?php if ($foto_ktp == null) : ?>
-													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<?php echo form_open_multipart('dashboard_admin/edit'); ?>
 													<div class="custom-file-upload" id="drop-zone-foto_ktp">
 														<label for="foto_ktp" class="file-upload-label">
 															<div class="upload-icon">+</div>
 															<div class="upload-text">Unggah atau drop file disini</div>
-															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 8MB)</div>
 															<input type="file" id="foto_ktp" name="foto_ktp" onchange="uploadfile('foto_ktp')" accept="image/png, image/jpeg" hidden>
 														</label>
 														<div id="preview-container">
@@ -887,7 +888,7 @@
 													<?= form_error('foto_ktp', '<small class="text-danger">', '</small>'); ?>
 													<?php echo form_close(); ?>
 												<?php else : ?>
-													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<?php echo form_open_multipart('dashboard_admin/edit'); ?>
 													<div class="custom-file-upload" id="drop-zone-foto_ktp">
 														<div id="preview-container">
 															<img id="uploadImage-foto_ktp" src="<?= base_url('uploads/photo/') . $foto_ktp ?>" alt="Foto KTP" class="preview-image">
@@ -906,12 +907,12 @@
 												<!-- Foto Kartu Keluarga (KK) -->
 												<label for="foto_kk"><b>Foto Kartu Keluarga</b></label>
 												<?php if ($foto_kk == null) : ?>
-													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<?php echo form_open_multipart('dashboard_admin/edit'); ?>
 													<div class="custom-file-upload" id="drop-zone-foto_kk">
 														<label for="foto_kk" class="file-upload-label">
 															<div class="upload-icon">+</div>
 															<div class="upload-text">Unggah atau drop file disini</div>
-															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 8MB)</div>
 															<input type="file" id="foto_kk" name="foto_kk" onchange="uploadfile('foto_kk')" accept="image/png, image/jpeg" hidden>
 														</label>
 														<div id="preview-container">
@@ -921,7 +922,7 @@
 													<?= form_error('foto_kk', '<small class="text-danger">', '</small>'); ?>
 													<?php echo form_close(); ?>
 												<?php else : ?>
-													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<?php echo form_open_multipart('dashboard_admin/edit'); ?>
 													<div class="custom-file-upload" id="drop-zone-foto_kk">
 														<div id="preview-container">
 															<img id="uploadImage-foto_kk" src="<?= base_url('uploads/photo/') . $foto_kk ?>" alt="Foto KK" class="preview-image">
@@ -940,12 +941,12 @@
 												<!-- Foto Surat Pengantar -->
 												<label for="foto_surat"><b>Foto Surat Pengantar</b></label>
 												<?php if ($foto_surat == null) : ?>
-													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<?php echo form_open_multipart('dashboard_admin/edit'); ?>
 													<div class="custom-file-upload" id="drop-zone-foto_surat">
 														<label for="foto_surat" class="file-upload-label">
 															<div class="upload-icon">+</div>
 															<div class="upload-text">Unggah atau drop file disini</div>
-															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 2MB)</div>
+															<div class="upload-subtext">Format PNG/JPG/JPEG (Max 8MB)</div>
 															<input type="file" id="foto_surat" name="foto_surat" onchange="uploadfile('foto_surat')" accept="image/png, image/jpeg" hidden>
 														</label>
 														<div id="preview-container">
@@ -955,7 +956,7 @@
 													<?= form_error('foto_surat', '<small class="text-danger">', '</small>'); ?>
 													<?php echo form_close(); ?>
 												<?php else : ?>
-													<?php echo form_open_multipart('dashboard/pemeriksaan'); ?>
+													<?php echo form_open_multipart('dashboard_admin/edit'); ?>
 													<div class="custom-file-upload" id="drop-zone-foto_surat">
 														<div id="preview-container">
 															<img id="uploadImage-foto_surat" src="<?= base_url('uploads/photo/') . $foto_surat ?>" alt="Foto Surat" class="preview-image">
@@ -970,12 +971,9 @@
 													<?php echo form_close(); ?>
 												<?php endif ?>
 											</div>
-
 											<br>
-
-
+											<button type="submit">Submit</button>
 										</div>
-										<button type="submit">Submit</button>
 									</form>
 								</div>
 					</div>
@@ -1016,6 +1014,7 @@
 	<script src="<?= base_url('assets/js/data-catin-admin.js') ?>"></script>
 	<script src="<?= base_url('assets/js/sidebar.js') ?>"></script>
 	<script src="<?= base_url('assets/js/detail-baris-table.js') ?>"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="<?= base_url('assets/js/popup.js') ?>"></script>
 	<script>
@@ -1065,71 +1064,21 @@
 		});
 	</script>
 	<script>
-		function updateFile(fileId) {
-			var input = document.getElementById(fileId);
-			var fileName = input.files.length > 0 ? input.files[0].name : '';
-			document.getElementById('file-name-' + fileId).textContent = fileName;
+		function updateFile(inputId) {
+			const fileInput = document.getElementById(inputId);
+			const preview = document.getElementById('uploadImage-' + inputId);
 
-			var previewImage = document.getElementById('preview-image-' + fileId);
-			var uploadImage = document.getElementById('uploadImage-' + fileId);
-			var uploadIcon = document.querySelector('#drop-zone-' + fileId + ' .upload-icon');
-			var uploadText = document.querySelector('#drop-zone-' + fileId + ' .upload-text');
-			var uploadSubtext = document.querySelector('#drop-zone-' + fileId + ' .upload-subtext');
-
-			if (input.files.length > 0) {
-				var file = input.files[0];
-				var reader = new FileReader();
-
+			if (fileInput.files && fileInput.files[0]) {
+				const reader = new FileReader();
 				reader.onload = function(e) {
-					previewImage.src = e.target.result;
-					previewImage.style.display = 'block';
-					if (uploadImage) uploadImage.style.display = 'none';
+					preview.src = e.target.result; // Update sumber gambar
+					preview.style.display = "block"; // Tampilkan gambar
 				};
-
-				reader.readAsDataURL(file);
-
-				if (uploadIcon) uploadIcon.style.display = 'none';
-				if (uploadText) uploadText.style.display = 'none';
-				if (uploadSubtext) uploadSubtext.style.display = 'none';
-			} else {
-				if (uploadImage) uploadImage.src = '';
-				previewImage.src = '';
-				if (uploadImage) uploadImage.style.display = 'block';
-				previewImage.style.display = 'none';
-
-				if (uploadIcon) uploadIcon.style.display = 'block';
-				if (uploadText) uploadText.style.display = 'block';
-				if (uploadSubtext) uploadSubtext.style.display = 'block';
+				reader.readAsDataURL(fileInput.files[0]); // Baca file sebagai URL
 			}
 		}
-
-		// Event listeners for drag and drop
-		document.querySelectorAll('[id^=drop-zone-]').forEach(function(dropZone) {
-			dropZone.addEventListener('dragover', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				dropZone.classList.add('dragover');
-			});
-
-			dropZone.addEventListener('dragleave', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				dropZone.classList.remove('dragover');
-			});
-
-			dropZone.addEventListener('drop', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				dropZone.classList.remove('dragover');
-				var fileInputId = dropZone.id.replace('drop-zone-', '');
-				var files = e.dataTransfer.files;
-				document.getElementById(fileInputId).files = files;
-				updateFile(fileInputId);
-			});
-
-
-		});
 	</script>
+
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			var phoneInput = document.getElementById('nomor_telepon');

@@ -292,8 +292,8 @@
 								</form>
 							</div>
 						</tbody>
+						<?= $pagination; ?>
 					</table>
-					<?= $pagination; ?>
 				</div>
 				<!--  -->
 				<div class="copyright-text">

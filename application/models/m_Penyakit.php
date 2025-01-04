@@ -80,9 +80,10 @@ class m_Penyakit extends CI_Model
     }
 	
 	public function count_search($keyword) {
-        $this->db->like('nama_gejala', $keyword);
-        return $this->db->count_all_results('gejala');
-    }
+		$this->db->like('LOWER(nama)', strtolower($keyword), 'both', false);
+		return $this->db->from('penyakit')->count_all_results();
+	}
+	
 
 	function get_list_by_id($ids) {
 		// Jika $ids adalah string, ubah menjadi array

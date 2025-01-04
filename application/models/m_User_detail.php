@@ -57,6 +57,20 @@ class m_User_detail extends CI_Model
 		$query = $this->db->get('user_detail');
 		return $query;
 	}
+	
+	public function getPakar($id_user)
+	{
+		$this->db->select('*'); // Pilih semua kolom dari tabel yang digabungkan
+		$this->db->from('user_detail'); // Tabel utama
+		$this->db->join('hasil_diagnosa', 'user_detail.id_user_detail = hasil_diagnosa.user_id', 'left');
+		$this->db->join('users', 'user_detail.id_user_detail = users.id_user', 'left');
+		// Spesifikasikan tabel asal kolom untuk menghindari ambiguitas
+		$this->db->where('user_detail.id_user_detail', $id_user);
+		$this->db->where('user_detail.data_registered IS NOT NULL');
+		$this->db->where('users.role', 5);
+		$queryHasilDiagnosa = $this->db->get();
+		return $queryHasilDiagnosa->result_array();
+	}
 
 	public function getpemeriksa($id_user)
 	{
@@ -198,7 +212,7 @@ class m_User_detail extends CI_Model
 			'usia' => $umur,
 			'jenis_kelamin' => $jenisKelamin,
 			'agama' => $agama,
-			'pendidikan' => $pendidikan,
+			'pendidikan_terakhir' => $pendidikan,
 			'pekerjaan' => $pekerjaan,
 			'nomor_telepon' => $nomorTelepon,
 			'provinsi' => $provinsi,

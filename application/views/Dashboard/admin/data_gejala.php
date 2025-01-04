@@ -243,11 +243,11 @@
 
 							<!-- Tambahkan baris data lainnya di sini -->
 						</tbody>
-					</table>
-					<div>
-						<?= $pagination; ?>
+						<div>
+							<?= $pagination; ?>
+						</div>
 					</div>
-				</div>
+					</table>
 				<!--  -->
 				<div class="copyright-text">
 					Copyright © 2024 DPPKB Kota Tebing. Hak cipta dilindungi

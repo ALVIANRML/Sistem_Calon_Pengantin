@@ -1,0 +1,102 @@
+.dashboard{
+    height: 40vh;
+}
+
+.border-solo{
+    height: 100%;
+    border-radius: 10px;
+}
+.border{
+    height: 100%;
+    border-radius: 10px;
+}
+
+
+.text-center h6 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.bg-light {
+    background-color: #f8f9fa !important;
+    
+}
+.col-md-4{
+    margin-top:20px;
+}
+
+.btn-outline-primary {
+    width: 100%;
+    margin-top: 5vh;
+    border: 3px solid #015d67;
+    color: #015d67;
+    background-color: transparent;
+    transition: all 0.3s ease; /* Tambahkan transisi untuk animasi halus */
+    border-radius: 30px;
+}
+
+.btn-outline-primary:hover {
+    background-color: #015d67; /* Ubah warna latar belakang saat hover */
+    color: #ffffff;           /* Ubah warna teks menjadi putih untuk kontras */
+    border-color: #015d67;    /* Border tetap sesuai warna hover */
+}
+
+h6{
+    font-weight: bold;
+    font-size: large;
+    text-align: start;
+    
+}
+.status{
+    margin-top: 5vh;
+    font-size: large;
+}
+
+.status b {
+    text-align: start;
+}
+.status .text-danger {
+    text-align: end;
+    color: red;                   /* Warna merah untuk teks */
+}
+
+
+.text-grid-kanan{
+    text-align: start;
+    font-size: small;
+    margin-top: 5vh;
+    font-weight: bold
+    }
+
+
+  /* isi kolom kiri */
+  .original,
+.circular--square,
+.circular--landscape,
+.circular--portrait {
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.3);
+    height: 15vh;
+    width: 15vh; /* Tambahkan width agar elemen terlihat */
+    background-color: none; /* Contoh warna untuk visualisasi */
+  
+}
+
+.column {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .circular--square {
+    border-radius: 50%;
+  }
+
+  .label{
+    font-weight: bold;
+  }
+
+  .biodata{
+    margin-top: 5vh;
+  }

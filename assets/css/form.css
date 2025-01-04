@@ -1,0 +1,50 @@
+/* Menjamin label dan input berada di bawah satu sama lain dalam responsive */
+.mb-3 .form-label {
+    display: block;
+}
+
+.mb-3 .form-control {
+    width: 100%;
+}
+
+select.form-select {
+    border-color: #ced4da !important; /* Warna abu-abu default Bootstrap */
+    box-shadow: none !important; /* Hilangkan efek shadow jika ada */
+}
+
+small.text-danger {
+    color: #dc3545; /* Warna teks merah untuk pesan error */
+}
+
+select.is-invalid {
+    border-color: #ced4da; /* Kembali ke abu-abu */
+}
+.form {
+    margin-left: 250px;
+    margin-top: 12vh; /* Space for the navbar */
+    padding: 20px;
+    width: calc(100vw - 250px);
+    height: auto;
+    overflow: hidden; /* Prevent inner content scrolling */
+    background-color: #828282;
+}
+
+.upload-box {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.upload-box:hover {
+    background-color: #f3f3f3;
+    cursor: pointer;
+}
+
+.upload-box img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    display: none;
+}

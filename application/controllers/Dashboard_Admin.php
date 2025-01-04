@@ -169,118 +169,118 @@ class Dashboard_Admin extends CI_Controller
 		}
 
 
-		$this->form_validation->set_rules(
-			'nama_lengkap',
-			'Nama',
-			'required|trim',
-			[
-				'required' => 'nama tidak boleh kosong',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'nama_lengkap',
+		// 	'Nama',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'nama tidak boleh kosong',
+		// 	]
+		// );
 
-		$this->form_validation->set_rules(
-			'nik',
-			'NIK',
-			'required|trim|min_length[16]',
-			[
-				'required' => 'NIK tidak boleh kosong',
-				'min_length' => 'NIK terlalu pendek',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'nik',
+		// 	'NIK',
+		// 	'required|trim|min_length[16]',
+		// 	[
+		// 		'required' => 'NIK tidak boleh kosong',
+		// 		'min_length' => 'NIK terlalu pendek',
+		// 	]
+		// );
 
-		$this->form_validation->set_rules(
-			'tempat_lahir',
-			'Tempat Lahir',
-			'required|trim',
-			[
-				'required' => 'Tempat Lahir tidak boleh kosong',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'tempat_lahir',
+		// 	'Tempat Lahir',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Tempat Lahir tidak boleh kosong',
+		// 	]
+		// );
 
-		$this->form_validation->set_rules(
-			'tanggal_lahir',
-			'Tanggal Lahir',
-			'required|trim',
-			[
-				'required' => 'Tanggal Lahir tidak boleh kosong',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'tanggal_lahir',
+		// 	'Tanggal Lahir',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Tanggal Lahir tidak boleh kosong',
+		// 	]
+		// );
 
-		$this->form_validation->set_rules(
-			'agama',
-			'Agama',
-			'required|trim',
-			[
-				'required' => 'Agama tidak boleh kosong',
-			]
-		);
-		$this->form_validation->set_rules(
-			'pendidikan',
-			'Pendidikan Terakhir',
-			'required|trim',
-			[
-				'required' => 'Pendidikan Terakhir tidak boleh kosong',
-			]
-		);
-		$this->form_validation->set_rules(
-			'pekerjaan',
-			'Pekerjaan',
-			'required|trim',
-			[
-				'required' => 'Pekerjaan tidak boleh kosong',
-			]
-		);
-		$this->form_validation->set_rules(
-			'umur',
-			'Umur',
-			'required|trim',
-			[
-				'required' => 'Umur tidak boleh kosong',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'agama',
+		// 	'Agama',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Agama tidak boleh kosong',
+		// 	]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'pendidikan',
+		// 	'Pendidikan Terakhir',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Pendidikan Terakhir tidak boleh kosong',
+		// 	]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'pekerjaan',
+		// 	'Pekerjaan',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Pekerjaan tidak boleh kosong',
+		// 	]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'umur',
+		// 	'Umur',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Umur tidak boleh kosong',
+		// 	]
+		// );
 
-		$this->form_validation->set_rules(
-			'jenis_kelamin',
-			'Jenis Kelamin',
-			'required|trim',
-			[
-				'required' => 'Jenis Kelamin tidak boleh kosong',
-			]
-		);
-		$this->form_validation->set_rules(
-			'nomor_telepon',
-			'Nomor HP',
-			'required|trim',
-			[
-				'required' =>  'Nomor HP tidak boleh kosong',
-			]
-		);
-		$this->form_validation->set_rules(
-			'alamat',
-			'Alamat',
-			'required|trim',
-			[
-				'required' => 'Alamat tidak boleh kosong',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'jenis_kelamin',
+		// 	'Jenis Kelamin',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Jenis Kelamin tidak boleh kosong',
+		// 	]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'nomor_telepon',
+		// 	'Nomor HP',
+		// 	'required|trim',
+		// 	[
+		// 		'required' =>  'Nomor HP tidak boleh kosong',
+		// 	]
+		// );
+		// $this->form_validation->set_rules(
+		// 	'alamat',
+		// 	'Alamat',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Alamat tidak boleh kosong',
+		// 	]
+		// );
 
-		$this->form_validation->set_rules(
-			'tanggal_pernikahan',
-			'Tanggal Pernikahan',
-			'required|trim',
-			[
-				'required' => 'Tanggal Pernikahan tidak boleh kosong',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'tanggal_pernikahan',
+		// 	'Tanggal Pernikahan',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => 'Tanggal Pernikahan tidak boleh kosong',
+		// 	]
+		// );
 
-		$this->form_validation->set_rules(
-			'pernikahan_ke',
-			'"Pernikahan ke"',
-			'required|trim',
-			[
-				'required' => '"Pernikahan ke" tidak boleh kosong',
-			]
-		);
+		// $this->form_validation->set_rules(
+		// 	'pernikahan_ke',
+		// 	'"Pernikahan ke"',
+		// 	'required|trim',
+		// 	[
+		// 		'required' => '"Pernikahan ke" tidak boleh kosong',
+		// 	]
+		// );
 
 		if ($this->form_validation->run() == false) {
 
@@ -353,6 +353,9 @@ class Dashboard_Admin extends CI_Controller
 				$this->session->set_flashdata('eror_input_file', 'eror_input_file');
 				$fotoSurat = $this->session->userdata('foto_surat');
 			}
+
+			var_dump($fotoSurat);
+			exit;
 
 			// Data untuk update
 			$id_user = $this->session->userdata('id_user');
@@ -630,75 +633,68 @@ class Dashboard_Admin extends CI_Controller
 	}
 
 	public function data_penyakit()
-{
-    $keyword = $this->input->post('input'); // Ambil kata kunci pencarian jika ada
-    $page = $this->input->post('page') ?? 1; // Nomor halaman dari AJAX, default ke 1 jika kosong
-    $per_page = 5; // Jumlah data per halaman
+	{
+		$keyword = $this->input->get('search'); // Ambil keyword dari URL
+		$config = array();
+		$config['base_url'] = base_url('dashboard_admin/data_penyakit'); // URL dasar untuk pagination
+		$config['per_page'] = 5; // Jumlah data per halaman
+		$config['uri_segment'] = 3; // Segmen URI untuk mengetahui halaman
+		$config['num_links'] = 5; // Jumlah link angka halaman
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		if ($keyword != null) {
+			// Jika ada keyword pencarian
+			$config['base_url'] = base_url('dashboard_admin/data_penyakit'); // Base URL tanpa query string
+			$config['suffix'] = '?search=' . urlencode($keyword); // Menambahkan query string search di setiap link
+			$config['first_url'] = $config['base_url'] . $config['suffix']; // URL untuk halaman pertama dengan query string
+			$total_rows = $this->m_Penyakit->count_search($keyword);
+			// var_dump($total_rows); exit;
+			$data['id'] = $this->m_Penyakit->pagination_search($keyword, $config['per_page'], $page);
+		} else {
+			$total_rows = $this->m_Penyakit->count_all_penyakit(); // Jumlah total data tanpa pencarian
+			// var_dump($total_rows); exit;
+			$data['id'] = $this->m_Penyakit->pagination_penyakit($config['per_page'], $page);
+		}
 
-    // Menghitung jumlah total data berdasarkan pencarian
-    if ($keyword) {
-        $total_rows = $this->m_Penyakit->count_search($keyword); // Jumlah total hasil pencarian
-        $data['id'] = $this->m_Penyakit->pagination_search($keyword, $per_page, ($page - 1) * $per_page);
-    } else {
-        $total_rows = $this->m_Penyakit->count_all_penyakit(); // Jumlah total data tanpa pencarian
-        $data['id'] = $this->m_Penyakit->pagination_penyakit($per_page, ($page - 1) * $per_page);
-    }
+		$config['full_tag_open'] = '<nav><ul class="pagination">';
+		$config['full_tag_close'] = '</ul></nav>';
 
-    // Pengaturan pagination
-    $this->load->library('pagination');
-    // $config['base_url'] = base_url('dashboard_admin/data_penyakit');
-    $config['base_url'] = '#';
-    $config['total_rows'] = $total_rows;
-    $config['per_page'] = $per_page;
-    $config['use_page_numbers'] = TRUE; // Menggunakan nomor halaman, bukan offset
-    $config['num_links'] = 5; // Jumlah link di kiri dan kanan halaman aktif
-	// $config['total_rows'] = $total_rows;
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
 
-    // Pengaturan tampilan HTML untuk pagination
-	$config['full_tag_open'] = '<nav><ul class="pagination">';
-	$config['full_tag_close'] = '</ul></nav>';
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
 
-	$config['first_link'] = 'First';
-	$config['first_tag_open'] = '<li class="page-item">';
-	$config['first_tag_close'] = '</li>';
+		$config['next_link'] = '&raquo;';
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
 
-	$config['last_link'] = 'Last';
-	$config['last_tag_open'] = '<li class="page-item">';
-	$config['last_tag_close'] = '</li>';
+		$config['prev_link'] = '&laquo;';
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
 
-	$config['next_link'] = '&raquo;';
-	$config['next_tag_open'] = '<li class="page-item">';
-	$config['next_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link">';
+		$config['cur_tag_close'] = '</a></li>';
 
-	$config['prev_link'] = '&laquo;';
-	$config['prev_tag_open'] = '<li class="page-item">';
-	$config['prev_tag_close'] = '</li>';
+		$config['num_tag_open'] = '<li class="page-item">';
+		$config['num_tag_close'] = '</li>';
 
-	$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link">';
-	$config['cur_tag_close'] = '</a></li>';
+		$config['attributes'] = array('class' => 'page-link');
 
-	$config['num_tag_open'] = '<li class="page-item">';
-	$config['num_tag_close'] = '</li>';
+		// Total data untuk pagination
+		$config['total_rows'] = $total_rows;
 
-	$config['attributes'] = array('class' => 'page-link');
+		// Inisialisasi pagination
+		$this->pagination->initialize($config);
+		$data['start'] = $page;
+		// var_dump($data['start']);exit;
+		// Menyimpan link pagination dalam $data['pagination']
+		$data['pagination'] = $this->pagination->create_links();
 
-
-    $this->pagination->initialize($config);
-    $data['pagination'] = $this->pagination->create_links();
-
-    // Jika request AJAX, kirim respons dalam bentuk JSON
-    if ($this->input->is_ajax_request()) {
-        echo json_encode([
-            'results' => $data['id'],
-            'pagination' => $data['pagination']
-        ]);
-        return;
-    }
-
-    // Jika bukan request AJAX, tampilkan view biasa
-    $data['start'] = ($page - 1) * $per_page;
-    $this->load->view('Dashboard/admin/data_penyakit', $data);
-}
+		// Tampilkan halaman dengan data pagination
+		$this->load->view('Dashboard/admin/data_penyakit', $data);
+	}
 
 
 
